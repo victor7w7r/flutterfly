@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutterfly/providers/data_provider.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutterfly/screens/home_screen.dart';
+import 'package:flutterfly/screens/store_screen.dart';
+
+import 'package:flutterfly/providers/theme_provider.dart';
+import 'package:flutterfly/share_preferences/preferences.dart';
+
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Preferences.init();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: ( _ ) => ThemeProvider(isDarkmode: Preferences.isDarkmode )),
+        ChangeNotifierProvider(create: ( _ ) => DataProvider(data: ""))
+      ],
+      child: const MyApp()
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,13 +33,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'flutterfly',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
-      home: const Center(
-        child: Text('Awesome')
-      ),
+      initialRoute: HomeScreen.routerName,
+      routes: <String, WidgetBuilder> {
+        HomeScreen.routerName : ( _ ) => const HomeScreen(),
+        StoreScreen.routerName : ( _ ) => const StoreScreen()
+      },
+      theme: Provider.of<ThemeProvider>(context).currentTheme
     );
   }
 }
-
