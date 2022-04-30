@@ -30,7 +30,7 @@ class _StoreScreenState extends State<StoreScreen> {
           title: const Text('My Store'),
           elevation: 0.0
         ),
-        drawer: const DrawerMenu(),
+        drawer: DrawerMenu(onTap: () => setState(() {})),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

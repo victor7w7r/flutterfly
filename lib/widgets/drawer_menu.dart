@@ -8,7 +8,9 @@ import 'package:flutterfly/share_preferences/preferences.dart';
 import 'package:flutterfly/providers/theme_provider.dart';
 
 class DrawerMenu extends StatefulWidget {
-  const DrawerMenu({Key? key}) : super(key: key);
+
+  const DrawerMenu({Key? key, this.onTap}) : super(key: key);
+  final Function()? onTap;
 
   @override
   State<DrawerMenu> createState() => _DrawerMenuState();
@@ -26,24 +28,15 @@ class _DrawerMenuState extends State<DrawerMenu> {
       Column(
         children: [
           const Spacer(flex: 2),
-          DrawerHeader(
-            child: Container(),
-            decoration: togglerHeader()
-          ),
+          DrawerHeader(child: Container(), decoration: togglerHeader()),
           const Spacer(flex: 1),
           ListTile(
-            leading: const Icon( Icons.home_outlined ),
-            title: const Text('Home'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, HomeScreen.routerName );
-            },
+            leading: const Icon( Icons.home_outlined ), title: const Text('Home'),
+            onTap: () => Navigator.pushReplacementNamed(context, HomeScreen.routerName)
           ),
           ListTile(
-            leading: const Icon( Icons.store_outlined ),
-            title: const Text('Store'),
-            onTap: () {
-                Navigator.pushReplacementNamed(context, StoreScreen.routerName );
-            },
+            leading: const Icon( Icons.store_outlined ), title: const Text('Store'),
+            onTap: () => Navigator.pushReplacementNamed(context, StoreScreen.routerName )
           ),
           const Spacer(flex: 10),
           ListTile(
@@ -57,6 +50,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                   ? themeProvider.setDarkmode() 
                   : themeProvider.setLightMode();
                 setState(() {});
+                widget.onTap!();
             },
           ),
           const Spacer(flex: 15),
@@ -70,15 +64,13 @@ class _DrawerMenuState extends State<DrawerMenu> {
     if ( value ) {
       return const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/aqua-light.png'),
-          fit: BoxFit.scaleDown
+          image: AssetImage('assets/aqua-light.png'), fit: BoxFit.scaleDown
         )
       );
     } else {
         return const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/aqua-black.png'),
-          fit: BoxFit.scaleDown
+          image: AssetImage('assets/aqua-black.png'), fit: BoxFit.scaleDown
         )
       );
     }
