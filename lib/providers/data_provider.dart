@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class DataProvider extends ChangeNotifier {
 
-  DataProvider({this.data}); 
+  DataProvider({required this.data}); 
 
-  String? data;
+  String data;
 
   void rename( String reciever ) {
     data = reciever;

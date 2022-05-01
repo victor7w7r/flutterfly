@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfly/providers/data_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutterfly/screens/home_screen.dart';
-import 'package:flutterfly/screens/store_screen.dart';
-
-import 'package:flutterfly/providers/theme_provider.dart';
+import 'package:flutterfly/providers/providers.dart';
+import 'package:flutterfly/screens/screens.dart';
 import 'package:flutterfly/share_preferences/preferences.dart';
 
 void main() async {
@@ -16,8 +13,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: ( _ ) => ThemeProvider(isDarkmode: Preferences.isDarkmode )),
-        ChangeNotifierProvider(create: ( _ ) => DataProvider(data: ""))
+        ChangeNotifierProvider(create: ( _ ) => ThemeProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode )),
+        ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
+        ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false ),
       ],
       child: const MyApp()
     )
@@ -30,14 +28,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'flutterfly',
       initialRoute: HomeScreen.routerName,
       routes: <String, WidgetBuilder> {
-        HomeScreen.routerName : ( _ ) => const HomeScreen(),
-        StoreScreen.routerName : ( _ ) => const StoreScreen()
+        HomeScreen.routerName: ( _ ) => const HomeScreen(),
+        StoreScreen.routerName: ( _ ) => const StoreScreen(),
       },
       theme: Provider.of<ThemeProvider>(context).currentTheme
     );

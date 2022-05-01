@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 Widget brandChip(bool value) {
 
   return Container(
-    width: 275,
-    height: 50,
+    width: 300,
+    height: 70,
     child: Row(
       children: [
-        const SizedBox(width: 30),
-        Image.asset( value ? 'assets/brandwhite.png' : 'assets/brand.png', width: 220.0, height: 43.0),
+        const SizedBox(width: 38),
+        Image.asset( value ? 'assets/brandwhite.png' : 'assets/brand.png', width: 220.0, height: 70.0),
       ]
     ),
     decoration: BoxDecoration(

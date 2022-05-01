@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfly/providers/data_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/drawer_menu.dart';
+import 'package:flutterfly/providers/providers.dart';
+import 'package:flutterfly/widgets/widgets.dart';
 
 class StoreScreen extends StatefulWidget {
 
@@ -20,8 +20,6 @@ class _StoreScreenState extends State<StoreScreen> {
 
   @override 
   Widget build(BuildContext context) {
-
-    DataProvider dataProvider = Provider.of<DataProvider>(context, listen: false);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -43,57 +41,71 @@ class _StoreScreenState extends State<StoreScreen> {
               child: Text('Write anything in this form and send!', style: TextStyle(fontSize: 20)),
             ),
             const SizedBox(height: 25),
-            SizedBox(
-              width: 250.0,
-              height: 55.0,
-              child: TextField( 
-                cursorHeight: 25,
-                controller: storeController,
-                decoration: const InputDecoration(
-                  hintText: 'here',
-                  border: OutlineInputBorder(),
-                )
-              )
-            ),
+            _textField(),
             const SizedBox(height: 12),
-            SizedBox(
-              child: ElevatedButton(
-                onPressed: () {
-                  if ( storeController.text.isNotEmpty ) {
-                    dataProvider.rename(storeController.text);
-                    setState(() {});
-                  } else {
-                    showDialog<String>(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: const Text('Error'),
-                        content: const Text('Is empty your TextField'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, 'OK'),
-                            child: const Text('OK')
-                          )
-                        ]
-                      )
-                    );
-                  }
-                },
-                child: const Text('SUBMIT'),
-              )
-            ),
+            _button(context),
             const SizedBox(height: 10),
-            dataProvider.data!.isEmpty ? (
-              const Center(  
-                child: Text('Store state: Not yet.', style: TextStyle(fontSize: 20)),
-              )
-            ) : (
-              Center(  
-                child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 20)),
-              )
-            )
+            _storeState(context)
           ]
         )
       )
     );
+  }
+
+  SizedBox _textField() {
+    return SizedBox(
+      width: 250.0,
+      height: 55.0,
+      child: TextField( 
+        cursorHeight: 25,
+        controller: storeController,
+        decoration: const InputDecoration(
+          hintText: 'here',
+          border: OutlineInputBorder()
+        )
+      )
+    );
+  }
+
+  SizedBox _button(BuildContext context) {
+
+    final dataProvider = Provider.of<DataProvider>(context, listen: false);
+    
+    return SizedBox(
+      child: ElevatedButton(
+        onPressed: () {
+          if ( storeController.text.isNotEmpty ) {
+            dataProvider.rename(storeController.text);
+            setState(() {});
+          } else {
+            showDialog<String>(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Error'),
+                content: const Text('Is empty your TextField'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK')
+                  )
+                ]
+              )
+            );
+          }
+        },
+        child: const Text('SUBMIT'),
+      )
+    );
+  }
+
+  Center _storeState(BuildContext context) {
+
+    final dataProvider = Provider.of<DataProvider>(context, listen: false);
+
+    if (dataProvider.data.isEmpty) {
+      return const Center( child: Text('Store state: Not yet.', style: TextStyle(fontSize: 20)));
+    } else {
+      return Center(child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 20)));
+    }
   }
 }
