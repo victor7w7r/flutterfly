@@ -36,27 +36,27 @@ class Binance {
   double count;
 
   factory Binance.fromMap(Map<String, dynamic> json) => Binance(
-      symbol: json["symbol"],
-      priceChange: json["priceChange"],
-      priceChangePercent: json["priceChangePercent"],
-      weightedAvgPrice: json["weightedAvgPrice"],
-      prevClosePrice: json["prevClosePrice"],
-      lastPrice: json["lastPrice"],
-      lastQty: json["lastQty"],
-      bidPrice: json["bidPrice"],
-      bidQty: json["bidQty"],
-      askPrice: json["askPrice"],
-      askQty: json["askQty"],
-      openPrice: json["openPrice"],
-      highPrice: json["highPrice"],
-      lowPrice: json["lowPrice"],
-      volume: json["volume"],
-      quoteVolume: json["quoteVolume"],
-      openTime: json["openTime"].toDouble(),
-      closeTime: json["closeTime"].toDouble(),
-      firstId: json["firstId"].toDouble(),
-      lastId: json["lastId"].toDouble(),
-      count: json["count"].toDouble()
+    symbol: json["symbol"],
+    priceChange: json["priceChange"],
+    priceChangePercent: json["priceChangePercent"],
+    weightedAvgPrice: json["weightedAvgPrice"],
+    prevClosePrice: json["prevClosePrice"],
+    lastPrice: json["lastPrice"],
+    lastQty: json["lastQty"],
+    bidPrice: json["bidPrice"],
+    bidQty: json["bidQty"],
+    askPrice: json["askPrice"],
+    askQty: json["askQty"],
+    openPrice: json["openPrice"],
+    highPrice: json["highPrice"],
+    lowPrice: json["lowPrice"],
+    volume: json["volume"],
+    quoteVolume: json["quoteVolume"],
+    openTime: json["openTime"].toDouble(),
+    closeTime: json["closeTime"].toDouble(),
+    firstId: json["firstId"].toDouble(),
+    lastId: json["lastId"].toDouble(),
+    count: json["count"].toDouble()
   );
 
   static List<Binance> fromJsonList(String str) {

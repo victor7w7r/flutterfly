@@ -6,11 +6,13 @@ import 'package:flutterfly/widgets/widgets.dart';
 import 'package:flutterfly/share_preferences/preferences.dart';
 
 class HomeScreen extends StatefulWidget {
+
   static const String routerName = 'Home';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+  
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -21,53 +23,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Home'),
-        elevation: 0.0
-      ),
+      appBar: AppBar(title: const Text('My Home'), elevation: 0.0),
       drawer: DrawerMenu(onTap: () => setState(() => value = Preferences.isDarkmode)),
       body: OrientationBuilder(   
         builder: (context, orientation) {
           return Flex(
             direction: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
             children: [
-              Expanded (
-                flex: 1, child: _firstColumn(context, orientation)
-              ),
-            Expanded (
-                flex: orientation == Orientation.portrait ? 2 : 1,
-                child: Column(
-                children: const [
-                  SizedBox(height: 20),
-                  Center(child: Text("Cryptocurrency data", style: TextStyle(fontSize: 35))),
-                  SizedBox(height: 25),
-                  CurrencyList()
-              ])
-              ),
-
+              Expanded (flex: 1, child: _firstColumn(context, orientation)),
+              Expanded (flex: orientation == Orientation.portrait ? 2 : 1, child: _secondColumn())
             ]
           );
         }
       )
     );
   }
-
- /* GridView _body(Orientation orientation) {
-    return GridView.count( 
-      crossAxisCount: orientation == Orientation.portrait ? 1 : 2,
-      physics: const NeverScrollableScrollPhysics(),
-      //childAspectRatio: orientation == Orientation.portrait ? 1/.6 : 1,
-      children: [
-        Container(
-          color: Colors.pinkAccent,
-          child: 
-        ),
-        Container(
-          color: Colors.cyanAccent,
-          child:
-      ]
-    );
-  }*/
 
   Column _firstColumn(BuildContext context, Orientation orientation) {
 
@@ -96,5 +66,15 @@ class _HomeScreenState extends State<HomeScreen> {
         brandChip(value)
       ],
     );
+  }
+
+  Column _secondColumn() {
+    return Column(
+    children: const [
+      SizedBox(height: 20),
+      Center(child: Text("Cryptocurrency data", style: TextStyle(fontSize: 35))),
+      SizedBox(height: 25),
+      CurrencyList()
+    ]);
   }
 }

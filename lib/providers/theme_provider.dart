@@ -4,8 +4,8 @@ import 'package:flutterfly/share_preferences/preferences.dart';
 
 class ThemeProvider extends ChangeNotifier{ 
 
-  bool darkState;
   ThemeData currentTheme;
+  bool darkState;
 
   ThemeProvider({required bool isDarkmode, required this.darkState}):
     currentTheme = isDarkmode 

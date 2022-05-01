@@ -24,18 +24,13 @@ class _StoreScreenState extends State<StoreScreen> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('My Store'),
-          elevation: 0.0
-        ),
+        appBar: AppBar(title: const Text('My Store'), elevation: 0.0),
         drawer: DrawerMenu(onTap: () => setState(() {})),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const Center(
-              child: Text('Store Example', style: TextStyle(fontSize: 40)),
-            ),
+          children: [
+            const Center(child: Text('Store Example', style: TextStyle(fontSize: 40))),
             const SizedBox(height: 15),
             const Center(
               child: Text('Write anything in this form and send!', style: TextStyle(fontSize: 20)),
@@ -99,7 +94,6 @@ class _StoreScreenState extends State<StoreScreen> {
   }
 
   Center _storeState(BuildContext context) {
-
     final dataProvider = Provider.of<DataProvider>(context, listen: false);
 
     if (dataProvider.data.isEmpty) {

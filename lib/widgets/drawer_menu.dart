@@ -11,6 +11,7 @@ class DrawerMenu extends StatefulWidget {
 
   @override
   State<DrawerMenu> createState() => _DrawerMenuState();
+
 }
 
 class _DrawerMenuState extends State<DrawerMenu> {
@@ -37,24 +38,24 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
   List<ListTile> _tiles(BuildContext context) {
     return [
-        ListTile(
-          leading: const Icon( Icons.home_outlined ), title: const Text('Home'),
-          onTap: () => Navigator.pushReplacementNamed(context, HomeScreen.routerName)
-        ), 
-        ListTile(
-          leading: const Icon( Icons.store_outlined ), title: const Text('Store'),
-          onTap: () => Navigator.pushReplacementNamed(context, StoreScreen.routerName )
-        ),
-        ListTile(
-          leading: const Icon( Icons.color_lens_outlined),
-          title: const Text('Change Color Mode'),
-          onTap: () {
-              final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
-              themeProvider.toggle();
-              setState(() {});
-              widget.onTap!();
-          }
-        )
+      ListTile(
+        leading: const Icon( Icons.home_outlined ), title: const Text('Home'),
+        onTap: () => Navigator.pushReplacementNamed(context, HomeScreen.routerName)
+      ), 
+      ListTile(
+        leading: const Icon( Icons.store_outlined ), title: const Text('Store'),
+        onTap: () => Navigator.pushReplacementNamed(context, StoreScreen.routerName )
+      ),
+      ListTile(
+        leading: const Icon( Icons.color_lens_outlined),
+        title: const Text('Change Color Mode'),
+        onTap: () {
+          final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+          themeProvider.toggle();
+          setState(() {});
+          widget.onTap!();
+        }
+      )
     ];
   }
 
