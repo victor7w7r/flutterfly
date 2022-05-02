@@ -33,7 +33,7 @@ class _StoreScreenState extends State<StoreScreen> {
             const Center(child: Text('Store Example', style: TextStyle(fontSize: 40))),
             const SizedBox(height: 15),
             const Center(
-              child: Text('Write anything in this form and send!', style: TextStyle(fontSize: 20)),
+              child: Text('Write anything in this form and send!', style: TextStyle(fontSize: 20))
             ),
             const SizedBox(height: 25),
             _textField(),
@@ -69,7 +69,7 @@ class _StoreScreenState extends State<StoreScreen> {
     return SizedBox(
       child: ElevatedButton(
         onPressed: () {
-          if ( storeController.text.isNotEmpty ) {
+          if (storeController.text.isNotEmpty) {
             dataProvider.rename(storeController.text);
             setState(() {});
           } else {
@@ -78,7 +78,7 @@ class _StoreScreenState extends State<StoreScreen> {
               builder: (context) => AlertDialog(
                 title: const Text('Error'),
                 content: const Text('Is empty your TextField'),
-                actions: <Widget>[
+                actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context, 'OK'),
                     child: const Text('OK')
@@ -88,7 +88,7 @@ class _StoreScreenState extends State<StoreScreen> {
             );
           }
         },
-        child: const Text('SUBMIT'),
+        child: const Text('SUBMIT')
       )
     );
   }
@@ -97,7 +97,7 @@ class _StoreScreenState extends State<StoreScreen> {
     final dataProvider = Provider.of<DataProvider>(context, listen: false);
 
     if (dataProvider.data.isEmpty) {
-      return const Center( child: Text('Store state: Not yet.', style: TextStyle(fontSize: 20)));
+      return const Center(child: Text('Store state: Not yet.', style: TextStyle(fontSize: 20)));
     } else {
       return Center(child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 20)));
     }

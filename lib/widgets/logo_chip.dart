@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget logoChip(bool value) {
+Container logoChip(bool value) {
 
   return Container(
     width: 270,
@@ -16,6 +16,6 @@ Widget logoChip(bool value) {
       border: value
               ? Border.all(width: 2, color: Colors.white)
               : Border.all(width: 2, color: Colors.black)
-    ),
+    )
   );
 }

@@ -30,8 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
           return Flex(
             direction: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
             children: [
-              Expanded (flex: 1, child: _firstColumn(context, orientation)),
-              Expanded (flex: orientation == Orientation.portrait ? 2 : 1, child: _secondColumn())
+              Expanded(flex: 1, child: _firstColumn(context, orientation)),
+              Expanded(flex: orientation == Orientation.portrait ? 2 : 1, child: _secondColumn())
             ]
           );
         }
@@ -53,11 +53,11 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 10),
         dataProvider.data.isEmpty ? (
           const Center(  
-            child: Text('Store state: Not yet.', style: TextStyle(fontSize: 20)),
+            child: Text('Store state: Not yet.', style: TextStyle(fontSize: 20))
           )
         ) : (
           Center(  
-            child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 20)),
+            child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 20))
           )
         ),
         const SizedBox(height: 25),
@@ -70,11 +70,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Column _secondColumn() {
     return Column(
-    children: const [
-      SizedBox(height: 20),
-      Center(child: Text("Cryptocurrency data", style: TextStyle(fontSize: 35))),
-      SizedBox(height: 25),
-      CurrencyList()
-    ]);
+      children: const [
+        SizedBox(height: 20),
+        Center(child: Text("Cryptocurrency data", style: TextStyle(fontSize: 35))),
+        SizedBox(height: 25),
+        CurrencyList()
+      ]
+    );
   }
 }

@@ -13,9 +13,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: ( _ ) => ThemeProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode )),
+        ChangeNotifierProvider(create: ( _ ) => ThemeProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode)),
         ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
-        ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false )
+        ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
       ],
       child: const MyApp()
     )
@@ -24,7 +24,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       initialRoute: HomeScreen.routerName,
       routes: <String, WidgetBuilder> {
         HomeScreen.routerName: ( _ ) => const HomeScreen(),
-        StoreScreen.routerName: ( _ ) => const StoreScreen(),
+        StoreScreen.routerName: ( _ ) => const StoreScreen()
       },
       theme: Provider.of<ThemeProvider>(context).currentTheme
     );

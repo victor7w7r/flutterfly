@@ -37,7 +37,7 @@ class _CurrencyCardState extends State<CurrencyCard> {
           const SizedBox(height: 3),
           Text('${widget.per}%', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
           const SizedBox(height: 3),
-          Text( widget.pri, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+          Text(widget.pri, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold))
         ]
       ),
       decoration: BoxDecoration(
@@ -55,4 +55,3 @@ class _CurrencyCardState extends State<CurrencyCard> {
     );
   }
 }
-

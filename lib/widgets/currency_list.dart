@@ -36,8 +36,7 @@ class _CurrencyListState extends State<CurrencyList> {
       return Row( 
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          SizedBox(height: 120),
-          CircularProgressIndicator()
+          SizedBox(height: 120), CircularProgressIndicator()
         ]
       );
     } else {
@@ -79,5 +78,4 @@ class _CurrencyListState extends State<CurrencyList> {
       setState(() {});
     }
   }
-
 }
