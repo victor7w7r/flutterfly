@@ -22,7 +22,7 @@ class BinanceProvider extends ChangeNotifier {
     final response = await http.get(url);
     return response.body;
   }
-  
+
   getCurrencies() async {
     final jsonData = await _getJsonData('/api/v3/ticker/24hr');
     final binData = Binance.fromJsonList(jsonData);

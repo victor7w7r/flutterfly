@@ -33,7 +33,7 @@ class _CurrencyListState extends State<CurrencyList> {
   final binanceProvider = Provider.of<BinanceProvider>(context);
 
     if(binanceProvider.loading) {
-      return Row( 
+      return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           SizedBox(height: 120), CircularProgressIndicator()
@@ -52,10 +52,10 @@ class _CurrencyListState extends State<CurrencyList> {
             scrollDirection: Axis.vertical,
             controller: _scrollController,
             children: [
-              for (var bin in binanceProvider.bin) 
-                CurrencyCard ( 
-                  sym: bin.symbol, 
-                  per: bin.priceChangePercent, 
+              for (var bin in binanceProvider.bin)
+              CurrencyCard (
+                  sym: bin.symbol,
+                  per: bin.priceChangePercent,
                   pri: bin.bidPrice
                 )
             ]

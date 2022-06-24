@@ -18,7 +18,7 @@ class _StoreScreenState extends State<StoreScreen> {
 
   final storeController = TextEditingController();
 
-  @override 
+  @override
   Widget build(BuildContext context) {
 
     return GestureDetector(
@@ -51,7 +51,7 @@ class _StoreScreenState extends State<StoreScreen> {
     return SizedBox(
       width: 250.0,
       height: 55.0,
-      child: TextField( 
+      child: TextField(
         cursorHeight: 25,
         controller: storeController,
         decoration: const InputDecoration(
@@ -65,7 +65,7 @@ class _StoreScreenState extends State<StoreScreen> {
   SizedBox _button(BuildContext context) {
 
     final dataProvider = Provider.of<DataProvider>(context, listen: false);
-    
+
     return SizedBox(
       child: ElevatedButton(
         onPressed: () {

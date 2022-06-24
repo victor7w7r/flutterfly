@@ -25,10 +25,22 @@ class _CurrencyCardState extends State<CurrencyCard> {
   Widget build(BuildContext context) {
 
     final themeProvider = Provider.of<ThemeProvider>(context, listen: true);
-    
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       padding: const EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        border: themeProvider.darkState
+          ? Border.all(width: 2, color: Colors.white)
+          : Border.all(width: 2, color: Colors.black),
+        image: const DecorationImage(
+          alignment: Alignment(1.3, -5),
+          image: AssetImage('assets/binance.png'),
+          scale: 12,
+          fit: BoxFit.none
+        )
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,18 +51,6 @@ class _CurrencyCardState extends State<CurrencyCard> {
           const SizedBox(height: 3),
           Text(widget.pri, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold))
         ]
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        border: themeProvider.darkState
-          ? Border.all(width: 2, color: Colors.white)
-          : Border.all(width: 2, color: Colors.black),
-        image: const DecorationImage(
-          alignment: Alignment(1.3, -5),  
-          image: AssetImage('assets/binance.png'),
-          scale: 12,
-          fit: BoxFit.none
-        )
       )
     );
   }

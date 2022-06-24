@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DataProvider extends ChangeNotifier {
 
-  DataProvider({required this.data}); 
+  DataProvider({required this.data});
 
   String data;
 

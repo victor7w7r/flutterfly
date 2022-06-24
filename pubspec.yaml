@@ -1,21 +1,21 @@
 name: flutterfly
 description: A new Flutter project.
 
-publish_to: 'none' 
+publish_to: 'none'
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.17.5 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-    
+
   shared_preferences: ^2.0.15
   provider: ^6.0.3
   http: ^0.13.4
-  flutter_native_splash: ^2.1.6
+  flutter_native_splash: ^2.2.3+1
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +29,6 @@ flutter_native_splash:
 
 flutter:
   uses-material-design: true
-    
+
   assets:
     - assets/

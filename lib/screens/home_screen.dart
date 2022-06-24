@@ -12,7 +12,6 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-  
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -25,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('My Home'), elevation: 0.0),
       drawer: DrawerMenu(onTap: () => setState(() => value = Preferences.isDarkmode)),
-      body: OrientationBuilder(   
+      body: OrientationBuilder(
         builder: (context, orientation) {
           return Flex(
             direction: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
@@ -43,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     DataProvider dataProvider = Provider.of<DataProvider>(context, listen: false);
     Size size = MediaQuery.of(context).size;
-  
+
     return Column(
       children: [
         SizedBox(height: orientation == Orientation.portrait ? 50 : size.height / 6),
@@ -52,11 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
         const Center(child: Text("Happy Hacking!, Dart... Dart...", style: TextStyle(fontSize: 30))),
         const SizedBox(height: 10),
         dataProvider.data.isEmpty ? (
-          const Center(  
+          const Center(
             child: Text('Store state: Not yet.', style: TextStyle(fontSize: 20))
           )
         ) : (
-          Center(  
+          Center(
             child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 20))
           )
         ),

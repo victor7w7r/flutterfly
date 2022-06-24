@@ -23,7 +23,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
       child: Column(
         children: [
           const Spacer(flex: 2),
-          DrawerHeader(child: Container(), decoration: togglerHeader()),
+          DrawerHeader(decoration: togglerHeader(), child: Container()),
           const Spacer(flex: 1),
           _tiles(context)[0],
           _tiles(context)[1],
@@ -41,7 +41,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
       ListTile(
         leading: const Icon( Icons.home_outlined ), title: const Text('Home'),
         onTap: () => Navigator.pushReplacementNamed(context, HomeScreen.routerName)
-      ), 
+      ),
       ListTile(
         leading: const Icon( Icons.store_outlined ), title: const Text('Store'),
         onTap: () => Navigator.pushReplacementNamed(context, StoreScreen.routerName )
