@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show ChangeNotifier, ThemeData;
 
 import 'package:flutterfly/share_preferences/preferences.dart';
 
-class ThemeProvider extends ChangeNotifier{
+class ThemeMaterialProvider extends ChangeNotifier{
 
   ThemeData currentTheme;
   bool darkState;
 
-  ThemeProvider({required bool isDarkmode, required this.darkState}):
+  ThemeMaterialProvider({required bool isDarkmode, required this.darkState}):
     currentTheme = isDarkmode
       ? ThemeData.dark()
       : ThemeData.light();

@@ -24,16 +24,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('My Home'), elevation: 0.0),
       drawer: DrawerMenu(onTap: () => setState(() => value = Preferences.isDarkmode)),
-      body: OrientationBuilder(
-        builder: (context, orientation) {
-          return Flex(
-            direction: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
-            children: [
-              Expanded(flex: 1, child: _firstColumn(context, orientation)),
-              Expanded(flex: orientation == Orientation.portrait ? 2 : 1, child: _secondColumn(context))
-            ]
-          );
-        }
+      body: OrientationBuilder(builder: (context, orientation) =>
+        Flex(
+          direction: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
+          children: [
+            Expanded(flex: 1, child: _firstColumn(context, orientation)),
+            Expanded(
+              flex: orientation == Orientation.portrait ? 2 : 1,
+              child: _secondColumn(context, orientation)
+            )
+          ]
+        )
       )
     );
   }
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Column(
       children: [
-        SizedBox(height: orientation == Orientation.portrait ? 30 : size.height / 6),
+        SizedBox(height: orientation == Orientation.portrait ? 30 : size.height / 3.5),
         HomeLogoChip(value: value),
         const SizedBox(height: 15),
         Center(
@@ -70,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Column _secondColumn(BuildContext context) {
+  Column _secondColumn(BuildContext context, Orientation orientation) {
 
     Size size = MediaQuery.of(context).size;
 
@@ -79,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 35),
         Center(child: Text("Cryptocurrency data", style: TextStyle(fontSize: (size.height>960) ? 35 : 30))),
         const SizedBox(height: 25),
-        const HomeCurrencyList()
+        HomeCurrencyList(orientation: orientation)
       ]
     );
   }

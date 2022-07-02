@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/screens/screens.dart';
-import 'package:flutterfly/providers/providers.dart' show ThemeProvider;
+import 'package:provider/provider.dart' show Provider;
+import 'package:auto_route/auto_route.dart';
+
+import 'package:flutterfly/providers/providers.dart' show ThemeMaterialProvider;
 
 class DrawerMenu extends StatefulWidget {
 
@@ -18,7 +19,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final themeProvider = Provider.of<ThemeMaterialProvider>(context, listen: false);
     return Drawer(
       child: Column(
         children: [
@@ -40,17 +41,17 @@ class _DrawerMenuState extends State<DrawerMenu> {
     return [
       ListTile(
         leading: const Icon( Icons.home_outlined ), title: const Text('Home'),
-        onTap: () => Navigator.pushReplacementNamed(context, HomeScreen.routerName)
+        onTap: () => context.navigateNamedTo('/home')
       ),
       ListTile(
         leading: const Icon( Icons.store_outlined ), title: const Text('Store'),
-        onTap: () => Navigator.pushReplacementNamed(context, StoreScreen.routerName )
+        onTap: () => context.navigateNamedTo('/store')
       ),
       ListTile(
         leading: const Icon( Icons.color_lens_outlined),
         title: const Text('Change Color Mode'),
         onTap: () {
-          final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+          final themeProvider = Provider.of<ThemeMaterialProvider>(context, listen: false);
           themeProvider.toggle();
           setState(() {});
           widget.onTap!();
@@ -60,7 +61,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
   }
 
   BoxDecoration togglerHeader() {
-    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final themeProvider = Provider.of<ThemeMaterialProvider>(context, listen: false);
     if ( themeProvider.darkState ) {
       return const BoxDecoration(
         image: DecorationImage(

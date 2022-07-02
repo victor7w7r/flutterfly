@@ -6,10 +6,13 @@ import 'package:flutterfly/widgets/widgets.dart' show HomeCurrencyCard;
 import 'package:flutterfly/providers/providers.dart' show BinanceProvider;
 
 class HomeCurrencyList extends StatefulWidget {
-  const HomeCurrencyList({Key? key}) : super(key: key);
+  const HomeCurrencyList({Key? key, required this.orientation}) : super(key: key);
+
+  final Orientation orientation;
 
   @override
   State<HomeCurrencyList> createState() => _HomeCurrencyListState();
+
 }
 
 class _HomeCurrencyListState extends State<HomeCurrencyList> {
@@ -55,10 +58,11 @@ class _HomeCurrencyListState extends State<HomeCurrencyList> {
             children: [
               for (var bin in binanceProvider.bin)
               HomeCurrencyCard (
-                  sym: bin.symbol,
-                  per: bin.priceChangePercent,
-                  pri: bin.bidPrice
-                )
+                sym: bin.symbol,
+                per: bin.priceChangePercent,
+                pri: bin.bidPrice,
+                orientation: widget.orientation,
+              )
             ]
           )
         )
