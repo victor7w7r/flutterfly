@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutterfly/share_preferences/preferences.dart';
+
 class ThemeProvider extends ChangeNotifier{
 
   ThemeData currentTheme;

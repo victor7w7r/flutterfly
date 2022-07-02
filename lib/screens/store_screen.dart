@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/providers/providers.dart';
 import 'package:flutterfly/widgets/widgets.dart';
@@ -20,7 +20,6 @@ class _StoreScreenState extends State<StoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -73,7 +72,7 @@ class _StoreScreenState extends State<StoreScreen> {
             dataProvider.rename(storeController.text);
             setState(() {});
           } else {
-            showDialog<String>(
+            showDialog(
               context: context,
               builder: (context) => AlertDialog(
                 title: const Text('Error'),

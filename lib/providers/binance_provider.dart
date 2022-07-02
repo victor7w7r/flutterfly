@@ -1,5 +1,4 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutterfly/models/binance.dart';
@@ -14,7 +13,7 @@ class BinanceProvider extends ChangeNotifier {
   bool loading = true;
 
   BinanceProvider() {
-    getCurrencies ();
+    getCurrencies();
   }
 
   Future<String> _getJsonData(String endpoint) async {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/screens/screens.dart';
-import 'package:flutterfly/providers/providers.dart';
+import 'package:flutterfly/providers/providers.dart' show ThemeProvider;
 
 class DrawerMenu extends StatefulWidget {
 

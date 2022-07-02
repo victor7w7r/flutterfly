@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class DataProvider extends ChangeNotifier {
 
@@ -6,7 +6,7 @@ class DataProvider extends ChangeNotifier {
 
   String data;
 
-  void rename( String reciever ) {
+  void rename(String reciever) {
     data = reciever;
     notifyListeners();
   }

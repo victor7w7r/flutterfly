@@ -1,3 +1,3 @@
-export 'package:flutterfly/providers/binance_provider.dart';
-export 'package:flutterfly/providers/data_provider.dart';
-export 'package:flutterfly/providers/theme_provider.dart';
+export 'binance_provider.dart';
+export 'data_provider.dart';
+export 'theme_provider.dart';

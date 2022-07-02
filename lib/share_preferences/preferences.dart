@@ -1,4 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
 
 class Preferences {
 
@@ -14,7 +14,7 @@ class Preferences {
     return _prefs.getBool('isDarkmode') ?? _isDarkmode;
   }
 
-  static set isDarkmode( bool value ) {
+  static set isDarkmode(bool value) {
     _isDarkmode = value;
     _prefs.setBool('isDarkmode', value );
   }

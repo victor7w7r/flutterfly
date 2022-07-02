@@ -1,5 +1,5 @@
-export 'package:flutterfly/widgets/brand_chip.dart';
-export 'package:flutterfly/widgets/currency_card.dart';
-export 'package:flutterfly/widgets/currency_list.dart';
-export 'package:flutterfly/widgets/drawer_menu.dart';
-export 'package:flutterfly/widgets/logo_chip.dart';
+export 'home_brand_chip.dart';
+export 'home_currency_card.dart';
+export 'home_currency_list.dart';
+export 'home_logo_chip.dart';
+export 'drawer_menu.dart';
