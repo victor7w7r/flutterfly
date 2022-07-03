@@ -5,16 +5,12 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutterfly/utils/animated_gradient.dart';
 
 class DesktopSelector extends StatefulWidget {
-  const DesktopSelector({
-    Key? key,
-    required this.callback
-  }) : super(key: key);
+  const DesktopSelector({Key? key, required this.callback}) : super(key: key);
 
   final void Function(String) callback;
 
   @override
   State<DesktopSelector> createState() => _DesktopSelectorState();
-
 }
 
 class _DesktopSelectorState extends State<DesktopSelector> {

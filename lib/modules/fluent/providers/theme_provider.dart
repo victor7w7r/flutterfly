@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+
 class ThemeFluentProvider extends ChangeNotifier {
 
   ThemeFluentProvider({required this.color, required this.darkState});

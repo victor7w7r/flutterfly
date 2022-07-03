@@ -6,8 +6,8 @@ import 'package:flutterfly/modules/fluent/screens/store_screen.dart';
 @CustomAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: [
-    AutoRoute(path: 'home', page: HomeScreen, initial: true),
-    AutoRoute(path: 'store', page: StoreScreen)
+    AutoRoute(path: '/home', page: HomeScreen, initial: true),
+    AutoRoute(path: '/store', page: StoreScreen)
   ]
 )
 class $FluentAppRouter {}

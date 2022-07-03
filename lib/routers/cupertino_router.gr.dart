@@ -35,16 +35,16 @@ class CupertinoAppRouter extends _i3.RootStackRouter {
   @override
   List<_i3.RouteConfig> get routes => [
         _i3.RouteConfig('/#redirect',
-            path: '/', redirectTo: 'home', fullMatch: true),
-        _i3.RouteConfig(HomeScreen.name, path: 'home'),
-        _i3.RouteConfig(StoreScreen.name, path: 'store')
+            path: '/', redirectTo: '/home', fullMatch: true),
+        _i3.RouteConfig(HomeScreen.name, path: '/home'),
+        _i3.RouteConfig(StoreScreen.name, path: '/store')
       ];
 }
 
 /// generated route for
 /// [_i1.HomeScreen]
 class HomeScreen extends _i3.PageRouteInfo<void> {
-  const HomeScreen() : super(HomeScreen.name, path: 'home');
+  const HomeScreen() : super(HomeScreen.name, path: '/home');
 
   static const String name = 'HomeScreen';
 }
@@ -52,7 +52,7 @@ class HomeScreen extends _i3.PageRouteInfo<void> {
 /// generated route for
 /// [_i2.StoreScreen]
 class StoreScreen extends _i3.PageRouteInfo<void> {
-  const StoreScreen() : super(StoreScreen.name, path: 'store');
+  const StoreScreen() : super(StoreScreen.name, path: '/store');
 
   static const String name = 'StoreScreen';
 }

@@ -6,8 +6,8 @@ import 'package:flutterfly/modules/cupertino/screens/store_screen.dart';
 @CupertinoAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: [
-    AutoRoute(path: 'home', page: HomeScreen, initial: true),
-    AutoRoute(path: 'store', page: StoreScreen)
+    AutoRoute(path: '/home', page: HomeScreen, initial: true),
+    AutoRoute(path: '/store', page: StoreScreen)
   ]
 )
 class $CupertinoAppRouter {}

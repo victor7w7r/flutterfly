@@ -5,7 +5,7 @@ import 'package:flutter/material.dart' show MaterialApp;
 import 'package:flutter/widgets.dart';
 
 import 'package:provider/provider.dart' show Provider;
-import 'package:fluent_ui/fluent_ui.dart' show FluentApp;
+import 'package:fluent_ui/fluent_ui.dart' show FluentApp, ThemeData, Colors;
 
 import 'package:flutterfly/desktop_selector.dart';
 
@@ -35,7 +35,7 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
 
   @override
   Widget build(BuildContext context) {
-    if(Platform.isIOS && !_isDesktop) {
+  /*  if(Platform.isIOS && !_isDesktop) {
       return _cupertinoApp(context, _cupertinoAppRouter);
     } else if (Platform.isAndroid && !_isDesktop) {
       return _materialApp(context, _materialAppRouter);
@@ -45,9 +45,9 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
           return _materialApp(context, _materialAppRouter);
         case 'cupertino':
           return _cupertinoApp(context, _cupertinoAppRouter);
-        default:
+        default:*/
           return _fluentApp(context, _fluentAppRouter);
-      }
+    /* }
     } else {
       return DesktopSelector(callback: (value) {
         setState(() {
@@ -55,7 +55,7 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
           _isDesktop = true;
         });
       });
-    }
+    }*/
   }
 
   CupertinoApp _cupertinoApp(BuildContext context, CupertinoAppRouter desktopAppRouter) {

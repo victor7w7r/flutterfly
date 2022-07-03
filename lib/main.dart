@@ -38,7 +38,7 @@ List<SingleChildWidget> dynamicProviders() {
   } else {
     return [
       ChangeNotifierProvider(create: ( _ ) =>
-        ThemeFluentProvider(darkState: false, color: const Color.fromRGBO(255, 255, 255, 0))),
+        ThemeFluentProvider(darkState: false, color: const Color(0xFF18171C))),
       ChangeNotifierProvider(create: ( _ ) =>
         ThemeCupertinoProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode)),
       ChangeNotifierProvider(create: ( _ ) =>
