@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' show Provider;
 import 'package:auto_route/auto_route.dart';
 
-import 'package:flutterfly/providers/providers.dart' show ThemeMaterialProvider;
+import 'package:flutterfly/modules/material/providers/theme_provider.dart' show ThemeMaterialProvider;
 
 class DrawerMenu extends StatefulWidget {
 
@@ -24,7 +24,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
       child: Column(
         children: [
           const Spacer(flex: 2),
-          DrawerHeader(decoration: togglerHeader(), child: Container()),
+          DrawerHeader(decoration: _togglerHeader(), child: Container()),
           const Spacer(flex: 1),
           _tiles(context)[0],
           _tiles(context)[1],
@@ -60,7 +60,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
     ];
   }
 
-  BoxDecoration togglerHeader() {
+  BoxDecoration _togglerHeader() {
     final themeProvider = Provider.of<ThemeMaterialProvider>(context, listen: false);
     if ( themeProvider.darkState ) {
       return const BoxDecoration(

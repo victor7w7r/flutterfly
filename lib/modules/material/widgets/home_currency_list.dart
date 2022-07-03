@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/widgets/widgets.dart' show HomeCurrencyCard;
+import 'package:flutterfly/modules/material/widgets/widgets.dart' show HomeCurrencyCard;
 import 'package:flutterfly/providers/providers.dart' show BinanceProvider;
 
 class HomeCurrencyList extends StatefulWidget {

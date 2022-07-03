@@ -1,63 +1,62 @@
 import 'dart:io' show Platform;
 
-import 'package:flutter/widgets.dart'
-  show runApp, StatelessWidget, Widget,
-    BuildContext, Key, WidgetsFlutterBinding;
+import 'package:flutter/widgets.dart';
 
-import 'package:flutter/material.dart' show MaterialApp;
-import 'package:flutter/cupertino.dart' show CupertinoApp;
-import 'package:flutterfly/providers/theme_cupertino_provider.dart';
+import 'package:provider/provider.dart' show MultiProvider;
 
-import 'package:provider/provider.dart' show MultiProvider, ChangeNotifierProvider, Provider;
-
-import 'package:flutterfly/providers/providers.dart';
+import 'package:flutterfly/providers/dynamic_providers.dart';
 import 'package:flutterfly/share_preferences/preferences.dart';
+import 'package:flutterfly/desktop_selector.dart';
+import 'package:flutterfly/platforms.dart';
 
-import 'router.gr.dart';
-
-final _appRouter = AppRouter();
+import 'package:flutterfly/routers/cupertino_router.gr.dart';
+import 'package:flutterfly/routers/material_router.gr.dart';
+import 'package:flutterfly/routers/fluent_router.gr.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Preferences.init();
-
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: ( _ ) => ThemeCupertinoProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode)),
-        ChangeNotifierProvider(create: ( _ ) => ThemeMaterialProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode)),
-        ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
-        ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
-      ],
-      child: const MyApp()
-    )
-  );
+  runApp(MultiProvider(providers: dynamicProviders(), child: const App()));
 }
 
-class MyApp extends StatelessWidget {
+final _materialAppRouter = MaterialAppRouter();
+final _cupertinoAppRouter = CupertinoAppRouter();
+final _fluentAppRouter = FluentAppRouter();
 
-  const MyApp({Key? key}): super(key: key);
+class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+
+  bool _isDesktop = false;
+  String _desktopSelector = '';
 
   @override
   Widget build(BuildContext context) {
-
-    if(Platform.isIOS) {
-      return CupertinoApp.router(
-        title: 'flutterfly',
-        debugShowCheckedModeBanner: false,
-        routerDelegate: _appRouter.delegate(),
-        routeInformationParser: _appRouter.defaultRouteParser(),
-        theme: Provider.of<ThemeCupertinoProvider>(context).currentTheme
-      );
+    if(Platform.isIOS && !_isDesktop) {
+      return cupertinoApp(context, _cupertinoAppRouter);
+    } else if (Platform.isAndroid && !_isDesktop) {
+      return materialApp(context, _materialAppRouter);
+    } else if (_desktopSelector != '' && _isDesktop) {
+      switch(_desktopSelector) {
+        case 'material':
+          return materialApp(context, _materialAppRouter);
+        case 'cupertino':
+          return cupertinoApp(context, _cupertinoAppRouter);
+        default:
+          return fluentApp(context, _fluentAppRouter);
+      }
     } else {
-      return MaterialApp.router(
-        title: 'flutterfly',
-        debugShowCheckedModeBanner: false,
-        routerDelegate: _appRouter.delegate(),
-        routeInformationParser: _appRouter.defaultRouteParser(),
-        theme: Provider.of<ThemeMaterialProvider>(context).currentTheme
-      );
+      return DesktopSelector(callback: (value) {
+        setState(() {
+          _desktopSelector = value;
+          _isDesktop = true;
+        });
+      });
     }
   }
 }

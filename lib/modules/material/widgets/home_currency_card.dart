@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/providers/providers.dart' show ThemeMaterialProvider;
+import 'package:flutterfly/modules/material/providers/theme_provider.dart' show ThemeMaterialProvider;
 
 class HomeCurrencyCard extends StatefulWidget {
   const HomeCurrencyCard({
