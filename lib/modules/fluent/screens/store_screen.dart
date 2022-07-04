@@ -1,6 +1,9 @@
 import 'package:flutter/widgets.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/modules/fluent/widgets/blur_button.dart';
 import 'package:flutterfly/modules/fluent/widgets/header.dart';
@@ -16,8 +19,9 @@ class StoreScreen extends StatefulWidget {
 class _StoreScreenState extends State<StoreScreen> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
     return Container (
-      color: const Color(0xFF18171C),
+      color: themeProvider.backgroundColor,
       child: Column(
         children:  [
           const SizedBox(height: 10),
@@ -27,7 +31,7 @@ class _StoreScreenState extends State<StoreScreen> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [const StoreCard()]
+                children: const [StoreCard()],
               ),
               const SizedBox(height: 60),
               BlurButton(caption: 'Go to Home', onClick:() => context.navigateNamedTo('/home')),

@@ -1,5 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
+import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:provider/provider.dart' show Provider;
+
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);
 
@@ -9,12 +12,12 @@ class Header extends StatefulWidget {
 
 class _HeaderState extends State<Header> {
 
-  bool _checked = true;
-
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
+    Size size = MediaQuery.of(context).size;
     return Card(
-      backgroundColor: const Color(0xFF20242D),
+      backgroundColor: themeProvider.cardColor,
       borderRadius: BorderRadius.circular(20),
       elevation: 0.0,
       child: FractionallySizedBox(
@@ -23,20 +26,34 @@ class _HeaderState extends State<Header> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(200, 0, 0, 0),
+              padding: size.width > 960
+                ? const EdgeInsets.fromLTRB(200, 0, 0, 0)
+                : const EdgeInsets.fromLTRB(50, 0, 0, 0),
               child: Row(
                 children: [
                   Image.asset('assets/flutter-logo.png', width: 50.0, height: 30.0),
-                  const Text('Flutter Template', style: TextStyle(color: Colors.white))
+                  Text('Flutter Template', style: TextStyle(color: themeProvider.invertedColor))
                 ]
               )
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 200, 0),
+              padding: size.width > 960
+                ? const EdgeInsets.fromLTRB(0, 0, 200, 0)
+                : const EdgeInsets.fromLTRB(0, 0, 50, 0),
               child: ToggleSwitch(
-                checked: _checked,
-                onChanged: (v) => setState(() => _checked = v),
-                content: const Text('Dark Mode', style: TextStyle(color: Colors.white))
+                checked: themeProvider.darkMode,
+                /*style: ToggleSwitchThemeData(
+                  checkedDecoration: ButtonState.all<BoxDecoration>(
+                    BoxDecoration(
+                      color: themeProvider.cardColor
+                    ),
+                  )
+                ),*/
+                onChanged: (v) {
+                  themeProvider.toggle(v);
+                  setState(() => themeProvider.darkMode = v);
+                },
+                content: Text('Dark Mode', style: TextStyle(color: themeProvider.invertedColor))
               )
             )
           ]

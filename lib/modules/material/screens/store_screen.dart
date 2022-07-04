@@ -77,12 +77,7 @@ class _StoreScreenState extends State<StoreScreen> {
               builder: (context) => AlertDialog(
                 title: const Text('Error'),
                 content: const Text('Is empty your TextField'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context, 'OK'),
-                    child: const Text('OK')
-                  )
-                ]
+                actions: [TextButton(onPressed: () => Navigator.pop(context, 'OK'), child: const Text('OK'))]
               )
             );
           }

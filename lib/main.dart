@@ -38,7 +38,13 @@ List<SingleChildWidget> dynamicProviders() {
   } else {
     return [
       ChangeNotifierProvider(create: ( _ ) =>
-        ThemeFluentProvider(darkState: false, color: const Color(0xFF18171C))),
+        ThemeFluentProvider(
+          darkMode: true,
+          backgroundColor: const Color(0xFF18171C),
+          cardColor: const Color(0xFF20242D),
+          invertedColor: const Color(0xFFFFFFFF)
+          )
+        ),
       ChangeNotifierProvider(create: ( _ ) =>
         ThemeCupertinoProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode)),
       ChangeNotifierProvider(create: ( _ ) =>

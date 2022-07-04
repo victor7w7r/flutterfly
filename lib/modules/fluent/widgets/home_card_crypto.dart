@@ -1,4 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutterfly/models/binance.dart';
+import 'package:provider/provider.dart' show Provider;
+
+import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:flutterfly/providers/providers.dart';
 
 class HomeCardCrypto extends StatefulWidget {
   const HomeCardCrypto({Key? key}) : super(key: key);
@@ -8,28 +13,56 @@ class HomeCardCrypto extends StatefulWidget {
 }
 
 class _HomeCardCryptoState extends State<HomeCardCrypto> {
+
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
+    Size size = MediaQuery.of(context).size;
     return Card(
-      backgroundColor: const Color(0xFF20242D),
+      backgroundColor: themeProvider.cardColor,
       borderRadius: BorderRadius.circular(20),
-      padding: const EdgeInsets.fromLTRB(150, 150, 150, 150),
+      padding: EdgeInsets.fromLTRB(100, size.width > 960 ? 75: 5, 100, size.width > 960 ? 75: 5),
       child: Column(
-        children: const [
-          SizedBox(height: 45),
-          Text('Store State: Not Yet',
-            style: TextStyle(color: Colors.white, fontSize: 20)
-          ),
-          SizedBox(height: 45),
-          Text('Symbol',
-            style: TextStyle(color: Colors.white, fontSize: 20)
-          ),
-          Text('Price',
-            style: TextStyle(color: Colors.white, fontSize: 20)
-          ),
-          SizedBox(height: 45)
+        children: [
+          const SizedBox(height: 45),
+          _storeState(context),
+          const SizedBox(height: 45),
+          ..._cryptoData(context)
         ],
       )
     );
   }
+
+  List<Widget> _cryptoData(BuildContext context) {
+
+    final binanceProvider = Provider.of<BinanceProvider>(context);
+    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
+    if(binanceProvider.loading) {
+      return const [ProgressRing(value: 35)];
+    } else {
+      Binance bitcoin = binanceProvider.bin.firstWhere((element) => element.symbol == 'BTCUSDT');
+      return [
+        Text('Symbol: ${bitcoin.symbol}',
+          style: TextStyle(color: themeProvider.invertedColor, fontSize: 20)
+        ),
+        Text('Symbol: ${bitcoin.askPrice}',
+          style: TextStyle(color: themeProvider.invertedColor, fontSize: 20)
+        ),
+        const SizedBox(height: 45)
+      ];
+    }
+  }
+
+  Text _storeState(BuildContext context) {
+
+    final dataProvider = Provider.of<DataProvider>(context, listen: true);
+    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
+
+    if (dataProvider.data.isEmpty) {
+      return Text('Store State: Not Yet', style: TextStyle(color: themeProvider.invertedColor, fontSize: 20));
+    } else {
+      return Text('Store state: Yes, you write. ${dataProvider.data}', style: TextStyle(color: themeProvider.invertedColor, fontSize: 20));
+    }
+  }
+
 }

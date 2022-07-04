@@ -84,7 +84,7 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
       debugShowCheckedModeBanner: false,
       routerDelegate: desktopAppRouter.delegate(),
       routeInformationParser: desktopAppRouter.defaultRouteParser(),
-      color: Provider.of<ThemeFluentProvider>(context).color,
+      color: Provider.of<ThemeFluentProvider>(context).backgroundColor,
     );
   }
 }
