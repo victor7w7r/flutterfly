@@ -1,3 +1,5 @@
+import 'dart:io' show SocketException;
+
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,19 +19,25 @@ class BinanceProvider extends ChangeNotifier {
   }
 
   Future<String> _getJsonData(String endpoint) async {
-    final url = Uri.https( _baseUrl, endpoint );
-    final response = await http.get(url);
-    return response.body;
+    try {
+      final url = Uri.https( _baseUrl, endpoint );
+      final response = await http.get(url);
+      return response.body;
+    } on SocketException catch (_) {
+      return '';
+    }
   }
 
   getCurrencies() async {
     final jsonData = await _getJsonData('/api/v3/ticker/24hr');
     final binData = Binance.fromJsonList(jsonData);
     allBin = binData;
-    bin = binData.sublist(0, 40);
-    position = 40;
-    loading = false;
-    notifyListeners();
+    try {
+      bin = binData.sublist(0, 40);
+      position = 40;
+      loading = false;
+      notifyListeners();
+    }  on RangeError catch (_) { }
   }
 
   void paginateCurrencies () {

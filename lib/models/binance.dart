@@ -43,7 +43,11 @@ class Binance {
   Map<String, dynamic> toJson() => _$BinanceToJson(this);
 
   static List<Binance> fromJsonList(String str) {
-    return (json.decode(str) as List).map((data) => Binance.fromJson(data)).toList();
+    try {
+      return (json.decode(str) as List).map((data) => Binance.fromJson(data)).toList();
+    } on FormatException catch (_) {
+      return [];
+    }
   }
 
 }
