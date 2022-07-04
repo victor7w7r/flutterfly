@@ -1,7 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
 import 'package:provider/provider.dart' show Provider;
+
+import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
 
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);

@@ -28,7 +28,10 @@ class BlurButton extends StatelessWidget {
       onPressed:() => onClick(),
       child: Padding (
         padding: const EdgeInsets.fromLTRB(10, 3, 10, 3),
-        child: Text(caption, style: const TextStyle(fontFamily: 'FuturaPTMedium', fontSize: 20))
+        child: Text(
+          caption,
+          style: const TextStyle(fontFamily: 'FuturaPTMedium', fontSize: 20)
+        )
       )
     );
   }

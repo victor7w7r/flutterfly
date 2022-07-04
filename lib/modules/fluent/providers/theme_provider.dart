@@ -44,7 +44,6 @@ class ThemeFluentProvider extends ChangeNotifier {
       interpolator(const Color(0xFF18171C), 'background');
       interpolator(const Color(0xFF20242D), 'card');
       interpolator(const Color(0xFFFFFFFF), 'color');
-
     } else {
       interpolator(const Color(0xFFFFFFFF), 'background');
       interpolator(const Color(0xFFC1C6CC), 'card');

@@ -1,15 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
 import 'package:provider/provider.dart' show Provider;
 
+import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
 
 class ColorButton extends StatelessWidget {
 
-  const ColorButton({
-    Key? key,
-    required this.color,
-  }) : super(key: key);
+  const ColorButton({Key? key, required this.color}) : super(key: key);
 
   final String color;
 
@@ -30,9 +27,7 @@ class ColorButton extends StatelessWidget {
         )
       ),
       onPressed: () => colorChange(context),
-      child: const Padding (
-        padding: EdgeInsets.fromLTRB(25, 25, 25, 25),
-      )
+      child: const Padding (padding: EdgeInsets.fromLTRB(25, 25, 25, 25))
     );
   }
 
@@ -44,29 +39,33 @@ class ColorButton extends StatelessWidget {
       case 'blue':
         themeProvider.interpolator(
           themeProvider.darkMode
-            ?const Color(0xFF0C4A6E)
-            :const Color(0xAA7DD3fC), 'background');
+            ? const Color(0xFF0C4A6E)
+            : const Color(0xAA7DD3fC), 'background'
+        );
         themeProvider.interpolator(const Color(0xFF0369A1), 'card');
         break;
       case 'violet':
         themeProvider.interpolator(
           themeProvider.darkMode
             ?const Color(0xFF581c87)
-            :const Color(0xFFD8b4FE), 'background');
+            :const Color(0xFFD8b4FE), 'background'
+        );
         themeProvider.interpolator(const Color(0xFF7E22CE), 'card');
         break;
       case 'red':
         themeProvider.interpolator(
           themeProvider.darkMode
             ?const Color(0xFF7F1D1D)
-            :const Color(0xFFfCA5A5), 'background');
+            :const Color(0xFFfCA5A5), 'background'
+        );
         themeProvider.interpolator(const Color(0xFFB91C1C), 'card');
         break;
       default:
         themeProvider.interpolator(
           themeProvider.darkMode
             ?const Color(0xFF064E3B)
-            :const Color(0xFF6EE7B7), 'background');
+            :const Color(0xFF6EE7B7), 'background'
+        );
         themeProvider.interpolator(const Color(0xFF047857), 'card');
         break;
     }
@@ -74,28 +73,19 @@ class ColorButton extends StatelessWidget {
 
   Color _backSelector() {
     switch (color) {
-      case 'blue':
-        return const Color(0xFF0284C7);
-      case 'violet':
-        return const Color(0xFF9333EA);
-      case 'red':
-        return const Color(0xFFF3425B);
-      default:
-        return const Color(0xFF059669);
+      case 'blue': return const Color(0xFF0284C7);
+      case 'violet': return const Color(0xFF9333EA);
+      case 'red': return const Color(0xFFF3425B);
+      default: return const Color(0xFF059669);
     }
   }
 
   Color _borderSelector() {
     switch (color) {
-      case 'blue':
-        return const Color(0xAA7DD3fC);
-      case 'violet':
-        return const Color(0xAAD8B4FE);
-      case 'red':
-        return const Color(0xAAfCA5A5);
-      default:
-        return const Color(0xAA6EE7B7);
+      case 'blue': return const Color(0xAA7DD3fC);
+      case 'violet': return const Color(0xAAD8B4FE);
+      case 'red': return const Color(0xAAfCA5A5);
+      default: return const Color(0xAA6EE7B7);
     }
   }
-
 }

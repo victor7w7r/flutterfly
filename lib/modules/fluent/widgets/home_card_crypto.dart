@@ -1,18 +1,14 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutterfly/models/binance.dart';
+
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
 import 'package:flutterfly/providers/providers.dart';
+import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:flutterfly/models/binance.dart';
 
-class HomeCardCrypto extends StatefulWidget {
+class HomeCardCrypto extends StatelessWidget {
+
   const HomeCardCrypto({Key? key}) : super(key: key);
-
-  @override
-  State<HomeCardCrypto> createState() => _HomeCardCryptoState();
-}
-
-class _HomeCardCryptoState extends State<HomeCardCrypto> {
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +17,10 @@ class _HomeCardCryptoState extends State<HomeCardCrypto> {
     return Card(
       backgroundColor: themeProvider.cardColor,
       borderRadius: BorderRadius.circular(20),
-      padding: EdgeInsets.fromLTRB(100, size.width > 960 ? 75: 5, 100, size.width > 960 ? 75: 5),
+      padding: EdgeInsets.fromLTRB(
+        100, size.width > 960 ? 75: 5,
+        100, size.width > 960 ? 75: 5
+      ),
       child: Column(
         children: [
           const SizedBox(height: 45),
@@ -34,7 +33,6 @@ class _HomeCardCryptoState extends State<HomeCardCrypto> {
   }
 
   List<Widget> _cryptoData(BuildContext context) {
-
     final binanceProvider = Provider.of<BinanceProvider>(context);
     final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
     if(binanceProvider.loading) {
@@ -54,15 +52,18 @@ class _HomeCardCryptoState extends State<HomeCardCrypto> {
   }
 
   Text _storeState(BuildContext context) {
-
     final dataProvider = Provider.of<DataProvider>(context, listen: true);
     final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
-
     if (dataProvider.data.isEmpty) {
-      return Text('Store State: Not Yet', style: TextStyle(color: themeProvider.invertedColor, fontSize: 20));
+      return Text(
+        'Store State: Not Yet',
+        style: TextStyle(color: themeProvider.invertedColor, fontSize: 20)
+      );
     } else {
-      return Text('Store state: Yes, you write. ${dataProvider.data}', style: TextStyle(color: themeProvider.invertedColor, fontSize: 20));
+      return Text(
+        'Store state: Yes, you write. ${dataProvider.data}',
+        style: TextStyle(color: themeProvider.invertedColor, fontSize: 20)
+      );
     }
   }
-
 }

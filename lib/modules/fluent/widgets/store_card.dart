@@ -1,9 +1,10 @@
 import 'package:fluent_ui/fluent_ui.dart';
+
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
 import 'package:flutterfly/providers/providers.dart';
-import 'package:flutterfly/modules/fluent/widgets/blur_button.dart';
+import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:flutterfly/modules/fluent/widgets/widgets.dart' show BlurButton;
 
 class StoreCard extends StatefulWidget {
   const StoreCard({Key? key}) : super(key: key);
@@ -18,8 +19,8 @@ class _StoreCardState extends State<StoreCard> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
 
+    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
     return Card(
       backgroundColor: themeProvider.cardColor,
       borderRadius: BorderRadius.circular(20),
@@ -41,6 +42,7 @@ class _StoreCardState extends State<StoreCard> {
       )
     );
   }
+
   SizedBox _textField() {
     final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
     return SizedBox(
@@ -55,7 +57,7 @@ class _StoreCardState extends State<StoreCard> {
         style: TextStyle(color:themeProvider.invertedColor),
         cursorColor:themeProvider.invertedColor,
         highlightColor: const Color(0xFF6B7280),
-        decoration: BoxDecoration(color: themeProvider.cardColor),
+        decoration: BoxDecoration(color: themeProvider.cardColor)
       )
     );
   }
@@ -87,9 +89,13 @@ class _StoreCardState extends State<StoreCard> {
     final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
 
     if (dataProvider.data.isEmpty) {
-      return  Text('Store State: Not Yet', style: TextStyle(color:themeProvider.invertedColor, fontSize: 20));
+      return Text('Store State: Not Yet',
+        style: TextStyle(color:themeProvider.invertedColor, fontSize: 20)
+      );
     } else {
-      return Text('Store state: Yes, you write. ${dataProvider.data}', style: TextStyle(color:themeProvider.invertedColor, fontSize: 20));
+      return Text('Store state: Yes, you write. ${dataProvider.data}',
+        style: TextStyle(color:themeProvider.invertedColor, fontSize: 20)
+      );
     }
   }
 }
