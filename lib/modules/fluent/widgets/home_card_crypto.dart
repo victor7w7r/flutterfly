@@ -27,7 +27,7 @@ class _HomeCardCryptoState extends State<HomeCardCrypto> {
           Text('Price',
             style: TextStyle(color: Colors.white, fontSize: 20)
           ),
-          SizedBox(height: 45),
+          SizedBox(height: 45)
         ],
       )
     );

@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: const [HomeCardBrand(), HomeCardCrypto()]
               ),
               const SizedBox(height: 60),
-              BlurButton(caption: 'Go to store', onClick:() => context.navigateNamedTo('/store')),
+              BlurButton(caption: 'Go to Store', onClick:() => context.navigateNamedTo('/store')),
               const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
