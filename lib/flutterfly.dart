@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart' show CupertinoApp;
 import 'package:flutter/material.dart' show MaterialApp;
 import 'package:flutter/widgets.dart';
+import 'package:flutterfly/modules/cupertino/cupertino_home.dart';
 
 import 'package:provider/provider.dart' show Provider;
 import 'package:fluent_ui/fluent_ui.dart' show FluentApp, ThemeData, Colors;
@@ -13,12 +14,10 @@ import 'package:flutterfly/modules/material/providers/theme_provider.dart';
 import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
 import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
 
-import 'package:flutterfly/routers/cupertino_router.gr.dart';
 import 'package:flutterfly/routers/material_router.gr.dart';
 import 'package:flutterfly/routers/fluent_router.gr.dart';
 
 final _materialAppRouter = MaterialAppRouter();
-final _cupertinoAppRouter = CupertinoAppRouter();
 final _fluentAppRouter = FluentAppRouter();
 
 class FlutterflyApp extends StatefulWidget {
@@ -35,9 +34,9 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
 
   @override
   Widget build(BuildContext context) {
-  /*  if(Platform.isIOS && !_isDesktop) {
-      return _cupertinoApp(context, _cupertinoAppRouter);
-    } else if (Platform.isAndroid && !_isDesktop) {
+    /* if(Platform.isIOS && !_isDesktop) { */
+      return _cupertinoApp(context);
+    /*} else if (Platform.isAndroid && !_isDesktop) {
       return _materialApp(context, _materialAppRouter);
     } else if (_desktopSelector != '' && _isDesktop) {
       switch(_desktopSelector) {
@@ -45,9 +44,9 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
           return _materialApp(context, _materialAppRouter);
         case 'cupertino':
           return _cupertinoApp(context, _cupertinoAppRouter);
-        default:*/
+        default:
           return _fluentApp(context, _fluentAppRouter);
-    /* }
+      }
     } else {
       return DesktopSelector(callback: (value) {
         setState(() {
@@ -55,16 +54,16 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
           _isDesktop = true;
         });
       });
-    }*/
+    }
+    */
   }
 
-  CupertinoApp _cupertinoApp(BuildContext context, CupertinoAppRouter desktopAppRouter) {
-    return CupertinoApp.router(
+  CupertinoApp _cupertinoApp(BuildContext context) {
+    return CupertinoApp(
       title: 'flutterfly',
       debugShowCheckedModeBanner: false,
-      routerDelegate: desktopAppRouter.delegate(),
-      routeInformationParser: desktopAppRouter.defaultRouteParser(),
-      theme: Provider.of<ThemeCupertinoProvider>(context).currentTheme
+      theme: Provider.of<ThemeCupertinoProvider>(context).currentTheme,
+      home: const CupertinoHome()
     );
   }
 

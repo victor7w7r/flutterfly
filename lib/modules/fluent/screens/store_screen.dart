@@ -34,7 +34,7 @@ class _StoreScreenState extends State<StoreScreen> {
                 children: const [StoreCard()],
               ),
               const SizedBox(height: 60),
-              BlurButton(caption: 'Go to Home', onClick:() => context.navigateNamedTo('/home')),
+              BlurButton(caption: 'Go to Home', onClick: () => context.navigateNamedTo('/home')),
               const SizedBox(height: 40),
             ]
           )
