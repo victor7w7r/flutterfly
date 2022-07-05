@@ -13,14 +13,12 @@ class CupertinoHome extends StatefulWidget {
 
 class _CupertinoHomeState extends State<CupertinoHome> {
 
-  String title = "";
-
   final List<Widget> _tabs = [const HomeTab(), const StoreTab()];
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(middle: Text(title)),
+      navigationBar: const CupertinoNavigationBar(middle: Text('CupertinoApp')),
       child: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           items: const [
@@ -28,10 +26,7 @@ class _CupertinoHomeState extends State<CupertinoHome> {
             BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Store')
           ]
         ),
-        tabBuilder: (BuildContext context, index) {
-          setState(() => index == 0 ? title = 'My Home' : title = 'My Store');
-          return _tabs[index];
-        }
+        tabBuilder: (BuildContext context, index)  => _tabs[index]
       )
     );
   }
