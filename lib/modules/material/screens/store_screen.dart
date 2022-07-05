@@ -62,9 +62,7 @@ class _StoreScreenState extends State<StoreScreen> {
   }
 
   SizedBox _button(BuildContext context) {
-
     final dataProvider = Provider.of<DataProvider>(context, listen: false);
-
     return SizedBox(
       child: ElevatedButton(
         onPressed: () {
