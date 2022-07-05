@@ -20,10 +20,10 @@ class _ThemeToggleState extends State<ThemeToggle> {
       children: [
         const Text('Dark Mode', style: TextStyle(fontSize: 15)),
         CupertinoSwitch (
-        value: themeProvider.darkState,
+        value: themeProvider.darkMode,
         onChanged: (value){
           themeProvider.toggle();
-          themeProvider.darkState = value;
+          themeProvider.darkMode = value;
           setState(() {});
         },
         thumbColor: CupertinoColors.white,

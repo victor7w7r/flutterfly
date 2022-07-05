@@ -6,17 +6,17 @@ import 'package:flutterfly/share_preferences/preferences.dart';
 class ThemeCupertinoProvider extends ChangeNotifier {
 
   CupertinoThemeData currentTheme;
-  bool darkState;
+  bool darkMode;
 
-  ThemeCupertinoProvider({required bool isDarkmode, required this.darkState}):
+  ThemeCupertinoProvider({required bool isDarkmode, required this.darkMode}):
     currentTheme = isDarkmode
       ? const CupertinoThemeData(brightness: Brightness.dark)
       : const CupertinoThemeData(brightness: Brightness.light);
 
   void toggle() {
-    darkState = !darkState;
-    Preferences.isDarkmode = darkState;
-    darkState
+    darkMode = !darkMode;
+    Preferences.darkModeCupertino = darkMode;
+    darkMode
       ? currentTheme = const CupertinoThemeData(brightness: Brightness.dark)
       : currentTheme = const CupertinoThemeData(brightness: Brightness.light);
     notifyListeners();

@@ -31,7 +31,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
           const Spacer(flex: 8),
           _tiles(context)[2],
           const Spacer(flex: 15),
-          Image.asset(themeProvider.darkState ? 'assets/brandwhite.png' : 'assets/brand.png', width: 250.0, height: 75.0)
+          Image.asset(themeProvider.darkMode ? 'assets/brandwhite.png' : 'assets/brand.png', width: 250.0, height: 75.0)
         ],
       ),
     );
@@ -62,7 +62,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
   BoxDecoration _togglerHeader() {
     final themeProvider = Provider.of<ThemeMaterialProvider>(context, listen: false);
-    if ( themeProvider.darkState ) {
+    if ( themeProvider.darkMode ) {
       return const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/aqua-light.png'), fit: BoxFit.scaleDown

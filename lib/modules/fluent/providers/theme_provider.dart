@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 
+import 'package:flutterfly/share_preferences/preferences.dart';
+
 class ThemeFluentProvider extends ChangeNotifier {
 
   ThemeFluentProvider({
@@ -40,6 +42,7 @@ class ThemeFluentProvider extends ChangeNotifier {
 
   void toggle(bool value) {
     darkMode = value;
+    Preferences.darkModeFluent = darkMode;
     if(darkMode) {
       interpolator(const Color(0xFF18171C), 'background');
       interpolator(const Color(0xFF20242D), 'card');

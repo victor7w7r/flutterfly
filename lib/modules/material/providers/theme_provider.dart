@@ -5,17 +5,15 @@ import 'package:flutterfly/share_preferences/preferences.dart';
 class ThemeMaterialProvider extends ChangeNotifier{
 
   ThemeData currentTheme;
-  bool darkState;
+  bool darkMode;
 
-  ThemeMaterialProvider({required bool isDarkmode, required this.darkState}):
-    currentTheme = isDarkmode
-      ? ThemeData.dark()
-      : ThemeData.light();
+  ThemeMaterialProvider({required bool isDarkmode, required this.darkMode}):
+    currentTheme = isDarkmode ? ThemeData.dark() : ThemeData.light();
 
   void toggle() {
-    darkState = !darkState;
-    Preferences.isDarkmode = darkState;
-    darkState
+    darkMode = !darkMode;
+    Preferences.darkModeMaterial = darkMode;
+    darkMode
       ? currentTheme = ThemeData.dark()
       : currentTheme = ThemeData.light();
     notifyListeners();

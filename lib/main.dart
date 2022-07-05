@@ -24,14 +24,14 @@ List<SingleChildWidget> dynamicProviders() {
   if(Platform.isIOS) {
     return [
         ChangeNotifierProvider(create: ( _ ) =>
-          ThemeCupertinoProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode)),
+          ThemeCupertinoProvider(isDarkmode: Preferences.darkModeCupertino, darkMode: Preferences.darkModeCupertino)),
         ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
         ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
     ];
   } else if(Platform.isAndroid) {
     return [
         ChangeNotifierProvider(create: ( _ ) =>
-          ThemeMaterialProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode)),
+          ThemeMaterialProvider(isDarkmode: Preferences.darkModeMaterial, darkMode: Preferences.darkModeMaterial)),
         ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
         ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
     ];
@@ -39,16 +39,16 @@ List<SingleChildWidget> dynamicProviders() {
     return [
       ChangeNotifierProvider(create: ( _ ) =>
         ThemeFluentProvider(
-          darkMode: true,
+          darkMode: Preferences.darkModeMaterial,
           backgroundColor: const Color(0xFF18171C),
           cardColor: const Color(0xFF20242D),
           invertedColor: const Color(0xFFFFFFFF)
           )
         ),
       ChangeNotifierProvider(create: ( _ ) =>
-        ThemeCupertinoProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode)),
+        ThemeCupertinoProvider(isDarkmode: Preferences.darkModeCupertino, darkMode: Preferences.darkModeCupertino)),
       ChangeNotifierProvider(create: ( _ ) =>
-        ThemeMaterialProvider(isDarkmode: Preferences.isDarkmode, darkState: Preferences.isDarkmode)),
+        ThemeMaterialProvider(isDarkmode: Preferences.darkModeMaterial, darkMode: Preferences.darkModeMaterial)),
       ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
       ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
     ];

@@ -18,7 +18,7 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
 
-  bool value = Preferences.isDarkmode;
+  bool value = Preferences.darkModeCupertino;
 
   @override
   Widget build(BuildContext context) {

@@ -39,7 +39,4 @@ class Preferences {
     _prefs.setBool('fluent', value );
   }
 
-
-
-
 }

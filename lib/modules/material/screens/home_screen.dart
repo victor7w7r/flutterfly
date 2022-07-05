@@ -16,14 +16,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  bool value = Preferences.isDarkmode;
+  bool value = Preferences.darkModeFluent;
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(title: const Text('My Home'), elevation: 0.0),
-      drawer: DrawerMenu(onTap: () => setState(() => value = Preferences.isDarkmode)),
+      drawer: DrawerMenu(onTap: () => setState(() => value = Preferences.darkModeFluent)),
       body: OrientationBuilder(builder: (context, orientation) =>
         Flex(
           direction: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,

@@ -34,7 +34,7 @@ class _HomeCurrencyCardState extends State<HomeCurrencyCard> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        border: themeProvider.darkState
+        border: themeProvider.darkMode
           ? Border.all(width: 2, color: const Color.fromRGBO(255, 255, 255, 1))
           : Border.all(width: 2, color: const Color.fromRGBO(0, 0, 0, 1)),
         image: DecorationImage(
