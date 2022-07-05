@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutterfly/modules/cupertino/widgets/home_currency_list.dart';
+
 import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/providers/providers.dart';
@@ -21,6 +22,7 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
+     // print(value);
     return OrientationBuilder(builder: (context, orientation) =>
       Flex(
         direction: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
@@ -35,39 +37,34 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
-  Stack _firstColumn(BuildContext context, Orientation orientation) {
+  Column _firstColumn(BuildContext context, Orientation orientation) {
 
     DataProvider dataProvider = Provider.of<DataProvider>(context, listen: false);
     Size size = MediaQuery.of(context).size;
 
-    return Stack(
+    return Column(
       children: [
-        Column(
-          children: [
-            SizedBox(height: orientation == Orientation.portrait ? 75 : size.height / 3.5),
-            HomeLogoChip(value: value),
-            const SizedBox(height: 15),
-            Center(
-              child: Text("Happy Hacking!, Dart... Dart...",
-              style: TextStyle(fontSize: (size.height > 960 ) ? 30 : 20))
-            ),
-            const SizedBox(height: 10),
-            dataProvider.data.isEmpty ? (
-            Center(
-                child: Text('Store state: Not yet.', style: TextStyle(fontSize: (size.height>960) ? 20 : 15))
-              )
-            ) : (
-              Center(
-                child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 20))
-              )
-            ),
-            const SizedBox(height: 20),
-            const Center(child: Text("Made with love by ", style: TextStyle(fontSize: 15))),
-            const SizedBox(height: 20),
-            HomeBrandChip(value: value)
-          ]
+        SizedBox(height: orientation == Orientation.portrait ? 75 : size.height / 3.5),
+        HomeLogoChip(value: value),
+        const SizedBox(height: 10),
+        Center(
+          child: Text("Happy Hacking!, Dart... Dart...",
+          style: TextStyle(fontSize: (size.height > 960 ) ? 30 : 20))
         ),
-       
+        const SizedBox(height: 10),
+        dataProvider.data.isEmpty ? (
+        Center(
+            child: Text('Store state: Not yet.', style: TextStyle(fontSize: (size.height>960) ? 20 : 15))
+          )
+        ) : (
+          Center(
+            child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 20))
+          )
+        ),
+        const SizedBox(height: 20),
+        const Center(child: Text("Made with love by ", style: TextStyle(fontSize: 15))),
+        const SizedBox(height: 20),
+        HomeBrandChip(value: value)
       ]
     );
   }

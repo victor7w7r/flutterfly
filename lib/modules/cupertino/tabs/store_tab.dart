@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+
 import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/providers/providers.dart';
@@ -18,34 +19,26 @@ class _StoreTabState extends State<StoreTab> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Stack(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Positioned(
-          top: 10,
-          right: 10,
-          child: Text('BBBBBB')
-        ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Center(child: Text('Store Example', style: TextStyle(fontSize: 40))),
-              const SizedBox(height: 15),
-              const Center(
-                child: Text('Write anything in this form and send!', style: TextStyle(fontSize: 20))
-              ),
-              const SizedBox(height: 25),
-              _textField(),
-              const SizedBox(height: 12),
-              _button(context),
-              const SizedBox(height: 20),
-              _storeState(context)
-            ]
-          )
+          const Center(child: Text('Store Example', style: TextStyle(fontSize: 40))),
+          const SizedBox(height: 15),
+          const Center(
+            child: Text('Write anything in this form and send!', style: TextStyle(fontSize: 20))
+          ),
+          const SizedBox(height: 25),
+          _textField(),
+          const SizedBox(height: 12),
+          _button(context),
+          const SizedBox(height: 20),
+          _storeState(context)
         ]
       )
     );
   }
+
   SizedBox _textField() {
     return SizedBox(
       width: 250.0,
@@ -88,6 +81,7 @@ class _StoreTabState extends State<StoreTab> {
       )
     );
   }
+
   Center _storeState(BuildContext context) {
     final dataProvider = Provider.of<DataProvider>(context, listen: false);
     if (dataProvider.data.isEmpty) {

@@ -1,0 +1,35 @@
+import 'package:flutter/cupertino.dart';
+
+import 'package:provider/provider.dart' show Provider;
+import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
+
+class ThemeToggle extends StatefulWidget {
+  const ThemeToggle({Key? key}) : super(key: key);
+
+  @override
+  State<ThemeToggle> createState() => _ThemeToggleState();
+}
+
+class _ThemeToggleState extends State<ThemeToggle> {
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeCupertinoProvider>(context, listen: false);
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 3,
+      children: [
+        const Text('Dark Mode', style: TextStyle(fontSize: 15)),
+        CupertinoSwitch (
+        value: themeProvider.darkState,
+        onChanged: (value){
+          themeProvider.toggle();
+          themeProvider.darkState = value;
+          setState(() {});
+        },
+        thumbColor: CupertinoColors.white,
+        activeColor: CupertinoColors.activeBlue
+        )
+      ],
+    );
+  }
+}

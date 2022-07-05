@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart'
   show ChangeNotifier, CupertinoThemeData, Brightness;
 
+import 'package:flutterfly/share_preferences/preferences.dart';
+
 class ThemeCupertinoProvider extends ChangeNotifier {
 
   CupertinoThemeData currentTheme;
@@ -13,6 +15,7 @@ class ThemeCupertinoProvider extends ChangeNotifier {
 
   void toggle() {
     darkState = !darkState;
+    Preferences.isDarkmode = darkState;
     darkState
       ? currentTheme = const CupertinoThemeData(brightness: Brightness.dark)
       : currentTheme = const CupertinoThemeData(brightness: Brightness.light);

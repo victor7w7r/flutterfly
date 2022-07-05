@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' show Icons;
 
 import 'package:flutterfly/modules/cupertino/tabs/home_tab.dart';
 import 'package:flutterfly/modules/cupertino/tabs/store_tab.dart';
+import 'package:flutterfly/modules/cupertino/widgets/theme_toggle.dart';
 
 class CupertinoHome extends StatefulWidget {
   const CupertinoHome({Key? key}) : super(key: key);
@@ -18,7 +19,10 @@ class _CupertinoHomeState extends State<CupertinoHome> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(middle: Text('CupertinoApp')),
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('CupertinoApp'),
+        trailing: ThemeToggle(),
+      ),
       child: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           items: const [
