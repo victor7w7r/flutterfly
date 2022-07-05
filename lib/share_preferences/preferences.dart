@@ -4,19 +4,42 @@ class Preferences {
 
   static late SharedPreferences _prefs;
 
-  static bool _isDarkmode = false;
+  static bool _darkModeMaterial = false;
+  static bool _darkModeCupertino = false;
+  static bool _darkModeFluent = false;
 
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  static bool get isDarkmode {
-    return _prefs.getBool('isDarkmode') ?? _isDarkmode;
+  static bool get darkModeMaterial {
+    return _prefs.getBool('material') ?? _darkModeMaterial;
   }
 
-  static set isDarkmode(bool value) {
-    _isDarkmode = value;
-    _prefs.setBool('isDarkmode', value );
+  static set darkModeMaterial(bool value) {
+    _darkModeMaterial = value;
+    _prefs.setBool('material', value );
   }
+
+  static bool get darkModeCupertino {
+    return _prefs.getBool('cupertino') ?? _darkModeCupertino;
+  }
+
+  static set darkModeCupertino(bool value) {
+    _darkModeCupertino = value;
+    _prefs.setBool('material', value );
+  }
+
+    static bool get darkModeFluent {
+    return _prefs.getBool('fluent') ?? _darkModeFluent;
+  }
+
+  static set darkModeFluent(bool value) {
+    _darkModeFluent = value;
+    _prefs.setBool('fluent', value );
+  }
+
+
+
 
 }
