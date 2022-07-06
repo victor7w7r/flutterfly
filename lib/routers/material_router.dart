@@ -6,8 +6,8 @@ import 'package:flutterfly/modules/material/screens/store_screen.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: [
-    AutoRoute(path: '/home', page: HomeScreen, initial: true),
-    AutoRoute(path: '/store', page: StoreScreen)
+    AutoRoute(path: '', page: HomeScreen, initial: true),
+    AutoRoute(path: 'store', page: StoreScreen)
   ]
 )
 class $MaterialAppRouter {}

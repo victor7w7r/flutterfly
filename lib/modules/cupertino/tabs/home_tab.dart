@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutterfly/modules/cupertino/widgets/home_currency_list.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/providers/providers.dart';
 import 'package:flutterfly/share_preferences/preferences.dart';
 
-import 'package:flutterfly/modules/cupertino/widgets/home_brand_chip.dart';
-import 'package:flutterfly/modules/cupertino/widgets/home_logo_chip.dart';
+import 'package:flutterfly/modules/cupertino/widgets/widgets.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -22,7 +20,6 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-     // print(value);
     return OrientationBuilder(builder: (context, orientation) =>
       Flex(
         direction: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
@@ -45,7 +42,7 @@ class _HomeTabState extends State<HomeTab> {
     return Column(
       children: [
         SizedBox(height: orientation == Orientation.portrait ? 75 : size.height / 3.5),
-        HomeLogoChip(value: value),
+        DynamicChip(value: value, selector: 'brand'),
         const SizedBox(height: 10),
         Center(
           child: Text("Happy Hacking!, Dart... Dart...",
@@ -64,7 +61,7 @@ class _HomeTabState extends State<HomeTab> {
         const SizedBox(height: 20),
         const Center(child: Text("Made with love by ", style: TextStyle(fontSize: 15))),
         const SizedBox(height: 20),
-        HomeBrandChip(value: value)
+        DynamicChip(value: value, selector: 'home')
       ]
     );
   }

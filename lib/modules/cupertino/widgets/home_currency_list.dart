@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/material/widgets/widgets.dart' show HomeCurrencyCard;
+import 'package:flutterfly/modules/material/widgets/widgets.dart';
 import 'package:flutterfly/providers/providers.dart' show BinanceProvider;
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';

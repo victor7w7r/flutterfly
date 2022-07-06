@@ -5,17 +5,11 @@ import 'package:auto_route/auto_route.dart';
 
 import 'package:flutterfly/modules/material/providers/theme_provider.dart' show ThemeMaterialProvider;
 
-class DrawerMenu extends StatefulWidget {
+class DrawerMenu extends StatelessWidget {
 
-  const DrawerMenu({Key? key, this.onTap}) : super(key: key);
-  final Function()? onTap;
+  const DrawerMenu({Key? key, required this.callback}) : super(key: key);
 
-  @override
-  State<DrawerMenu> createState() => _DrawerMenuState();
-
-}
-
-class _DrawerMenuState extends State<DrawerMenu> {
+  final VoidCallback callback;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +18,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
       child: Column(
         children: [
           const Spacer(flex: 2),
-          DrawerHeader(decoration: _togglerHeader(), child: Container()),
+          DrawerHeader(decoration: _togglerHeader(context), child: Container()),
           const Spacer(flex: 1),
           _tiles(context)[0],
           _tiles(context)[1],
@@ -38,42 +32,35 @@ class _DrawerMenuState extends State<DrawerMenu> {
   }
 
   List<ListTile> _tiles(BuildContext context) {
+    final themeProvider = Provider.of<ThemeMaterialProvider>(context, listen: false);
     return [
       ListTile(
-        leading: const Icon( Icons.home_outlined ), title: const Text('Home'),
+        leading: const Icon(Icons.home_outlined), title: const Text('Home'),
         onTap: () => context.navigateNamedTo('/home')
       ),
       ListTile(
-        leading: const Icon( Icons.store_outlined ), title: const Text('Store'),
+        leading: const Icon(Icons.store_outlined), title: const Text('Store'),
         onTap: () => context.navigateNamedTo('/store')
       ),
       ListTile(
-        leading: const Icon( Icons.color_lens_outlined),
+        leading: const Icon(Icons.color_lens_outlined),
         title: const Text('Change Color Mode'),
         onTap: () {
-          final themeProvider = Provider.of<ThemeMaterialProvider>(context, listen: false);
           themeProvider.toggle();
-          setState(() {});
-          widget.onTap!();
+          callback();
         }
       )
     ];
   }
 
-  BoxDecoration _togglerHeader() {
+  BoxDecoration _togglerHeader(BuildContext context) {
     final themeProvider = Provider.of<ThemeMaterialProvider>(context, listen: false);
-    if ( themeProvider.darkMode ) {
-      return const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/aqua-light.png'), fit: BoxFit.scaleDown
-        )
-      );
-    } else {
-        return const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/aqua-black.png'), fit: BoxFit.scaleDown
-        )
-      );
-    }
+
+    return BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage(themeProvider.darkMode ? 'assets/aqua-light.png' : 'assets/aqua-black.png'),
+        fit: BoxFit.scaleDown
+      )
+    );
   }
 }

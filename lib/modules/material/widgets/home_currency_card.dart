@@ -3,7 +3,7 @@ import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/modules/material/providers/theme_provider.dart' show ThemeMaterialProvider;
 
-class HomeCurrencyCard extends StatefulWidget {
+class HomeCurrencyCard extends StatelessWidget {
   const HomeCurrencyCard({
     Key? key,
     required this.sym,
@@ -16,12 +16,6 @@ class HomeCurrencyCard extends StatefulWidget {
   final String per;
   final String pri;
   final Orientation orientation;
-
-  @override
-  State<HomeCurrencyCard> createState() => _HomeCurrencyCardState();
-}
-
-class _HomeCurrencyCardState extends State<HomeCurrencyCard> {
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +41,10 @@ class _HomeCurrencyCardState extends State<HomeCurrencyCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _responsiveSize(widget.orientation, size),
-          Text(widget.sym, style: TextStyle(fontSize: (size.width> 520) ? 20 : 15, fontWeight: FontWeight.bold)),
-          Text('${widget.per}%', style: TextStyle(fontSize: (size.width> 520) ? 12 : 10, fontWeight: FontWeight.bold)),
-          Text(widget.pri, style: TextStyle(fontSize: (size.width> 520) ? 12 : 10, fontWeight: FontWeight.bold)),
+          _responsiveSize(orientation, size),
+          Text(sym, style: TextStyle(fontSize: (size.width> 520) ? 20 : 15, fontWeight: FontWeight.bold)),
+          Text('$per%', style: TextStyle(fontSize: (size.width> 520) ? 12 : 10, fontWeight: FontWeight.bold)),
+          Text(pri, style: TextStyle(fontSize: (size.width> 520) ? 12 : 10, fontWeight: FontWeight.bold)),
         ]
       )
     );
@@ -58,25 +52,25 @@ class _HomeCurrencyCardState extends State<HomeCurrencyCard> {
 
   SizedBox _responsiveSize (Orientation orientation, Size size) {
     if(orientation == Orientation.portrait) {
-        if(size.width > 720) {
-          return const SizedBox(height: 45);
-        } else if(size.width > 520) {
-          return const SizedBox(height: 20);
-        } else if(size.width > 320) {
-          return const SizedBox(height: 10);
-        }
+      if(size.width > 720) {
+        return const SizedBox(height: 45);
+      } else if(size.width > 520) {
+        return const SizedBox(height: 20);
+      } else if(size.width > 320) {
+        return const SizedBox(height: 10);
+      }
     } else {
-        if(size.width > 1920) {
-          return const SizedBox(height: 65);
-        } else if(size.width > 1280) {
-          return const SizedBox(height: 30);
-        } else if(size.width > 1024) {
-          return const SizedBox(height: 15);
-        } else if(size.width > 960) {
-          return const SizedBox(height: 10);
-        } else if(size.width > 866) {
-          return const SizedBox(height: 5);
-        }
+      if(size.width > 1920) {
+        return const SizedBox(height: 65);
+      } else if(size.width > 1280) {
+        return const SizedBox(height: 30);
+      } else if(size.width > 1024) {
+        return const SizedBox(height: 15);
+      } else if(size.width > 960) {
+        return const SizedBox(height: 10);
+      } else if(size.width > 866) {
+        return const SizedBox(height: 5);
+      }
     }
     return const SizedBox(height: 0);
   }

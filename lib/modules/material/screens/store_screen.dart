@@ -20,11 +20,12 @@ class _StoreScreenState extends State<StoreScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(title: const Text('My Store'), elevation: 0.0),
-        drawer: DrawerMenu(onTap: () => setState(() {})),
+        drawer: DrawerMenu(callback: () => setState((){})),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

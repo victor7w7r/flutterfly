@@ -13,7 +13,6 @@ class CupertinoHome extends StatefulWidget {
 }
 
 class _CupertinoHomeState extends State<CupertinoHome> {
-
   final List<Widget> _tabs = [const HomeTab(), const StoreTab()];
 
   @override

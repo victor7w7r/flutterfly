@@ -40,7 +40,7 @@ List<SingleChildWidget> dynamicProviders() {
       ChangeNotifierProvider(create: ( _ ) =>
         ThemeFluentProvider(
           darkMode: Preferences.darkModeMaterial,
-          backgroundColor: const Color(0xFF18171C),
+          backgroundColor: Preferences.darkModeMaterial ? const Color(0xFF18171C) : const Color(0xFFFFFFFF),
           cardColor: const Color(0xFF20242D),
           invertedColor: const Color(0xFFFFFFFF)
           )

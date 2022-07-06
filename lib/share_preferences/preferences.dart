@@ -27,7 +27,7 @@ class Preferences {
 
   static set darkModeCupertino(bool value) {
     _darkModeCupertino = value;
-    _prefs.setBool('material', value );
+    _prefs.setBool('cupertino', value );
   }
 
     static bool get darkModeFluent {

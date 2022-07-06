@@ -7,7 +7,6 @@ import 'package:flutterfly/modules/material/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
 
-  static const String routerName = 'Home';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -16,14 +15,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  bool value = Preferences.darkModeFluent;
+  bool value = Preferences.darkModeMaterial;
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(title: const Text('My Home'), elevation: 0.0),
-      drawer: DrawerMenu(onTap: () => setState(() => value = Preferences.darkModeFluent)),
+      drawer: DrawerMenu(callback: () => setState((){})),
       body: OrientationBuilder(builder: (context, orientation) =>
         Flex(
           direction: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
@@ -47,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
         SizedBox(height: orientation == Orientation.portrait ? 30 : size.height / 3.5),
-        HomeLogoChip(value: value),
+        DynamicChip(value: value, selector: 'brand'),
         const SizedBox(height: 15),
         Center(
           child: Text("Happy Hacking!, Dart... Dart...",
@@ -66,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 25),
         const Center(child: Text("Made with love by ", style: TextStyle(fontSize: 15))),
         const SizedBox(height: 20),
-        HomeBrandChip(value: value)
+        DynamicChip(value: value, selector: 'home')
       ]
     );
   }
