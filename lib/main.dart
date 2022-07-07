@@ -33,9 +33,9 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
 
   @override
   Widget build(BuildContext context) {
-    if(Platform.isIOS && !_isDesktop) {
+  //  if(Platform.isIOS && !_isDesktop) {
       return cupertinoApp(context);
-    } else if (Platform.isAndroid && !_isDesktop) {
+  /*  } else if (Platform.isAndroid && !_isDesktop) {
       return materialApp(context);
     } else if (_desktopSelector != '' && _isDesktop) {
       switch(_desktopSelector) {
@@ -50,6 +50,6 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
           _isDesktop = true;
         })
       );
-    }
+    }*/
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' show Icons;
 
 import 'package:flutterfly/modules/cupertino/tabs/home_tab.dart';
 import 'package:flutterfly/modules/cupertino/tabs/store_tab.dart';
+import 'package:flutterfly/modules/cupertino/tabs/crypto_tab.dart';
 
 import 'package:flutterfly/modules/cupertino/widgets/theme_toggle.dart';
 
@@ -14,7 +15,7 @@ class CupertinoHome extends StatefulWidget {
 }
 
 class _CupertinoHomeState extends State<CupertinoHome> {
-  final List<Widget> _tabs = [const HomeTab(), const StoreTab()];
+  final List<Widget> _tabs = [const HomeTab(), const CryptoTab(), const StoreTab()];
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class _CupertinoHomeState extends State<CupertinoHome> {
         tabBar: CupertinoTabBar(
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Crypto'),
             BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Store')
           ]
         ),

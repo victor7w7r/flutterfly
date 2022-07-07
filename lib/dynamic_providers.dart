@@ -37,8 +37,8 @@ List<SingleChildWidget> dynamicProviders() {
           backgroundColor: Preferences.darkModeMaterial ? const Color(0xFF18171C) : const Color(0xFFFFFFFF),
           cardColor: const Color(0xFF20242D),
           invertedColor: const Color(0xFFFFFFFF)
-          )
-        ),
+        )
+      ),
       ChangeNotifierProvider(create: ( _ ) =>
         ThemeCupertinoProvider(isDarkmode: Preferences.darkModeCupertino, darkMode: Preferences.darkModeCupertino)),
       ChangeNotifierProvider(create: ( _ ) =>
