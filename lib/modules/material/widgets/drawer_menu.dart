@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart' show Provider;
-import 'package:auto_route/auto_route.dart';
 
 import 'package:flutterfly/modules/material/providers/theme_provider.dart' show ThemeMaterialProvider;
+
+import 'package:flutterfly/modules/material/screens/home_screen.dart';
+import 'package:flutterfly/modules/material/screens/store_screen.dart';
 
 class DrawerMenu extends StatelessWidget {
 
@@ -36,11 +38,11 @@ class DrawerMenu extends StatelessWidget {
     return [
       ListTile(
         leading: const Icon(Icons.home_outlined), title: const Text('Home'),
-        onTap: () => context.navigateNamedTo('/home')
+        onTap: () => () => Navigator.pushReplacementNamed(context, HomeScreen.routerName)
       ),
       ListTile(
         leading: const Icon(Icons.store_outlined), title: const Text('Store'),
-        onTap: () => context.navigateNamedTo('/store')
+        onTap: () => Navigator.pushReplacementNamed(context, StoreScreen.routerName )
       ),
       ListTile(
         leading: const Icon(Icons.color_lens_outlined),

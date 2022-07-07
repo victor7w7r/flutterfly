@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/providers/providers.dart';
+
 import 'package:flutterfly/share_preferences/preferences.dart';
+
 import 'package:flutterfly/modules/material/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
 
   const HomeScreen({Key? key}) : super(key: key);
+
+  static const String routerName = 'Home';
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

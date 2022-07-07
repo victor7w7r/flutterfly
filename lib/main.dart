@@ -1,18 +1,17 @@
 import 'dart:io' show Platform;
 
-import 'package:flutter/widgets.dart' show WidgetsFlutterBinding, runApp, Color;
-import 'package:provider/provider.dart' show MultiProvider, ChangeNotifierProvider;
-import 'package:provider/single_child_widget.dart';
+import 'package:flutter/widgets.dart';
 
-import 'package:flutterfly/flutterfly.dart';
+import 'package:provider/provider.dart' show MultiProvider;
 
 import 'package:flutterfly/share_preferences/preferences.dart';
-import 'package:flutterfly/providers/data_provider.dart';
-import 'package:flutterfly/providers/binance_provider.dart';
 
-import 'package:flutterfly/modules/material/providers/theme_provider.dart';
-import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:flutterfly/desktop_selector.dart';
+import 'package:flutterfly/dynamic_providers.dart';
+
+import 'package:flutterfly/routers/cupertino.dart';
+import 'package:flutterfly/routers/fluent.dart';
+import 'package:flutterfly/routers/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,37 +19,37 @@ void main() async {
   runApp(MultiProvider(providers: dynamicProviders(), child: const FlutterflyApp()));
 }
 
-List<SingleChildWidget> dynamicProviders() {
-  if(Platform.isIOS) {
-    return [
-        ChangeNotifierProvider(create: ( _ ) =>
-          ThemeCupertinoProvider(isDarkmode: Preferences.darkModeCupertino, darkMode: Preferences.darkModeCupertino)),
-        ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
-        ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
-    ];
-  } else if(Platform.isAndroid) {
-    return [
-        ChangeNotifierProvider(create: ( _ ) =>
-          ThemeMaterialProvider(isDarkmode: Preferences.darkModeMaterial, darkMode: Preferences.darkModeMaterial)),
-        ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
-        ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
-    ];
-  } else {
-    return [
-      ChangeNotifierProvider(create: ( _ ) =>
-        ThemeFluentProvider(
-          darkMode: Preferences.darkModeMaterial,
-          backgroundColor: Preferences.darkModeMaterial ? const Color(0xFF18171C) : const Color(0xFFFFFFFF),
-          cardColor: const Color(0xFF20242D),
-          invertedColor: const Color(0xFFFFFFFF)
-          )
-        ),
-      ChangeNotifierProvider(create: ( _ ) =>
-        ThemeCupertinoProvider(isDarkmode: Preferences.darkModeCupertino, darkMode: Preferences.darkModeCupertino)),
-      ChangeNotifierProvider(create: ( _ ) =>
-        ThemeMaterialProvider(isDarkmode: Preferences.darkModeMaterial, darkMode: Preferences.darkModeMaterial)),
-      ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
-      ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
-    ];
+class FlutterflyApp extends StatefulWidget {
+  const FlutterflyApp({Key? key}) : super(key: key);
+
+  @override
+  State<FlutterflyApp> createState() => _FlutterflyAppState();
+}
+
+class _FlutterflyAppState extends State<FlutterflyApp> {
+
+  bool _isDesktop = false;
+  String _desktopSelector = '';
+
+  @override
+  Widget build(BuildContext context) {
+    if(Platform.isIOS && !_isDesktop) {
+      return cupertinoApp(context);
+    } else if (Platform.isAndroid && !_isDesktop) {
+      return materialApp(context);
+    } else if (_desktopSelector != '' && _isDesktop) {
+      switch(_desktopSelector) {
+        case 'material': return materialApp(context);
+        case 'cupertino': return cupertinoApp(context);
+        default: return fluentApp(context);
+      }
+    } else {
+      return DesktopSelector(callback: (value) =>
+        setState(() {
+          _desktopSelector = value;
+          _isDesktop = true;
+        })
+      );
+    }
   }
 }

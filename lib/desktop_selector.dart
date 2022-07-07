@@ -50,7 +50,7 @@ class _DesktopSelectorState extends State<DesktopSelector> {
                     children: [
                       Expanded(child: OutlinedButton(child: const Text('Material'), onPressed: () => _changeApp('material'))),
                       Expanded(child: OutlinedButton(child: const Text('Fluent'), onPressed: () => _changeApp('web') )),
-                      Expanded(child: OutlinedButton(child: const Text('Cupertino'), onPressed: () => _changeApp('cupertino') )),
+                      Expanded(child: OutlinedButton(child: const Text('Cupertino'), onPressed: () => _changeApp('cupertino') ))
                     ]
                   )
                 )
@@ -64,8 +64,6 @@ class _DesktopSelectorState extends State<DesktopSelector> {
 
   void _changeApp(String selector) {
     setState(() => _visible = !_visible);
-    Timer(const Duration(seconds: 1), () {
-      widget.callback(selector);
-    });
+    Timer(const Duration(seconds: 1), () => widget.callback(selector));
   }
 }

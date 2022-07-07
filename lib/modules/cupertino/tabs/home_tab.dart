@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/providers/providers.dart';
+
 import 'package:flutterfly/share_preferences/preferences.dart';
 
 import 'package:flutterfly/modules/cupertino/widgets/widgets.dart';
@@ -42,7 +43,7 @@ class _HomeTabState extends State<HomeTab> {
     return Column(
       children: [
         SizedBox(height: orientation == Orientation.portrait ? 75 : size.height / 3.5),
-        DynamicChip(value: value, selector: 'brand'),
+        const DynamicChip(selector: 'brand'),
         const SizedBox(height: 10),
         Center(
           child: Text("Happy Hacking!, Dart... Dart...",
@@ -61,7 +62,7 @@ class _HomeTabState extends State<HomeTab> {
         const SizedBox(height: 20),
         const Center(child: Text("Made with love by ", style: TextStyle(fontSize: 15))),
         const SizedBox(height: 20),
-        DynamicChip(value: value, selector: 'home')
+        const DynamicChip(selector: 'home')
       ]
     );
   }

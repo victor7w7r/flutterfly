@@ -11,7 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  auto_route: ^4.0.1
   fluent_ui: ^3.12.0
   flutter_native_splash: ^2.2.3+1
   http: ^0.13.4
@@ -23,7 +22,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  auto_route_generator: ^4.0.0
   build_runner: ^2.1.11
   flutter_lints: ^2.0.1
   json_serializable: ^6.2.0
