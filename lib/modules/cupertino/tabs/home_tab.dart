@@ -25,30 +25,37 @@ class _HomeTabState extends State<HomeTab> {
     final dataProvider = Provider.of<DataProvider>(context, listen: true);
     Size size = MediaQuery.of(context).size;
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const DynamicChip(selector: 'brand'),
-          const SizedBox(height: 10),
-          Center(
-            child: Text("Happy Hacking!, Dart... Dart...",
-            style: TextStyle(fontSize: (size.height > 960 ) ? 30 : 20))
-          ),
-          const SizedBox(height: 10),
-          dataProvider.data.isEmpty
-            ? Center(
-                child: Text('Store state: Not yet.',
-                style: TextStyle(fontSize: (size.height>960) ? 20 : 15)))
-            : Center(
-              child: Text("Store state: Yes, you write. ${dataProvider.data}",
-              style: const TextStyle(fontSize: 20))),
-          const SizedBox(height: 20),
-          const Center(child: Text("Made with love by ", style: TextStyle(fontSize: 15))),
-          const SizedBox(height: 20),
-          const DynamicChip(selector: 'home')
-        ]
-      )
+    return Stack(
+      children: [
+        const Positioned(
+          top: 47,
+          right: 0,
+          child: ThemeToggle()
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const DynamicChip(selector: 'brand'),
+            const SizedBox(height: 10),
+            Center(
+              child: Text("Happy Hacking!, Dart... Dart...",
+              style: TextStyle(fontSize: (size.height > 960 ) ? 25 : 10))
+            ),
+            const SizedBox(height: 10),
+            dataProvider.data.isEmpty
+              ? Center(
+                  child: Text('Store state: Not yet.',
+                  style: TextStyle(fontSize: (size.height>960) ? 20 : 15)))
+              : Center(
+                child: Text("Store state: Yes, you write. ${dataProvider.data}",
+                style: const TextStyle(fontSize: 20))),
+            const SizedBox(height: 20),
+            const Center(child: Text("Made with love by ", style: TextStyle(fontSize: 15))),
+            const SizedBox(height: 20),
+            const DynamicChip(selector: 'home')
+          ]
+        )
+      ]
     );
   }
 }

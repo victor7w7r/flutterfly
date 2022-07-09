@@ -10,13 +10,11 @@ class HomeCurrencyCard extends StatelessWidget {
     required this.sym,
     required this.per,
     required this.pri,
-    required this.orientation
   }): super(key: key);
 
   final String sym;
   final String per;
   final String pri;
-  final Orientation orientation;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +40,7 @@ class HomeCurrencyCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _responsiveSize(orientation, size),
+          _responsiveSize(size),
           Text(sym, style: TextStyle(fontSize: (size.width> 520) ? 20 : 15, fontWeight: FontWeight.bold)),
           Text('$per%', style: TextStyle(fontSize: (size.width> 520) ? 12 : 10, fontWeight: FontWeight.bold)),
           Text(pri, style: TextStyle(fontSize: (size.width> 520) ? 12 : 10, fontWeight: FontWeight.bold)),
@@ -51,29 +49,15 @@ class HomeCurrencyCard extends StatelessWidget {
     );
   }
 
-  SizedBox _responsiveSize (Orientation orientation, Size size) {
-    if(orientation == Orientation.portrait) {
-      if(size.width > 720) {
-        return const SizedBox(height: 45);
-      } else if(size.width > 520) {
-        return const SizedBox(height: 20);
-      } else if(size.width > 320) {
-        return const SizedBox(height: 10);
-      }
+  SizedBox _responsiveSize (Size size) {
+    if(size.width > 720) {
+      return const SizedBox(height: 45);
+    } else if(size.width > 520) {
+      return const SizedBox(height: 20);
+    } else if(size.width > 320) {
+      return const SizedBox(height: 10);
     } else {
-      if(size.width > 1920) {
-        return const SizedBox(height: 65);
-      } else if(size.width > 1280) {
-        return const SizedBox(height: 30);
-      } else if(size.width > 1024) {
-        return const SizedBox(height: 15);
-      } else if(size.width > 960) {
-        return const SizedBox(height: 10);
-      } else if(size.width > 866) {
-        return const SizedBox(height: 5);
-      }
+      return const SizedBox(height: 5);
     }
-    return const SizedBox(height: 0);
   }
-
 }

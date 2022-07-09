@@ -15,17 +15,15 @@ class CupertinoHome extends StatefulWidget {
 }
 
 class _CupertinoHomeState extends State<CupertinoHome> {
+
   final List<Widget> _tabs = [const HomeTab(), const CryptoTab(), const StoreTab()];
 
   @override
   Widget build(BuildContext context) {
+
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        leading: Padding(
-          padding: EdgeInsets.only(top: 10),
-          child: Text('CupertinoApp'),
-        ),
-        trailing: ThemeToggle()
+        middle: Text('CupertinoApp')
       ),
       child: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
@@ -35,7 +33,7 @@ class _CupertinoHomeState extends State<CupertinoHome> {
             BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Store')
           ]
         ),
-        tabBuilder: (BuildContext context, index)  => _tabs[index]
+        tabBuilder: (BuildContext context, index) => _tabs[index]
       )
     );
   }

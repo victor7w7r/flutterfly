@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/providers/providers.dart';
+
+import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
+
+import 'package:flutterfly/modules/cupertino/widgets/widgets.dart';
 
 class StoreTab extends StatefulWidget {
   const StoreTab({Key? key}) : super(key: key);
@@ -20,22 +23,31 @@ class _StoreTabState extends State<StoreTab> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Stack(
         children: [
-          const Center(child: Text('Store Example', style: TextStyle(fontSize: 40))),
-          const SizedBox(height: 15),
-          const Center(
-            child: Text('Write anything in this form and send!', style: TextStyle(fontSize: 20))
+          const Positioned(
+            top: 47,
+            right: 0,
+            child: ThemeToggle()
           ),
-          const SizedBox(height: 25),
-          _textField(context),
-          const SizedBox(height: 12),
-          _button(context),
-          const SizedBox(height: 20),
-          _storeState(context)
-        ]
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Center(child: Text('Store Example', style: TextStyle(fontSize: 40))),
+              const SizedBox(height: 15),
+              const Center(
+                child: Text('Write anything in this form and send!', style: TextStyle(fontSize: 20))
+              ),
+              const SizedBox(height: 25),
+              _textField(context),
+              const SizedBox(height: 12),
+              _button(context),
+              const SizedBox(height: 20),
+              _storeState(context)
+            ]
+          )
+        ],
       )
     );
   }
