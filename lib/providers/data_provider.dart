@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' show ChangeNotifier;
 
 class DataProvider extends ChangeNotifier {
 
@@ -10,5 +10,4 @@ class DataProvider extends ChangeNotifier {
     data = reciever;
     notifyListeners();
   }
-
 }

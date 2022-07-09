@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:flutterfly/providers/providers.dart' show FluentProvider;
 
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class _HeaderState extends State<Header> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
+    final themeProvider = Provider.of<FluentProvider>(context, listen: true);
     Size size = MediaQuery.of(context).size;
     return Card(
       backgroundColor: themeProvider.cardColor,
@@ -43,13 +43,6 @@ class _HeaderState extends State<Header> {
                 : const EdgeInsets.fromLTRB(0, 0, 50, 0),
               child: ToggleSwitch(
                 checked: themeProvider.darkMode,
-                /*style: ToggleSwitchThemeData(
-                  checkedDecoration: ButtonState.all<BoxDecoration>(
-                    BoxDecoration(
-                      color: themeProvider.cardColor
-                    ),
-                  )
-                ),*/
                 onChanged: (v) {
                   themeProvider.toggle(v);
                   setState(() => themeProvider.darkMode = v);

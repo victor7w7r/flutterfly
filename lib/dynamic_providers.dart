@@ -7,44 +7,57 @@ import 'package:provider/single_child_widget.dart';
 
 import 'package:flutterfly/share_preferences/preferences.dart';
 
-import 'package:flutterfly/providers/data_provider.dart';
-import 'package:flutterfly/providers/binance_provider.dart';
-
-import 'package:flutterfly/modules/material/providers/theme_provider.dart';
-import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:flutterfly/providers/providers.dart';
 
 List<SingleChildWidget> dynamicProviders() {
   if(defaultTargetPlatform == TargetPlatform.iOS) {
     return [
-        ChangeNotifierProvider(create: ( _ ) =>
-          ThemeCupertinoProvider(isDarkmode: Preferences.darkModeCupertino, darkMode: Preferences.darkModeCupertino)),
-        ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
-        ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
+      ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
+      ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false),
+      ChangeNotifierProvider(
+        create: ( _ ) => CupertinoProvider(
+          isDarkmode: Preferences.darkModeCupertino,
+          darkMode: Preferences.darkModeCupertino
+        )
+      )
     ];
   } else if(defaultTargetPlatform == TargetPlatform.android) {
     return [
-        ChangeNotifierProvider(create: ( _ ) =>
-          ThemeMaterialProvider(isDarkmode: Preferences.darkModeMaterial, darkMode: Preferences.darkModeMaterial)),
-        ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
-        ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
+      ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
+      ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false),
+      ChangeNotifierProvider(
+        create: ( _ ) => MaterialProvider(
+          isDarkmode: Preferences.darkModeMaterial,
+          darkMode: Preferences.darkModeMaterial
+        )
+      )
     ];
   } else {
     return [
-      ChangeNotifierProvider(create: ( _ ) =>
-        ThemeFluentProvider(
+      ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
+      ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false),
+      ChangeNotifierProvider(
+        create: ( _ ) => FluentProvider(
           darkMode: Preferences.darkModeMaterial,
-          backgroundColor: Preferences.darkModeMaterial ? const Color(0xFF18171C) : const Color(0xFFFFFFFF),
+          backgroundColor: Preferences.darkModeMaterial
+            ? const Color(0xFF18171C)
+            : const Color(0xFFFFFFFF),
           cardColor: const Color(0xFF20242D),
           invertedColor: const Color(0xFFFFFFFF)
         )
       ),
-      ChangeNotifierProvider(create: ( _ ) =>
-        ThemeCupertinoProvider(isDarkmode: Preferences.darkModeCupertino, darkMode: Preferences.darkModeCupertino)),
-      ChangeNotifierProvider(create: ( _ ) =>
-        ThemeMaterialProvider(isDarkmode: Preferences.darkModeMaterial, darkMode: Preferences.darkModeMaterial)),
-      ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
-      ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
+      ChangeNotifierProvider(
+        create: ( _ ) => CupertinoProvider(
+          isDarkmode: Preferences.darkModeCupertino,
+          darkMode: Preferences.darkModeCupertino
+        )
+      ),
+      ChangeNotifierProvider(
+        create: ( _ ) => MaterialProvider(
+          isDarkmode: Preferences.darkModeMaterial,
+          darkMode: Preferences.darkModeMaterial
+        )
+      ),
     ];
   }
 }

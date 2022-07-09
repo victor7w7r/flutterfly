@@ -4,8 +4,6 @@ import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/providers/providers.dart';
 
-import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
-
 import 'package:flutterfly/modules/cupertino/widgets/widgets.dart';
 
 class StoreTab extends StatefulWidget {
@@ -54,7 +52,7 @@ class _StoreTabState extends State<StoreTab> {
 
   SizedBox _textField(BuildContext context) {
 
-    final themeProvider = Provider.of<ThemeCupertinoProvider>(context, listen: true);
+    final themeProvider = Provider.of<CupertinoProvider>(context, listen: true);
 
     return SizedBox(
       width: 250.0,
@@ -86,7 +84,7 @@ class _StoreTabState extends State<StoreTab> {
               builder: (BuildContext context) => CupertinoAlertDialog (
                 title: const Text('Error'),
                 content: const Text('Is empty your TextField'),
-                actions: <CupertinoDialogAction>[
+                actions: [
                   CupertinoDialogAction(
                     isDefaultAction: true,
                     onPressed: () => Navigator.pop(context),
@@ -105,9 +103,13 @@ class _StoreTabState extends State<StoreTab> {
   Center _storeState(BuildContext context) {
     final dataProvider = Provider.of<DataProvider>(context, listen: false);
     if (dataProvider.data.isEmpty) {
-      return const Center(child: Text('Store state: Not yet.', style: TextStyle(fontSize: 15)));
+      return const Center(
+        child: Text('Store state: Not yet.', style: TextStyle(fontSize: 15) )
+      );
     } else {
-      return Center(child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 15)));
+      return Center(
+        child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 15))
+      );
     }
   }
 }

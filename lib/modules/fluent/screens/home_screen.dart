@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:flutterfly/providers/fluent_provider.dart';
 
 import 'package:flutterfly/modules/fluent/screens/store_screen.dart';
 
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
+    final themeProvider = Provider.of<FluentProvider>(context, listen: true);
     Size size = MediaQuery.of(context).size;
     return Container (
       color: themeProvider.backgroundColor,
@@ -35,18 +35,19 @@ class _HomeScreenState extends State<HomeScreen> {
             : const SizedBox(height: 20),
           Column(
             children: [
-              size.width > 960 ?
-                Row(
+              size.width > 960
+                ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: const [HomeCardBrand(), HomeCardCrypto()]
-                ) :
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [HomeCardBrand(), SizedBox(height: 30), HomeCardCrypto()]
+                )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [HomeCardBrand(), SizedBox(height: 30), HomeCardCrypto()]
                 ),
               const SizedBox(height: 40),
-              BlurButton(caption: 'Go to Store', onClick: () =>
-                Navigator.pushReplacementNamed(context, StoreScreen.routerName )
+              BlurButton(
+                caption: 'Go to Store',
+                onClick: () => Navigator.pushReplacementNamed(context, StoreScreen.routerName)
               ),
               const SizedBox(height: 40),
               Row(

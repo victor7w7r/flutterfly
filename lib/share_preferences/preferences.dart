@@ -38,5 +38,4 @@ class Preferences {
     _darkModeFluent = value;
     _prefs.setBool('fluent', value );
   }
-
 }

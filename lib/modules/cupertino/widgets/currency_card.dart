@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
+
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/material/providers/theme_provider.dart' show ThemeMaterialProvider;
+import 'package:flutterfly/providers/cupertino_provider.dart' show CupertinoProvider;
 
-class HomeCurrencyCard extends StatelessWidget {
-  const HomeCurrencyCard({
+class CurrencyCard extends StatelessWidget {
+  const CurrencyCard({
     Key? key,
     required this.sym,
     required this.per,
@@ -19,7 +19,7 @@ class HomeCurrencyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final themeProvider = Provider.of<ThemeCupertinoProvider>(context, listen: true);
+    final themeProvider = Provider.of<CupertinoProvider>(context, listen: true);
     Size size = MediaQuery.of(context).size;
 
     return Container(

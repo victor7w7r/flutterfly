@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/providers/providers.dart';
+import 'package:flutterfly/providers/providers.dart' show DataProvider;
 
 import 'package:flutterfly/modules/material/widgets/widgets.dart';
 
@@ -78,7 +78,12 @@ class _StoreScreenState extends State<StoreScreen> {
               builder: (context) => AlertDialog(
                 title: const Text('Error'),
                 content: const Text('Is empty your TextField'),
-                actions: [TextButton(onPressed: () => Navigator.pop(context, 'OK'), child: const Text('OK'))]
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK')
+                  )
+                ]
               )
             );
           }
@@ -92,9 +97,13 @@ class _StoreScreenState extends State<StoreScreen> {
     final dataProvider = Provider.of<DataProvider>(context, listen: false);
 
     if (dataProvider.data.isEmpty) {
-      return const Center(child: Text('Store state: Not yet.', style: TextStyle(fontSize: 20)));
+      return const Center(
+        child: Text('Store state: Not yet.', style: TextStyle(fontSize: 20))
+      );
     } else {
-      return Center(child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 20)));
+      return Center(
+        child: Text("Store state: Yes, you write. ${dataProvider.data}", style: const TextStyle(fontSize: 20))
+      );
     }
   }
 }

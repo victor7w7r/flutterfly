@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show MaterialApp, BuildContext;
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/material/providers/theme_provider.dart';
+import 'package:flutterfly/providers/providers.dart' show MaterialProvider;
 
 import 'package:flutterfly/modules/material/screens/home_screen.dart';
 import 'package:flutterfly/modules/material/screens/store_screen.dart';
@@ -12,10 +12,10 @@ MaterialApp materialApp(BuildContext context) {
     title: 'flutterfly',
     debugShowCheckedModeBanner: false,
     initialRoute: HomeScreen.routerName,
-    routes: <String, WidgetBuilder> {
+    routes: {
       HomeScreen.routerName: (_) => const HomeScreen(),
       StoreScreen.routerName: (_) => const StoreScreen()
     },
-    theme: Provider.of<ThemeMaterialProvider>(context).currentTheme
+    theme: Provider.of<MaterialProvider>(context).currentTheme
   );
 }

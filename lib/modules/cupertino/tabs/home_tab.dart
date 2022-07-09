@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/providers/providers.dart';
+import 'package:flutterfly/providers/providers.dart' show DataProvider;
 
 import 'package:flutterfly/share_preferences/preferences.dart';
 
@@ -47,8 +47,8 @@ class _HomeTabState extends State<HomeTab> {
                   child: Text('Store state: Not yet.',
                   style: TextStyle(fontSize: (size.height>960) ? 20 : 15)))
               : Center(
-                child: Text("Store state: Yes, you write. ${dataProvider.data}",
-                style: const TextStyle(fontSize: 20))),
+                  child: Text("Store state: Yes, you write. ${dataProvider.data}",
+                  style: const TextStyle(fontSize: 20))),
             const SizedBox(height: 20),
             const Center(child: Text("Made with love by ", style: TextStyle(fontSize: 15))),
             const SizedBox(height: 20),

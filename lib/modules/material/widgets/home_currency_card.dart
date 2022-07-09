@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/material/providers/theme_provider.dart' show ThemeMaterialProvider;
+import 'package:flutterfly/providers/providers.dart' show MaterialProvider;
 
 class HomeCurrencyCard extends StatelessWidget {
   const HomeCurrencyCard({
@@ -20,7 +21,7 @@ class HomeCurrencyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final themeProvider = Provider.of<ThemeMaterialProvider>(context, listen: true);
+    final themeProvider = Provider.of<MaterialProvider>(context, listen: true);
     Size size = MediaQuery.of(context).size;
 
     return Container(

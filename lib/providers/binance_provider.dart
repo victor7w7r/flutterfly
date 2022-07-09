@@ -1,6 +1,7 @@
 import 'dart:io' show SocketException;
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' show ChangeNotifier;
+
 import 'package:http/http.dart' as http;
 
 import 'package:flutterfly/models/binance.dart';
@@ -37,7 +38,7 @@ class BinanceProvider extends ChangeNotifier {
       position = 40;
       loading = false;
       notifyListeners();
-    }  on RangeError catch (_) { }
+    } on RangeError catch (_) { }
   }
 
   void paginateCurrencies () {

@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutterfly/models/binance.dart';
-import 'package:flutterfly/modules/cupertino/widgets/home_currency_card.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
 import 'package:flutterfly/providers/providers.dart' show BinanceProvider;
+
+import 'package:flutterfly/modules/cupertino/widgets/widgets.dart';
 
 class CryptoTab extends StatefulWidget {
   const CryptoTab({Key? key}) : super(key: key);
 
   @override
   State<CryptoTab> createState() => _CryptoTabState();
-
 }
 
 class _CryptoTabState extends State<CryptoTab> {
@@ -49,7 +48,7 @@ class _CryptoTabState extends State<CryptoTab> {
         physics: const BouncingScrollPhysics(),
         slivers: [
           const CupertinoSliverNavigationBar(
-            largeTitle: Text('Crypto Data'),
+            largeTitle: Text('Crypto Data')
           ),
           CupertinoSliverRefreshControl(onRefresh: _refresh),
           const SliverToBoxAdapter(child: SizedBox(height: 20)),
@@ -62,7 +61,7 @@ class _CryptoTabState extends State<CryptoTab> {
               crossAxisSpacing: 10.0,
               children: [
                 for (var bin in binanceProvider.bin)
-                HomeCurrencyCard (
+                CurrencyCard (
                   sym: bin.symbol,
                   per: bin.priceChangePercent,
                   pri: bin.bidPrice

@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:flutterfly/providers/providers.dart' show FluentProvider;
 
 class ColorButton extends StatelessWidget {
 
@@ -32,9 +32,7 @@ class ColorButton extends StatelessWidget {
   }
 
   void colorChange(BuildContext context) {
-
-    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: false);
-
+    final themeProvider = Provider.of<FluentProvider>(context, listen: false);
     switch (color) {
       case 'blue':
         themeProvider.interpolator(
@@ -47,24 +45,24 @@ class ColorButton extends StatelessWidget {
       case 'violet':
         themeProvider.interpolator(
           themeProvider.darkMode
-            ?const Color(0xFF581c87)
-            :const Color(0xFFD8b4FE), 'background'
+            ? const Color(0xFF581c87)
+            : const Color(0xFFD8b4FE), 'background'
         );
         themeProvider.interpolator(const Color(0xFF7E22CE), 'card');
         break;
       case 'red':
         themeProvider.interpolator(
           themeProvider.darkMode
-            ?const Color(0xFF7F1D1D)
-            :const Color(0xFFfCA5A5), 'background'
+            ? const Color(0xFF7F1D1D)
+            : const Color(0xFFfCA5A5), 'background'
         );
         themeProvider.interpolator(const Color(0xFFB91C1C), 'card');
         break;
       default:
         themeProvider.interpolator(
           themeProvider.darkMode
-            ?const Color(0xFF064E3B)
-            :const Color(0xFF6EE7B7), 'background'
+            ? const Color(0xFF064E3B)
+            : const Color(0xFF6EE7B7), 'background'
         );
         themeProvider.interpolator(const Color(0xFF047857), 'card');
         break;

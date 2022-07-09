@@ -4,9 +4,9 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutterfly/share_preferences/preferences.dart';
 
-class ThemeFluentProvider extends ChangeNotifier {
+class FluentProvider extends ChangeNotifier {
 
-  ThemeFluentProvider({
+  FluentProvider({
     required this.darkMode,
     required this.backgroundColor,
     required this.cardColor,

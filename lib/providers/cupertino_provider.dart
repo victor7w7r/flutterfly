@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart'
 
 import 'package:flutterfly/share_preferences/preferences.dart';
 
-class ThemeCupertinoProvider extends ChangeNotifier {
+class CupertinoProvider extends ChangeNotifier {
 
   CupertinoThemeData currentTheme;
   bool darkMode;
 
-  ThemeCupertinoProvider({required bool isDarkmode, required this.darkMode}):
+  CupertinoProvider({required bool isDarkmode, required this.darkMode}):
     currentTheme = isDarkmode
       ? const CupertinoThemeData(brightness: Brightness.dark)
       : const CupertinoThemeData(brightness: Brightness.light);

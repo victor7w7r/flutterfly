@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/material/widgets/widgets.dart' show HomeCurrencyCard;
 import 'package:flutterfly/providers/providers.dart' show BinanceProvider;
+
+import 'package:flutterfly/modules/material/widgets/widgets.dart' show HomeCurrencyCard;
 
 class HomeCurrencyList extends StatefulWidget {
   const HomeCurrencyList({Key? key, required this.orientation}) : super(key: key);

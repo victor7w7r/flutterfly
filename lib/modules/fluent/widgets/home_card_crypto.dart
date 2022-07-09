@@ -2,8 +2,8 @@ import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/providers/providers.dart';
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:flutterfly/providers/providers.dart'
+;
 import 'package:flutterfly/models/binance.dart';
 
 class HomeCardCrypto extends StatelessWidget {
@@ -12,14 +12,14 @@ class HomeCardCrypto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
+    final themeProvider = Provider.of<FluentProvider>(context, listen: true);
     Size size = MediaQuery.of(context).size;
     return Card(
       backgroundColor: themeProvider.cardColor,
       borderRadius: BorderRadius.circular(20),
       padding: EdgeInsets.fromLTRB(
-        100, size.width > 960 ? 75: 5,
-        100, size.width > 960 ? 75: 5
+        100, size.width > 960 ? 75 : 5,
+        100, size.width > 960 ? 75 : 5
       ),
       child: Column(
         children: [
@@ -27,18 +27,20 @@ class HomeCardCrypto extends StatelessWidget {
           _storeState(context),
           const SizedBox(height: 45),
           ..._cryptoData(context)
-        ],
+        ]
       )
     );
   }
 
   List<Widget> _cryptoData(BuildContext context) {
     final binanceProvider = Provider.of<BinanceProvider>(context);
-    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
+    final themeProvider = Provider.of<FluentProvider>(context, listen: true);
     if(binanceProvider.loading) {
       return const [ProgressRing(value: 35)];
     } else {
-      Binance bitcoin = binanceProvider.bin.firstWhere((element) => element.symbol == 'BTCUSDT');
+      Binance bitcoin = binanceProvider.bin.firstWhere(
+        (element) => element.symbol == 'BTCUSDT'
+      );
       return [
         Text('Symbol: ${bitcoin.symbol}',
           style: TextStyle(color: themeProvider.invertedColor, fontSize: 20)
@@ -53,7 +55,7 @@ class HomeCardCrypto extends StatelessWidget {
 
   Text _storeState(BuildContext context) {
     final dataProvider = Provider.of<DataProvider>(context, listen: true);
-    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
+    final themeProvider = Provider.of<FluentProvider>(context, listen: true);
     if (dataProvider.data.isEmpty) {
       return Text(
         'Store State: Not Yet',

@@ -1,4 +1,5 @@
 import 'dart:convert' show json;
+
 import 'package:json_annotation/json_annotation.dart' show JsonSerializable;
 
 part 'binance.g.dart';

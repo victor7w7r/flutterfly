@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' show Icons;
 
-import 'package:flutterfly/modules/cupertino/tabs/home_tab.dart';
-import 'package:flutterfly/modules/cupertino/tabs/store_tab.dart';
-import 'package:flutterfly/modules/cupertino/tabs/crypto_tab.dart';
+import 'package:flutterfly/modules/cupertino/tabs/tabs.dart';
 
 class CupertinoHome extends StatefulWidget {
   const CupertinoHome({Key? key}) : super(key: key);
@@ -14,11 +12,14 @@ class CupertinoHome extends StatefulWidget {
 
 class _CupertinoHomeState extends State<CupertinoHome> {
 
-  final List<Widget> _tabs = [const HomeTab(), const CryptoTab(), const StoreTab()];
+  final _tabs = [
+    const HomeTab(),
+    const CryptoTab(),
+    const StoreTab()
+  ];
 
   @override
   Widget build(BuildContext context) {
-
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
         middle: Text('CupertinoApp')

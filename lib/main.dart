@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
-
 import 'package:flutter/widgets.dart';
 
 import 'package:provider/provider.dart' show MultiProvider;
@@ -31,9 +30,9 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
   bool _isDesktop = false;
   String _desktopSelector = '';
 
-  final _desktopBool = (defaultTargetPlatform == TargetPlatform.linux
+  final _desktopBool = defaultTargetPlatform == TargetPlatform.linux
     || defaultTargetPlatform == TargetPlatform.macOS
-    || defaultTargetPlatform == TargetPlatform.windows);
+    || defaultTargetPlatform == TargetPlatform.windows;
 
   @override
   Widget build(BuildContext context) {

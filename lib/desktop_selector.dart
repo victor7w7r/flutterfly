@@ -25,7 +25,6 @@ class _DesktopSelectorState extends State<DesktopSelector> {
 
   @override
   Widget build(BuildContext context) {
-
     return FluentApp(
       color: const Color.fromRGBO(255, 255, 255, 1),
       debugShowCheckedModeBanner: false,
@@ -43,9 +42,11 @@ class _DesktopSelectorState extends State<DesktopSelector> {
             ),
             const Align(
               alignment: Alignment.topCenter,
-              child:Text(
+              child: Text(
                 'Choose your flavour',
-                style: TextStyle(fontSize: 50.0, fontFamily: 'AminaReska', color: Colors.white)
+                style: TextStyle(
+                  fontSize: 50.0, fontFamily: 'AminaReska', color: Colors.white
+                )
               )
             ),
             Center(
@@ -65,14 +66,17 @@ class _DesktopSelectorState extends State<DesktopSelector> {
   }
 
   Column _menuBuilder(BuildContext context, String title, String image, String selector) {
-
     return Column(
       children: [
-        Text(title, style: const TextStyle(fontSize: 30.0, fontFamily: 'AminaReska', color: Colors.white)),
+        Text(
+          title, style: const TextStyle(
+            fontSize: 30.0, fontFamily: 'AminaReska', color: Colors.white
+          )
+        ),
         GestureDetector(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
-            child:  SizedBox.fromSize(
+            child: SizedBox.fromSize(
               size: const Size.fromRadius(120),
               child: Image.asset('assets/$image.jpg', fit: BoxFit.cover)
             )

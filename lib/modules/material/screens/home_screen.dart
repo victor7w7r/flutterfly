@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/providers/providers.dart';
+import 'package:flutterfly/providers/providers.dart' show DataProvider;
 
 import 'package:flutterfly/share_preferences/preferences.dart';
 
@@ -24,7 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text('My Home'), elevation: 0.0),
       drawer: DrawerMenu(callback: () => setState((){})),
@@ -44,10 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Column _firstColumn(BuildContext context, Orientation orientation) {
-
     DataProvider dataProvider = Provider.of<DataProvider>(context, listen: false);
     Size size = MediaQuery.of(context).size;
-
     return Column(
       children: [
         SizedBox(height: orientation == Orientation.portrait ? 30 : size.height / 3.5),
@@ -76,9 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Column _secondColumn(BuildContext context, Orientation orientation) {
-
     Size size = MediaQuery.of(context).size;
-
     return Column(
       children: [
         const SizedBox(height: 35),

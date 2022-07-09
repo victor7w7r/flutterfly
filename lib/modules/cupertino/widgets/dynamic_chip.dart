@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:provider/provider.dart';
-import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
+
+import 'package:flutterfly/providers/providers.dart' show CupertinoProvider;
 
 class DynamicChip extends StatelessWidget {
 
@@ -12,7 +13,7 @@ class DynamicChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final themeProvider = Provider.of<ThemeCupertinoProvider>(context, listen: true);
+    final themeProvider = Provider.of<CupertinoProvider>(context, listen: true);
 
     return Container(
       width: selector == 'home' ? 300 : 270,
@@ -29,12 +30,17 @@ class DynamicChip extends StatelessWidget {
 
   List<Widget> _imageSelector(String selector, BuildContext context) {
 
-    final themeProvider = Provider.of<ThemeCupertinoProvider>(context, listen: true);
+    final themeProvider = Provider.of<CupertinoProvider>(context, listen: true);
 
     if(selector == 'home') {
       return [
         const SizedBox(width: 38),
-        Image.asset( themeProvider.darkMode ? 'assets/brandwhite.png' : 'assets/brand.png', width: 220.0, height: 70.0)
+        Image.asset(
+          themeProvider.darkMode
+          ? 'assets/brandwhite.png'
+          : 'assets/brand.png',
+          width: 220.0, height: 70.0
+        )
       ];
     } else {
       return [

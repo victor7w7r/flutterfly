@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
+import 'package:flutterfly/providers/fluent_provider.dart';
 
 import 'package:flutterfly/modules/fluent/screens/home_screen.dart';
 
@@ -22,11 +22,11 @@ class _StoreScreenState extends State<StoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeFluentProvider>(context, listen: true);
+    final themeProvider = Provider.of<FluentProvider>(context, listen: true);
     return Container (
       color: themeProvider.backgroundColor,
       child: Column(
-        children:  [
+        children: [
           const SizedBox(height: 10),
           const Header(),
           const SizedBox(height: 50),
@@ -37,8 +37,11 @@ class _StoreScreenState extends State<StoreScreen> {
                 children: const [StoreCard()],
               ),
               const SizedBox(height: 60),
-              BlurButton(caption: 'Go to Home', onClick: () =>  Navigator.pushReplacementNamed(context, HomeScreen.routerName )),
-              const SizedBox(height: 40),
+              BlurButton(
+                caption: 'Go to Home',
+                onClick: () =>  Navigator.pushReplacementNamed(context, HomeScreen.routerName)
+              ),
+              const SizedBox(height: 40)
             ]
           )
         ]

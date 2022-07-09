@@ -30,7 +30,13 @@ class DynamicChip extends StatelessWidget {
     if(selector == 'home') {
       return [
         const SizedBox(width: 38),
-        Image.asset(value ? 'assets/brandwhite.png' : 'assets/brand.png', width: 220.0, height: 70.0)
+        Image.asset(
+          value
+            ? 'assets/brandwhite.png'
+            : 'assets/brand.png',
+          width: 220.0,
+          height: 70.0
+        )
       ];
     } else {
       return [

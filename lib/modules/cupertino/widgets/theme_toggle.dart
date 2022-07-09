@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:provider/provider.dart' show Provider;
-import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
+
+import 'package:flutterfly/providers/providers.dart' show CupertinoProvider;
 
 class ThemeToggle extends StatefulWidget {
   const ThemeToggle({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class ThemeToggle extends StatefulWidget {
 class _ThemeToggleState extends State<ThemeToggle> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeCupertinoProvider>(context, listen: false);
+    final themeProvider = Provider.of<CupertinoProvider>(context, listen: false);
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       spacing: -5,
@@ -32,7 +33,7 @@ class _ThemeToggleState extends State<ThemeToggle> {
             activeColor: CupertinoColors.activeBlue
           )
         )
-      ],
+      ]
     );
   }
 }
