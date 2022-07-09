@@ -1,6 +1,6 @@
-import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 
-import 'package:flutter/widgets.dart' show Color;
+import 'package:flutter/widgets.dart' show Color, TargetPlatform;
 
 import 'package:provider/provider.dart' show ChangeNotifierProvider;
 import 'package:provider/single_child_widget.dart';
@@ -15,14 +15,14 @@ import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
 import 'package:flutterfly/modules/fluent/providers/theme_provider.dart';
 
 List<SingleChildWidget> dynamicProviders() {
-  if(Platform.isIOS) {
+  if(defaultTargetPlatform == TargetPlatform.iOS) {
     return [
         ChangeNotifierProvider(create: ( _ ) =>
           ThemeCupertinoProvider(isDarkmode: Preferences.darkModeCupertino, darkMode: Preferences.darkModeCupertino)),
         ChangeNotifierProvider(create: ( _ ) => DataProvider(data: "")),
         ChangeNotifierProvider(create: ( _ ) => BinanceProvider(), lazy: false)
     ];
-  } else if(Platform.isAndroid) {
+  } else if(defaultTargetPlatform == TargetPlatform.android) {
     return [
         ChangeNotifierProvider(create: ( _ ) =>
           ThemeMaterialProvider(isDarkmode: Preferences.darkModeMaterial, darkMode: Preferences.darkModeMaterial)),

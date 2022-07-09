@@ -25,6 +25,7 @@ class _DesktopSelectorState extends State<DesktopSelector> {
 
   @override
   Widget build(BuildContext context) {
+
     return FluentApp(
       color: const Color.fromRGBO(255, 255, 255, 1),
       debugShowCheckedModeBanner: false,
@@ -40,21 +41,22 @@ class _DesktopSelectorState extends State<DesktopSelector> {
                 child: AnimatedGradient()
               )
             ),
-            Column(
-              children: [
-                const Text('Choose your flavour',style: TextStyle(fontSize: 50.0, fontFamily: 'AminaReska', color: Colors.white)),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(child: OutlinedButton(child: const Text('Material'), onPressed: () => _changeApp('material'))),
-                      Expanded(child: OutlinedButton(child: const Text('Fluent'), onPressed: () => _changeApp('web') )),
-                      Expanded(child: OutlinedButton(child: const Text('Cupertino'), onPressed: () => _changeApp('cupertino') ))
-                    ]
-                  )
-                )
-              ]
+            const Align(
+              alignment: Alignment.topCenter,
+              child:Text(
+                'Choose your flavour',
+                style: TextStyle(fontSize: 50.0, fontFamily: 'AminaReska', color: Colors.white)
+              )
+            ),
+            Center(
+              child: Wrap(
+                spacing: 50,
+                children: [
+                  _menuBuilder(context, 'Material', 'material', 'material'),
+                  _menuBuilder(context, 'Fluent', 'fluent', 'web'),
+                  _menuBuilder(context, 'Cupertino', 'cupertino', 'cupertino')
+                ]
+              )
             )
           ]
         )
@@ -62,8 +64,25 @@ class _DesktopSelectorState extends State<DesktopSelector> {
     );
   }
 
-  void _changeApp(String selector) {
-    setState(() => _visible = !_visible);
-    Timer(const Duration(seconds: 1), () => widget.callback(selector));
+  Column _menuBuilder(BuildContext context, String title, String image, String selector) {
+
+    return Column(
+      children: [
+        Text(title, style: const TextStyle(fontSize: 30.0, fontFamily: 'AminaReska', color: Colors.white)),
+        GestureDetector(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child:  SizedBox.fromSize(
+              size: const Size.fromRadius(120),
+              child: Image.asset('assets/$image.jpg', fit: BoxFit.cover)
+            )
+          ),
+          onTap: () {
+            setState(() => _visible = !_visible);
+            Timer(const Duration(seconds: 1), () => widget.callback(selector));
+          }
+        )
+      ]
+    );
   }
 }

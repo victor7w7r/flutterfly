@@ -1,4 +1,4 @@
-import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 
 import 'package:flutter/widgets.dart';
 
@@ -31,14 +31,18 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
   bool _isDesktop = false;
   String _desktopSelector = '';
 
+  final _desktopBool = (defaultTargetPlatform == TargetPlatform.linux
+    || defaultTargetPlatform == TargetPlatform.macOS
+    || defaultTargetPlatform == TargetPlatform.windows);
+
   @override
   Widget build(BuildContext context) {
-  //  if(Platform.isIOS && !_isDesktop) {
+    if(defaultTargetPlatform == TargetPlatform.iOS) {
       return cupertinoApp(context);
-  /*  } else if (Platform.isAndroid && !_isDesktop) {
+    } else if (defaultTargetPlatform == TargetPlatform.android) {
       return materialApp(context);
-    } else if (_desktopSelector != '' && _isDesktop) {
-      switch(_desktopSelector) {
+    } else if (_desktopBool && _isDesktop) {
+        switch(_desktopSelector) {
         case 'material': return materialApp(context);
         case 'cupertino': return cupertinoApp(context);
         default: return fluentApp(context);
@@ -50,6 +54,6 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
           _isDesktop = true;
         })
       );
-    }*/
+    }
   }
 }
