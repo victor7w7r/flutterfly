@@ -31,8 +31,6 @@ class _HomeCurrencyListState extends State<HomeCurrencyList> {
     _scrollController.dispose();
   }
 
- // RefreshController _refreshController = RefreshController(initialRefresh: false);
-
   @override
   Widget build(BuildContext context) {
 

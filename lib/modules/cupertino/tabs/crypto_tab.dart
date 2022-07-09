@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutterfly/models/binance.dart';
 import 'package:flutterfly/modules/cupertino/widgets/home_currency_card.dart';
 
 import 'package:provider/provider.dart' show Provider;
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'package:flutterfly/providers/providers.dart' show BinanceProvider;
 
@@ -11,11 +11,24 @@ class CryptoTab extends StatefulWidget {
 
   @override
   State<CryptoTab> createState() => _CryptoTabState();
+
 }
 
 class _CryptoTabState extends State<CryptoTab> {
 
-  final RefreshController _refreshController = RefreshController(initialRefresh: true);
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,44 +43,49 @@ class _CryptoTabState extends State<CryptoTab> {
         ]
       );
     } else {
-      return SmartRefresher(
-        enablePullDown: true,
-        enablePullUp: true,
-        onRefresh: _refresh,
-        onLoading: _loading,
-        header: const CupertinoSliverNavigationBar(largeTitle: Text('Crypto Data')),
-        controller: _refreshController,
-        child: GridView.count(
-          crossAxisCount: 2,
-          childAspectRatio: (6 / 3),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          mainAxisSpacing: 10.0,
-          scrollDirection: Axis.vertical,
-          children: [
-            for (var bin in binanceProvider.bin)
-            HomeCurrencyCard (
-              sym: bin.symbol,
-              per: bin.priceChangePercent,
-              pri: bin.bidPrice,
+      return CustomScrollView(
+        scrollDirection: Axis.vertical,
+        controller: _scrollController,
+        physics: const ClampingScrollPhysics(),
+        slivers: [
+          const CupertinoSliverNavigationBar(
+            largeTitle: Text('Crypto Data'),
+          ),
+          CupertinoSliverRefreshControl(onRefresh: _refresh),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            sliver: SliverGrid.count(
+              crossAxisCount: 2,
+              childAspectRatio: (6 / 3),
+              mainAxisSpacing: 20.0,
+              crossAxisSpacing: 10.0,
+              children: [
+                for (var bin in binanceProvider.bin)
+                HomeCurrencyCard (
+                  sym: bin.symbol,
+                  per: bin.priceChangePercent,
+                  pri: bin.bidPrice
+                )
+              ]
             )
-          ]
-        )
+          )
+        ]
       );
     }
   }
 
-  void _loading () {
-    final binanceProvider = Provider.of<BinanceProvider>(context, listen: false);
-    binanceProvider.paginateCurrencies();
-    setState(() {});
-    _refreshController.loadComplete();
+  void _scrollListener () {
+    if( _scrollController.position.pixels == _scrollController.position.maxScrollExtent ) {
+      final binanceProvider = Provider.of<BinanceProvider>(context, listen: false);
+      binanceProvider.paginateCurrencies();
+      setState(() {});
+    }
   }
 
   Future<void> _refresh() async {
-    print('a');
     final binanceProvider = Provider.of<BinanceProvider>(context, listen: false);
     await binanceProvider.getCurrencies();
     setState(() {});
-    _refreshController.refreshCompleted();
   }
 }
