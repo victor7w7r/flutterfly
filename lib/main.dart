@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show defaultTargetPlatform;
+import 'package:flutter/widgets.dart';
 
+import 'package:flutterfly/platforms/platforms.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -10,16 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'flutterfly',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
-      home: const Center(
-        child: Text('Awesome')
-      ),
-    );
+    if(defaultTargetPlatform == TargetPlatform.iOS) {
+      return cupertinoApp(context);
+    } else if (defaultTargetPlatform == TargetPlatform.android) {
+      return materialApp(context);
+    } else {
+      return fluentApp(context);
+    }
   }
 }
-
