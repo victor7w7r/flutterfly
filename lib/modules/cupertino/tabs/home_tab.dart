@@ -39,7 +39,7 @@ class _HomeTabState extends State<HomeTab> {
             const SizedBox(height: 10),
             Center(
               child: Text("Happy Hacking!, Dart... Dart...",
-              style: TextStyle(fontSize: (size.height > 960 ) ? 25 : 10))
+              style: TextStyle(fontSize: (size.height > 960 ) ? 25 : 20))
             ),
             const SizedBox(height: 10),
             dataProvider.data.isEmpty

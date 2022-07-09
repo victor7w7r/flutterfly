@@ -46,7 +46,7 @@ class _CryptoTabState extends State<CryptoTab> {
       return CustomScrollView(
         scrollDirection: Axis.vertical,
         controller: _scrollController,
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: [
           const CupertinoSliverNavigationBar(
             largeTitle: Text('Crypto Data'),

@@ -5,8 +5,6 @@ import 'package:flutterfly/modules/cupertino/tabs/home_tab.dart';
 import 'package:flutterfly/modules/cupertino/tabs/store_tab.dart';
 import 'package:flutterfly/modules/cupertino/tabs/crypto_tab.dart';
 
-import 'package:flutterfly/modules/cupertino/widgets/theme_toggle.dart';
-
 class CupertinoHome extends StatefulWidget {
   const CupertinoHome({Key? key}) : super(key: key);
 
