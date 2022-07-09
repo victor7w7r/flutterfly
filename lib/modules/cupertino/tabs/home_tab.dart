@@ -22,7 +22,7 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
 
-    final dataProvider = Provider.of<DataProvider>(context, listen: false);
+    final dataProvider = Provider.of<DataProvider>(context, listen: true);
     Size size = MediaQuery.of(context).size;
 
     return Center(

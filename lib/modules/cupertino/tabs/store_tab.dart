@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutterfly/modules/cupertino/providers/theme_provider.dart';
 
 import 'package:provider/provider.dart' show Provider;
 
@@ -29,7 +30,7 @@ class _StoreTabState extends State<StoreTab> {
             child: Text('Write anything in this form and send!', style: TextStyle(fontSize: 20))
           ),
           const SizedBox(height: 25),
-          _textField(),
+          _textField(context),
           const SizedBox(height: 12),
           _button(context),
           const SizedBox(height: 20),
@@ -39,14 +40,21 @@ class _StoreTabState extends State<StoreTab> {
     );
   }
 
-  SizedBox _textField() {
+  SizedBox _textField(BuildContext context) {
+
+    final themeProvider = Provider.of<ThemeCupertinoProvider>(context, listen: true);
+
     return SizedBox(
       width: 250.0,
       height: 55.0,
       child: CupertinoTextField(
+        placeholder: 'here',
         cursorHeight: 25,
         controller: storeController,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
+          color: themeProvider.darkMode
+            ?const Color(0xFF262626)
+            : const Color(0xFFF5F5F5),
         )
       )
     );

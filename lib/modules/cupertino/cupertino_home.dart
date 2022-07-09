@@ -21,8 +21,11 @@ class _CupertinoHomeState extends State<CupertinoHome> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('CupertinoApp'),
-        trailing: ThemeToggle(),
+        leading: Padding(
+          padding: EdgeInsets.only(top: 10),
+          child: Text('CupertinoApp'),
+        ),
+        trailing: ThemeToggle()
       ),
       child: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(

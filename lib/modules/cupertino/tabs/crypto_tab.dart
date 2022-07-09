@@ -12,6 +12,12 @@ class CryptoTab extends StatefulWidget {
 
 class _CryptoTabState extends State<CryptoTab> {
 
+  List<Widget> items = <Widget>[
+    const SizedBox(height: 100.0, child: Text('a')),
+    const SizedBox(height: 100.0, child: Text('b')),
+    const SizedBox(height: 100.0, child: Text('c')),
+  ];
+
   @override
   Widget build(BuildContext context) {
 
@@ -39,9 +45,9 @@ class _CryptoTabState extends State<CryptoTab> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) => items[index],
               childCount: items.length,
-            ),
-          ),
-        ],
+            )
+          )
+        ]
       );
     }
   }

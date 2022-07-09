@@ -16,18 +16,21 @@ class _ThemeToggleState extends State<ThemeToggle> {
     final themeProvider = Provider.of<ThemeCupertinoProvider>(context, listen: false);
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: 3,
+      spacing: -5,
       children: [
-        const Text('Dark Mode', style: TextStyle(fontSize: 15)),
-        CupertinoSwitch (
-        value: themeProvider.darkMode,
-        onChanged: (value){
-          themeProvider.toggle();
-          themeProvider.darkMode = value;
-          setState(() {});
-        },
-        thumbColor: CupertinoColors.white,
-        activeColor: CupertinoColors.activeBlue
+        const Text('Dark Mode', style: TextStyle(fontSize: 13)),
+        Transform.scale(
+          scale: 0.7,
+          child: CupertinoSwitch (
+            value: themeProvider.darkMode,
+            onChanged: (value){
+              themeProvider.toggle();
+              themeProvider.darkMode = value;
+              setState(() {});
+            },
+            thumbColor: CupertinoColors.white,
+            activeColor: CupertinoColors.activeBlue
+          )
         )
       ],
     );
