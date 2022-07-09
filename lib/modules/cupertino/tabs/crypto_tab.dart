@@ -15,30 +15,7 @@ class CryptoTab extends StatefulWidget {
 
 class _CryptoTabState extends State<CryptoTab> {
 
-
-  final _scrollController = ScrollController();
-
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_scrollListener);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _scrollController.dispose();
-  }
-
-   void _scrollListener () {
-    if( _scrollController.position.pixels == _scrollController.position.maxScrollExtent ) {
-      final binanceProvider = Provider.of<BinanceProvider>(context, listen: false);
-      binanceProvider.paginateCurrencies();
-      setState(() {});
-    }
-  }
+  final RefreshController _refreshController = RefreshController(initialRefresh: true);
 
   @override
   Widget build(BuildContext context) {
@@ -54,33 +31,40 @@ class _CryptoTabState extends State<CryptoTab> {
       );
     } else {
       return SmartRefresher(
-        enablePullDown: false,
+        enablePullDown: true,
         enablePullUp: true,
         onRefresh: _refresh,
-        header:  const CupertinoSliverNavigationBar(largeTitle: Text('Crypto Data')),
+        onLoading: _loading,
+        header: const CupertinoSliverNavigationBar(largeTitle: Text('Crypto Data')),
         controller: _refreshController,
-          child: GridView.count(
-            crossAxisCount: 2,
-            childAspectRatio: (6 / 3),
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            physics: const AlwaysScrollableScrollPhysics(),
-            mainAxisSpacing: 10.0,
-            scrollDirection: Axis.vertical,
-            controller: _scrollController,
-            children: [
-              for (var bin in binanceProvider.bin)
-              HomeCurrencyCard (
-                sym: bin.symbol,
-                per: bin.priceChangePercent,
-                pri: bin.bidPrice,
-              )
-            ]
-          )
+        child: GridView.count(
+          crossAxisCount: 2,
+          childAspectRatio: (6 / 3),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          mainAxisSpacing: 10.0,
+          scrollDirection: Axis.vertical,
+          children: [
+            for (var bin in binanceProvider.bin)
+            HomeCurrencyCard (
+              sym: bin.symbol,
+              per: bin.priceChangePercent,
+              pri: bin.bidPrice,
+            )
+          ]
+        )
       );
     }
   }
 
+  void _loading () {
+    final binanceProvider = Provider.of<BinanceProvider>(context, listen: false);
+    binanceProvider.paginateCurrencies();
+    setState(() {});
+    _refreshController.loadComplete();
+  }
+
   Future<void> _refresh() async {
+    print('a');
     final binanceProvider = Provider.of<BinanceProvider>(context, listen: false);
     await binanceProvider.getCurrencies();
     setState(() {});

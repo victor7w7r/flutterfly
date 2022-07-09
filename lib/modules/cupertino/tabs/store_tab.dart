@@ -26,7 +26,7 @@ class _StoreTabState extends State<StoreTab> {
       child: Stack(
         children: [
           const Positioned(
-            top: 47,
+            top: 70,
             right: 0,
             child: ThemeToggle()
           ),

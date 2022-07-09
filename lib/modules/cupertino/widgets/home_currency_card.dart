@@ -23,7 +23,7 @@ class HomeCurrencyCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
       padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
