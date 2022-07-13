@@ -7,10 +7,11 @@ version: 1.0.1
 
 environment:
   sdk: ">=2.17.5 <3.0.0"
-
+ 
 dependencies:
   flutter:
     sdk: flutter
+  cupertino_icons: ^1.0.5
   fluent_ui: ^3.12.0
   flutter_native_splash: ^2.2.3+1
   http: ^0.13.4
