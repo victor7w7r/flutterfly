@@ -5,12 +5,12 @@ import 'package:provider/provider.dart' show MultiProvider;
 
 import 'package:flutterfly/share_preferences/preferences.dart';
 
-import 'package:flutterfly/desktop_selector.dart';
+import 'package:flutterfly/modules/desktop_selector.dart';
 import 'package:flutterfly/dynamic_providers.dart';
 
-import 'package:flutterfly/routers/cupertino.dart';
-import 'package:flutterfly/routers/fluent.dart';
-import 'package:flutterfly/routers/material.dart';
+import 'package:flutterfly/modules/cupertino/cupertino.dart';
+import 'package:flutterfly/modules/fluent/fluent.dart';
+import 'package:flutterfly/modules/material/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,13 +37,13 @@ class _FlutterflyAppState extends State<FlutterflyApp> {
   @override
   Widget build(BuildContext context) {
     if(defaultTargetPlatform == TargetPlatform.iOS) {
-      return cupertinoApp(context);
+      return const CupertinoModule();
     } else if (defaultTargetPlatform == TargetPlatform.android) {
       return materialApp(context);
     } else if (_desktopBool && _isDesktop) {
         switch(_desktopSelector) {
         case 'material': return materialApp(context);
-        case 'cupertino': return cupertinoApp(context);
+        case 'cupertino': return const CupertinoModule();
         default: return fluentApp(context);
       }
     } else {
