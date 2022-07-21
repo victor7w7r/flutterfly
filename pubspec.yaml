@@ -7,24 +7,58 @@ version: 1.0.1
 
 environment:
   sdk: ">=2.17.5 <3.0.0"
- 
+
 dependencies:
   flutter:
     sdk: flutter
+  animated_custom_dropdown: ^1.2.2
+  animated_theme_switcher: ^2.0.6
+  anitex: ^3.0.1
+  auto_size_text: ^3.0.0
+  auto_orientation: ^2.2.1
+  battery_plus: ^2.1.4
+  bitsdojo_window: ^0.1.2
+  blurrycontainer: ^1.0.2
+  circular_reveal_animation: ^2.0.1
   cupertino_icons: ^1.0.5
+  double_back_to_close_app: ^2.1.0
+  envify: ^2.0.2
+  floating_bubbles: ^2.2.0
   fluent_ui: ^3.12.0
-  flutter_native_splash: ^2.2.3+1
+  fluid_kit: ^2.1.0
+  flutter_acrylic: ^1.0.0+2
+  flutter_intro: ^3.0.2
+  flutter_hooks: ^0.18.5+1
+  flutter_modular: ^5.0.3
+  flutter_native_splash: ^2.2.5
+  flutter_riverpod: ^1.0.4
+  flutter_vlc_player: ^7.1.5
+  get: ^4.6.5
+  glass: ^1.0.1+1
   http: ^0.13.4
-  json_annotation: ^4.5.0
+  hooks_riverpod: ^1.0.4
+  internet_connection_checker: ^0.0.1+4
+  json_annotation: ^4.6.0
+  nested: ^1.0.0
+  niku: ^2.3.2
+  platform_device_id: ^1.0.1
   provider: ^6.0.3
+  responsive_framework: ^0.2.0
+  rxdart: ^0.27.5
   shared_preferences: ^2.0.15
+  stop_watch_timer: ^1.5.0
+  swipable_stack: ^2.0.0
+  tailwind_colors : ^0.3.1
+  torch_controller: ^2.0.1
+  vibration: ^1.7.3
+  wave: ^0.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.1.11
+  build_runner: ^2.2.0
   flutter_lints: ^2.0.1
-  json_serializable: ^6.2.0
+  json_serializable: ^6.3.1
 
 flutter_native_splash:
   color: "#2196F3"
