@@ -30,7 +30,7 @@ void EnableFullDpiSupportIfAvailable(HWND hwnd) {
   }
 }
 
-}
+}  // namespace
 
 class WindowClassRegistrar {
  public:
