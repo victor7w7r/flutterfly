@@ -12,7 +12,7 @@ This template is used to be clean. Made with ❤️ by
 
 [Github Pages](https://victor7w7r.github.io/flutterfly/)
 
-### Install Packages (SDK >= 2.18.6)
+### Install Packages
 
 ``` bash
 $ flutter pub get
