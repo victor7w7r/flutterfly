@@ -29,16 +29,16 @@ class DrawerMenu extends StatelessWidget {
       const Spacer(flex: 1),
       n.ListTile()
         ..leading = n.Icon(Icons.home_outlined)
-        ..title = "Home".n
-        ..onTap = () => Navigator.of(context).pushNamed("/"),
+        ..title = 'Home'.n
+        ..onTap = () => Navigator.of(context).pushNamed('/'),
       n.ListTile()
         ..leading = n.Icon(Icons.store_outlined)
-        ..title = "Store".n
-        ..onTap = () => Navigator.of(context).pushNamed("/store"),
+        ..title = 'Store'.n
+        ..onTap = () => Navigator.of(context).pushNamed('/store'),
       const Spacer(flex: 8),
       n.ListTile()
         ..leading = n.Icon(Icons.color_lens_outlined)
-        ..title = "Change Color Mode".n
+        ..title = 'Change Color Mode'.n
         ..onTap = context.read(materialProvider.notifier).toggle,
       const Spacer(flex: 15),
       Consumer(builder: (_, ref, __) => n.Image.asset(ref.watch(materialProvider)

@@ -21,16 +21,16 @@ class Store extends StatelessWidget {
     return GestureDetector(
       onTap: FocusManager.instance.primaryFocus?.unfocus,
       child: Scaffold(
-        appBar: appBar("My Store"),
+        appBar: appBar('My Store'),
         drawer: isMacOS ? null : const DrawerMenu(),
         endDrawer: isMacOS ? const DrawerMenu() : null,
         body: n.Column([
-          "Store Example".n
+          'Store Example'.n
             ..freezed
             ..fontSize = 40
             ..n.center,
           const SizedBox(height: 15),
-          "Write anything in this form and send!".n
+          'Write anything in this form and send!'.n
             ..freezed
             ..fontSize = 20
             ..n.center,
@@ -54,8 +54,8 @@ class Store extends StatelessWidget {
           Consumer(builder: (_, ref, __) {
             final data = ref.watch(dataProvider);
             return n.Text(data.isEmpty
-              ? "Store state: Not yet."
-              : "Store state: Yes, you write. $data"
+              ? 'Store state: Not yet.'
+              : 'Store state: Yes, you write. $data'
             )
               ..fontSize = 15
               ..n.center;

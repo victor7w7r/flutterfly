@@ -11,7 +11,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(context) => Scaffold(
-    appBar: appBar("My Home"),
+    appBar: appBar('My Home'),
     drawer: isMacOS ? null : const DrawerMenu(),
     endDrawer: isMacOS ? const DrawerMenu() : null,
     body: OrientationBuilder(builder: (_, or) =>

@@ -11,7 +11,7 @@ class ThemeToggle extends StatelessWidget {
 
   @override
   Widget build(context) => n.Wrap([
-    "Dark Mode".n
+    'Dark Mode'.n
       ..freezed
       ..fontSize = 13,
     Transform.scale(

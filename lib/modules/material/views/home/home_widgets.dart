@@ -30,20 +30,20 @@ class TopContent extends StatelessWidget {
     ),
     const DynamicChip(isHome: false),
     const SizedBox(height: 15),
-    "Happy Hacking!, Dart... Dart...".n
+    'Happy Hacking!, Dart... Dart...'.n
       ..fontSize = (pSize.height > 960 ) ? 30 : 20,
     const SizedBox(height: 10),
     Consumer(builder: (_, ref, __) {
       final data = ref.watch(dataProvider);
       return n.Text(data.isEmpty
-        ? "Store state: Not yet."
-        : "Store state: Yes, you write. $data"
+        ? 'Store state: Not yet.'
+        : 'Store state: Yes, you write. $data'
       )
         ..fontSize = data.isEmpty ? ((pSize.height > 960 ) ? 25 : 15) : 20
         ..n.center;
     }),
     const SizedBox(height: 25),
-    "Made with love by ".n
+    'Made with love by '.n
       ..freezed
       ..fontSize = 14
       ..n.center,
@@ -81,7 +81,7 @@ class DynamicChip extends StatelessWidget {
         n.Image.asset('assets/flutter-logo.png')
           ..width = 77.0
           ..height = 35.0,
-        "Flutter Template".n
+        'Flutter Template'.n
           ..freezed
           ..fontSize = 20
       ])
@@ -134,7 +134,7 @@ class _BottomContentState extends State<BottomContent> {
   @override
   Widget build(context) => n.Column([
     const SizedBox(height: 35),
-    "Cryptocurrency data".n
+    'Cryptocurrency data'.n
       ..fontSize = (widget.pSize.height > 960) ? 35 : 30
       ..n.center,
     const SizedBox(height: 25),

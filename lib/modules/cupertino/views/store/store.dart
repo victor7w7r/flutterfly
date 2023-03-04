@@ -26,12 +26,12 @@ class Store extends StatelessWidget {
           ..niku.top = 70
           ..niku.right = 0,
         n.Column([
-          "Store Example".n
+          'Store Example'.n
             ..fontSize = 40
             ..freezed
             ..n.center,
           const SizedBox(height: 15),
-          "Write anything in this form and send!".n
+          'Write anything in this form and send!'.n
             ..fontSize = 20
             ..freezed
             ..n.center,
@@ -58,8 +58,8 @@ class Store extends StatelessWidget {
           Consumer(builder: (_, ref, __) {
             final data = ref.watch(dataProvider);
             return n.Text(data.isEmpty
-              ? "Store state: Not yet."
-              : "Store state: Yes, you write. $data"
+              ? 'Store state: Not yet.'
+              : 'Store state: Yes, you write. $data'
             )
               ..fontSize = 15
               ..n.center;

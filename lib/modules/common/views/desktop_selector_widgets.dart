@@ -22,7 +22,7 @@ class MenuBuilder extends StatelessWidget {
   Widget build(context) => n.Column([
     title.n
       ..fontSize = 30
-      ..fontFamily = "AminaReska"
+      ..fontFamily = 'AminaReska'
       ..color = TWTwoColors.gray.shade100,
     Nester.list([
       (next) => GestureDetector(onTap: onTap, child: next),

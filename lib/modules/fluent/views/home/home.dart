@@ -47,7 +47,7 @@ class Home extends StatelessWidget {
           const SizedBox(height: 40),
           BlurButton(
             caption: 'Go to Store',
-            onClick: () => Navigator.of(context).pushNamed("/store")
+            onClick: () => Navigator.of(context).pushNamed('/store')
           ),
           const SizedBox(height: 40),
           n.Row([

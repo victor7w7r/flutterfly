@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart' show DioError;
-import 'package:fpdart/fpdart.dart' show Option;
+import 'package:fpdart/fpdart.dart' show Option, OptionExtension;
 
 class HttpNotSuccess implements Exception {
 
@@ -10,14 +10,10 @@ class HttpNotSuccess implements Exception {
 
   factory HttpNotSuccess.dioThrow(DioError e) => HttpNotSuccess(
     Option.fromNullable(e.response)
-      .map((res) => res.statusCode!).getOrElse(() => 0),
+      .map((res) => res.statusCode!)
+      .getOrElse(() => 0),
     Option.fromNullable(e.response)
-      .map((res) => res.data["error"])
-      .getOrElse(() => "Server error, check your internet connection")
+      .map((res) => res.data['error'])
+      .getOrElse(() => 'Server error, check your internet connection')
   );
-}
-
-class ServerFailure {
-  const ServerFailure(this.res);
-  final int res;
 }

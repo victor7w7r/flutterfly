@@ -29,9 +29,9 @@ class DesktopSelector extends HookWidget {
         duration: const Duration(milliseconds: 1000),
         child: n.Stack([
           const AnimatedGradient(),
-          "Choose your flavour".n
+          'Choose your flavour'.n
             ..fontSize = 50
-            ..fontFamily = "AminaReska"
+            ..fontFamily = 'AminaReska'
             ..color = TWTwoColors.gray.shade100
             ..n.align = Alignment.topCenter,
           n.Wrap([

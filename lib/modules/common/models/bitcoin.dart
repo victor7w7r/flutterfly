@@ -12,6 +12,6 @@ class Bitcoin with _$Bitcoin{
     _$BitcoinFromJson(json);
 
   factory Bitcoin.dummy() =>
-    const Bitcoin("DUMMY", "0.00");
+    const Bitcoin('DUMMY', '0.00');
 
 }

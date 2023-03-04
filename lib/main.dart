@@ -34,10 +34,10 @@ class FlutterflyApp extends StatelessWidget {
       cases: [
         Case(isIos, builder: CupertinoModule.new),
         Case(isAndroid, builder: MaterialModule.new),
-        Case(isDesktop && desktop != "none", builder: () => Conditioned(
+        Case(isDesktop && desktop != 'none', builder: () => Conditioned(
           cases: [
-            Case(desktop == "material", builder: MaterialModule.new),
-            Case(desktop == "cupertino", builder: CupertinoModule.new),
+            Case(desktop == 'material', builder: MaterialModule.new),
+            Case(desktop == 'cupertino', builder: CupertinoModule.new),
           ],
           defaultBuilder: FluentModule.new
         ))

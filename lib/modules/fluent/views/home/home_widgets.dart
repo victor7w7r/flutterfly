@@ -99,8 +99,8 @@ class HomeCardCrypto extends StatelessWidget {
         Consumer(builder: (_, ref, __) {
           final data = ref.watch(dataProvider);
           return n.Text(data.isEmpty
-            ? "Store state: Not yet."
-            : "Store state: Yes, you write. $data"
+            ? 'Store state: Not yet.'
+            : 'Store state: Yes, you write. $data'
           )
             ..fontSize = 20
             ..color = theme.themeColor[2]
@@ -115,10 +115,10 @@ class HomeCardCrypto extends StatelessWidget {
               ..fontSize = 20
           ],
           data: (bit) => [
-            "Symbol: ${bit.symbol}".n
+            'Symbol: ${bit.symbol}'.n
               ..color = theme.themeColor[2]
               ..fontSize = 20,
-            "Price: ${bit.price}".n
+            'Price: ${bit.price}'.n
               ..color = theme.themeColor[2]
               ..fontSize = 20,
             const SizedBox(height: 45),

@@ -20,21 +20,21 @@ class Home extends StatelessWidget {
     n.Column([
       const DynamicChip(isHome: false),
       const SizedBox(height: 10),
-      "Happy Hacking!, Dart... Dart...".n
+      'Happy Hacking!, Dart... Dart...'.n
         ..fontSize = (context.mediaQuerySize.height > 960 ) ? 25 : 20
         ..n.center,
       const SizedBox(height: 10),
       Consumer(builder: (_, ref, __) {
         final data = ref.watch(dataProvider);
         return n.Text(data.isEmpty
-          ? "Store state: Not yet."
-          : "Store state: Yes, you write. $data"
+          ? 'Store state: Not yet.'
+          : 'Store state: Yes, you write. $data'
         )
           ..fontSize = data.isEmpty ? ((context.mediaQuerySize.height > 960 ) ? 20 : 15) : 20
           ..n.center;
       }),
         const SizedBox(height: 20),
-        "Made with love by ".n
+        'Made with love by '.n
           ..freezed
           ..fontSize = 15
           ..n.center,

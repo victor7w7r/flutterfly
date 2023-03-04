@@ -5,3 +5,4 @@ analyzer:
 linter:
   rules:
     non_constant_identifier_names: false
+    prefer_single_quotes: true

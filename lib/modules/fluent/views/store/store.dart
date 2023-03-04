@@ -51,8 +51,8 @@ class Store extends StatelessWidget {
               Consumer(builder: (_, ref, __) {
                 final data = ref.watch(dataProvider);
                 return n.Text(data.isEmpty
-                  ? "Store state: Not yet."
-                  : "Store state: Yes, you write. $data"
+                  ? 'Store state: Not yet.'
+                  : 'Store state: Yes, you write. $data'
                 )
                   ..fontSize = 20
                   ..color = theme.themeColor[2]
@@ -65,7 +65,7 @@ class Store extends StatelessWidget {
           const SizedBox(height: 60),
           BlurButton(
             caption: 'Go to Home',
-            onClick: () => Navigator.of(context).pushNamed("/")
+            onClick: () => Navigator.of(context).pushNamed('/')
           ),
           const SizedBox(height: 40)
         ])

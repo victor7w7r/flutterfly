@@ -35,7 +35,7 @@ class DynamicChip extends StatelessWidget {
         n.Image.asset('assets/flutter-logo.png')
           ..width = 77.0
           ..height = 35.0,
-        "Flutter Template".n
+        'Flutter Template'.n
           ..freezed
           ..fontSize = 20
       ])

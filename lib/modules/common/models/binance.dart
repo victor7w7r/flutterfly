@@ -21,9 +21,9 @@ class Binance with _$Binance {
   factory Binance.fromJson(Map<String, dynamic> json) => _$BinanceFromJson(json);
 
   static List<Binance> dummyGen() => List.filled(120, null).map((_) => const Binance(
-    "Dummy", "", "0.00", "",
-    "", "", "", "100", "", "",
-    "", "", "", "", "", "", 0,
+    'Dummy', '', '0.00', '',
+    '', '', '', '100', '', '',
+    '', '', '', '', '', '', 0,
     0, 0, 0, 0
   )).toList();
 
