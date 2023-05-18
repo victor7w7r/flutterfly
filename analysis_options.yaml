@@ -2,7 +2,8 @@ include: package:flutter_lints/flutter.yaml
 analyzer:
   errors:
     invalid_annotation_target: ignore
+  exclude:
+    - lib/**.g.dart
 linter:
   rules:
-    non_constant_identifier_names: false
     prefer_single_quotes: true

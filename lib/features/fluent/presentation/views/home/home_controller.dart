@@ -1,0 +1,79 @@
+import 'package:fluent_ui/fluent_ui.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart' show Provider, ProviderRef;
+import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
+
+import 'package:flutterfly/features/fluent/data/providers/fluent_provider.dart';
+
+final class HomeController {
+
+  const HomeController(this.ref);
+
+  final ProviderRef ref;
+
+  Color _background() =>
+    ref.read(fluentProvider).isDark
+      ? TWColors.gray.shade100
+      : TWColors.gray.shade900;
+
+  void colorChange(final String color) {
+    switch (color) {
+      case 'blue':
+        ref.read(fluentProvider.notifier).interpolator([
+          ref.read(fluentProvider).isDark
+            ? const Color(0xFF0C4A6E)
+            : const Color.fromARGB(255, 136, 202, 238),
+          const Color(0xFF0369A1),
+          _background()
+        ]);
+        break;
+      case 'violet':
+        ref.read(fluentProvider.notifier).interpolator([
+          ref.read(fluentProvider).isDark
+            ? const Color(0xFF581c87)
+            : const Color(0xFFD8b4FE),
+          const Color(0xFF7E22CE),
+          _background()
+        ]);
+        break;
+      case 'red':
+        ref.read(fluentProvider.notifier).interpolator([
+          ref.read(fluentProvider).isDark
+            ? const Color(0xFF7F1D1D)
+            : const Color(0xFFfCA5A5),
+          const Color(0xFFB91C1C),
+          _background()
+        ]);
+        break;
+      default:
+        ref.read(fluentProvider.notifier).interpolator([
+          ref.read(fluentProvider).isDark
+            ? const Color(0xFF064E3B)
+            : const Color(0xFF6EE7B7),
+          const Color(0xFF047857),
+          _background()
+        ]);
+        break;
+    }
+  }
+
+  Color backSelector(final String color) =>
+    switch (color) {
+      'blue' => const Color(0xFF0284C7),
+      'violet' => const Color(0xFF9333EA),
+      'red' => const Color(0xFFF3425B),
+      _ => const Color(0xFF059669)
+    };
+
+
+  Color borderSelector(final String color) =>
+    switch (color) {
+      'blue' => const Color(0xAA7DD3fC),
+      'violet' => const Color(0xAAD8B4FE),
+      'red' => const Color(0xAAfCA5A5),
+      _ => const Color(0xAA6EE7B7)
+    };
+
+}
+
+final homeController = Provider(HomeController.new);
