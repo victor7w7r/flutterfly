@@ -3,24 +3,24 @@ import 'package:flutter/widgets.dart';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart' show appWindow, doWhenWindowReady;
 
-import 'package:flutterfly/platforms/index.dart';
+import 'package:flutterfly/platforms/platforms.dart';
 
 void main() {
-  runApp(const MyApp());
-
+  WidgetsFlutterBinding.ensureInitialized();
   doWhenWindowReady(() => appWindow
     ..minSize = const Size(640, 360)
     ..size = const Size(1280, 720)
     ..alignment = Alignment.center
-    ..title = "Flutterfly"
+    ..title = 'Flutterfly'
     ..show()
   );
 
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
 
-  const MyApp({super.key});
+  const App({super.key});
 
   @override
   Widget build(context) {

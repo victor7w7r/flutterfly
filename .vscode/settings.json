@@ -1,0 +1,23 @@
+{
+  "explorer.autoReveal": false,
+  "material-icon-theme.folders.associations": {
+    ".dart_tool": "Tools",
+    "appbuilder": "Views",
+    "builder": "Less",
+    "mappers": "Json",
+    "dialogs": "Review",
+    "domain": "Database",
+    "features": "Other",
+    "inject": "Target",
+    "linux": "Client",
+    "macos": "Client",
+    "presentation": "Resource",
+    "repository": "Json",
+    "windows": "Client"
+  },
+  "material-icon-theme.files.associations": {
+    ".flutter-plugins": "Dart_generated",
+    ".flutter-plugins-dependencies": "Dart_generated",
+    ".metadata": "Dart_generated",
+  }
+}
