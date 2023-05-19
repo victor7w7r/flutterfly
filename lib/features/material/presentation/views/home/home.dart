@@ -11,9 +11,9 @@ final class Home extends StatelessWidget {
 
   @override
   Widget build(context) => Scaffold(
-    appBar: const PreferredSize(
-      preferredSize: Size.fromHeight(50),
-      child: NavBar('My Home')
+    appBar: PreferredSize(
+      preferredSize: Size.fromHeight(isMacOS ? 35 : 50),
+      child: const NavBar('My Home')
     ),
     drawer: isMacOS ? null : const DrawerMenu(),
     endDrawer: isMacOS ? const DrawerMenu() : null,
