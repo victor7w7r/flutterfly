@@ -8,7 +8,7 @@ import 'package:flutterfly/app.dart';
 import 'package:flutterfly/config/inject/inject.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configInjection();
 
