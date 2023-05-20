@@ -43,7 +43,8 @@ final class FluentThemeApp {
   );
 }
 
-class FluentNotifier extends Notifier<FluentThemeApp> {
+final class FluentNotifier
+  extends Notifier<FluentThemeApp> {
 
   @override
   FluentThemeApp build() =>
@@ -78,7 +79,9 @@ class FluentNotifier extends Notifier<FluentThemeApp> {
     });
   }
 
-  Future<void> toggle(bool value) async {
+  Future<void> toggle(
+    final bool value
+  ) async {
     state = state.copyWith(isDark: value);
     state.isDark
       ? interpolator(darkColors)

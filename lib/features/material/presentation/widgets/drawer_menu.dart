@@ -6,7 +6,7 @@ import 'package:riverpod_context/riverpod_context.dart' show RiverpodContext;
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
 import 'package:flutterfly/features/material/data/providers/material_provider.dart';
 
-class DrawerMenu extends StatelessWidget {
+final class DrawerMenu extends StatelessWidget {
 
   const DrawerMenu({super.key});
 

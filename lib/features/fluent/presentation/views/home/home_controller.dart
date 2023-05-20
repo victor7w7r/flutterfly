@@ -7,20 +7,20 @@ import 'package:flutterfly/features/fluent/data/providers/fluent_provider.dart';
 
 final class HomeController {
 
-  const HomeController(this.ref);
+  final ProviderRef _ref;
 
-  final ProviderRef ref;
+  const HomeController(this._ref);
 
   Color _background() =>
-    ref.read(fluentProvider).isDark
+    _ref.read(fluentProvider).isDark
       ? TWColors.gray.shade100
       : TWColors.gray.shade900;
 
   void colorChange(final String color) {
     switch (color) {
       case 'blue':
-        ref.read(fluentProvider.notifier).interpolator([
-          ref.read(fluentProvider).isDark
+        _ref.read(fluentProvider.notifier).interpolator([
+          _ref.read(fluentProvider).isDark
             ? const Color(0xFF0C4A6E)
             : const Color.fromARGB(255, 136, 202, 238),
           const Color(0xFF0369A1),
@@ -28,8 +28,8 @@ final class HomeController {
         ]);
         break;
       case 'violet':
-        ref.read(fluentProvider.notifier).interpolator([
-          ref.read(fluentProvider).isDark
+        _ref.read(fluentProvider.notifier).interpolator([
+          _ref.read(fluentProvider).isDark
             ? const Color(0xFF581c87)
             : const Color(0xFFD8b4FE),
           const Color(0xFF7E22CE),
@@ -37,8 +37,8 @@ final class HomeController {
         ]);
         break;
       case 'red':
-        ref.read(fluentProvider.notifier).interpolator([
-          ref.read(fluentProvider).isDark
+        _ref.read(fluentProvider.notifier).interpolator([
+          _ref.read(fluentProvider).isDark
             ? const Color(0xFF7F1D1D)
             : const Color(0xFFfCA5A5),
           const Color(0xFFB91C1C),
@@ -46,8 +46,8 @@ final class HomeController {
         ]);
         break;
       default:
-        ref.read(fluentProvider.notifier).interpolator([
-          ref.read(fluentProvider).isDark
+        _ref.read(fluentProvider.notifier).interpolator([
+          _ref.read(fluentProvider).isDark
             ? const Color(0xFF064E3B)
             : const Color(0xFF6EE7B7),
           const Color(0xFF047857),

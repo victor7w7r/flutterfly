@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' show Notifier, NotifierP
 import 'package:flutterfly/config/inject/inject.dart';
 import 'package:flutterfly/core/modules/shareprefs_module.dart';
 
-class CupertinoNotifier
+final class CupertinoNotifier
   extends Notifier<bool> {
 
   @override

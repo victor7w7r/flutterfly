@@ -8,7 +8,7 @@ import 'package:flutterfly/features/cupertino/presentation/views/crypto/crypto.d
 import 'package:flutterfly/features/cupertino/presentation/views/home/home.dart';
 import 'package:flutterfly/features/cupertino/presentation/views/store/store.dart';
 
-class CupertinoModule extends StatelessWidget {
+final class CupertinoModule extends StatelessWidget {
 
   const CupertinoModule({super.key});
 

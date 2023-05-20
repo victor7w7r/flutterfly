@@ -9,9 +9,9 @@ import 'package:flutterfly/features/cupertino/data/providers/cupertino_provider.
 
 final class CurrencyCard extends StatelessWidget {
 
-  final String sym;
   final String per;
   final String pri;
+  final String sym;
 
   const CurrencyCard({
     super.key,

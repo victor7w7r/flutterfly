@@ -5,7 +5,7 @@ import 'package:riverpod_context/riverpod_context.dart' show RiverpodContext;
 
 import 'package:flutterfly/features/cupertino/data/providers/cupertino_provider.dart';
 
-class ThemeToggle extends StatelessWidget {
+final class ThemeToggle extends StatelessWidget {
 
   const ThemeToggle({super.key});
 

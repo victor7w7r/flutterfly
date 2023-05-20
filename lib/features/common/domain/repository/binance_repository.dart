@@ -9,7 +9,7 @@ typedef TaskListBinance = TaskEither<HttpNotSuccess, List<Binance>>;
 typedef TaskBitcoin = TaskEither<HttpNotSuccess, Bitcoin>;
 
 @injectable
-class BinanceRepository {
+final class BinanceRepository {
 
   final String _bitRoute;
   final String _currRoute;

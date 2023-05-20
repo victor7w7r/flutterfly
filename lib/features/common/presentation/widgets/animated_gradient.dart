@@ -65,8 +65,8 @@ final animatedGradientController =
 
 class AnimatedGradient extends StatelessWidget {
 
-  final double width;
   final double height;
+  final double width;
 
   const AnimatedGradient({
     this.width = 2400,

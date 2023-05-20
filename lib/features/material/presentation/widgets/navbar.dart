@@ -6,7 +6,7 @@ import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
 import 'package:flutterfly/features/material/data/providers/material_provider.dart';
 
-class NavBar extends StatelessWidget {
+final class NavBar extends StatelessWidget {
 
   final String title;
 

@@ -4,11 +4,11 @@ import 'package:flutterfly/core/utils/index.dart';
 import 'package:flutterfly/features/common/data/services/binance_service.dart';
 import 'package:flutterfly/features/common/domain/models/models.dart';
 
-class BinanceNotifier
+final class BinanceNotifier
   extends AsyncNotifier<List<Binance>> {
 
   final allBin = <Binance>[];
-  int position = 0;
+  var position = 0;
 
   @override
   Future<List<Binance>> build() async {

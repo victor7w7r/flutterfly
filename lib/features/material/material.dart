@@ -6,7 +6,7 @@ import 'package:flutterfly/features/material/data/providers/material_provider.da
 import 'package:flutterfly/features/material/presentation/views/home/home.dart';
 import 'package:flutterfly/features/material/presentation/views/store/store.dart';
 
-class MaterialModule extends StatelessWidget {
+final class MaterialModule extends StatelessWidget {
 
   const MaterialModule({super.key});
 

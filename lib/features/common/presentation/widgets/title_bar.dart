@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:niku/namespace.dart' as n;
 
-class WindowTitleBar extends StatelessWidget {
+final class WindowTitleBar
+  extends StatelessWidget {
 
   final bool isDark;
 

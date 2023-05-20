@@ -10,7 +10,7 @@ import 'package:flutterfly/features/common/presentation/views/desktop_selector_c
 import 'package:flutterfly/features/common/presentation/views/desktop_selector_widgets.dart';
 import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
 
-class DesktopSelector extends HookWidget {
+final class DesktopSelector extends HookWidget {
 
   const DesktopSelector({super.key});
 

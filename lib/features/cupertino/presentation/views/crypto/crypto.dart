@@ -8,7 +8,7 @@ import 'package:flutterfly/core/utils/errors.dart';
 import 'package:flutterfly/features/common/data/providers/binance_provider.dart';
 import 'package:flutterfly/features/cupertino/presentation/views/crypto/crypto_widgets.dart';
 
-class Crypto extends StatefulWidget {
+final class Crypto extends StatefulWidget {
 
   const Crypto({super.key});
 
@@ -16,7 +16,7 @@ class Crypto extends StatefulWidget {
   State<Crypto> createState() => _CryptoState();
 }
 
-class _CryptoState extends State<Crypto> {
+final class _CryptoState extends State<Crypto> {
 
   final scrCtl = ScrollController();
 

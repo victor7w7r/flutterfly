@@ -5,7 +5,7 @@ import 'package:niku/namespace.dart' as n;
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/widgets/title_bar.dart';
 
-class CupTitle extends StatelessWidget {
+final class CupTitle extends StatelessWidget {
 
   final bool dark;
 

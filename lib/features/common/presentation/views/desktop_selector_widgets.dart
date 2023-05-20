@@ -7,9 +7,9 @@ import 'package:tailwind_colors/tailwind_colors.dart' show TWTwoColors;
 
 final class MenuBuilder extends StatelessWidget {
 
-  final String title;
   final String image;
   final VoidCallback onTap;
+  final String title;
 
   const MenuBuilder({
     super.key,

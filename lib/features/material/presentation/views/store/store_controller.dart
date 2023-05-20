@@ -4,10 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' show Provider, ProviderR
 
 import 'package:flutterfly/features/common/data/providers/data_provider.dart';
 
-class StoreController {
+final class StoreController {
 
   final ProviderRef _ref;
-
   final TextEditingController txtCtl;
 
   StoreController(this._ref):

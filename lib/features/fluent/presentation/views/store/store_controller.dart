@@ -7,7 +7,6 @@ import 'package:flutterfly/features/common/data/providers/data_provider.dart';
 final class StoreController {
 
   final ProviderRef _ref;
-
   final TextEditingController txtCtl;
 
   StoreController(this._ref):

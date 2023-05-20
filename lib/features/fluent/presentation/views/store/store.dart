@@ -11,7 +11,7 @@ import 'package:flutterfly/features/fluent/presentation/views/store/store_contro
 import 'package:flutterfly/features/fluent/presentation/views/store/store_widgets.dart';
 import 'package:flutterfly/features/fluent/presentation/widgets/widgets.dart';
 
-class Store extends StatelessWidget {
+final class Store extends StatelessWidget {
 
   const Store({super.key});
 
