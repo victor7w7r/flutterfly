@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart' show DioError;
+import 'package:dio/dio.dart' show DioException;
 import 'package:fpdart/fpdart.dart';
 
 final class HttpNotSuccess implements Exception {
@@ -11,7 +11,7 @@ final class HttpNotSuccess implements Exception {
   factory HttpNotSuccess.throwError(
     Object e, StackTrace s
   ) => HttpNotSuccess(
-    (e as DioError).response.toOption()
+    (e as DioException).response.toOption()
       .map((res) => res.statusCode!)
       .getOrElse(() => 0),
     e.response.toOption()
