@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,18 +20,12 @@ jobs:
       - name: "Install dependencies"
         run: flutter pub get
       - name: "Enable for Publishing"
-        run: sed -i 's/$FLUTTER_BASE_HREF/https:\/\/victor7w7r.github.io\/flutterfly\//' web/index.html
-      - name: "Compiling.."
-        run: flutter build web --web-renderer canvaskit
-      - name: "Deploying.."
         run: |
-          cd build/web
-          git init
-          git config --global user.email testvictor7w7r@gmail.com
-          git config --global user.name victor7w7r
-          git status
-          git remote add origin https://${{secrets.commit_secret}}@github.com/victor7w7r/flutterfly.git
-          git checkout -b pages
-          git add --all
-          git commit -m "update"
-          git push origin pages -f
+          rm web/index.html
+          mv web/index.prod.html web/index.html
+      - name: "Compiling..."
+        run: flutter build web --web-renderer canvaskit
+      - name: "Deploying..."
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/web
