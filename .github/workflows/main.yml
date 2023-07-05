@@ -1,6 +1,4 @@
 name: "Github Deploy"
-env:
-  my_secret: ${{secrets.commit_secret}}
 on:
   push:
     branches:
