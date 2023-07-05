@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart' show singleton;
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:flutterfly/core/modules/env_module.dart';
-import 'package:flutterfly/core/utils/platforms.dart';
 
-@singleton
+part 'dio_module.g.dart';
+
 final class DioModule {
 
   final Dio _client;
@@ -17,12 +17,14 @@ final class DioModule {
     responseType: ResponseType.json,
     headers: {
       'Content-Type': 'application/json'
-    },
-    connectTimeout: !isWeb
-      ? const Duration(milliseconds: 3000)
-      : null
+    }
   ));
 
   Dio get client => _client;
 
 }
+
+@Riverpod(keepAlive: true)
+DioModule dioModule(
+  final DioModuleRef ref
+) => DioModule(ref.watch(envModule$));

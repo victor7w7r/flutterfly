@@ -2,15 +2,15 @@ import 'package:flutter/widgets.dart';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart' show appWindow, doWhenWindowReady;
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
-import 'package:riverpod_context/riverpod_context.dart' show InheritedConsumer;
+import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
 
 import 'package:flutterfly/app.dart';
-import 'package:flutterfly/config/inject/inject.dart';
+import 'package:flutterfly/core/modules/prefs_module.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
-  await configInjection();
 
   if(isDesktopOnly) {
     doWhenWindowReady(() => appWindow
@@ -22,8 +22,13 @@ void main() async {
     );
   }
 
-  runApp(const ProviderScope(
-    child: InheritedConsumer(child: App())
+  runApp(ProviderScope(
+    overrides: [
+      sharedPrefs$.overrideWithValue(
+        await SharedPreferences.getInstance()
+      )
+    ],
+    child: const App()
   ));
 
 }

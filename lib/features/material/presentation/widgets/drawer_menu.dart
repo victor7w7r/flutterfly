@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
 import 'package:niku/namespace.dart' as n;
-import 'package:riverpod_context/riverpod_context.dart' show RiverpodContext;
 
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
-import 'package:flutterfly/features/material/data/providers/material_provider.dart';
+import 'package:flutterfly/features/material/providers/material_provider.dart';
 
-final class DrawerMenu extends StatelessWidget {
+final class DrawerMenu extends ConsumerWidget {
 
   const DrawerMenu({super.key});
 
   @override
-  Widget build(context) => Drawer(
+  Widget build(context, ref) => Drawer(
     child: n.Column([
       const Spacer(flex: 2),
       AppConsumer((ref) => DrawerHeader(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              ref.watch(materialProvider)
+              ref.watch(materialProvider$)
                 ? 'assets/aqua-light.png'
                 : 'assets/aqua-black.png'
             ),
@@ -42,11 +42,11 @@ final class DrawerMenu extends StatelessWidget {
       n.ListTile()
         ..leading = n.Icon(Icons.color_lens_outlined)
         ..title = 'Change Color Mode'.n
-        ..onTap = context.read(materialProvider.notifier)
+        ..onTap = ref.read(materialProvider$.notifier)
           .toggle,
       const Spacer(flex: 15),
       AppConsumer((ref) => n.Image.asset(
-        ref.watch(materialProvider)
+        ref.watch(materialProvider$)
           ? 'assets/brandwhite.png'
           : 'assets/brand.png'
         )

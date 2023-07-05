@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'package:riverpod_context/riverpod_context.dart' show RiverpodContext;
+import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
 
-import 'package:flutterfly/features/material/data/providers/material_provider.dart';
-import 'package:flutterfly/features/material/presentation/views/home/home.dart';
-import 'package:flutterfly/features/material/presentation/views/store/store.dart';
+import 'package:flutterfly/features/material/providers/material_provider.dart';
+import 'package:flutterfly/features/material/presentation/screens/home/home.dart';
+import 'package:flutterfly/features/material/presentation/screens/store/store.dart';
 
-final class MaterialModule extends StatelessWidget {
+final class MaterialModule extends ConsumerWidget {
 
   const MaterialModule({super.key});
 
   @override
-  Widget build(context) => MaterialApp(
+  Widget build(context, ref) => MaterialApp(
     title: 'flutterfly',
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
@@ -21,7 +21,7 @@ final class MaterialModule extends StatelessWidget {
     darkTheme: ThemeData.dark().copyWith(
       splashFactory: InkRipple.splashFactory
     ),
-    themeMode: context.watch(materialProvider)
+    themeMode: ref.watch(materialProvider$)
       ? ThemeMode.dark
       : ThemeMode.light,
     initialRoute: '/',

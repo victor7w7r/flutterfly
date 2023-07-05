@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_context/riverpod_context.dart' show RiverpodContext;
 import 'package:tailwind_colors/tailwind_colors.dart' show TWTwoColors;
 
 final class AnimatedGradientController
@@ -63,7 +62,7 @@ final animatedGradientController =
     _Ctl()..init()
   );
 
-class AnimatedGradient extends StatelessWidget {
+class AnimatedGradient extends ConsumerWidget {
 
   final double height;
   final double width;
@@ -75,9 +74,9 @@ class AnimatedGradient extends StatelessWidget {
   });
 
   @override
-  Widget build(context) {
+  Widget build(context, ref) {
 
-    final ctl = context.watch(
+    final ctl = ref.watch(
       animatedGradientController
     );
 

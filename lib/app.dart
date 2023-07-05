@@ -1,22 +1,22 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutterfly/features/common/presentation/views/desktop_selector.dart';
 
-import 'package:riverpod_context/riverpod_context.dart' show RiverpodContext;
+import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
 
 import 'package:flutterfly/core/utils/platforms.dart';
-import 'package:flutterfly/features/common/data/providers/desktop_provider.dart';
+import 'package:flutterfly/features/common/presentation/screens/desktop_selector.dart';
+import 'package:flutterfly/features/common/providers/desktop_provider.dart';
 import 'package:flutterfly/features/cupertino/cupertino.dart';
 import 'package:flutterfly/features/fluent/fluent.dart';
 import 'package:flutterfly/features/material/material.dart';
 
-final class App extends StatelessWidget {
+final class App extends ConsumerWidget {
 
-  const App({super.key});
+  const App({ super.key });
 
   @override
-  Widget build(context) {
+  Widget build(context, ref) {
 
-    final desktop = context.watch(desktopProvider);
+    final desktop = ref.watch(desktopProvider$);
 
     if(isIos) {
       return const CupertinoModule();

@@ -1,21 +1,21 @@
 import 'package:flutter/cupertino.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
+
 import 'package:flutterfly/features/cupertino/presentation/widgets/title.dart';
+import 'package:flutterfly/features/cupertino/presentation/screens/crypto/crypto.dart';
+import 'package:flutterfly/features/cupertino/presentation/screens/home/home.dart';
+import 'package:flutterfly/features/cupertino/presentation/screens/store/store.dart';
+import 'package:flutterfly/features/cupertino/providers/cupertino_provider.dart';
 
-import 'package:riverpod_context/riverpod_context.dart' show RiverpodContext;
+final class CupertinoModule extends ConsumerWidget {
 
-import 'package:flutterfly/features/cupertino/data/providers/cupertino_provider.dart';
-import 'package:flutterfly/features/cupertino/presentation/views/crypto/crypto.dart';
-import 'package:flutterfly/features/cupertino/presentation/views/home/home.dart';
-import 'package:flutterfly/features/cupertino/presentation/views/store/store.dart';
-
-final class CupertinoModule extends StatelessWidget {
-
-  const CupertinoModule({super.key});
+  const CupertinoModule({ super.key });
 
   @override
-  Widget build(context) {
+  Widget build(context, ref) {
 
-    final dark = context.watch(cupertinoProvider);
+    final dark = ref.watch(cupertinoProvider$);
 
     return CupertinoApp(
       title: 'flutterfly',

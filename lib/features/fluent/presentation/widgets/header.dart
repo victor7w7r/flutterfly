@@ -1,22 +1,22 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:nester/nester.dart' show Nester;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
-import 'package:riverpod_context/riverpod_context.dart' show RiverpodContext;
 
-import 'package:flutterfly/config/extensions/extensions.dart';
-import 'package:flutterfly/features/fluent/data/providers/fluent_provider.dart';
+import 'package:flutterfly/core/extensions/extensions.dart';
+import 'package:flutterfly/features/common/presentation/widgets/nest.dart';
+import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
 
-final class Header extends StatelessWidget {
+final class Header extends ConsumerWidget {
 
   const Header({super.key});
 
   @override
-  Widget build(context) {
+  Widget build(context, ref) {
 
-    final theme = context.watch(fluentProvider);
+    final theme = ref.watch(fluentProvider$);
 
-    return Nester.list([
+    return Nest([
       (next) => Card(
         backgroundColor: theme.themeColor[1],
         borderRadius: BorderRadius.circular(20),
@@ -35,7 +35,7 @@ final class Header extends StatelessWidget {
           ..pl = context.mWidth > 960 ? 200 : 50,
         ToggleSwitch(
           checked: theme.isDark,
-          onChanged: context.read(fluentProvider.notifier)
+          onChanged: ref.read(fluentProvider$.notifier)
             .toggle,
           content: 'Dark Mode'.n
             ..color = theme.themeColor[2]

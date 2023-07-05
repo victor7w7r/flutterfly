@@ -4,7 +4,7 @@ import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
-import 'package:flutterfly/features/material/data/providers/material_provider.dart';
+import 'package:flutterfly/features/material/providers/material_provider.dart';
 
 final class NavBar extends StatelessWidget {
 
@@ -20,11 +20,11 @@ final class NavBar extends StatelessWidget {
     toolbarHeight: isMacOS ? 30 : null,
     leading: isMacOS ? Container() : null,
     title: isMacOS ? AppConsumer((ref) =>
-      WindowTitleBar(isDark: ref.watch(materialProvider)
+      WindowTitleBar(isDark: ref.watch(materialProvider$)
     )) : n.Stack([
       title.n,
       if(isDesktop) AppConsumer((ref) =>
-        WindowTitleBar(isDark: ref.watch(materialProvider)
+        WindowTitleBar(isDark: ref.watch(materialProvider$)
       ))
     ]),
     actions: isMacOS ? [

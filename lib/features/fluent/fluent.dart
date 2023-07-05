@@ -1,17 +1,17 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:riverpod_context/riverpod_context.dart' show RiverpodContext;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:flutterfly/features/fluent/data/providers/fluent_provider.dart';
-import 'package:flutterfly/features/fluent/presentation/views/home/home.dart';
-import 'package:flutterfly/features/fluent/presentation/views/store/store.dart';
+import 'package:flutterfly/features/fluent/presentation/screens/home/home.dart';
+import 'package:flutterfly/features/fluent/presentation/screens/store/store.dart';
+import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
 
-final class FluentModule extends StatelessWidget {
+final class FluentModule extends ConsumerWidget {
 
   const FluentModule({super.key});
 
   @override
-  Widget build(context) => FluentApp(
+  Widget build(context, ref) => FluentApp(
     title: 'flutterfly',
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
@@ -19,7 +19,7 @@ final class FluentModule extends StatelessWidget {
       '/': (_) => const Home(),
       '/store': (_) => const Store()
     },
-    color: context.watch(fluentProvider)
+    color: ref.watch(fluentProvider$)
       .themeColor[0]
   );
 }
