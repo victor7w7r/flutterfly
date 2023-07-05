@@ -20,16 +20,10 @@ void main() {
 
 final class App extends StatelessWidget {
 
-  const App({super.key});
+  const App({ super.key });
 
   @override
-  Widget build(context) {
-    if(defaultTargetPlatform == TargetPlatform.iOS) {
-      return cupertinoApp(context);
-    } else if (defaultTargetPlatform == TargetPlatform.android) {
-      return materialApp(context);
-    } else {
-      return fluentApp(context);
-    }
-  }
+  Widget build(context) =>
+    defaultTargetPlatform == TargetPlatform.iOS ?
+      cupertinoApp(context) : materialApp(context);
 }
