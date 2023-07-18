@@ -19,7 +19,7 @@ final class BinanceRepository {
   TaskListBinance getCurrencies() => TaskEither.tryCatch(
     Task(() async => _dio.client.get<List<dynamic>>(_currRoute))
       .map((final res) =>
-        Binance.fromJsonToList(res.data)
+        Binance.fromJsonToList(res.data ?? [])
       ).run,
     HttpNotSuccess.throwError
   );
@@ -27,7 +27,7 @@ final class BinanceRepository {
   TaskBitcoin getBitcoin() => TaskEither.tryCatch(
     Task(() async => _dio.client.get<Map<String, dynamic>>(_bitRoute))
       .map((final res) =>
-        Bitcoin.fromJson(res.data)
+        Bitcoin.fromJson(res.data ?? {})
       ).run,
     HttpNotSuccess.throwError
   );
