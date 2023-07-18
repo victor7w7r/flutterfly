@@ -7,33 +7,33 @@ import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
 
 final class MenuBuilder extends StatelessWidget {
 
+  const MenuBuilder({
+    required this.title,
+    required this.image,
+    required this.onTap,
+    super.key
+  });
+
   final String image;
   final VoidCallback onTap;
   final String title;
 
-  const MenuBuilder({
-    super.key,
-    required this.title,
-    required this.image,
-    required this.onTap
-  });
-
   @override
-  Widget build(context) => n.Column([
+  Widget build(final BuildContext context) => n.Column([
     title.n
       ..fontSize = 30
       ..fontFamily = 'AminaReska'
       ..color = TWTwoColors.gray.shade100,
     Nest([
-      (next) => GestureDetector(
+      (final next) => GestureDetector(
         onTap: onTap, child: next
-      ), (next) => ClipRRect(
+      ), (final next) => ClipRRect(
         borderRadius: BorderRadius.circular(20.0),
         child: next
-      ), (next) => SizedBox.fromSize(
+      ), (final next) => SizedBox.fromSize(
         size: const Size.fromRadius(120),
         child: next
-      ), (_) => Image.asset(
+      ), (final _) => Image.asset(
         'assets/$image.jpg',
         fit: BoxFit.cover
       )

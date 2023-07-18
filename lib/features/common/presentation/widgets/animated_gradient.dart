@@ -58,14 +58,11 @@ final class AnimatedGradientController
 typedef _Ctl = AnimatedGradientController;
 
 final animatedGradientController =
-  ChangeNotifierProvider<_Ctl>((_) =>
+  ChangeNotifierProvider<_Ctl>((final _) =>
     _Ctl()..init()
   );
 
 class AnimatedGradient extends ConsumerWidget {
-
-  final double height;
-  final double width;
 
   const AnimatedGradient({
     this.width = 2400,
@@ -73,8 +70,14 @@ class AnimatedGradient extends ConsumerWidget {
     super.key
   });
 
+  final double height;
+  final double width;
+
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final ctl = ref.watch(
       animatedGradientController

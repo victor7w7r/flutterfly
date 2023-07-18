@@ -6,15 +6,17 @@ typedef CallRef = Widget Function(WidgetRef ref);
 
 final class AppConsumer extends StatelessWidget {
 
-  final CallRef callRef;
-
   const AppConsumer(
     this.callRef,
     {super.key}
   );
 
+  final CallRef callRef;
+
   @override
-  Widget build(context) => Consumer(
-    builder: ((_, ref, ___) => callRef(ref))
+  Widget build(
+    final BuildContext context
+  ) => Consumer(
+    builder: (final _, final ref, final ___) => callRef(ref)
   );
 }

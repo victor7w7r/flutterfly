@@ -1,3 +1,5 @@
+import 'dart:async' show unawaited;
+
 import 'package:flutter/material.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -8,20 +10,19 @@ part 'store_controller.g.dart';
 
 final class StoreController {
 
-  final ProviderRef _ref;
-  final TextEditingController txtCtl;
-
   StoreController(this._ref):
     txtCtl = TextEditingController();
+
+  final StoreControllerRef _ref;
+  final TextEditingController txtCtl;
 
   void request(
     final BuildContext context
   ) => txtCtl.text.isNotEmpty
-    ? _ref.read(dataProvider$.notifier)
-        .mutate(txtCtl.text)
-    : showDialog(
+    ? _ref.read(dataProvider$.notifier).mutate = txtCtl.text
+    : unawaited(showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (final ctx) => AlertDialog(
         title: const Text('Error'),
         content: const Text('Is empty your TextField'),
         actions: [TextButton(
@@ -29,7 +30,7 @@ final class StoreController {
           child: const Text('OK')
         )]
       )
-    );
+    ));
 }
 
 @riverpod

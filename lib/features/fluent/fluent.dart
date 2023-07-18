@@ -11,13 +11,16 @@ final class FluentModule extends ConsumerWidget {
   const FluentModule({super.key});
 
   @override
-  Widget build(context, ref) => FluentApp(
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) => FluentApp(
     title: 'flutterfly',
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes: {
-      '/': (_) => const Home(),
-      '/store': (_) => const Store()
+      '/': (final _) => const Home(),
+      '/store': (final _) => const Store()
     },
     color: ref.watch(fluentProvider$)
       .themeColor[0]

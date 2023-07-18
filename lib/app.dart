@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/screens/desktop_selector.dart';
@@ -14,7 +14,10 @@ final class App extends ConsumerWidget {
   const App({ super.key });
 
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final desktop = ref.watch(desktopProvider$);
 

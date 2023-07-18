@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/utils/platforms.dart';
-import 'package:flutterfly/features/common/providers/data_provider.dart';
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
+import 'package:flutterfly/features/common/providers/data_provider.dart';
 import 'package:flutterfly/features/material/presentation/screens/store/store_controller.dart';
 import 'package:flutterfly/features/material/presentation/widgets/widgets.dart';
 
@@ -14,7 +14,10 @@ final class Store extends ConsumerWidget {
   const Store({super.key});
 
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final ctl = ref.read(storeController$);
 
@@ -56,7 +59,7 @@ final class Store extends ConsumerWidget {
             child: const Text('SUBMIT')
           ),
           const SizedBox(height: 10),
-          AppConsumer((ref) {
+          AppConsumer((final ref) {
             final data = ref.watch(dataProvider$);
             return n.Text(data.isEmpty
               ? 'Store state: Not yet.'

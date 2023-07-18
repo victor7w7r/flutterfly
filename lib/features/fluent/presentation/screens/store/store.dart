@@ -1,28 +1,33 @@
+import 'dart:async' show unawaited;
+
 import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/utils/platforms.dart';
-import 'package:flutterfly/features/common/providers/providers.dart';
 import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
+import 'package:flutterfly/features/common/providers/providers.dart';
 import 'package:flutterfly/features/cupertino/presentation/screens/store/store_controller.dart';
-import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
 import 'package:flutterfly/features/fluent/presentation/screens/store/store_widgets.dart';
 import 'package:flutterfly/features/fluent/presentation/widgets/widgets.dart';
+import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
 
 final class Store extends ConsumerWidget {
 
   const Store({super.key});
 
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final theme = ref.watch(fluentProvider$);
 
     final ctl = ref.read(storeController$);
 
-    return Container(
+    return ColoredBox(
       color: theme.themeColor[0],
       child: n.Column([
         if(!isWeb) WindowTitleBar(isDark: theme.isDark),
@@ -47,7 +52,7 @@ final class Store extends ConsumerWidget {
                 onClick: () => ctl.request(context)
               ),
               const SizedBox(height: 45),
-              AppConsumer((ref) {
+              AppConsumer((final ref) {
                 final data = ref.watch(dataProvider$);
                 return n.Text(data.isEmpty
                   ? 'Store state: Not yet.'
@@ -64,7 +69,7 @@ final class Store extends ConsumerWidget {
           const SizedBox(height: 60),
           BlurButton(
             caption: 'Go to Home',
-            onClick: () => Navigator.of(context).pushNamed('/')
+            onClick: () => unawaited(Navigator.of(context).pushNamed('/'))
           ),
           const SizedBox(height: 40)
         ])

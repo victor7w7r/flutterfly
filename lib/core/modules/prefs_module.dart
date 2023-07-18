@@ -1,3 +1,5 @@
+import 'dart:async' show unawaited;
+
 import 'package:flutter_riverpod/flutter_riverpod.dart' show Ref;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
@@ -6,14 +8,14 @@ part 'prefs_module.g.dart';
 
 class PrefsModule {
 
-  final SharedPreferences _prefs;
+  const PrefsModule(this._prefs);
 
-  PrefsModule(this._prefs);
+  final SharedPreferences _prefs;
 
   bool _darkWorker(final String key) {
     final isDark = _prefs.getBool(key);
     if(isDark == null) {
-      _prefs.setBool(key, true);
+      unawaited(_prefs.setBool(key, true));
       return true;
     } else {
       return isDark;

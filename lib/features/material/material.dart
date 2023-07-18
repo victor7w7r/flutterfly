@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutterfly/features/material/providers/material_provider.dart';
 import 'package:flutterfly/features/material/presentation/screens/home/home.dart';
@@ -11,7 +11,10 @@ final class MaterialModule extends ConsumerWidget {
   const MaterialModule({super.key});
 
   @override
-  Widget build(context, ref) => MaterialApp(
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) => MaterialApp(
     title: 'flutterfly',
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
@@ -26,8 +29,8 @@ final class MaterialModule extends ConsumerWidget {
       : ThemeMode.light,
     initialRoute: '/',
     routes: {
-      '/': (_) => const Home(),
-      '/store': (_) => const Store()
+      '/': (final _) => const Home(),
+      '/store': (final _) => const Store()
     }
   );
 }

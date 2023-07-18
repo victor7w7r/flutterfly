@@ -10,21 +10,20 @@ final class Home extends StatelessWidget {
   const Home({ super.key });
 
   @override
-  Widget build(context) => Scaffold(
+  Widget build(final BuildContext context) => Scaffold(
     appBar: PreferredSize(
       preferredSize: Size.fromHeight(isMacOS ? 35 : 50),
       child: const NavBar('My Home')
     ),
     drawer: isMacOS ? null : const DrawerMenu(),
     endDrawer: isMacOS ? const DrawerMenu() : null,
-    body: OrientationBuilder(builder: (_, or) =>
+    body: OrientationBuilder(builder: (final _, final or) =>
       Flex(
         direction: or == Orientation.portrait
           ? Axis.vertical
           : Axis.horizontal,
         children: [
           Expanded(
-            flex: 1,
             child: TopContent(
               height: context.mHeight,
               pOrientation: or

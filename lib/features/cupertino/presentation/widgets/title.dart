@@ -7,14 +7,14 @@ import 'package:flutterfly/features/common/presentation/widgets/title_bar.dart';
 
 final class CupTitle extends StatelessWidget {
 
-  final bool dark;
-
   const CupTitle(
     this.dark, {super.key}
   );
 
+  final bool dark;
+
   @override
-  Widget build(context) {
+  Widget build(final BuildContext context) {
     if(isMacOS) {
       return WindowTitleBar(isDark: dark);
     } else if (!isDesktop) {

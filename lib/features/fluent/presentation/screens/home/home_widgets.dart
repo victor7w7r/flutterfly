@@ -5,24 +5,24 @@ import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/extensions/extensions.dart';
 import 'package:flutterfly/core/utils/errors.dart';
-import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
 import 'package:flutterfly/features/common/providers/providers.dart';
+import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
 
 final class ColorButton extends StatelessWidget {
+
+  const ColorButton({
+    required this.back,
+    required this.border,
+    required this.onClick,
+    super.key
+  });
 
   final Color back;
   final Color border;
   final VoidCallback onClick;
 
-  const ColorButton({
-    super.key,
-    required this.back,
-    required this.border,
-    required this.onClick
-  });
-
   @override
-  Widget build(context) => Button(
+  Widget build(final BuildContext context) => Button(
     style: ButtonStyle(
       elevation: ButtonState.all<double>(0),
       backgroundColor: ButtonState.all<Color>(back),
@@ -30,8 +30,7 @@ final class ColorButton extends StatelessWidget {
         CircleBorder(
           side: BorderSide(
             width: 4,
-            color: border,
-            style: BorderStyle.solid
+            color: border
           )
         )
       )
@@ -48,7 +47,10 @@ final class HomeCardBrand extends ConsumerWidget {
   const HomeCardBrand({ super.key });
 
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final theme = ref.watch(fluentProvider$);
 
@@ -87,7 +89,10 @@ final class HomeCardCrypto extends ConsumerWidget {
   const HomeCardCrypto({ super.key });
 
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final theme = ref.watch(fluentProvider$);
 
@@ -100,7 +105,7 @@ final class HomeCardCrypto extends ConsumerWidget {
       ),
       child: n.Column([
         const SizedBox(height: 45),
-        Consumer(builder: (_, ref, __) {
+        Consumer(builder: (final _, final ref, final __) {
           final data = ref.watch(dataProvider$);
           return n.Text(data.isEmpty
             ? 'Store state: Not yet.'
@@ -111,14 +116,14 @@ final class HomeCardCrypto extends ConsumerWidget {
             ..n.center;
         }),
         const SizedBox(height: 45),
-        ...(ref.watch(bitcoinProvider$).when(
+        ...ref.watch(bitcoinProvider$).when(
           loading: () => const [ProgressRing(value: 35)],
-          error: (err, _) => [
+          error: (final err, final _) => [
             const SizedBox(height: 120),
             (err as HttpNotSuccess).message.n
               ..fontSize = 20
           ],
-          data: (bit) => [
+          data: (final bit) => [
             'Symbol: ${bit.symbol}'.n
               ..color = theme.themeColor[2]
               ..fontSize = 20,
@@ -127,7 +132,7 @@ final class HomeCardCrypto extends ConsumerWidget {
               ..fontSize = 20,
             const SizedBox(height: 45),
           ]
-        ))
+        )
       ])
     );
   }

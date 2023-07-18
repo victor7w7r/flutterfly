@@ -6,15 +6,15 @@ import 'package:niku/namespace.dart' as n;
 final class WindowTitleBar
   extends StatelessWidget {
 
-  final bool isDark;
-
   const WindowTitleBar({
-    super.key,
-    required this.isDark
+    required this.isDark,
+    super.key
   });
 
+  final bool isDark;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
 
     final buttonColors = WindowButtonColors(
       iconNormal: !isDark

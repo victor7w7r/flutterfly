@@ -5,19 +5,19 @@ import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
 final class BlurButton extends StatelessWidget {
 
+  const BlurButton({
+    required this.caption,
+    required this.onClick,
+    super.key,
+    this.fontSize = 14
+  });
+
   final String caption;
   final double fontSize;
   final VoidCallback onClick;
 
-  const BlurButton({
-    super.key,
-    required this.caption,
-    required this.onClick,
-    this.fontSize = 14
-  });
-
   @override
-  Widget build(context) => FilledButton(
+  Widget build(final BuildContext context) => FilledButton(
     onPressed: onClick,
     style: ButtonStyle(
       elevation: ButtonState.all<double>(0),

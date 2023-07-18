@@ -26,7 +26,7 @@ class Binance with _$Binance {
   ) => _$BinanceFromJson(json);
 
   static List<Binance> dummyGen() =>
-    List.filled(120, null).map((_) => const Binance(
+    List.filled(120, null).map((final _) => const Binance(
       'Dummy', '', '0.00', '',
       '', '', '', '100', '', '',
       '', '', '', '', '', '', 0,
@@ -36,7 +36,8 @@ class Binance with _$Binance {
   static List<Binance> fromJsonToList(
     final List<dynamic> list
   ) => Either.tryCatch(
-    () => list.map((curr) => Binance.fromJson(curr)).toList(),
-    (e, _) => e
-  ).getOrElse((_) => []);
+    // ignore: unnecessary_lambdas
+    () => list.map((final curr) => Binance.fromJson(curr)).toList(),
+    (final e, final _) => e
+  ).getOrElse((final _) => []);
 }

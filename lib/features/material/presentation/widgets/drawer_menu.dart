@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
@@ -11,10 +11,13 @@ final class DrawerMenu extends ConsumerWidget {
   const DrawerMenu({super.key});
 
   @override
-  Widget build(context, ref) => Drawer(
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) => Drawer(
     child: n.Column([
       const Spacer(flex: 2),
-      AppConsumer((ref) => DrawerHeader(
+      AppConsumer((final ref) => DrawerHeader(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
@@ -27,16 +30,16 @@ final class DrawerMenu extends ConsumerWidget {
         ),
         child: Container()
       )),
-      const Spacer(flex: 1),
+      const Spacer(),
       n.ListTile()
         ..leading = n.Icon(Icons.home_outlined)
         ..title = 'Home'.n
-        ..onTap = () => Navigator.of(context)
+        ..onTap = () async => Navigator.of(context)
           .pushNamed('/'),
       n.ListTile()
         ..leading = n.Icon(Icons.store_outlined)
         ..title = 'Store'.n
-        ..onTap = () => Navigator.of(context)
+        ..onTap = () async => Navigator.of(context)
           .pushNamed('/store'),
       const Spacer(flex: 8),
       n.ListTile()
@@ -45,7 +48,7 @@ final class DrawerMenu extends ConsumerWidget {
         ..onTap = ref.read(materialProvider$.notifier)
           .toggle,
       const Spacer(flex: 15),
-      AppConsumer((ref) => n.Image.asset(
+      AppConsumer((final ref) => n.Image.asset(
         ref.watch(materialProvider$)
           ? 'assets/brandwhite.png'
           : 'assets/brand.png'

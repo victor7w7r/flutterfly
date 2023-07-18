@@ -38,7 +38,7 @@ final class _CryptoState extends ConsumerState<Crypto> {
       : null;
 
   @override
-  Widget build(context) => ref.watch(
+  Widget build(final BuildContext context) => ref.watch(
     binanceProvider$
   ).when(
     loading: () => n.Row(const [
@@ -46,15 +46,14 @@ final class _CryptoState extends ConsumerState<Crypto> {
       CupertinoActivityIndicator()
     ])
       ..mainCenter,
-    error: (err, _) => n.Row([
+    error: (final err, final _) => n.Row([
       const SizedBox(height: 120),
       (err as HttpNotSuccess).message.n
         ..fontSize = 20
     ])
       ..mainCenter
       ..crossCenter,
-    data: (currs) => CustomScrollView(
-      scrollDirection: Axis.vertical,
+    data: (final currs) => CustomScrollView(
       controller: scrCtl,
       physics: const BouncingScrollPhysics(),
       slivers: [
@@ -62,7 +61,7 @@ final class _CryptoState extends ConsumerState<Crypto> {
           largeTitle: Text('Crypto Data')
         ),
         CupertinoSliverRefreshControl(
-          onRefresh: () => ref.refresh(binanceProvider$.future)
+          onRefresh: () async => ref.refresh(binanceProvider$.future)
         ),
         const SliverToBoxAdapter(
           child: SizedBox(height: 20)
@@ -74,7 +73,7 @@ final class _CryptoState extends ConsumerState<Crypto> {
             childAspectRatio: 2,
             mainAxisSpacing: 20.0,
             crossAxisSpacing: 10.0,
-            children: currs.map((bin) => CurrencyCard(
+            children: currs.map((final bin) => CurrencyCard(
               sym: bin.symbol,
               per: bin.priceChangePercent,
               pri: bin.bidPrice

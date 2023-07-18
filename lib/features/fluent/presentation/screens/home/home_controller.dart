@@ -9,9 +9,9 @@ part 'home_controller.g.dart';
 
 final class HomeController {
 
-  final HomeControllerRef _ref;
-
   const HomeController(this._ref);
+
+  final HomeControllerRef _ref;
 
   Color _background() =>
     _ref.read(fluentProvider$).isDark

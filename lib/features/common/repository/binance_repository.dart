@@ -12,29 +12,29 @@ typedef TaskBitcoin = TaskEither<HttpNotSuccess, Bitcoin>;
 
 final class BinanceRepository {
 
-  final String _bitRoute;
-  final String _currRoute;
+  const BinanceRepository(this._dio);
+
   final DioModule _dio;
 
-  const BinanceRepository(this._dio):
-    _currRoute = '/24hr',
-    _bitRoute = '/price?symbol=BTCUSDT';
-
   TaskListBinance getCurrencies() => TaskEither.tryCatch(
-    Task(() => _dio.client.get(_currRoute))
-      .map((res) =>
-        Binance.fromJsonToList(res.data as List<dynamic>)
+    Task(() async => _dio.client.get<List<dynamic>>(_currRoute))
+      .map((final res) =>
+        Binance.fromJsonToList(res.data)
       ).run,
     HttpNotSuccess.throwError
   );
 
   TaskBitcoin getBitcoin() => TaskEither.tryCatch(
-    Task(() => _dio.client.get(_bitRoute))
-      .map((res) =>
-        Bitcoin.fromJson(res.data as Map<String, dynamic>)
+    Task(() async => _dio.client.get<Map<String, dynamic>>(_bitRoute))
+      .map((final res) =>
+        Bitcoin.fromJson(res.data)
       ).run,
     HttpNotSuccess.throwError
   );
+
+  String get _currRoute => '/24hr';
+  String get _bitRoute => '/price?symbol=BTCUSDT';
+
 }
 
 @riverpod

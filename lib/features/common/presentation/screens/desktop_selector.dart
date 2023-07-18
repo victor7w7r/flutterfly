@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 import 'package:tailwind_colors/tailwind_colors.dart' show TWTwoColors;
 
@@ -14,7 +14,10 @@ final class DesktopSelector extends ConsumerWidget {
   const DesktopSelector({ super.key });
 
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final isOpacity = ref.watch(
       desktopSelectorController$

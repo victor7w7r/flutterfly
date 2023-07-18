@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutterfly/features/cupertino/presentation/widgets/title.dart';
 import 'package:flutterfly/features/cupertino/presentation/screens/crypto/crypto.dart';
@@ -13,7 +13,10 @@ final class CupertinoModule extends ConsumerWidget {
   const CupertinoModule({ super.key });
 
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final dark = ref.watch(cupertinoProvider$);
 
@@ -46,7 +49,7 @@ final class CupertinoModule extends ConsumerWidget {
               )
             ]
           ),
-          tabBuilder: (_, i) => const [
+          tabBuilder: (final _, final i) => const [
             Home(), Crypto(), Store()
           ][i]
         )

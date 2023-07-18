@@ -8,7 +8,7 @@ class DataProvider extends _$DataProvider {
   @override
   String build() => '';
 
-  void mutate(final String state) =>
+  set mutate(final String state) =>
     this.state = state;
 
 }

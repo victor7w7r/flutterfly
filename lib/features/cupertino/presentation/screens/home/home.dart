@@ -13,7 +13,7 @@ final class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
-  Widget build(context) => n.Stack([
+  Widget build(final BuildContext context) => n.Stack([
     const ThemeToggle().niku
       ..top = 70
       ..right = 0,
@@ -24,7 +24,7 @@ final class Home extends StatelessWidget {
         ..fontSize = (context.mHeight > 960 ) ? 25 : 20
         ..n.center,
       const SizedBox(height: 10),
-      AppConsumer((ref) {
+      AppConsumer((final ref) {
         final data = ref.watch(dataProvider$);
         return n.Text(data.isEmpty
           ? 'Store state: Not yet.'

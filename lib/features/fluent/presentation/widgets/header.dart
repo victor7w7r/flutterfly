@@ -12,19 +12,22 @@ final class Header extends ConsumerWidget {
   const Header({super.key});
 
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final theme = ref.watch(fluentProvider$);
 
     return Nest([
-      (next) => Card(
+      (final next) => Card(
         backgroundColor: theme.themeColor[1],
         borderRadius: BorderRadius.circular(20),
         child: next
-      ), (next) => FractionallySizedBox(
+      ), (final next) => FractionallySizedBox(
         widthFactor: 0.98,
         child: next
-      ), (_) => n.Row([
+      ), (final _) => n.Row([
         n.Row([
           n.Image.asset('assets/flutter-logo.png')
             ..width = 50

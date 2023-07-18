@@ -7,18 +7,17 @@ part 'dio_module.g.dart';
 
 final class DioModule {
 
-  final Dio _client;
-
-  // ignore: unused_field
-  final EnvModule _env;
-
   DioModule(this._env): _client = Dio(BaseOptions(
     baseUrl: '${_env.protocol}://${_env.host}',
-    responseType: ResponseType.json,
     headers: {
       'Content-Type': 'application/json'
     }
   ));
+
+  final Dio _client;
+  // ignore: unused_field
+  final EnvModule _env;
+
 
   Dio get client => _client;
 

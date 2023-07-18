@@ -1,3 +1,5 @@
+import 'dart:async' show unawaited;
+
 import 'package:flutter/cupertino.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -8,21 +10,20 @@ part 'store_controller.g.dart';
 
 final class StoreController {
 
-  final ProviderRef _ref;
-
-  final TextEditingController txtCtl;
-
   StoreController(this._ref):
     txtCtl = TextEditingController();
+
+  final StoreControllerRef _ref;
+
+  final TextEditingController txtCtl;
 
   void request(
     final BuildContext context
   ) => txtCtl.text.isNotEmpty
-    ? _ref.read(dataProvider$.notifier)
-        .mutate(txtCtl.text)
-    : showCupertinoModalPopup<void> (
+    ? _ref.read(dataProvider$.notifier).mutate = txtCtl.text
+    : unawaited(showCupertinoModalPopup<void> (
       context: context,
-      builder: (ctx) => CupertinoAlertDialog(
+      builder: (final ctx) => CupertinoAlertDialog(
         title: const Text('Error'),
         content: const Text('Is empty your TextField'),
         actions: [CupertinoDialogAction(
@@ -31,7 +32,7 @@ final class StoreController {
           child: const Text('OK')
         )]
       )
-    );
+    ));
 }
 
 @riverpod

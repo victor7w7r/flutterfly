@@ -8,28 +8,28 @@ import 'package:flutterfly/features/material/providers/material_provider.dart';
 
 final class NavBar extends StatelessWidget {
 
-  final String title;
-
   const NavBar(
     this.title, {super.key}
   );
 
+  final String title;
+
   @override
-  Widget build(context) => AppBar(
+  Widget build(final BuildContext context) => AppBar(
     elevation: 0.0,
     toolbarHeight: isMacOS ? 30 : null,
     leading: isMacOS ? Container() : null,
-    title: isMacOS ? AppConsumer((ref) =>
+    title: isMacOS ? AppConsumer((final ref) =>
       WindowTitleBar(isDark: ref.watch(materialProvider$)
     )) : n.Stack([
       title.n,
-      if(isDesktop) AppConsumer((ref) =>
+      if(isDesktop) AppConsumer((final ref) =>
         WindowTitleBar(isDark: ref.watch(materialProvider$)
       ))
     ]),
     actions: isMacOS ? [
       Builder(
-        builder: (ctx) => n.IconButton(Icons.menu)
+        builder: (final ctx) => n.IconButton(Icons.menu)
           ..ml = 10
           ..pt = 4
           ..onPressed = Scaffold.of(ctx).openEndDrawer

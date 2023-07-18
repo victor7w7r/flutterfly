@@ -26,13 +26,13 @@ final class BinanceProvider extends _$BinanceProvider {
   Future<List<Binance>> getCurrencies() =>
     ref.read(binanceRepository$)
       .getCurrencies()
-      .match((l) => throw l, (r) => r)
+      .match((final l) => throw l, (final r) => r)
       .run();
 
   Future<Bitcoin> getBitcoin() =>
     ref.read(binanceRepository$)
       .getBitcoin()
-      .match((l) => throw l, (r) => r)
+      .match((final l) => throw l, (final r) => r)
       .run();
 
   void paginate() {

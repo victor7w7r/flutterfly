@@ -4,17 +4,18 @@ import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
 
 final class StoreText extends StatelessWidget {
 
+  const StoreText({
+    required this.ctl,
+    required this.theme,
+    super.key,
+  });
+
   final TextEditingController ctl;
   final FluentThemeApp theme;
 
-  const StoreText({
-    super.key,
-    required this.ctl,
-    required this.theme
-  });
 
   @override
-  Widget build(context) => SizedBox(
+  Widget build(final BuildContext context) => SizedBox(
     width: 250.0,
     height: 40.0,
     child: TextBox(

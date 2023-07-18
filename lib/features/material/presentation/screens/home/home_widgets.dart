@@ -6,24 +6,24 @@ import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
 import 'package:flutterfly/core/extensions/extensions.dart';
 import 'package:flutterfly/core/utils/errors.dart';
+import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
 import 'package:flutterfly/features/common/presentation/widgets/nest.dart';
 import 'package:flutterfly/features/common/providers/providers.dart';
-import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
 import 'package:flutterfly/features/material/providers/material_provider.dart';
 
 final class TopContent extends StatelessWidget {
 
+  const TopContent({
+    required this.height,
+    required this.pOrientation,
+    super.key
+  });
+
   final double height;
   final Orientation pOrientation;
 
-  const TopContent({
-    super.key,
-    required this.height,
-    required this.pOrientation
-  });
-
   @override
-  Widget build(context) => n.Column([
+  Widget build(final BuildContext context) => n.Column([
     SizedBox(
       height: pOrientation == Orientation.portrait
         ? 30 : height / 3.5
@@ -33,7 +33,7 @@ final class TopContent extends StatelessWidget {
     'Happy Hacking!, Dart... Dart...'.n
       ..fontSize = (height > 960 ) ? 30 : 20,
     const SizedBox(height: 10),
-    AppConsumer((ref) {
+    AppConsumer((final ref) {
       final data = ref.watch(dataProvider$);
       return n.Text(data.isEmpty
         ? 'Store state: Not yet.'
@@ -56,15 +56,18 @@ final class TopContent extends StatelessWidget {
 
 final class DynamicChip extends ConsumerWidget {
 
-  final bool isHome;
-
   const DynamicChip({
-    super.key,
-    required this.isHome
+    required this.isHome,
+    super.key
   });
 
+  final bool isHome;
+
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final dark = ref.watch(materialProvider$);
 
@@ -102,14 +105,15 @@ final class DynamicChip extends ConsumerWidget {
 
 final class BottomContent extends ConsumerStatefulWidget {
 
+  const BottomContent({
+    required this.height,
+    required this.pOrientation,
+    super.key
+  });
+
   final double height;
   final Orientation pOrientation;
 
-  const BottomContent({
-    super.key,
-    required this.height,
-    required this.pOrientation
-  });
 
   @override
   ConsumerState<BottomContent> createState() =>
@@ -142,7 +146,7 @@ final class _BottomContentState
 
 
   @override
-  Widget build(context) => n.Column([
+  Widget build(final BuildContext context) => n.Column([
     const SizedBox(height: 35),
     'Cryptocurrency data'.n
       ..fontSize = (widget.height > 960) ? 35 : 30
@@ -154,26 +158,26 @@ final class _BottomContentState
         CircularProgressIndicator()
       ])
         ..mainCenter,
-      error: (err, _) => n.Row([
+      error: (final err, final _) => n.Row([
         const SizedBox(height: 120),
         (err as HttpNotSuccess).message.n
           ..fontSize = 20
       ])
         ..mainCenter
         ..crossCenter,
-      data: (currs) => Nest([
-        (next) => Expanded(child: next),
-        (next) => RefreshIndicator(
-          onRefresh: () => ref.refresh(binanceProvider$.future),
+      data: (final currs) => Nest([
+        (final next) => Expanded(child: next),
+        (final next) => RefreshIndicator(
+          onRefresh: () async => ref.refresh(binanceProvider$.future),
           child: next
-        ), (_) => n.GridView.count(crossAxisCount: 2)
+        ), (final _) => n.GridView.count(crossAxisCount: 2)
           ..childAspectRatio = 2
           ..px = 40
           ..physics = const AlwaysScrollableScrollPhysics()
           ..mainAxisSpacing = 10.0
           ..scrollDirection = Axis.vertical
           ..controller = scrCtl
-          ..children = currs.map((bin) => CurrencyCard(
+          ..children = currs.map((final bin) => CurrencyCard(
             sym: bin.symbol,
             per: bin.priceChangePercent,
             pri: bin.bidPrice,
@@ -186,21 +190,24 @@ final class _BottomContentState
 
 final class CurrencyCard extends ConsumerWidget {
 
+  const CurrencyCard({
+    required this.orientation,
+    required this.per,
+    required this.pri,
+    required this.sym,
+    super.key
+  });
+
   final Orientation orientation;
   final String per;
   final String pri;
   final String sym;
 
-  const CurrencyCard({
-    super.key,
-    required this.orientation,
-    required this.per,
-    required this.pri,
-    required this.sym
-  });
-
   @override
-  Widget build(context, ref) => Container(
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) => Container(
     margin: const EdgeInsets.symmetric(
       vertical: 10,
       horizontal: 10

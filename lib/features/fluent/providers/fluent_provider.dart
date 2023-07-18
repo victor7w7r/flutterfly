@@ -23,9 +23,6 @@ final List<Color> lightColors = [
 
 final class FluentThemeApp {
 
-  final bool isDark;
-  final List<Color> themeColor;
-
   const FluentThemeApp(this.isDark, this.themeColor);
 
   factory FluentThemeApp.dark() => FluentThemeApp(
@@ -36,9 +33,12 @@ final class FluentThemeApp {
     false, lightColors
   );
 
+  final bool isDark;
+  final List<Color> themeColor;
+
   FluentThemeApp copyWith({
-    bool? isDark,
-    List<Color>? themeColor
+    final bool? isDark,
+    final List<Color>? themeColor
   }) => FluentThemeApp(
     isDark ?? this.isDark,
     themeColor ?? this.themeColor
@@ -59,12 +59,12 @@ final class FluentProvider
     final List<Color> changer
   ) {
 
-    double linear = 0.1;
+    var linear = 0.1;
     Color interpolatorBack;
     Color interpolatorCard;
     Color interpolatorInv;
 
-    Timer.periodic(const Duration(milliseconds: 30), (t) {
+    Timer.periodic(const Duration(milliseconds: 30), (final t) {
       interpolatorBack = Color.lerp(
         state.themeColor[0], changer[0], linear
       )!;

@@ -8,7 +8,7 @@ class DesktopProvider extends _$DesktopProvider {
   @override
   String build() => 'none';
 
-  void mutate(final String state) =>
+  set mutate(final String state) =>
     this.state = state;
 
 }

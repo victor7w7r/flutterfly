@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
@@ -8,15 +8,18 @@ import 'package:flutterfly/features/cupertino/providers/cupertino_provider.dart'
 
 final class DynamicChip extends ConsumerWidget {
 
-  final bool isHome;
-
   const DynamicChip({
-    super.key,
-    required this.isHome
+    required this.isHome,
+    super.key
   });
 
+  final bool isHome;
+
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final dark = ref.watch(cupertinoProvider$);
 

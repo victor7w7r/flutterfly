@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
@@ -9,19 +9,22 @@ import 'package:flutterfly/features/cupertino/providers/cupertino_provider.dart'
 
 final class CurrencyCard extends ConsumerWidget {
 
+  const CurrencyCard({
+    required this.sym,
+    required this.per,
+    required this.pri,
+    super.key,
+  });
+
   final String per;
   final String pri;
   final String sym;
 
-  const CurrencyCard({
-    super.key,
-    required this.sym,
-    required this.per,
-    required this.pri
-  });
-
   @override
-  Widget build(context, ref) => Container(
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) => Container(
     margin: const EdgeInsets.symmetric(
       vertical: 2,
       horizontal: 5

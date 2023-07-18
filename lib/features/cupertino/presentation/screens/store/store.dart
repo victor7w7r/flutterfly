@@ -4,18 +4,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
-import 'package:flutterfly/features/common/providers/data_provider.dart';
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
-import 'package:flutterfly/features/cupertino/providers/cupertino_provider.dart';
+import 'package:flutterfly/features/common/providers/data_provider.dart';
 import 'package:flutterfly/features/cupertino/presentation/screens/store/store_controller.dart';
 import 'package:flutterfly/features/cupertino/presentation/widgets/theme_toggle.dart';
+import 'package:flutterfly/features/cupertino/providers/cupertino_provider.dart';
 
 final class Store extends ConsumerWidget {
 
   const Store({super.key});
 
   @override
-  Widget build(context, ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref
+  ) {
 
     final ctl = ref.read(storeController$);
 
@@ -36,7 +39,7 @@ final class Store extends ConsumerWidget {
             ..freezed
             ..n.center,
           const SizedBox(height: 25),
-          AppConsumer((ref) => CupertinoTextField(
+          AppConsumer((final ref) => CupertinoTextField(
             placeholder: 'here',
             cursorHeight: 25,
             controller: ctl.txtCtl,
@@ -55,7 +58,7 @@ final class Store extends ConsumerWidget {
             child: const Text('SUBMIT')
           ),
           const SizedBox(height: 20),
-          AppConsumer((ref) {
+          AppConsumer((final ref) {
             final data = ref.watch(dataProvider$);
             return n.Text(data.isEmpty
               ? 'Store state: Not yet.'
