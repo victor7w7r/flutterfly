@@ -1,4 +1,5 @@
 {
+  "editor.formatOnSave": false,
   "explorer.autoReveal": false,
   "material-icon-theme.folders.associations": {
     ".dart_tool": "Tools",

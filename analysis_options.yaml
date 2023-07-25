@@ -46,6 +46,7 @@ linter:
     - conditional_uri_does_not_exist
     - discarded_futures
     - do_not_use_environment
+    - eol_at_end_of_file
     - implicit_call_tearoffs
     - implicit_reopen
     - join_return_with_assignment
