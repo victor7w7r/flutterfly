@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/widgets.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
 import 'package:bitsdojo_window/bitsdojo_window.dart' show appWindow, doWhenWindowReady;
 
 import 'package:flutterfly/platforms/platforms.dart';
@@ -15,7 +16,7 @@ void main() {
     ..show()
   );
 
-  runApp(const App());
+  runApp(const ProviderScope(child: App()));
 }
 
 final class App extends StatelessWidget {
@@ -23,7 +24,7 @@ final class App extends StatelessWidget {
   const App({ super.key });
 
   @override
-  Widget build(context) =>
+  Widget build(final BuildContext context) =>
     defaultTargetPlatform == TargetPlatform.iOS ?
       cupertinoApp(context) : materialApp(context);
 }
