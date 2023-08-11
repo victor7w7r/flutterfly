@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
-import 'package:flutterfly/features/material/providers/material_provider.dart';
+import 'package:flutterfly/features/material/providers/material.riverpod.dart';
 
 final class DrawerMenu extends ConsumerWidget {
 

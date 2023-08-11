@@ -2,9 +2,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/models/models.dart';
-import 'package:flutterfly/features/common/repository/binance_repository.dart';
+import 'package:flutterfly/features/common/services/binance.service.dart';
 
-part 'binance_provider.g.dart';
+part 'binance.riverpod.g.dart';
 
 @riverpod
 final class BinanceProvider extends _$BinanceProvider {
@@ -24,13 +24,13 @@ final class BinanceProvider extends _$BinanceProvider {
   }
 
   Future<List<Binance>> getCurrencies() =>
-    ref.read(binanceRepository$)
+    ref.read(binanceService$)
       .getCurrencies()
       .match((final l) => throw l, (final r) => r)
       .run();
 
   Future<Bitcoin> getBitcoin() =>
-    ref.read(binanceRepository$)
+    ref.read(binanceService$)
       .getBitcoin()
       .match((final l) => throw l, (final r) => r)
       .run();

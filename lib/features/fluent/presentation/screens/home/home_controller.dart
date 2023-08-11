@@ -3,7 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
-import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
+import 'package:flutterfly/features/fluent/providers/fluent.riverpod.dart';
 
 part 'home_controller.g.dart';
 

@@ -1,18 +1,18 @@
 import 'package:fpdart/fpdart.dart' show Task, TaskEither;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:flutterfly/core/modules/dio_module.dart';
+import 'package:flutterfly/core/modules/dio.module.dart';
 import 'package:flutterfly/core/utils/errors.dart';
 import 'package:flutterfly/features/common/models/models.dart';
 
-part 'binance_repository.g.dart';
+part 'binance.service.g.dart';
 
 typedef TaskListBinance = TaskEither<HttpNotSuccess, List<Binance>>;
 typedef TaskBitcoin = TaskEither<HttpNotSuccess, Bitcoin>;
 
-final class BinanceRepository {
+final class BinanceService {
 
-  const BinanceRepository(this._dio);
+  const BinanceService(this._dio);
 
   final DioModule _dio;
 
@@ -38,6 +38,6 @@ final class BinanceRepository {
 }
 
 @riverpod
-BinanceRepository binanceRepository(
-  final BinanceRepositoryRef ref
-) => BinanceRepository(ref.watch(dioModule$));
+BinanceService binanceService(
+  final BinanceServiceRef ref
+) => BinanceService(ref.watch(dioModule$));

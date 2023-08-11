@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:flutterfly/features/common/providers/data_provider.dart';
+import 'package:flutterfly/features/common/providers/data.riverpod.dart';
 
 part 'store_controller.g.dart';
 

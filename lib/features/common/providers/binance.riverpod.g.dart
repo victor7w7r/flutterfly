@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'binance_provider.dart';
+part of 'binance.riverpod.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -21,7 +21,7 @@ final bitcoinProvider$ = AutoDisposeFutureProvider<Bitcoin>.internal(
 );
 
 typedef BitcoinProviderRef = AutoDisposeFutureProviderRef<Bitcoin>;
-String _$binanceProviderHash() => r'8eda64a271fa1f3db358024d54c3a66d36e79088';
+String _$binanceProviderHash() => r'f8d492cf787622b5f004d3ef46553f0928985a43';
 
 /// See also [BinanceProvider].
 @ProviderFor(BinanceProvider)
@@ -37,4 +37,5 @@ final binanceProvider$ =
 );
 
 typedef _$BinanceProvider = AutoDisposeAsyncNotifier<List<Binance>>;
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

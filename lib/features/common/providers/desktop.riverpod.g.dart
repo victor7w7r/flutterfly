@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'desktop_provider.dart';
+part of 'desktop.riverpod.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$desktopProviderHash() => r'47205080de26a1e29aee7142119e7c7026f8df77';
+String _$desktopProviderHash() => r'd82d89e037e1c733c6d05d7a1b32a1a25b12dca9';
 
 /// See also [DesktopProvider].
 @ProviderFor(DesktopProvider)
@@ -22,4 +22,5 @@ final desktopProvider$ =
 );
 
 typedef _$DesktopProvider = AutoDisposeNotifier<String>;
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

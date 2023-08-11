@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/utils/errors.dart';
-import 'package:flutterfly/features/common/providers/binance_provider.dart';
+import 'package:flutterfly/features/common/providers/binance.riverpod.dart';
 import 'package:flutterfly/features/cupertino/presentation/screens/crypto/crypto_widgets.dart';
 
 final class Crypto extends ConsumerStatefulWidget {

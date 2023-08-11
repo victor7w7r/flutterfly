@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:flutterfly/features/common/providers/desktop_provider.dart';
+import 'package:flutterfly/features/common/providers/desktop.riverpod.dart';
 
-part 'desktop_selector_controller.g.dart';
+part 'desktop_selector.riverpod.g.dart';
 
 @riverpod
 final class DesktopSelectorController

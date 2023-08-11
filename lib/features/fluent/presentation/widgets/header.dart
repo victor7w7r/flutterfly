@@ -5,7 +5,7 @@ import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/extensions/extensions.dart';
 import 'package:flutterfly/features/common/presentation/widgets/nest.dart';
-import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
+import 'package:flutterfly/features/fluent/providers/fluent.riverpod.dart';
 
 final class Header extends ConsumerWidget {
 

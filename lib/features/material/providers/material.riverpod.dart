@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:flutterfly/core/modules/prefs_module.dart';
+import 'package:flutterfly/core/modules/prefs.module.dart';
 
-part 'material_provider.g.dart';
+part 'material.riverpod.g.dart';
 
 @riverpod
 final class MaterialProvider

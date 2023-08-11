@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:flutterfly/core/modules/prefs_module.dart';
+import 'package:flutterfly/core/modules/prefs.module.dart';
 
-part 'cupertino_provider.g.dart';
+part 'cupertino.riverpod.g.dart';
 
 @riverpod
 final class CupertinoProvider

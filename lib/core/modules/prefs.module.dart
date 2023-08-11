@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' show Ref;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
 
-part 'prefs_module.g.dart';
+part 'prefs.module.g.dart';
 
-class PrefsModule {
+final class PrefsModule {
 
   const PrefsModule(this._prefs);
 

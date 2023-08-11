@@ -9,7 +9,7 @@ import 'package:flutterfly/core/utils/errors.dart';
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
 import 'package:flutterfly/features/common/presentation/widgets/nest.dart';
 import 'package:flutterfly/features/common/providers/providers.dart';
-import 'package:flutterfly/features/material/providers/material_provider.dart';
+import 'package:flutterfly/features/material/providers/material.riverpod.dart';
 
 final class TopContent extends StatelessWidget {
 

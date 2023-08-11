@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'data_provider.g.dart';
+part 'data.riverpod.g.dart';
 
 @riverpod
-class DataProvider extends _$DataProvider {
+final class DataProvider extends _$DataProvider {
 
   @override
   String build() => '';

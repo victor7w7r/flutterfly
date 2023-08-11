@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
 import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
 
 import 'package:flutterfly/app.dart';
-import 'package:flutterfly/core/modules/prefs_module.dart';
+import 'package:flutterfly/core/modules/prefs.module.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 
 void main() async {

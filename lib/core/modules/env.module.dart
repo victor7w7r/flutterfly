@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:flutterfly/core/env/env.dart';
 
-part 'env_module.g.dart';
+part 'env.module.g.dart';
 
 enum Mode { dev, prod }
 

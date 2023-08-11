@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:flutterfly/core/modules/env_module.dart';
+import 'package:flutterfly/core/modules/env.module.dart';
 
-part 'dio_module.g.dart';
+part 'dio.module.g.dart';
 
 final class DioModule {
 

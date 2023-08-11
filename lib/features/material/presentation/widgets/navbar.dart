@@ -4,7 +4,7 @@ import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
-import 'package:flutterfly/features/material/providers/material_provider.dart';
+import 'package:flutterfly/features/material/providers/material.riverpod.dart';
 
 final class NavBar extends StatelessWidget {
 

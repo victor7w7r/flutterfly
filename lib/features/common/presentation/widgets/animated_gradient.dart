@@ -62,7 +62,7 @@ final animatedGradientController =
     _Ctl()..init()
   );
 
-class AnimatedGradient extends ConsumerWidget {
+final class AnimatedGradient extends ConsumerWidget {
 
   const AnimatedGradient({
     this.width = 2400,

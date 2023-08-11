@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'desktop_provider.g.dart';
+part 'desktop.riverpod.g.dart';
 
 @riverpod
 class DesktopProvider extends _$DesktopProvider {

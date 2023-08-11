@@ -9,9 +9,9 @@ import 'package:flutterfly/features/common/presentation/widgets/title_bar.dart';
 import 'package:flutterfly/features/fluent/presentation/screens/home/home_controller.dart';
 import 'package:flutterfly/features/fluent/presentation/screens/home/home_widgets.dart';
 import 'package:flutterfly/features/fluent/presentation/widgets/widgets.dart';
-import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
+import 'package:flutterfly/features/fluent/providers/fluent.riverpod.dart';
 
-class Home extends ConsumerWidget {
+final class Home extends ConsumerWidget {
 
   const Home({super.key});
 

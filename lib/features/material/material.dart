@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:flutterfly/features/material/providers/material_provider.dart';
+import 'package:flutterfly/features/material/providers/material.riverpod.dart';
 import 'package:flutterfly/features/material/presentation/screens/home/home.dart';
 import 'package:flutterfly/features/material/presentation/screens/store/store.dart';
 

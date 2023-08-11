@@ -5,7 +5,7 @@ import 'package:niku/namespace.dart' as n;
 import 'package:tailwind_colors/tailwind_colors.dart' show TWTwoColors;
 
 import 'package:flutterfly/core/utils/platforms.dart';
-import 'package:flutterfly/features/common/presentation/screens/desktop_selector_controller.dart';
+import 'package:flutterfly/features/common/presentation/screens/desktop_selector.riverpod.dart';
 import 'package:flutterfly/features/common/presentation/screens/desktop_selector_widgets.dart';
 import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
 

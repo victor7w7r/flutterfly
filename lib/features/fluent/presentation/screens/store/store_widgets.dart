@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
+import 'package:flutterfly/features/fluent/providers/fluent.riverpod.dart';
 
 final class StoreText extends StatelessWidget {
 

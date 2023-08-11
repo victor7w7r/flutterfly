@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'fluent_provider.dart';
+part of 'fluent.riverpod.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -22,7 +22,7 @@ final fluentIsDarkProvider$ = AutoDisposeProvider<bool>.internal(
 );
 
 typedef FluentIsDarkProviderRef = AutoDisposeProviderRef<bool>;
-String _$fluentProviderHash() => r'ab4960cb6729af3df8a725c35d1a5363831c0fdb';
+String _$fluentProviderHash() => r'206915c10b1f3cf57e8a54344dd7c1bd007e22c4';
 
 /// See also [FluentProvider].
 @ProviderFor(FluentProvider)
@@ -38,4 +38,5 @@ final fluentProvider$ =
 );
 
 typedef _$FluentProvider = AutoDisposeNotifier<FluentThemeApp>;
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

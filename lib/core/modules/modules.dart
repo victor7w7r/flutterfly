@@ -1,3 +1,3 @@
-export 'dio_module.dart';
-export 'env_module.dart';
-export 'prefs_module.dart';
+export 'dio.module.dart';
+export 'env.module.dart';
+export 'prefs.module.dart';

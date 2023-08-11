@@ -11,7 +11,7 @@ import 'package:flutterfly/features/common/providers/providers.dart';
 import 'package:flutterfly/features/cupertino/presentation/screens/store/store_controller.dart';
 import 'package:flutterfly/features/fluent/presentation/screens/store/store_widgets.dart';
 import 'package:flutterfly/features/fluent/presentation/widgets/widgets.dart';
-import 'package:flutterfly/features/fluent/providers/fluent_provider.dart';
+import 'package:flutterfly/features/fluent/providers/fluent.riverpod.dart';
 
 final class Store extends ConsumerWidget {
 

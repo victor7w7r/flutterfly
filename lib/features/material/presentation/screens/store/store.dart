@@ -5,7 +5,7 @@ import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
-import 'package:flutterfly/features/common/providers/data_provider.dart';
+import 'package:flutterfly/features/common/providers/data.riverpod.dart';
 import 'package:flutterfly/features/material/presentation/screens/store/store_controller.dart';
 import 'package:flutterfly/features/material/presentation/widgets/widgets.dart';
 

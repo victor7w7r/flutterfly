@@ -6,7 +6,7 @@ import 'package:flutterfly/features/cupertino/presentation/widgets/title.dart';
 import 'package:flutterfly/features/cupertino/presentation/screens/crypto/crypto.dart';
 import 'package:flutterfly/features/cupertino/presentation/screens/home/home.dart';
 import 'package:flutterfly/features/cupertino/presentation/screens/store/store.dart';
-import 'package:flutterfly/features/cupertino/providers/cupertino_provider.dart';
+import 'package:flutterfly/features/cupertino/providers/cupertino.riverpod.dart';
 
 final class CupertinoModule extends ConsumerWidget {
 

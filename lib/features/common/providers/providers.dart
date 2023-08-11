@@ -1,3 +1,3 @@
-export 'binance_provider.dart';
-export 'data_provider.dart';
-export 'desktop_provider.dart';
+export 'binance.riverpod.dart';
+export 'data.riverpod.dart';
+export 'desktop.riverpod.dart';

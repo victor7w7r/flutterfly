@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/screens/desktop_selector.dart';
-import 'package:flutterfly/features/common/providers/desktop_provider.dart';
+import 'package:flutterfly/features/common/providers/desktop.riverpod.dart';
 import 'package:flutterfly/features/cupertino/cupertino.dart';
 import 'package:flutterfly/features/fluent/fluent.dart';
 import 'package:flutterfly/features/material/material.dart';

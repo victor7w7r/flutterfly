@@ -5,7 +5,7 @@ import 'package:niku/namespace.dart' as n;
 import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
 import 'package:flutterfly/core/extensions/extensions.dart';
-import 'package:flutterfly/features/cupertino/providers/cupertino_provider.dart';
+import 'package:flutterfly/features/cupertino/providers/cupertino.riverpod.dart';
 
 final class CurrencyCard extends ConsumerWidget {
 

@@ -5,10 +5,10 @@ import 'package:niku/namespace.dart' as n;
 import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
-import 'package:flutterfly/features/common/providers/data_provider.dart';
+import 'package:flutterfly/features/common/providers/data.riverpod.dart';
 import 'package:flutterfly/features/cupertino/presentation/screens/store/store_controller.dart';
 import 'package:flutterfly/features/cupertino/presentation/widgets/theme_toggle.dart';
-import 'package:flutterfly/features/cupertino/providers/cupertino_provider.dart';
+import 'package:flutterfly/features/cupertino/providers/cupertino.riverpod.dart';
 
 final class Store extends ConsumerWidget {
 

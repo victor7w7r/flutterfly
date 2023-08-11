@@ -5,9 +5,9 @@ import 'package:flutter/widgets.dart' show Color;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
-import 'package:flutterfly/core/modules/prefs_module.dart';
+import 'package:flutterfly/core/modules/prefs.module.dart';
 
-part 'fluent_provider.g.dart';
+part 'fluent.riverpod.g.dart';
 
 final List<Color> darkColors = [
   TWColors.gray.shade900,
