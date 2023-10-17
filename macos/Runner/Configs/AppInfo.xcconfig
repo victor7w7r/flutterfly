@@ -11,4 +11,4 @@ PRODUCT_NAME = flutterfly
 PRODUCT_BUNDLE_IDENTIFIER = com.zerothreesix.flutterfly
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.zerothreesix. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.zerothreesix. All rights reserved.
