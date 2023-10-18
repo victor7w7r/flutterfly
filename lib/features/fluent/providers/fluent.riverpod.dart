@@ -22,79 +22,51 @@ final List<Color> lightColors = [
 ];
 
 final class FluentThemeApp {
-
   const FluentThemeApp(this.isDark, this.themeColor);
 
-  factory FluentThemeApp.dark() => FluentThemeApp(
-    true, darkColors
-  );
+  factory FluentThemeApp.dark() => FluentThemeApp(true, darkColors);
 
-  factory FluentThemeApp.light() => FluentThemeApp(
-    false, lightColors
-  );
+  factory FluentThemeApp.light() => FluentThemeApp(false, lightColors);
 
   final bool isDark;
   final List<Color> themeColor;
 
-  FluentThemeApp copyWith({
-    final bool? isDark,
-    final List<Color>? themeColor
-  }) => FluentThemeApp(
-    isDark ?? this.isDark,
-    themeColor ?? this.themeColor
-  );
+  FluentThemeApp copyWith(
+          {final bool? isDark, final List<Color>? themeColor}) =>
+      FluentThemeApp(isDark ?? this.isDark, themeColor ?? this.themeColor);
 }
 
 @riverpod
-final class FluentProvider
-  extends _$FluentProvider {
-
+final class FluentProvider extends _$FluentProvider {
   @override
-  FluentThemeApp build() =>
-    ref.read(prefsModule$).fluentDark
+  FluentThemeApp build() => ref.read(prefsModule$).fluentDark
       ? FluentThemeApp.dark()
       : FluentThemeApp.light();
 
-  void interpolator(
-    final List<Color> changer
-  ) {
-
+  void interpolator(final List<Color> changer) {
     var linear = 0.1;
     Color interpolatorBack;
     Color interpolatorCard;
     Color interpolatorInv;
 
     Timer.periodic(const Duration(milliseconds: 30), (final t) {
-      interpolatorBack = Color.lerp(
-        state.themeColor[0], changer[0], linear
-      )!;
-      interpolatorCard = Color.lerp(
-        state.themeColor[1], changer[1], linear
-      )!;
-      interpolatorInv = Color.lerp(
-        state.themeColor[2], changer[2], linear
-      )!;
-      state = state.copyWith(themeColor: [
-        interpolatorBack, interpolatorCard, interpolatorInv
-      ]);
+      interpolatorBack = Color.lerp(state.themeColor[0], changer[0], linear)!;
+      interpolatorCard = Color.lerp(state.themeColor[1], changer[1], linear)!;
+      interpolatorInv = Color.lerp(state.themeColor[2], changer[2], linear)!;
+      state = state.copyWith(
+          themeColor: [interpolatorBack, interpolatorCard, interpolatorInv]);
       linear += 0.1;
-      if(linear >= 1) t.cancel();
+      if (linear >= 1) t.cancel();
     });
   }
 
-  Future<void> toggle(
-    final bool value
-  ) async {
+  Future<void> toggle(final bool value) async {
     state = state.copyWith(isDark: value);
-    state.isDark
-      ? interpolator(darkColors)
-      : interpolator(lightColors);
-    await ref.read(sharedPrefs$)
-      .setBool('fluentdark', state.isDark);
+    state.isDark ? interpolator(darkColors) : interpolator(lightColors);
+    await ref.read(sharedPrefs$).setBool('fluentdark', state.isDark);
   }
 }
 
 @riverpod
-bool fluentIsDarkProvider(
-  final FluentIsDarkProviderRef ref
-) => ref.watch(fluentProvider$).isDark;
+bool fluentIsDarkProvider(final FluentIsDarkProviderRef ref) =>
+    ref.watch(fluentProvider$).isDark;

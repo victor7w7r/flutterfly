@@ -6,16 +6,13 @@ import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/widgets/title_bar.dart';
 
 final class CupTitle extends StatelessWidget {
-
-  const CupTitle(
-    this.dark, {super.key}
-  );
+  const CupTitle(this.dark, {super.key});
 
   final bool dark;
 
   @override
   Widget build(final BuildContext context) {
-    if(isMacOS) {
+    if (isMacOS) {
       return WindowTitleBar(isDark: dark);
     } else if (!isDesktop) {
       return 'CupertinoApp'.n..freezed;

@@ -10,25 +10,20 @@ import 'package:flutterfly/features/fluent/fluent.dart';
 import 'package:flutterfly/features/material/material.dart';
 
 final class App extends ConsumerWidget {
-
-  const App({ super.key });
+  const App({super.key});
 
   @override
-  Widget build(
-    final BuildContext context,
-    final WidgetRef ref
-  ) {
-
+  Widget build(final BuildContext context, final WidgetRef ref) {
     final desktop = ref.watch(desktopProvider$);
 
-    if(isIos) {
+    if (isIos) {
       return const CupertinoModule();
-    } else if(isAndroid) {
+    } else if (isAndroid) {
       return const MaterialModule();
-    } else if(isDesktop && desktop != 'none') {
-      if(desktop == 'material') {
+    } else if (isDesktop && desktop != 'none') {
+      if (desktop == 'material') {
         return const MaterialModule();
-      } else if(desktop == 'cupertino') {
+      } else if (desktop == 'cupertino') {
         return const CupertinoModule();
       } else {
         return const FluentModule();

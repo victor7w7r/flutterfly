@@ -11,33 +11,26 @@ typedef TaskListBinance = TaskEither<HttpNotSuccess, List<Binance>>;
 typedef TaskBitcoin = TaskEither<HttpNotSuccess, Bitcoin>;
 
 final class BinanceService {
-
   const BinanceService(this._dio);
 
   final DioModule _dio;
 
   TaskListBinance getCurrencies() => TaskEither.tryCatch(
-    Task(() async => _dio.client.get<List<dynamic>>(_currRoute))
-      .map((final res) =>
-        Binance.fromJsonToList(res.data ?? [])
-      ).run,
-    HttpNotSuccess.throwError
-  );
+      Task(() async => _dio.client.get<List<dynamic>>(_currRoute))
+          .map((final res) => Binance.fromJsonToList(res.data ?? []))
+          .run,
+      HttpNotSuccess.throwError);
 
   TaskBitcoin getBitcoin() => TaskEither.tryCatch(
-    Task(() async => _dio.client.get<Map<String, dynamic>>(_bitRoute))
-      .map((final res) =>
-        Bitcoin.fromJson(res.data ?? {})
-      ).run,
-    HttpNotSuccess.throwError
-  );
+      Task(() async => _dio.client.get<Map<String, dynamic>>(_bitRoute))
+          .map((final res) => Bitcoin.fromJson(res.data ?? {}))
+          .run,
+      HttpNotSuccess.throwError);
 
   String get _currRoute => '/24hr';
   String get _bitRoute => '/price?symbol=BTCUSDT';
-
 }
 
 @riverpod
-BinanceService binanceService(
-  final BinanceServiceRef ref
-) => BinanceService(ref.watch(dioModule$));
+BinanceService binanceService(final BinanceServiceRef ref) =>
+    BinanceService(ref.watch(dioModule$));

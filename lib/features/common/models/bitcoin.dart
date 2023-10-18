@@ -5,17 +5,10 @@ part 'bitcoin.g.dart';
 
 @freezed
 class Bitcoin with _$Bitcoin {
+  const factory Bitcoin(final String symbol, final String price) = _Bitcoin;
 
-  const factory Bitcoin(
-    final String symbol,
-    final String price
-  ) = _Bitcoin;
+  factory Bitcoin.fromJson(final Map<String, dynamic> json) =>
+      _$BitcoinFromJson(json);
 
-  factory Bitcoin.fromJson(
-    final Map<String, dynamic> json
-  ) => _$BitcoinFromJson(json);
-
-  factory Bitcoin.dummy() =>
-    const Bitcoin('DUMMY', '0.00');
-
+  factory Bitcoin.dummy() => const Bitcoin('DUMMY', '0.00');
 }

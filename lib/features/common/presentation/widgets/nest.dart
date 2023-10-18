@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 typedef NestChain = Widget Function(Widget);
 
 final class Nest extends StatelessWidget {
-
-  Nest(
-    final List<NestChain> children,
-    { super.key }
-  ): children = children.toList();
+  Nest(final List<NestChain> children, {super.key})
+      : children = children.toList();
 
   final Object children;
 

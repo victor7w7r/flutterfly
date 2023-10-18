@@ -5,16 +5,12 @@ import 'package:flutterfly/core/modules/prefs.module.dart';
 part 'cupertino.riverpod.g.dart';
 
 @riverpod
-final class CupertinoProvider
-  extends _$CupertinoProvider {
-
+final class CupertinoProvider extends _$CupertinoProvider {
   @override
-  bool build() =>
-    ref.read(prefsModule$).cupertinoDark;
+  bool build() => ref.read(prefsModule$).cupertinoDark;
 
   Future<void> toggle() async {
     state = !state;
-    await ref.read(sharedPrefs$)
-      .setBool('cupertinodark', state);
+    await ref.read(sharedPrefs$).setBool('cupertinodark', state);
   }
 }
