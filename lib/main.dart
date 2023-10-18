@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
-import 'package:bitsdojo_window/bitsdojo_window.dart' show appWindow, doWhenWindowReady;
+import 'package:bitsdojo_window/bitsdojo_window.dart'
+    show appWindow, doWhenWindowReady;
 
 import 'package:flutterfly/platforms/platforms.dart';
 
@@ -13,18 +14,17 @@ void main() {
     ..size = const Size(1280, 720)
     ..alignment = Alignment.center
     ..title = 'Flutterfly'
-    ..show()
-  );
+    ..show());
 
   runApp(const ProviderScope(child: App()));
 }
 
 final class App extends StatelessWidget {
-
-  const App({ super.key });
+  const App({super.key});
 
   @override
   Widget build(final BuildContext context) =>
-    defaultTargetPlatform == TargetPlatform.iOS ?
-      cupertinoApp(context) : materialApp(context);
+      defaultTargetPlatform == TargetPlatform.iOS
+          ? cupertinoApp(context)
+          : materialApp(context);
 }

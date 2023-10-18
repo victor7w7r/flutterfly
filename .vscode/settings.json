@@ -1,5 +1,8 @@
 {
-  "editor.formatOnSave": false,
   "explorer.autoReveal": false,
-  "workbench.iconTheme": "theme"
+  "workbench.iconTheme": "theme",
+  "[dart]": {
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.formatOnSave": true,
+  }
 }
