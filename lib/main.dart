@@ -9,12 +9,14 @@ import 'package:flutterfly/platforms/platforms.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  doWhenWindowReady(() => appWindow
-    ..minSize = const Size(640, 360)
-    ..size = const Size(1280, 720)
-    ..alignment = Alignment.center
-    ..title = 'Flutterfly'
-    ..show());
+  doWhenWindowReady(
+    () => appWindow
+      ..minSize = const Size(640, 360)
+      ..size = const Size(1280, 720)
+      ..alignment = Alignment.center
+      ..title = 'Flutterfly'
+      ..show(),
+  );
 
   runApp(const ProviderScope(child: App()));
 }
