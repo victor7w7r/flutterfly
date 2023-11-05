@@ -14,15 +14,22 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   if (isDesktopOnly) {
-    doWhenWindowReady(() => appWindow
-      ..minSize = const Size(640, 360)
-      ..size = const Size(1280, 720)
-      ..alignment = Alignment.center
-      ..title = 'Flutterfly'
-      ..show());
+    doWhenWindowReady(
+      () => appWindow
+        ..minSize = const Size(640, 360)
+        ..size = const Size(1280, 720)
+        ..alignment = Alignment.center
+        ..title = 'Flutterfly'
+        ..show(),
+    );
   }
 
-  runApp(ProviderScope(overrides: [
-    sharedPrefs$.overrideWithValue(await SharedPreferences.getInstance())
-  ], child: const App()));
+  runApp(
+    ProviderScope(
+      overrides: [
+        sharedPrefs$.overrideWithValue(await SharedPreferences.getInstance()),
+      ],
+      child: const App(),
+    ),
+  );
 }

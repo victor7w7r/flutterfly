@@ -16,20 +16,23 @@ final class DynamicChip extends ConsumerWidget {
     final dark = ref.watch(cupertinoProvider$);
 
     return Container(
-        width: isHome ? 300 : 270,
-        height: isHome ? 60 : 50,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-            border: dark
-                ? Border.all(width: 2, color: TWColors.gray.shade100)
-                : Border.all(width: 2, color: TWColors.gray.shade900)),
-        child: n.Row(isHome
+      width: isHome ? 300 : 270,
+      height: isHome ? 60 : 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        border: dark
+            ? Border.all(width: 2, color: TWColors.gray.shade100)
+            : Border.all(width: 2, color: TWColors.gray.shade900),
+      ),
+      child: n.Row(
+        isHome
             ? [
                 const SizedBox(width: 38),
                 n.Image.asset(
-                    dark ? 'assets/brandwhite.png' : 'assets/brand.png')
+                  dark ? 'assets/brandwhite.png' : 'assets/brand.png',
+                )
                   ..width = 220.0
-                  ..height = 70.0
+                  ..height = 70.0,
               ]
             : [
                 n.Image.asset('assets/flutter-logo.png')
@@ -37,7 +40,9 @@ final class DynamicChip extends ConsumerWidget {
                   ..height = 35.0,
                 'Flutter Template'.n
                   ..freezed
-                  ..fontSize = 20
-              ]));
+                  ..fontSize = 20,
+              ],
+      ),
+    );
   }
 }

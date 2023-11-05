@@ -14,7 +14,9 @@ final class DesktopSelectorController extends _$DesktopSelectorController {
 
   void exit(final String selector) {
     state = !state;
-    Future.delayed(const Duration(seconds: 1),
-        () => ref.read(desktopProvider$.notifier).state = selector);
+    Future.delayed(
+      const Duration(seconds: 1),
+      () => ref.read(desktopProvider$.notifier).state = selector,
+    );
   }
 }

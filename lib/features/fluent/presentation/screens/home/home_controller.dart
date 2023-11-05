@@ -24,34 +24,31 @@ final class HomeController {
               ? const Color(0xFF0C4A6E)
               : const Color.fromARGB(255, 136, 202, 238),
           const Color(0xFF0369A1),
-          _background()
+          _background(),
         ]);
-        break;
       case 'violet':
         _ref.read(fluentProvider$.notifier).interpolator([
           _ref.read(fluentProvider$).isDark
               ? const Color(0xFF581c87)
               : const Color(0xFFD8b4FE),
           const Color(0xFF7E22CE),
-          _background()
+          _background(),
         ]);
-        break;
       case 'red':
         _ref.read(fluentProvider$.notifier).interpolator([
           _ref.read(fluentProvider$).isDark
               ? const Color(0xFF7F1D1D)
               : const Color(0xFFfCA5A5),
           const Color(0xFFB91C1C),
-          _background()
+          _background(),
         ]);
-        break;
       default:
         _ref.read(fluentProvider$.notifier).interpolator([
           _ref.read(fluentProvider$).isDark
               ? const Color(0xFF064E3B)
               : const Color(0xFF6EE7B7),
           const Color(0xFF047857),
-          _background()
+          _background(),
         ]);
         break;
     }

@@ -17,17 +17,22 @@ final class StoreController {
 
   void request(final BuildContext context) => txtCtl.text.isNotEmpty
       ? _ref.read(dataProvider$.notifier).mutate = txtCtl.text
-      : unawaited(showCupertinoModalPopup<void>(
-          context: context,
-          builder: (final ctx) => CupertinoAlertDialog(
-                  title: const Text('Error'),
-                  content: const Text('Is empty your TextField'),
-                  actions: [
-                    CupertinoDialogAction(
-                        isDefaultAction: true,
-                        onPressed: () => Navigator.pop(ctx),
-                        child: const Text('OK'))
-                  ])));
+      : unawaited(
+          showCupertinoModalPopup<void>(
+            context: context,
+            builder: (final ctx) => CupertinoAlertDialog(
+              title: const Text('Error'),
+              content: const Text('Is empty your TextField'),
+              actions: [
+                CupertinoDialogAction(
+                  isDefaultAction: true,
+                  onPressed: () => Navigator.pop(ctx),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          ),
+        );
 }
 
 @riverpod

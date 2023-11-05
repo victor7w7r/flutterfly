@@ -14,13 +14,15 @@ final class ThemeToggle extends ConsumerWidget {
           ..freezed
           ..fontSize = 13,
         Transform.scale(
-            scale: 0.7,
-            child: CupertinoSwitch(
-                value: ref.watch(cupertinoProvider$),
-                onChanged: (final _) async =>
-                    ref.read(cupertinoProvider$.notifier).toggle(),
-                thumbColor: CupertinoColors.white,
-                activeColor: CupertinoColors.activeBlue))
+          scale: 0.7,
+          child: CupertinoSwitch(
+            value: ref.watch(cupertinoProvider$),
+            onChanged: (final _) async =>
+                ref.read(cupertinoProvider$.notifier).toggle(),
+            thumbColor: CupertinoColors.white,
+            activeColor: CupertinoColors.activeBlue,
+          ),
+        ),
       ])
         ..crossAxisAlignment = WrapCrossAlignment.center
         ..spacing = -5;

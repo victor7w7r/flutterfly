@@ -22,7 +22,7 @@ final class CupTitle extends StatelessWidget {
           ..freezed
           ..mx = 10
           ..my = 5,
-        WindowTitleBar(isDark: dark)
+        WindowTitleBar(isDark: dark),
       ]);
     }
   }

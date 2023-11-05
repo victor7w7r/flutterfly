@@ -7,10 +7,11 @@ final class HttpNotSuccess implements Exception {
 
   factory HttpNotSuccess.throwError(final Object e, final StackTrace s) =>
       HttpNotSuccess(
-          (e as DioException).response?.statusCode ?? 0,
-          ((e.response?.data ??
-                  {'error': 'Servidor caido o error en el servidor'})
-              as Map<String, dynamic>)['error']);
+        (e as DioException).response?.statusCode ?? 0,
+        ((e.response?.data ??
+                {'error': 'Servidor caido o error en el servidor'})
+            as Map<String, dynamic>)['error'],
+      );
 
   final int statusCode;
   final String message;

@@ -16,16 +16,21 @@ final class StoreController {
 
   void request(final BuildContext context) => txtCtl.text.isNotEmpty
       ? _ref.read(dataProvider$.notifier).mutate = txtCtl.text
-      : unawaited(showDialog(
-          context: context,
-          builder: (final ctx) => AlertDialog(
-                  title: const Text('Error'),
-                  content: const Text('Is empty your TextField'),
-                  actions: [
-                    TextButton(
-                        onPressed: () => Navigator.pop(ctx, 'OK'),
-                        child: const Text('OK'))
-                  ])));
+      : unawaited(
+          showDialog(
+            context: context,
+            builder: (final ctx) => AlertDialog(
+              title: const Text('Error'),
+              content: const Text('Is empty your TextField'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          ),
+        );
 }
 
 @riverpod

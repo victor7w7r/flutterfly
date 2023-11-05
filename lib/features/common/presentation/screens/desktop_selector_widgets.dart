@@ -6,11 +6,12 @@ import 'package:tailwind_colors/tailwind_colors.dart' show TWTwoColors;
 import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
 
 final class MenuBuilder extends StatelessWidget {
-  const MenuBuilder(
-      {required this.title,
-      required this.image,
-      required this.onTap,
-      super.key});
+  const MenuBuilder({
+    required this.title,
+    required this.image,
+    required this.onTap,
+    super.key,
+  });
 
   final String image;
   final VoidCallback onTap;
@@ -28,7 +29,7 @@ final class MenuBuilder extends StatelessWidget {
               ClipRRect(borderRadius: BorderRadius.circular(20.0), child: next),
           (final next) =>
               SizedBox.fromSize(size: const Size.fromRadius(120), child: next),
-          (final _) => Image.asset('assets/$image.jpg', fit: BoxFit.cover)
-        ])
+          (final _) => Image.asset('assets/$image.jpg', fit: BoxFit.cover),
+        ]),
       ]);
 }

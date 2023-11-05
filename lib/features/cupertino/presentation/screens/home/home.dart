@@ -25,9 +25,11 @@ final class Home extends StatelessWidget {
           const SizedBox(height: 10),
           AppConsumer((final ref) {
             final data = ref.watch(dataProvider$);
-            return n.Text(data.isEmpty
-                ? 'Store state: Not yet.'
-                : 'Store state: Yes, you write. $data')
+            return n.Text(
+              data.isEmpty
+                  ? 'Store state: Not yet.'
+                  : 'Store state: Yes, you write. $data',
+            )
               ..fontSize =
                   data.isEmpty ? ((context.mHeight > 960) ? 20 : 15) : 20
               ..n.center;
@@ -38,7 +40,7 @@ final class Home extends StatelessWidget {
             ..fontSize = 15
             ..n.center,
           const SizedBox(height: 20),
-          const DynamicChip(isHome: true)
+          const DynamicChip(isHome: true),
         ])
           ..mainCenter,
       ]);

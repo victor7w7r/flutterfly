@@ -10,7 +10,8 @@ enum Mode { dev, prod }
 final class EnvModule {
   EnvModule()
       : mode = Mode.values.firstWhere(
-            (final mode) => mode.toString() == 'Mode.${env['mode'] ?? 'dev'}'),
+          (final mode) => mode.toString() == 'Mode.${env['mode'] ?? 'dev'}',
+        ),
         host = env['host'] ?? '',
         protocol = env['protocol'] ?? '';
 

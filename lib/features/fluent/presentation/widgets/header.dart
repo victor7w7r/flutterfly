@@ -16,26 +16,27 @@ final class Header extends ConsumerWidget {
 
     return Nest([
       (final next) => Card(
-          backgroundColor: theme.themeColor[1],
-          borderRadius: BorderRadius.circular(20),
-          child: next),
+            backgroundColor: theme.themeColor[1],
+            borderRadius: BorderRadius.circular(20),
+            child: next,
+          ),
       (final next) => FractionallySizedBox(widthFactor: 0.98, child: next),
       (final _) => n.Row([
             n.Row([
               n.Image.asset('assets/flutter-logo.png')
                 ..width = 50
                 ..height = 30,
-              'Flutter Template'.n..color = theme.themeColor[2]
+              'Flutter Template'.n..color = theme.themeColor[2],
             ])
               ..pl = context.mWidth > 960 ? 200 : 50,
             ToggleSwitch(
-                    checked: theme.isDark,
-                    onChanged: ref.read(fluentProvider$.notifier).toggle,
-                    content: 'Dark Mode'.n..color = theme.themeColor[2])
-                .niku
-              ..pr = context.mWidth > 960 ? 200 : 50
+              checked: theme.isDark,
+              onChanged: ref.read(fluentProvider$.notifier).toggle,
+              content: 'Dark Mode'.n..color = theme.themeColor[2],
+            ).niku
+              ..pr = context.mWidth > 960 ? 200 : 50,
           ])
-            ..mainAxisAlignment = MainAxisAlignment.spaceBetween
+            ..mainAxisAlignment = MainAxisAlignment.spaceBetween,
     ]);
   }
 }

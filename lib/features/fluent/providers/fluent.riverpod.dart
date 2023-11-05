@@ -12,13 +12,13 @@ part 'fluent.riverpod.g.dart';
 final List<Color> darkColors = [
   TWColors.gray.shade900,
   TWColors.gray.shade800,
-  TWColors.gray.shade100
+  TWColors.gray.shade100,
 ];
 
 final List<Color> lightColors = [
   TWColors.gray.shade100,
   TWColors.gray.shade400,
-  TWColors.gray.shade900
+  TWColors.gray.shade900,
 ];
 
 final class FluentThemeApp {
@@ -31,8 +31,10 @@ final class FluentThemeApp {
   final bool isDark;
   final List<Color> themeColor;
 
-  FluentThemeApp copyWith(
-          {final bool? isDark, final List<Color>? themeColor}) =>
+  FluentThemeApp copyWith({
+    final bool? isDark,
+    final List<Color>? themeColor,
+  }) =>
       FluentThemeApp(isDark ?? this.isDark, themeColor ?? this.themeColor);
 }
 
@@ -54,7 +56,8 @@ final class FluentProvider extends _$FluentProvider {
       interpolatorCard = Color.lerp(state.themeColor[1], changer[1], linear)!;
       interpolatorInv = Color.lerp(state.themeColor[2], changer[2], linear)!;
       state = state.copyWith(
-          themeColor: [interpolatorBack, interpolatorCard, interpolatorInv]);
+        themeColor: [interpolatorBack, interpolatorCard, interpolatorInv],
+      );
       linear += 0.1;
       if (linear >= 1) t.cancel();
     });

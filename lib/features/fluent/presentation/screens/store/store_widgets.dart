@@ -14,9 +14,9 @@ final class StoreText extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => SizedBox(
-      width: 250.0,
-      height: 40.0,
-      child: TextBox(
+        width: 250.0,
+        height: 40.0,
+        child: TextBox(
           cursorHeight: 25,
           controller: ctl,
           placeholder: 'here',
@@ -25,5 +25,7 @@ final class StoreText extends StatelessWidget {
           style: TextStyle(color: theme.themeColor[2]),
           cursorColor: theme.themeColor[2],
           highlightColor: const Color(0xFF6B7280),
-          decoration: BoxDecoration(color: theme.themeColor[1])));
+          decoration: BoxDecoration(color: theme.themeColor[1]),
+        ),
+      );
 }

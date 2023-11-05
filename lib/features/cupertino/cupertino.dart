@@ -16,24 +16,36 @@ final class CupertinoModule extends ConsumerWidget {
     final dark = ref.watch(cupertinoProvider$);
 
     return CupertinoApp(
-        title: 'flutterfly',
-        debugShowCheckedModeBanner: false,
-        theme: CupertinoThemeData(
-            brightness: dark ? Brightness.dark : Brightness.light),
-        home: CupertinoPageScaffold(
-            navigationBar: CupertinoNavigationBar(
-              middle: CupTitle(dark),
-            ),
-            child: CupertinoTabScaffold(
-                tabBar: CupertinoTabBar(items: const [
-                  BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.home), label: 'Home'),
-                  BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.money_dollar), label: 'Crypto'),
-                  BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.book), label: 'Store')
-                ]),
-                tabBuilder: (final _, final i) =>
-                    const [Home(), Crypto(), Store()][i])));
+      title: 'flutterfly',
+      debugShowCheckedModeBanner: false,
+      theme: CupertinoThemeData(
+        brightness: dark ? Brightness.dark : Brightness.light,
+      ),
+      home: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: CupTitle(dark),
+        ),
+        child: CupertinoTabScaffold(
+          tabBar: CupertinoTabBar(
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.money_dollar),
+                label: 'Crypto',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.book),
+                label: 'Store',
+              ),
+            ],
+          ),
+          tabBuilder: (final _, final i) =>
+              const [Home(), Crypto(), Store()][i],
+        ),
+      ),
+    );
   }
 }
