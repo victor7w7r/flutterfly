@@ -13,7 +13,10 @@ final class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref,
+  ) {
     final desktop = ref.watch(desktopProvider$);
 
     if (isIos) {

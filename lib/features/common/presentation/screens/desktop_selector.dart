@@ -13,7 +13,10 @@ final class DesktopSelector extends ConsumerWidget {
   const DesktopSelector({super.key});
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref,
+  ) {
     final isOpacity = ref.watch(desktopSelectorController$);
 
     final ctl = ref.read(desktopSelectorController$.notifier);

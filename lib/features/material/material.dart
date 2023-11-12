@@ -10,7 +10,11 @@ final class MaterialModule extends ConsumerWidget {
   const MaterialModule({super.key});
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) => MaterialApp(
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref,
+  ) =>
+      MaterialApp(
         title: 'flutterfly',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
