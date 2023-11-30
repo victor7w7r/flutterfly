@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
-import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
 import 'package:flutterfly/core/extensions/extensions.dart';
 import 'package:flutterfly/features/cupertino/providers/cupertino.riverpod.dart';
@@ -26,8 +25,11 @@ final class CurrencyCard extends ConsumerWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           border: ref.watch(cupertinoProvider$)
-              ? Border.all(width: 2, color: TWColors.gray.shade100)
-              : Border.all(width: 2, color: TWColors.gray.shade900),
+              ? Border.all(
+                  width: 2,
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                )
+              : Border.all(width: 2),
           image: DecorationImage(
             alignment: const Alignment(1.3, 0),
             image: const AssetImage('assets/binance.png'),

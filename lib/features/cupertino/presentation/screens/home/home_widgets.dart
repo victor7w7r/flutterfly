@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
-import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
 import 'package:flutterfly/features/cupertino/providers/cupertino.riverpod.dart';
 
@@ -21,8 +20,14 @@ final class DynamicChip extends ConsumerWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         border: dark
-            ? Border.all(width: 2, color: TWColors.gray.shade100)
-            : Border.all(width: 2, color: TWColors.gray.shade900),
+            ? Border.all(
+                width: 2,
+                color: const Color.fromARGB(255, 255, 255, 255),
+              )
+            : Border.all(
+                width: 2,
+                color: const Color.fromARGB(255, 26, 31, 43),
+              ),
       ),
       child: n.Row(
         isHome

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
-import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
 import 'package:flutterfly/features/common/providers/data.riverpod.dart';
@@ -41,8 +40,8 @@ final class Store extends ConsumerWidget {
               controller: ctl.txtCtl,
               decoration: BoxDecoration(
                 color: ref.watch(cupertinoProvider$)
-                    ? TWColors.gray.shade800
-                    : TWColors.gray.shade300,
+                    ? const Color.fromARGB(255, 43, 53, 69)
+                    : const Color.fromARGB(255, 248, 250, 253),
               ),
             ).niku
               ..w = 250.0

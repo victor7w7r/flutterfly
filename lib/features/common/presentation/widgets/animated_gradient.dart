@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tailwind_colors/tailwind_colors.dart' show TWTwoColors;
 
 final class AnimatedGradientController extends ChangeNotifier {
   AnimatedGradientController()
-      : _bottomColor = TWTwoColors.gray.shade700,
+      : _bottomColor = const Color.fromRGBO(253, 186, 116, 1),
         _colors = [
-          TWTwoColors.gray.shade600,
-          TWTwoColors.orange.shade500,
-          TWTwoColors.yellow.shade400,
-          TWTwoColors.green.shade400,
-          TWTwoColors.blue.shade500,
-          TWTwoColors.fuchsia.shade700,
-          TWTwoColors.rose.shade500,
+          const Color.fromRGBO(82, 82, 91, 1),
+          const Color.fromRGBO(249, 115, 22, 1),
+          const Color.fromRGBO(250, 204, 21, 1),
+          const Color.fromRGBO(74, 222, 128, 1),
+          const Color.fromRGBO(59, 130, 246, 1),
+          const Color.fromRGBO(162, 28, 175, 1),
+          const Color.fromRGBO(244, 63, 94, 1),
         ],
         _index = 0,
-        _topColor = TWTwoColors.orange.shade300;
+        _topColor = const Color.fromRGBO(253, 186, 116, 1);
 
   Color _bottomColor;
   final List<Color> _colors;
@@ -31,7 +30,7 @@ final class AnimatedGradientController extends ChangeNotifier {
 
   void init() => Future.delayed(
         Duration.zero,
-        () => bottomColor = TWTwoColors.orange.shade300,
+        () => bottomColor = const Color.fromRGBO(253, 186, 116, 1),
       );
 
   Color get bottomColor => _bottomColor;

@@ -1,7 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
 import 'package:flutterfly/features/fluent/providers/fluent.riverpod.dart';
 
@@ -12,9 +11,8 @@ final class HomeController {
 
   final HomeControllerRef _ref;
 
-  Color _background() => _ref.read(fluentProvider$).isDark
-      ? TWColors.gray.shade100
-      : TWColors.gray.shade900;
+  Color _background() =>
+      _ref.read(fluentProvider$).isDark ? Colors.white : Colors.black;
 
   void colorChange(final String color) {
     switch (color) {

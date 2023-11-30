@@ -1,24 +1,23 @@
 import 'dart:async' show Timer;
 
-import 'package:flutter/widgets.dart' show Color;
+import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
 import 'package:flutterfly/core/modules/prefs.module.dart';
 
 part 'fluent.riverpod.g.dart';
 
 final List<Color> darkColors = [
-  TWColors.gray.shade900,
-  TWColors.gray.shade800,
-  TWColors.gray.shade100,
+  Colors.black,
+  const Color.fromARGB(255, 42, 52, 68),
+  Colors.white,
 ];
 
 final List<Color> lightColors = [
-  TWColors.gray.shade100,
-  TWColors.gray.shade400,
-  TWColors.gray.shade900,
+  Colors.white,
+  const Color.fromARGB(255, 42, 52, 68),
+  Colors.black,
 ];
 
 final class FluentThemeApp {

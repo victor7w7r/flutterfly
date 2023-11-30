@@ -1,7 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:niku/namespace.dart' as n;
-import 'package:tailwind_colors/tailwind_colors.dart' show TWColors;
 
 final class BlurButton extends StatelessWidget {
   const BlurButton({
@@ -20,7 +19,7 @@ final class BlurButton extends StatelessWidget {
         onPressed: onClick,
         style: ButtonStyle(
           elevation: ButtonState.all<double>(0),
-          foregroundColor: ButtonState.all<Color>(TWColors.gray.shade900),
+          foregroundColor: ButtonState.all<Color>(Colors.black),
           backgroundColor:
               ButtonState.all<Color>(const Color.fromRGBO(255, 255, 255, 0.4)),
           shape: ButtonState.all<RoundedRectangleBorder>(

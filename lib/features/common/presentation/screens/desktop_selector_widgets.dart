@@ -1,7 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:niku/namespace.dart' as n;
-import 'package:tailwind_colors/tailwind_colors.dart' show TWTwoColors;
 
 import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
 
@@ -22,7 +21,7 @@ final class MenuBuilder extends StatelessWidget {
         title.n
           ..fontSize = 30
           ..fontFamily = 'AminaReska'
-          ..color = TWTwoColors.gray.shade100,
+          ..color = Colors.white,
         Nest([
           (final next) => GestureDetector(onTap: onTap, child: next),
           (final next) =>

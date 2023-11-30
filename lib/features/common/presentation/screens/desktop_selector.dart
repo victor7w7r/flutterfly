@@ -2,7 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
-import 'package:tailwind_colors/tailwind_colors.dart' show TWTwoColors;
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/screens/desktop_selector.riverpod.dart';
@@ -22,7 +21,7 @@ final class DesktopSelector extends ConsumerWidget {
     final ctl = ref.read(desktopSelectorController$.notifier);
 
     return FluentApp(
-      color: TWTwoColors.gray.shade100,
+      color: Colors.white,
       debugShowCheckedModeBanner: false,
       home: AnimatedOpacity(
         opacity: isOpacity ? 1.0 : 0.0,
@@ -32,7 +31,7 @@ final class DesktopSelector extends ConsumerWidget {
           'Choose your flavour'.n
             ..fontSize = 50
             ..fontFamily = 'AminaReska'
-            ..color = TWTwoColors.gray.shade100
+            ..color = Colors.white
             ..n.align = Alignment.topCenter,
           n.Wrap([
             MenuBuilder(
