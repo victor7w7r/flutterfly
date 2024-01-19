@@ -6,32 +6,29 @@ publish_to: 'none'
 version: 1.4.0
 
 environment:
-  sdk: '>=3.2.1 <4.0.0'
+  sdk: '>=3.2.4 <4.0.0'
 
 dependencies:
-  bitsdojo_window: ^0.1.5
+  bitsdojo_window: ^0.1.6
   cupertino_icons: ^1.0.6
   dio: ^5.4.0
-  fluent_ui: ^4.8.1
+  fluent_ui: ^4.8.5
   flutter:
     sdk: flutter
-  flutter_native_splash: ^2.3.6
+  flutter_native_splash: ^2.3.9
   flutter_riverpod: ^2.4.9
   fpdart: ^1.1.0
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
-  niku:
-    git:
-      url: https://github.com/victor7w7r/niku.git
-      ref: main
+  niku: ^2.4.3
   riverpod_annotation: ^2.3.3
   shared_preferences: ^2.2.2
 
 dev_dependencies:
-  build_runner: ^2.4.7
+  build_runner: ^2.4.8
   flutter_lints: ^3.0.1
-  freezed: ^2.4.5
-  icons_launcher: ^2.1.5
+  freezed: ^2.4.6
+  icons_launcher: ^2.1.7
   json_serializable: ^6.7.1
   riverpod_generator: ^2.3.9
 
