@@ -34,5 +34,7 @@ final class BinanceService {
 }
 
 @riverpod
-BinanceService binanceService(final BinanceServiceRef ref) =>
+BinanceService binanceService(
+  final BinanceServiceRef ref,
+) =>
     BinanceService(ref.watch(dioModule$));

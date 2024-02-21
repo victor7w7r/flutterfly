@@ -19,7 +19,11 @@ final class CurrencyCard extends ConsumerWidget {
   final String sym;
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) => Container(
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref,
+  ) =>
+      Container(
         margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
         padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(

@@ -10,7 +10,11 @@ final class DrawerMenu extends ConsumerWidget {
   const DrawerMenu({super.key});
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) => Drawer(
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref,
+  ) =>
+      Drawer(
         child: n.Column([
           const Spacer(flex: 2),
           AppConsumer(

@@ -11,7 +11,10 @@ final class DynamicChip extends ConsumerWidget {
   final bool isHome;
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) {
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref,
+  ) {
     final dark = ref.watch(cupertinoProvider$);
 
     return Container(

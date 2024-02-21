@@ -9,7 +9,11 @@ final class ThemeToggle extends ConsumerWidget {
   const ThemeToggle({super.key});
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) => n.Wrap([
+  Widget build(
+    final BuildContext context,
+    final WidgetRef ref,
+  ) =>
+      n.Wrap([
         'Dark Mode'.n
           ..freezed
           ..fontSize = 13,

@@ -35,4 +35,7 @@ SharedPreferences sharedPrefs(final SharedPrefsRef ref) =>
 PrefsModule prefsModule(final PrefsModuleRef ref) =>
     PrefsModule(ref.read(sharedPrefs$));
 
-PrefsModule prefsRef<T extends Ref>(final T ref) => ref.read(prefsModule$);
+PrefsModule prefsRef<T extends Ref>(
+  final T ref,
+) =>
+    ref.read(prefsModule$);

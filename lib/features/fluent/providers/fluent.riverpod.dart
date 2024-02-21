@@ -70,5 +70,7 @@ final class FluentProvider extends _$FluentProvider {
 }
 
 @riverpod
-bool fluentIsDarkProvider(final FluentIsDarkProviderRef ref) =>
+bool fluentIsDarkProvider(
+  final FluentIsDarkProviderRef ref,
+) =>
     ref.watch(fluentProvider$).isDark;

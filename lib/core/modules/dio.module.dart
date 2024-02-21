@@ -22,4 +22,9 @@ final class DioModule {
 }
 
 @Riverpod(keepAlive: true)
-DioModule dioModule(final DioModuleRef ref) => DioModule(ref.watch(envModule$));
+DioModule dioModule(
+  final DioModuleRef ref,
+) =>
+    DioModule(
+      ref.watch(envModule$),
+    );

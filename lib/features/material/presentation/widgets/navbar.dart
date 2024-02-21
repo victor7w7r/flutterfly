@@ -12,7 +12,10 @@ final class NavBar extends StatelessWidget {
   final String title;
 
   @override
-  Widget build(final BuildContext context) => AppBar(
+  Widget build(
+    final BuildContext context,
+  ) =>
+      AppBar(
         elevation: 0.0,
         toolbarHeight: isMacOS ? 30 : null,
         leading: isMacOS ? Container() : null,

@@ -21,9 +21,18 @@ final class EnvModule {
 }
 
 @Riverpod(keepAlive: true)
-EnvModule envModule(final EnvModuleRef ref) => EnvModule();
+EnvModule envModule(
+  final EnvModuleRef ref,
+) =>
+    EnvModule();
 
 @riverpod
-Mode modeProvider(final ModeProviderRef ref) => ref.watch(envModule$).mode;
+Mode modeProvider(
+  final ModeProviderRef ref,
+) =>
+    ref.watch(envModule$).mode;
 
-EnvModule envRef<T extends Ref>(final T ref) => ref.read(envModule$);
+EnvModule envRef<T extends Ref>(
+  final T ref,
+) =>
+    ref.read(envModule$);

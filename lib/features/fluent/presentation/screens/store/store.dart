@@ -8,20 +8,47 @@ import 'package:niku/namespace.dart' as n;
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
 import 'package:flutterfly/features/common/providers/providers.dart';
-import 'package:flutterfly/features/cupertino/presentation/screens/store/store_controller.dart';
 import 'package:flutterfly/features/fluent/presentation/screens/store/store_widgets.dart';
 import 'package:flutterfly/features/fluent/presentation/widgets/widgets.dart';
 import 'package:flutterfly/features/fluent/providers/fluent.riverpod.dart';
 
-final class Store extends ConsumerWidget {
+class Store extends ConsumerStatefulWidget {
   const Store({super.key});
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) {
+  ConsumerState<Store> createState() => _StoreState();
+}
+
+class _StoreState extends ConsumerState<Store> {
+  final TextEditingController _txtCtl = TextEditingController();
+
+  void _request(final BuildContext context) => _txtCtl.text.isNotEmpty
+      ? ref.read(dataProvider$.notifier).mutate = _txtCtl.text
+      : unawaited(
+          showDialog(
+            context: context,
+            builder: (final ctx) => ContentDialog(
+              title: const Text('Error'),
+              content: const Text('Is empty your Text'),
+              actions: [
+                Button(
+                  child: const Text('OK'),
+                  onPressed: () => Navigator.pop(ctx),
+                ),
+              ],
+            ),
+          ),
+        );
+
+  @override
+  void dispose() {
+    _txtCtl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(final BuildContext context) {
     final theme = ref.watch(fluentProvider$);
-
-    final ctl = ref.read(storeController$);
-
     return ColoredBox(
       color: theme.themeColor[0],
       child: n.Column([
@@ -41,11 +68,11 @@ final class Store extends ConsumerWidget {
                   ..color = theme.themeColor[2]
                   ..fontSize = 20,
                 const SizedBox(height: 30),
-                StoreText(ctl: ctl.txtCtl, theme: theme),
+                StoreText(ctl: _txtCtl, theme: theme),
                 const SizedBox(height: 30),
                 BlurButton(
                   caption: 'Send',
-                  onClick: () => ctl.request(context),
+                  onClick: () => _request(context),
                 ),
                 const SizedBox(height: 45),
                 AppConsumer((final ref) {
