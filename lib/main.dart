@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+import 'package:fl_query/fl_query.dart' show QueryClient;
+
+import 'package:flutterfly/core/di/di.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/presentation/screens/desktop_selector.dart';
 import 'package:flutterfly/features/common/providers/desktop.riverpod.dart';
@@ -11,6 +14,8 @@ import 'package:bitsdojo_window/bitsdojo_window.dart'
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  configInjection();
+  await QueryClient.initialize(cachePrefix: 'flutterfly');
 
   if (isDesktopOnly) {
     doWhenWindowReady(
