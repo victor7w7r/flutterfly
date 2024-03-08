@@ -18,12 +18,6 @@ This template is used to be clean. Made with ❤️ by
 $ flutter pub get
 ```
 
-## Architecture
-
-This app was made with the 036 Architecture for Flutter
-
-![Alt text](flutterarch.png?raw=true "Title")
-
 ## Extra Packages
 
 - bitsdojo_window: Makes it easy to customize and work with your Flutter desktop app window.

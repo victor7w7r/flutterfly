@@ -1,14 +1,13 @@
 import 'package:flutter/widgets.dart';
 
+import 'package:flutterfly/core/utils/platforms.dart';
+import 'package:flutterfly/features/common/presentation/screens/desktop_selector.dart';
+import 'package:flutterfly/features/common/providers/desktop.riverpod.dart';
+import 'package:flutterfly/features/cupertino/cupertino.dart';
+import 'package:flutterfly/features/fluent/fluent.dart';
+import 'package:flutterfly/features/material/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart'
     show appWindow, doWhenWindowReady;
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
-import 'package:shared_preferences/shared_preferences.dart'
-    show SharedPreferences;
-
-import 'package:flutterfly/app.dart';
-import 'package:flutterfly/core/modules/prefs.module.dart';
-import 'package:flutterfly/core/utils/platforms.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +15,7 @@ void main() async {
   if (isDesktopOnly) {
     doWhenWindowReady(
       () => appWindow
-        ..minSize = const Size(640, 360)
+        ..minSize = const Size(360, 360)
         ..size = const Size(1280, 720)
         ..alignment = Alignment.center
         ..title = 'Flutterfly'
@@ -24,12 +23,30 @@ void main() async {
     );
   }
 
-  runApp(
-    ProviderScope(
-      overrides: [
-        sharedPrefs$.overrideWithValue(await SharedPreferences.getInstance()),
-      ],
-      child: const App(),
-    ),
-  );
+  runApp(const App());
+}
+
+final class App extends StatelessWidget {
+  const App({super.key});
+
+  @override
+  Widget build(final BuildContext context) {
+    final desktop = ref.watch(desktopProvider$);
+
+    if (isIos) {
+      return const CupertinoModule();
+    } else if (isAndroid) {
+      return const MaterialModule();
+    } else if (isDesktop && desktop != 'none') {
+      if (desktop == 'material') {
+        return const MaterialModule();
+      } else if (desktop == 'cupertino') {
+        return const CupertinoModule();
+      } else {
+        return const FluentModule();
+      }
+    } else {
+      return const DesktopSelector();
+    }
+  }
 }

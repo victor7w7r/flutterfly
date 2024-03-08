@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/extensions/extensions.dart';
+import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/errors.dart';
 import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
 import 'package:flutterfly/features/common/presentation/widgets/nest.dart';

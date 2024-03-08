@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutterfly/core/extensions/extensions.dart';
+import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/material/presentation/screens/home/home_widgets.dart';
 import 'package:flutterfly/features/material/presentation/widgets/widgets.dart';
