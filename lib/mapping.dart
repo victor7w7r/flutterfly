@@ -17,4 +17,6 @@ class PersonEntity extends Equatable {
 @MappableClass()
 class Person extends PersonEntity with PersonMappable {
   Person(super.name, {super.age = 18});
+
+  static const fromJson = PersonMapper.fromMap;
 }
