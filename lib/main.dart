@@ -2,11 +2,13 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutterfly/core/di/di.dart';
 import 'package:flutterfly/core/mappers/fic_mappers.dart';
+import 'package:flutterfly/core/mvvm/base_mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
-import 'package:flutterfly/features/common/ui/screens/desktop_selector.dart';
-import 'package:flutterfly/features/cupertino/cupertino.dart';
-import 'package:flutterfly/features/fluent/fluent.dart';
-import 'package:flutterfly/features/material/material.dart';
+import 'package:flutterfly/features/common/ui/pages/desktop_selector_page.dart';
+import 'package:flutterfly/features/common/ui/services/desktop_service.dart';
+import 'package:flutterfly/features/cupertino/ui/cupertino.dart';
+import 'package:flutterfly/features/fluent/ui/fluent.dart';
+import 'package:flutterfly/features/material/ui/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart'
     show appWindow, doWhenWindowReady;
 
@@ -32,23 +34,26 @@ final class App extends StatelessWidget {
   const App({super.key});
 
   @override
-  Widget build(final BuildContext context) {
-    final desktop = ref.watch(desktopProvider$);
-
-    if (isIos) {
-      return const CupertinoModule();
-    } else if (isAndroid) {
-      return const MaterialModule();
-    } else if (isDesktop && desktop != 'none') {
-      if (desktop == 'material') {
-        return const MaterialModule();
-      } else if (desktop == 'cupertino') {
-        return const CupertinoModule();
-      } else {
-        return const FluentModule();
-      }
-    } else {
-      return const DesktopSelector();
-    }
-  }
+  Widget build(
+    final BuildContext context,
+  ) =>
+      ListenViewModel<DesktopService>(
+        builder: (final ctl) {
+          if (isIos) {
+            return const CupertinoModule();
+          } else if (isAndroid) {
+            return const MaterialModule();
+          } else if (isDesktop && ctl.state != 'none') {
+            if (ctl.state == 'material') {
+              return const MaterialModule();
+            } else if (ctl.state == 'cupertino') {
+              return const CupertinoModule();
+            } else {
+              return const FluentModule();
+            }
+          } else {
+            return const DesktopSelectorPage();
+          }
+        },
+      );
 }
