@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:flutterfly/core/di/di.dart';
+import 'package:flutterfly/core/mappers/fic_mappers.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/screens/desktop_selector.dart';
 import 'package:flutterfly/features/cupertino/cupertino.dart';
@@ -11,6 +12,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart'
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  initializeFICMappers();
   await configInjection();
   if (isDesktopOnly) {
     doWhenWindowReady(

@@ -11,5 +11,5 @@ final class BitcoinDto extends Bitcoin with BitcoinDtoMappable {
     super.price,
   );
 
-  static const fromJson = BitcoinDtoMapper.fromMap;
+  static const fromJson = BitcoinDtoMapper.fromJson;
 }

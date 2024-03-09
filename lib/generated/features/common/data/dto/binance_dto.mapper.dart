@@ -131,22 +131,22 @@ class BinanceDtoMapper extends ClassMapperBase<BinanceDto> {
   @override
   final Function instantiate = _instantiate;
 
-  static BinanceDto fromMap(Map<String, dynamic> map) {
+  static BinanceDto fromJson(Map<String, dynamic> map) {
     return ensureInitialized().decodeMap<BinanceDto>(map);
   }
 
-  static BinanceDto fromJson(String json) {
+  static BinanceDto fromJsonString(String json) {
     return ensureInitialized().decodeJson<BinanceDto>(json);
   }
 }
 
 mixin BinanceDtoMappable {
-  String toJson() {
+  String toJsonString() {
     return BinanceDtoMapper.ensureInitialized()
         .encodeJson<BinanceDto>(this as BinanceDto);
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return BinanceDtoMapper.ensureInitialized()
         .encodeMap<BinanceDto>(this as BinanceDto);
   }

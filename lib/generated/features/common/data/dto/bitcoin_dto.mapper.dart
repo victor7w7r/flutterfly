@@ -38,22 +38,22 @@ class BitcoinDtoMapper extends ClassMapperBase<BitcoinDto> {
   @override
   final Function instantiate = _instantiate;
 
-  static BitcoinDto fromMap(Map<String, dynamic> map) {
+  static BitcoinDto fromJson(Map<String, dynamic> map) {
     return ensureInitialized().decodeMap<BitcoinDto>(map);
   }
 
-  static BitcoinDto fromJson(String json) {
+  static BitcoinDto fromJsonString(String json) {
     return ensureInitialized().decodeJson<BitcoinDto>(json);
   }
 }
 
 mixin BitcoinDtoMappable {
-  String toJson() {
+  String toJsonString() {
     return BitcoinDtoMapper.ensureInitialized()
         .encodeJson<BitcoinDto>(this as BitcoinDto);
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return BitcoinDtoMapper.ensureInitialized()
         .encodeMap<BitcoinDto>(this as BitcoinDto);
   }
