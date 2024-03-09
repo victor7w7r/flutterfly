@@ -5,9 +5,9 @@ import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/errors.dart';
-import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
-import 'package:flutterfly/features/common/presentation/widgets/nest.dart';
-import 'package:flutterfly/features/common/providers/providers.dart';
+import 'package:flutterfly/features/common/ui/widgets/consumer.dart';
+import 'package:flutterfly/features/common/ui/widgets/nest.dart';
+import 'package:flutterfly/features/common/ui/services/providers.dart';
 import 'package:flutterfly/features/material/providers/material.riverpod.dart';
 
 final class TopContent extends StatelessWidget {

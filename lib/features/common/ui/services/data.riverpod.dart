@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'data.riverpod.g.dart';
+part '../../providers/data.riverpod.g.dart';
 
 @riverpod
 final class DataProvider extends _$DataProvider {

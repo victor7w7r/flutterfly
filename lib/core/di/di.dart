@@ -7,4 +7,4 @@ import 'di.config.dart';
 final inject = GetIt.instance;
 
 @InjectableInit()
-void configInjection() => inject.init();
+Future<void> configInjection() => inject.init();

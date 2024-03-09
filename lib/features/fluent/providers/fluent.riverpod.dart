@@ -4,7 +4,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:flutterfly/core/modules/prefs.module.dart';
+import 'package:flutterfly/core/modules/localdb_module.dart';
 
 part 'fluent.riverpod.g.dart';
 

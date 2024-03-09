@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/features/common/presentation/widgets/consumer.dart';
-import 'package:flutterfly/features/common/providers/data.riverpod.dart';
+import 'package:flutterfly/features/common/ui/widgets/consumer.dart';
+import 'package:flutterfly/features/common/ui/services/data.riverpod.dart';
 import 'package:flutterfly/features/cupertino/presentation/widgets/theme_toggle.dart';
 import 'package:flutterfly/features/cupertino/providers/cupertino.riverpod.dart';
 

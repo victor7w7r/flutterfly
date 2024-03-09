@@ -5,7 +5,7 @@ import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/errors.dart';
-import 'package:flutterfly/features/common/providers/providers.dart';
+import 'package:flutterfly/features/common/ui/services/providers.dart';
 import 'package:flutterfly/features/fluent/providers/fluent.riverpod.dart';
 
 final class ColorButton extends StatelessWidget {

@@ -5,7 +5,7 @@ import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
-import 'package:flutterfly/features/common/presentation/widgets/title_bar.dart';
+import 'package:flutterfly/features/common/ui/widgets/title_bar.dart';
 import 'package:flutterfly/features/fluent/presentation/screens/home/home_widgets.dart';
 import 'package:flutterfly/features/fluent/presentation/widgets/widgets.dart';
 import 'package:flutterfly/features/fluent/providers/fluent.riverpod.dart';

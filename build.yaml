@@ -1,0 +1,18 @@
+targets:
+  $default:
+    builders:
+      retrofit_generator:
+        generate_for:
+          include:
+            - lib/**_data_source.dart
+      source_gen|combining_builder:
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/generated/{{}}.g.dart'
+      dart_mappable_builder:
+        generate_for:
+          include:
+            - lib/**_dto.dart
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/generated/{{}}.mapper.dart'

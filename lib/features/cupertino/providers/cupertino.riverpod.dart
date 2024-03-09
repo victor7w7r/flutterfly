@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:flutterfly/core/modules/prefs.module.dart';
+import 'package:flutterfly/core/modules/localdb_module.dart';
 
 part 'cupertino.riverpod.g.dart';
 

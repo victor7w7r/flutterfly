@@ -6,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/utils/platforms.dart';
-import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
-import 'package:flutterfly/features/common/providers/providers.dart';
+import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
+import 'package:flutterfly/features/common/ui/services/providers.dart';
 import 'package:flutterfly/features/fluent/presentation/screens/store/store_widgets.dart';
 import 'package:flutterfly/features/fluent/presentation/widgets/widgets.dart';
 import 'package:flutterfly/features/fluent/providers/fluent.riverpod.dart';

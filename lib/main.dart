@@ -1,10 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:fl_query/fl_query.dart' show QueryClient;
-
 import 'package:flutterfly/core/di/di.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
-import 'package:flutterfly/features/common/presentation/screens/desktop_selector.dart';
+import 'package:flutterfly/features/common/ui/screens/desktop_selector.dart';
 import 'package:flutterfly/features/cupertino/cupertino.dart';
 import 'package:flutterfly/features/fluent/fluent.dart';
 import 'package:flutterfly/features/material/material.dart';
@@ -13,9 +11,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart'
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configInjection();
-  await QueryClient.initialize(cachePrefix: 'flutterfly');
-
+  await configInjection();
   if (isDesktopOnly) {
     doWhenWindowReady(
       () => appWindow

@@ -4,7 +4,7 @@ import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/models/models.dart';
 import 'package:flutterfly/features/common/services/binance.service.dart';
 
-part 'binance.riverpod.g.dart';
+part '../../providers/binance.riverpod.g.dart';
 
 @riverpod
 final class BinanceProvider extends _$BinanceProvider {

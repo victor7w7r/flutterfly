@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/utils/platforms.dart';
-import 'package:flutterfly/features/common/providers/desktop.riverpod.dart';
-import 'package:flutterfly/features/common/presentation/screens/desktop_selector_widgets.dart';
-import 'package:flutterfly/features/common/presentation/widgets/widgets.dart';
+import 'package:flutterfly/features/common/ui/services/desktop.riverpod.dart';
+import 'package:flutterfly/features/common/ui/screens/desktop_selector_widgets.dart';
+import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
 
 class DesktopSelector extends ConsumerStatefulWidget {
   const DesktopSelector({super.key});
