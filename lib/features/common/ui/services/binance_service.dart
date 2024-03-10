@@ -1,4 +1,6 @@
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart'
+    show IList;
+
 import 'package:fl_query/fl_query.dart' show Query;
 import 'package:fpdart/fpdart.dart' show identity;
 import 'package:injectable/injectable.dart' show lazySingleton;

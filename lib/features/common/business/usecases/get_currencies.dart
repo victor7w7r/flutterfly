@@ -1,4 +1,6 @@
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart'
+    show IList;
+
 import 'package:fpdart/fpdart.dart' show Either;
 import 'package:injectable/injectable.dart' show injectable;
 

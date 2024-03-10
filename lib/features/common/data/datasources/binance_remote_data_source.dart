@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart' show compute;
 
 import 'package:dio/dio.dart';
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -40,6 +39,6 @@ Map<String, dynamic> serializeBinanceDto(final BinanceDto object) =>
     object.toJson();
 
 List<Map<String, dynamic>> serializeBinanceDtoList(
-  final IList<BinanceDto> objects,
+  final List<BinanceDto> objects,
 ) =>
     objects.map((final e) => e.toJson()).toList();

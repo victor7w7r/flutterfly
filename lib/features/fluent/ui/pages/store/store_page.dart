@@ -4,8 +4,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/di/di.dart';
-import 'package:flutterfly/core/utils/mvvm.dart';
-import 'package:flutterfly/core/utils/platforms.dart';
+import 'package:flutterfly/core/utils/utils.dart';
 import 'package:flutterfly/features/common/ui/services/services.dart';
 import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
 import 'package:flutterfly/features/fluent/ui/pages/store/store_widgets.dart';

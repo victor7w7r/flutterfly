@@ -8,9 +8,14 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:dio/dio.dart' as _i5;
+import 'package:get_it/get_it.dart' as _i1;
+import 'package:injectable/injectable.dart' as _i2;
+
 import 'package:flutterfly/core/modules/dio_module.dart' as _i21;
 import 'package:flutterfly/core/modules/localdb_module.dart' as _i6;
+
 import 'package:flutterfly/features/common/business/repositories/binance_repository.dart'
     as _i9;
 import 'package:flutterfly/features/common/business/repositories/bitcoin_repository.dart'
@@ -43,8 +48,6 @@ import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart'
     as _i15;
 import 'package:flutterfly/features/material/ui/services/material_service.dart'
     as _i7;
-import 'package:get_it/get_it.dart' as _i1;
-import 'package:injectable/injectable.dart' as _i2;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt

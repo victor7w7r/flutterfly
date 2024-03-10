@@ -3,8 +3,7 @@ import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/di/di.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
-import 'package:flutterfly/core/utils/mvvm.dart';
-import 'package:flutterfly/core/utils/platforms.dart';
+import 'package:flutterfly/core/utils/utils.dart';
 import 'package:flutterfly/features/common/ui/widgets/title_bar.dart';
 import 'package:flutterfly/features/fluent/ui/pages/home/home_widgets.dart';
 import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
