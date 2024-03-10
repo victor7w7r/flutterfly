@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/features/common/ui/widgets/consumer.dart';
-import 'package:flutterfly/features/material/ui/providers/material.riverpod.dart';
+import 'package:flutterfly/core/di/di.dart';
+import 'package:flutterfly/core/mvvm/base_mvvm.dart';
+import 'package:flutterfly/features/material/ui/services/material_service.dart';
 
-final class DrawerMenu extends ConsumerWidget {
+final class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
 
   @override
   Widget build(
     final BuildContext context,
-    final WidgetRef ref,
   ) =>
       Drawer(
         child: n.Column([
           const Spacer(flex: 2),
-          AppConsumer(
-            (final ref) => DrawerHeader(
+          ListenViewModel<MaterialService>(
+            builder: (final ctl) => DrawerHeader(
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                    ref.watch(materialProvider$)
+                    ctl.isDark
                         ? 'assets/aqua-light.png'
                         : 'assets/aqua-black.png',
                   ),
@@ -45,13 +44,11 @@ final class DrawerMenu extends ConsumerWidget {
           n.ListTile()
             ..leading = n.Icon(Icons.color_lens_outlined)
             ..title = 'Change Color Mode'.n
-            ..onTap = ref.read(materialProvider$.notifier).toggle,
+            ..onTap = inject.get<MaterialService>().toggle,
           const Spacer(flex: 15),
-          AppConsumer(
-            (final ref) => n.Image.asset(
-              ref.watch(materialProvider$)
-                  ? 'assets/brandwhite.png'
-                  : 'assets/brand.png',
+          ListenViewModel<MaterialService>(
+            builder: (final ctl) => n.Image.asset(
+              ctl.isDark ? 'assets/brandwhite.png' : 'assets/brand.png',
             )
               ..width = 250.0
               ..height = 75.0,

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutterfly/core/mvvm/base_mvvm.dart';
+import 'package:flutterfly/features/common/ui/services/data_service.dart';
 
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/resources/extensions.dart';
-import 'package:flutterfly/features/common/ui/widgets/consumer.dart';
-import 'package:flutterfly/features/common/ui/services/data_service.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/home/home_widgets.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/theme_toggle.dart';
 
@@ -23,17 +23,16 @@ final class HomePage extends StatelessWidget {
             ..fontSize = (context.mHeight > 960) ? 25 : 20
             ..n.center,
           const SizedBox(height: 10),
-          AppConsumer((final ref) {
-            final data = ref.watch(dataProvider$);
-            return n.Text(
-              data.isEmpty
+          ListenViewModel<DataService>(
+            builder: (final ctl) => n.Text(
+              ctl.state.isEmpty
                   ? 'Store state: Not yet.'
-                  : 'Store state: Yes, you write. $data',
+                  : 'Store state: Yes, you write. ${ctl.state}',
             )
               ..fontSize =
-                  data.isEmpty ? ((context.mHeight > 960) ? 20 : 15) : 20
-              ..n.center;
-          }),
+                  ctl.state.isEmpty ? ((context.mHeight > 960) ? 20 : 15) : 20
+              ..n.center,
+          ),
           const SizedBox(height: 20),
           'Made with love by '.n
             ..freezed

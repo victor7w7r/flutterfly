@@ -15,7 +15,10 @@ final class BlurButton extends StatelessWidget {
   final VoidCallback onClick;
 
   @override
-  Widget build(final BuildContext context) => FilledButton(
+  Widget build(
+    final BuildContext context,
+  ) =>
+      FilledButton(
         onPressed: onClick,
         style: ButtonStyle(
           elevation: ButtonState.all<double>(0),

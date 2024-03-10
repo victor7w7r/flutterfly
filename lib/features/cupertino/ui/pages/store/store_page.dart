@@ -1,43 +1,46 @@
 import 'dart:async' show unawaited;
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/features/common/ui/widgets/consumer.dart';
+import 'package:flutterfly/core/di/di.dart';
+import 'package:flutterfly/core/mvvm/base_mvvm.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/theme_toggle.dart';
-import 'package:flutterfly/features/cupertino/ui/providers/cupertino.riverpod.dart';
 
-class StorePage extends ConsumerStatefulWidget {
+class StorePage extends StatefulWidget {
   const StorePage({super.key});
 
   @override
-  ConsumerState<Store> createState() => _StoreState();
+  State<StorePage> createState() => _StoreState();
 }
 
-class _StoreState extends ConsumerState<Store> {
+class _StoreState extends State<StorePage> {
   final TextEditingController _txtCtl = TextEditingController();
 
-  void _request(final BuildContext context) => _txtCtl.text.isNotEmpty
-      ? ref.read(dataProvider$.notifier).mutate = _txtCtl.text
-      : unawaited(
-          showCupertinoModalPopup<void>(
-            context: context,
-            builder: (final ctx) => CupertinoAlertDialog(
-              title: const Text('Error'),
-              content: const Text('Is empty your TextField'),
-              actions: [
-                CupertinoDialogAction(
-                  isDefaultAction: true,
-                  onPressed: () => Navigator.pop(ctx),
-                  child: const Text('OK'),
+  void _request(
+    final BuildContext context,
+  ) =>
+      _txtCtl.text.isNotEmpty
+          ? inject.get<DataService>().mutate = _txtCtl.text
+          : unawaited(
+              showCupertinoModalPopup<void>(
+                context: context,
+                builder: (final ctx) => CupertinoAlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('Is empty your TextField'),
+                  actions: [
+                    CupertinoDialogAction(
+                      isDefaultAction: true,
+                      onPressed: () => Navigator.pop(ctx),
+                      child: const Text('OK'),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-        );
+              ),
+            );
 
   @override
   void dispose() {
@@ -63,13 +66,13 @@ class _StoreState extends ConsumerState<Store> {
               ..freezed
               ..n.center,
             const SizedBox(height: 25),
-            AppConsumer(
-              (final ref) => CupertinoTextField(
+            ListenViewModel<CupertinoService>(
+              builder: (final ctl) => CupertinoTextField(
                 placeholder: 'here',
                 cursorHeight: 25,
                 controller: _txtCtl,
                 decoration: BoxDecoration(
-                  color: ref.watch(cupertinoProvider$)
+                  color: ctl.isDark
                       ? const Color.fromARGB(255, 43, 53, 69)
                       : const Color.fromARGB(255, 248, 250, 253),
                 ),
@@ -83,16 +86,15 @@ class _StoreState extends ConsumerState<Store> {
               child: const Text('SUBMIT'),
             ),
             const SizedBox(height: 20),
-            AppConsumer((final ref) {
-              final data = ref.watch(dataProvider$);
-              return n.Text(
-                data.isEmpty
+            ListenViewModel<DataService>(
+              builder: (final ctl) => n.Text(
+                ctl.state.isEmpty
                     ? 'Store state: Not yet.'
-                    : 'Store state: Yes, you write. $data',
+                    : 'Store state: Yes, you write. ${ctl.state.isEmpty}',
               )
                 ..fontSize = 15
-                ..n.center;
-            }),
+                ..n.center,
+            ),
           ])
             ..mainCenter
             ..crossCenter,

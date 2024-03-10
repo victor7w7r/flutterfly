@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:flutterfly/features/fluent/ui/providers/fluent.riverpod.dart';
+import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 
 final class StoreText extends StatelessWidget {
   const StoreText({
@@ -13,7 +13,10 @@ final class StoreText extends StatelessWidget {
   final FluentThemeApp theme;
 
   @override
-  Widget build(final BuildContext context) => SizedBox(
+  Widget build(
+    final BuildContext context,
+  ) =>
+      SizedBox(
         width: 250.0,
         height: 40.0,
         child: TextBox(

@@ -1,12 +1,10 @@
-import 'dart:async' show Timer;
+import 'dart:async' show Timer, unawaited;
 
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:injectable/injectable.dart' show lazySingleton;
 
 import 'package:flutterfly/core/modules/localdb_module.dart';
-
-part '../../providers/fluent.riverpod.g.dart';
 
 final List<Color> darkColors = [
   Colors.black,
@@ -37,12 +35,22 @@ final class FluentThemeApp {
       FluentThemeApp(isDark ?? this.isDark, themeColor ?? this.themeColor);
 }
 
-@riverpod
-final class FluentProvider extends _$FluentProvider {
-  @override
-  FluentThemeApp build() => ref.read(prefsModule$).fluentDark
-      ? FluentThemeApp.dark()
-      : FluentThemeApp.light();
+@lazySingleton
+final class FluentService extends ChangeNotifier {
+  FluentService(this._localDbModule)
+      : _state = _localDbModule.fluentDark
+            ? FluentThemeApp.dark()
+            : FluentThemeApp.light();
+
+  final LocalDbModule _localDbModule;
+  FluentThemeApp _state;
+
+  FluentThemeApp get state => _state;
+
+  set state(final FluentThemeApp value) {
+    _state = value;
+    notifyListeners();
+  }
 
   void interpolator(final List<Color> changer) {
     var linear = 0.1;
@@ -65,12 +73,6 @@ final class FluentProvider extends _$FluentProvider {
   Future<void> toggle(final bool value) async {
     state = state.copyWith(isDark: value);
     state.isDark ? interpolator(darkColors) : interpolator(lightColors);
-    await ref.read(sharedPrefs$).setBool('fluentdark', state.isDark);
+    unawaited(_localDbModule.prefsBox.put('fluentdark', state.isDark));
   }
 }
-
-@riverpod
-bool fluentIsDarkProvider(
-  final FluentIsDarkProviderRef ref,
-) =>
-    ref.watch(fluentProvider$).isDark;

@@ -1,23 +1,28 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutterfly/core/mvvm/base_mvvm.dart';
 
 import 'package:flutterfly/features/fluent/ui/pages/home/home_page.dart';
-import 'package:flutterfly/features/fluent/ui/pages/store/store.dart';
-import 'package:flutterfly/features/fluent/ui/providers/fluent.riverpod.dart';
+import 'package:flutterfly/features/fluent/ui/pages/store/store_page.dart';
+import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 
-final class FluentModule extends ConsumerWidget {
+final class FluentModule extends StatelessWidget {
   const FluentModule({super.key});
 
   @override
-  Widget build(final BuildContext context, final WidgetRef ref) => FluentApp(
-        title: 'flutterfly',
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-        routes: {
-          '/': (final _) => const Home(),
-          '/store': (final _) => const Store(),
-        },
-        color: ref.watch(fluentProvider$).themeColor[0],
+  Widget build(
+    final BuildContext context,
+  ) =>
+      ListenViewModel<FluentService>(
+        builder: (final ctl) => FluentApp(
+          title: 'flutterfly',
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/',
+          routes: {
+            '/': (final _) => const HomePage(),
+            '/store': (final _) => const StorePage(),
+          },
+          color: ctl.state.themeColor[0],
+        ),
       );
 }

@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutterfly/core/mvvm/base_mvvm.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/features/cupertino/ui/providers/cupertino.riverpod.dart';
+import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 
-final class ThemeToggle extends ConsumerWidget {
+final class ThemeToggle extends StatelessWidget {
   const ThemeToggle({super.key});
 
   @override
   Widget build(
     final BuildContext context,
-    final WidgetRef ref,
   ) =>
       n.Wrap([
         'Dark Mode'.n
@@ -19,12 +18,13 @@ final class ThemeToggle extends ConsumerWidget {
           ..fontSize = 13,
         Transform.scale(
           scale: 0.7,
-          child: CupertinoSwitch(
-            value: ref.watch(cupertinoProvider$),
-            onChanged: (final _) async =>
-                ref.read(cupertinoProvider$.notifier).toggle(),
-            thumbColor: CupertinoColors.white,
-            activeColor: CupertinoColors.activeBlue,
+          child: ListenViewModel<CupertinoService>(
+            builder: (final ctl) => CupertinoSwitch(
+              value: ctl.isDark,
+              onChanged: (final _) async => ctl.toggle(),
+              thumbColor: CupertinoColors.white,
+              activeColor: CupertinoColors.activeBlue,
+            ),
           ),
         ),
       ])

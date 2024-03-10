@@ -1,20 +1,18 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/utils/errors.dart';
-import 'package:flutterfly/features/common/ui/services/binance.riverpod.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_widgets.dart';
 
-final class Crypto extends ConsumerStatefulWidget {
-  const Crypto({super.key});
+final class CryptoPage extends StatefulWidget {
+  const CryptoPage({super.key});
 
   @override
-  ConsumerState<Crypto> createState() => _CryptoState();
+  State<CryptoPage> createState() => _CryptoPageState();
 }
 
-final class _CryptoState extends ConsumerState<Crypto> {
+final class _CryptoPageState extends State<CryptoPage> {
   final scrCtl = ScrollController();
 
   @override

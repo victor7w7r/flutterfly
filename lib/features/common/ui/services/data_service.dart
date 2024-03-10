@@ -8,7 +8,7 @@ final class DataService extends ChangeNotifier {
 
   String _state;
 
-  void mutate(final String state) {
+  set mutate(final String state) {
     _state = state;
     notifyListeners();
   }

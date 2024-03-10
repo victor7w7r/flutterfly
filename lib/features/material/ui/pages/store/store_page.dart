@@ -2,41 +2,44 @@ import 'dart:async' show unawaited;
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:niku/namespace.dart' as n;
 
+import 'package:flutterfly/core/di/di.dart';
+import 'package:flutterfly/core/mvvm/base_mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
-import 'package:flutterfly/features/common/ui/widgets/consumer.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
 import 'package:flutterfly/features/material/ui/widgets/widgets.dart';
 
-class StorePage extends ConsumerStatefulWidget {
+class StorePage extends StatefulWidget {
   const StorePage({super.key});
 
   @override
-  ConsumerState<Store> createState() => _StoreState();
+  State<StorePage> createState() => _StoreState();
 }
 
-class _StoreState extends ConsumerState<Store> {
+class _StoreState extends State<StorePage> {
   final TextEditingController _txtCtl = TextEditingController();
 
-  void _request(final BuildContext context) => _txtCtl.text.isNotEmpty
-      ? ref.read(dataProvider$.notifier).mutate = _txtCtl.text
-      : unawaited(
-          showDialog(
-            context: context,
-            builder: (final ctx) => AlertDialog(
-              title: const Text('Error'),
-              content: const Text('Is empty your TextField'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(ctx, 'OK'),
-                  child: const Text('OK'),
+  void _request(
+    final BuildContext context,
+  ) =>
+      _txtCtl.text.isNotEmpty
+          ? inject.get<DataService>().mutate = _txtCtl.text
+          : unawaited(
+              showDialog(
+                context: context,
+                builder: (final ctx) => AlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('Is empty your TextField'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(ctx, 'OK'),
+                      child: const Text('OK'),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-        );
+              ),
+            );
 
   @override
   void dispose() {
@@ -81,16 +84,15 @@ class _StoreState extends ConsumerState<Store> {
               child: const Text('SUBMIT'),
             ),
             const SizedBox(height: 10),
-            AppConsumer((final ref) {
-              final data = ref.watch(dataProvider$);
-              return n.Text(
-                data.isEmpty
+            ListenViewModel<DataService>(
+              builder: (final ctl) => n.Text(
+                ctl.state.isEmpty
                     ? 'Store state: Not yet.'
-                    : 'Store state: Yes, you write. $data',
+                    : 'Store state: Yes, you write. ${ctl.state.isEmpty}',
               )
                 ..fontSize = 15
-                ..n.center;
-            }),
+                ..n.center,
+            ),
           ])
             ..mainCenter
             ..crossCenter,

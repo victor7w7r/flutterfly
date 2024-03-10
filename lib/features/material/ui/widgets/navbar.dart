@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutterfly/core/mvvm/base_mvvm.dart';
+import 'package:flutterfly/features/material/ui/services/material_service.dart';
 
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
-import 'package:flutterfly/features/material/ui/providers/material.riverpod.dart';
 
 final class NavBar extends StatelessWidget {
   const NavBar(this.title, {super.key});
@@ -20,16 +21,14 @@ final class NavBar extends StatelessWidget {
         toolbarHeight: isMacOS ? 30 : null,
         leading: isMacOS ? Container() : null,
         title: isMacOS
-            ? AppConsumer(
-                (final ref) =>
-                    WindowTitleBar(isDark: ref.watch(materialProvider$)),
+            ? ListenViewModel<MaterialService>(
+                builder: (final ctl) => WindowTitleBar(isDark: ctl.isDark),
               )
             : n.Stack([
                 title.n,
                 if (isDesktop)
-                  AppConsumer(
-                    (final ref) =>
-                        WindowTitleBar(isDark: ref.watch(materialProvider$)),
+                  ListenViewModel<MaterialService>(
+                    builder: (final ctl) => WindowTitleBar(isDark: ctl.isDark),
                   ),
               ]),
         actions: isMacOS
