@@ -1,10 +1,8 @@
 # flutterfly
 
-A template for Flutter with essential packages
+A template with clean architecture for Flutter with useful packages
 
-## :warning: Test files not found
-
-This template is used to be clean. Made with ❤️ by
+Made with ❤️ by
 
 ![Alt text](assets/brandwhite.png?raw=true "Title")
 
@@ -18,25 +16,24 @@ This template is used to be clean. Made with ❤️ by
 $ flutter pub get
 ```
 
-## Architecture
-
-This app was made with the 036 Architecture for Flutter
-
-![Alt text](flutterarch.png?raw=true "Title")
-
 ## Extra Packages
 
 - bitsdojo_window: Makes it easy to customize and work with your Flutter desktop app window.
 - cupertino_icons: Icons for Flutter's Cupertino widgets.
+- dart_mappable: Improved json serialization and data classes with full support for generics, inheritance, customization and more:
 - dio: A powerful Http client for Dart.
+- equatable: Simplify Equality Comparisons.
+- fast_immutable_collections: Fast immutable collections for Dart.
+- fl_query: Asynchronous data caching, refetching & invalidation library for Flutter.
 - fluent_ui: Unofficial implementation of Fluent UI for Flutter.
 - flutter_native_splash: Splash screen for mobile apps.
-- flutter_riverpod: A state-management library, it's a rewrite of provider to make improvements that would be otherwise impossible.
 - fpdart: Functional programming in Dart and Flutter.
-- freezed: Code generation for immutable classes
-- json_annotation: Defines the annotations used by json_serializable to create code for JSON serialization and deserialization.
+- get_it: Service Locator for Dart and Flutter.
+- hive: A lightweight and blazing fast key-value database.
+- injectable: Convenient code generator for get_it. Inspired by Angular DI, Guice DI and inject.dart.
 - niku: Fluently developing without headache and Nested Hell.
-- shared_preferences: Flutter plugin for reading and writing simple key-value pairs.
+- retrofit: Is an dio client generator using source_gen and inspired by Chopper and Retrofit.
+- watch_it: A simple state management solution powered by get_it.
 
 ### Change to blank template
 

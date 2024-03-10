@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/widgets.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
 import 'package:bitsdojo_window/bitsdojo_window.dart'
     show appWindow, doWhenWindowReady;
 
@@ -18,7 +17,7 @@ void main() {
       ..show(),
   );
 
-  runApp(const ProviderScope(child: App()));
+  runApp(const App());
 }
 
 final class App extends StatelessWidget {
