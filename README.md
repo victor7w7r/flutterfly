@@ -20,7 +20,7 @@ $ flutter pub get
 
 - bitsdojo_window: Makes it easy to customize and work with your Flutter desktop app window.
 - cupertino_icons: Icons for Flutter's Cupertino widgets.
-- dart_mappable Improved json serialization and data classes with full support for generics, inheritance, customization and more:
+- dart_mappable: Improved json serialization and data classes with full support for generics, inheritance, customization and more:
 - dio: A powerful Http client for Dart.
 - equatable: Simplify Equality Comparisons.
 - fast_immutable_collections: Fast immutable collections for Dart.

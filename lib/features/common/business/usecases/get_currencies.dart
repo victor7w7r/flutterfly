@@ -12,7 +12,7 @@ import 'package:flutterfly/features/common/business/repositories/repositories.da
 @injectable
 class GetCurrenciesUseCase
     implements UseCase<Either<Failure, IList<Binance>>, void> {
-  GetCurrenciesUseCase(this._repository);
+  const GetCurrenciesUseCase(this._repository);
 
   final BinanceRepository _repository;
 
