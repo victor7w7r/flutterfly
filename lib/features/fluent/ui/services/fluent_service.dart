@@ -1,7 +1,6 @@
 import 'dart:async' show Timer, unawaited;
 
 import 'package:fluent_ui/fluent_ui.dart';
-
 import 'package:injectable/injectable.dart' show lazySingleton;
 
 import 'package:flutterfly/core/modules/localdb_module.dart';

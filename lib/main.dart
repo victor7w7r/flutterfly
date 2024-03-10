@@ -2,13 +2,14 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutterfly/core/di/di.dart';
 import 'package:flutterfly/core/mappers/fic_mappers.dart';
-import 'package:flutterfly/core/mvvm/base_mvvm.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_page.dart';
 import 'package:flutterfly/features/common/ui/services/desktop_service.dart';
 import 'package:flutterfly/features/cupertino/ui/cupertino.dart';
 import 'package:flutterfly/features/fluent/ui/fluent.dart';
 import 'package:flutterfly/features/material/ui/material.dart';
+
 import 'package:bitsdojo_window/bitsdojo_window.dart'
     show appWindow, doWhenWindowReady;
 

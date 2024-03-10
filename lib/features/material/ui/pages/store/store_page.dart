@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/di/di.dart';
-import 'package:flutterfly/core/mvvm/base_mvvm.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
 import 'package:flutterfly/features/material/ui/widgets/widgets.dart';

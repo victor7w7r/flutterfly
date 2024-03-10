@@ -1,17 +1,16 @@
 import 'dart:async' show unawaited;
 
 import 'package:fluent_ui/fluent_ui.dart';
-
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/di/di.dart';
-import 'package:flutterfly/core/mvvm/base_mvvm.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/services/services.dart';
 import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
 import 'package:flutterfly/features/fluent/ui/pages/store/store_widgets.dart';
-import 'package:flutterfly/features/fluent/ui/widgets/widgets.dart';
 import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
+import 'package:flutterfly/features/fluent/ui/widgets/widgets.dart';
 
 class StorePage extends StatefulWidget {
   const StorePage({super.key});

@@ -1,13 +1,13 @@
 import 'dart:async' show unawaited;
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/di/di.dart';
-import 'package:flutterfly/core/mvvm/base_mvvm.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
+import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/theme_toggle.dart';
 
 class StorePage extends StatefulWidget {

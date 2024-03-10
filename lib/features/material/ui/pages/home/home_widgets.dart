@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfly/core/mvvm/base_mvvm.dart';
 
 import 'package:niku/namespace.dart' as n;
 
+import 'package:flutterfly/core/di/di.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
-import 'package:flutterfly/core/utils/errors.dart';
-import 'package:flutterfly/features/common/ui/widgets/nest.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/features/common/ui/services/services.dart';
+import 'package:flutterfly/features/common/ui/widgets/nest.dart';
 import 'package:flutterfly/features/material/ui/services/material_service.dart';
 
 final class TopContent extends StatelessWidget {
@@ -107,9 +107,11 @@ final class BottomContent extends StatefulWidget {
 final class _BottomContentState extends State<BottomContent> {
   final scrCtl = ScrollController();
 
+  late QueryBinance _query;
+
   void _scrollListener() =>
       scrCtl.position.pixels == scrCtl.position.maxScrollExtent
-          ? ref.read(binanceProvider$.notifier).paginate()
+          ? inject.get<BinanceService>().refreshBinance(_query)
           : null;
 
   @override
@@ -131,42 +133,50 @@ final class _BottomContentState extends State<BottomContent> {
           ..fontSize = (widget.height > 960) ? 35 : 30
           ..n.center,
         const SizedBox(height: 25),
-        ref.watch(binanceProvider$).when(
-              loading: () => n.Row(
-                const [SizedBox(height: 120), CircularProgressIndicator()],
-              )..mainCenter,
-              error: (final err, final _) => n.Row([
-                const SizedBox(height: 120),
-                (err as HttpNotSuccess).message.n..fontSize = 20,
-              ])
-                ..mainCenter
-                ..crossCenter,
-              data: (final currs) => Nest([
-                (final next) => Expanded(child: next),
-                (final next) => RefreshIndicator(
-                      onRefresh: () async =>
-                          ref.refresh(binanceProvider$.future),
-                      child: next,
-                    ),
-                (final _) => n.GridView.count(crossAxisCount: 2)
-                  ..childAspectRatio = 2
-                  ..px = 40
-                  ..physics = const AlwaysScrollableScrollPhysics()
-                  ..mainAxisSpacing = 10.0
-                  ..scrollDirection = Axis.vertical
-                  ..controller = scrCtl
-                  ..children = currs
-                      .map(
-                        (final bin) => CurrencyCard(
-                          sym: bin.symbol,
-                          per: bin.priceChangePercent,
-                          pri: bin.bidPrice,
-                          orientation: widget.pOrientation,
-                        ),
-                      )
-                      .toList(),
-              ]),
-            ),
+        ViewModel<BinanceService>(
+          builder: (final ctl) async => QueryBinanceBuilder(
+            'binance_fetch',
+            ctl.fetchBinance(),
+            queryAccess: (final query) => _query = query,
+            initial: const [],
+            loading: () => n.Row(
+              const [
+                SizedBox(height: 120),
+                CircularProgressIndicator(),
+              ],
+            )..mainCenter,
+            error: (final _, final error) => n.Row([
+              const SizedBox(height: 120),
+              (error.message).n..fontSize = 20,
+            ])
+              ..mainCenter
+              ..crossCenter,
+            success: (final query, final data) => Nest([
+              (final next) => Expanded(child: next),
+              (final next) => RefreshIndicator(
+                    onRefresh: () async => ctl.refreshBinance(query),
+                    child: next,
+                  ),
+              (final _) => n.GridView.count(crossAxisCount: 2)
+                ..childAspectRatio = 2
+                ..px = 40
+                ..physics = const AlwaysScrollableScrollPhysics()
+                ..mainAxisSpacing = 10.0
+                ..scrollDirection = Axis.vertical
+                ..controller = scrCtl
+                ..children = data
+                    .map(
+                      (final bin) => CurrencyCard(
+                        sym: bin.symbol,
+                        per: bin.priceChangePercent,
+                        pri: bin.bidPrice,
+                        orientation: widget.pOrientation,
+                      ),
+                    )
+                    .toList(),
+            ]),
+          ),
+        ),
       ]);
 }
 

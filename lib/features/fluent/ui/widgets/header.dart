@@ -1,9 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
-
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/mvvm/base_mvvm.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/features/common/ui/widgets/nest.dart';
 import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 

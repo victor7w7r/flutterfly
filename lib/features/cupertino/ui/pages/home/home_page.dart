@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutterfly/core/mvvm/base_mvvm.dart';
-import 'package:flutterfly/features/common/ui/services/data_service.dart';
 
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/resources/extensions.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
+import 'package:flutterfly/features/common/ui/services/data_service.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/home/home_widgets.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/theme_toggle.dart';
 

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' show Dio;
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -17,7 +18,7 @@ abstract class BinanceRemoteDataSource {
   }) = _BinanceRemoteDataSource;
 
   @GET('/price?symbol=BTCUSDT')
-  Future<List<BinanceDto>> getCurrencies();
+  Future<IList<BinanceDto>> getCurrencies();
 
   @GET('/24hr')
   Future<BitcoinDto?> getBitcoin();

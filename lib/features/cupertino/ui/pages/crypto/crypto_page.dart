@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/utils/errors.dart';
+import 'package:flutterfly/core/di/di.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
+import 'package:flutterfly/features/common/ui/services/binance_service.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_widgets.dart';
 
 final class CryptoPage extends StatefulWidget {
@@ -14,6 +16,8 @@ final class CryptoPage extends StatefulWidget {
 
 final class _CryptoPageState extends State<CryptoPage> {
   final scrCtl = ScrollController();
+
+  late QueryBinance _query;
 
   @override
   void initState() {
@@ -29,53 +33,59 @@ final class _CryptoPageState extends State<CryptoPage> {
 
   void _scrollListener() =>
       scrCtl.position.pixels == scrCtl.position.maxScrollExtent
-          ? ref.read(binanceProvider$.notifier).paginate()
+          ? inject.get<BinanceService>().refreshBinance(_query)
           : null;
 
   @override
   Widget build(
     final BuildContext context,
   ) =>
-      ref.watch(binanceProvider$).when(
-            loading: () => n.Row(
-              const [SizedBox(height: 120), CupertinoActivityIndicator()],
-            )..mainCenter,
-            error: (final err, final _) => n.Row([
-              const SizedBox(height: 120),
-              (err as HttpNotSuccess).message.n..fontSize = 20,
-            ])
-              ..mainCenter
-              ..crossCenter,
-            data: (final currs) => CustomScrollView(
-              controller: scrCtl,
-              physics: const BouncingScrollPhysics(),
-              slivers: [
-                const CupertinoSliverNavigationBar(
-                  largeTitle: Text('Crypto Data'),
+      ViewModel<BinanceService>(
+        builder: (final ctl) async => QueryBinanceBuilder(
+          'binance_fetch',
+          ctl.fetchBinance(),
+          queryAccess: (final query) => _query = query,
+          initial: const [],
+          loading: () => n.Row(
+            const [SizedBox(height: 120), CupertinoActivityIndicator()],
+          )..mainCenter,
+          error: (final _, final error) => n.Row([
+            const SizedBox(height: 120),
+            error.message.n..fontSize = 20,
+          ])
+            ..mainCenter
+            ..crossCenter,
+          success: (final query, final data) => CustomScrollView(
+            controller: scrCtl,
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              const CupertinoSliverNavigationBar(
+                largeTitle: Text('Crypto Data'),
+              ),
+              CupertinoSliverRefreshControl(
+                onRefresh: () async => ctl.refreshBinance(query),
+              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 20)),
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                sliver: SliverGrid.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2,
+                  mainAxisSpacing: 20.0,
+                  crossAxisSpacing: 10.0,
+                  children: data
+                      .map(
+                        (final bin) => CurrencyCard(
+                          sym: bin.symbol,
+                          per: bin.priceChangePercent,
+                          pri: bin.bidPrice,
+                        ),
+                      )
+                      .toList(),
                 ),
-                CupertinoSliverRefreshControl(
-                  onRefresh: () async => ref.refresh(binanceProvider$.future),
-                ),
-                const SliverToBoxAdapter(child: SizedBox(height: 20)),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  sliver: SliverGrid.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: 2,
-                    mainAxisSpacing: 20.0,
-                    crossAxisSpacing: 10.0,
-                    children: currs
-                        .map(
-                          (final bin) => CurrencyCard(
-                            sym: bin.symbol,
-                            per: bin.priceChangePercent,
-                            pri: bin.bidPrice,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-              ],
-            ),
-          );
+              ),
+            ],
+          ),
+        ),
+      );
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart' show ChangeNotifier;
-import 'package:flutterfly/features/common/ui/services/desktop_service.dart';
 
 import 'package:injectable/injectable.dart' show lazySingleton;
+
+import 'package:flutterfly/features/common/ui/services/desktop_service.dart';
 
 @lazySingleton
 final class DesktopSelectorController extends ChangeNotifier {

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutterfly/core/mvvm/base_mvvm.dart';
 
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/resources/extensions.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 
 final class CurrencyCard extends StatelessWidget {

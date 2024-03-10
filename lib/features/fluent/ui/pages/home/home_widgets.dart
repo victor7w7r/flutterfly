@@ -1,10 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutterfly/core/mvvm/base_mvvm.dart';
-
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/resources/extensions.dart';
-import 'package:flutterfly/core/utils/errors.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/features/common/ui/services/services.dart';
 import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 
@@ -102,22 +100,26 @@ final class HomeCardCrypto extends StatelessWidget {
                 ..n.center,
             ),
             const SizedBox(height: 45),
-            ...ref.watch(bitcoinProvider$).when(
-                  loading: () => const [ProgressRing(value: 35)],
-                  error: (final err, final _) => [
-                    const SizedBox(height: 120),
-                    (err as HttpNotSuccess).message.n..fontSize = 20,
-                  ],
-                  data: (final bit) => [
-                    'Symbol: ${bit.symbol}'.n
-                      ..color = ctl.state.themeColor[2]
-                      ..fontSize = 20,
-                    'Price: ${bit.price}'.n
-                      ..color = ctl.state.themeColor[2]
-                      ..fontSize = 20,
-                    const SizedBox(height: 45),
-                  ],
+            ViewModel<BinanceService>(
+              builder: (final ctlServ) async => QueryBitcoinBuilder(
+                'bitcoin_fetch',
+                ctlServ.getBitcoin(),
+                initial: const [],
+                loading: () => const ProgressRing(value: 35),
+                error: (final _, final error) => n.Column(
+                  [const SizedBox(height: 120), error.message.n..fontSize = 20],
                 ),
+                success: (final query, final data) => n.Column([
+                  'Symbol: ${data.symbol}'.n
+                    ..color = ctl.state.themeColor[2]
+                    ..fontSize = 20,
+                  'Price: ${data.price}'.n
+                    ..color = ctl.state.themeColor[2]
+                    ..fontSize = 20,
+                  const SizedBox(height: 45),
+                ]),
+              ),
+            ),
           ]),
         ),
       );

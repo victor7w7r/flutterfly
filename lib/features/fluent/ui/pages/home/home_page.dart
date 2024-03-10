@@ -1,15 +1,14 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutterfly/core/di/di.dart';
-
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/mvvm/base_mvvm.dart';
+import 'package:flutterfly/core/di/di.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
+import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/widgets/title_bar.dart';
 import 'package:flutterfly/features/fluent/ui/pages/home/home_widgets.dart';
-import 'package:flutterfly/features/fluent/ui/widgets/widgets.dart';
 import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
+import 'package:flutterfly/features/fluent/ui/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
