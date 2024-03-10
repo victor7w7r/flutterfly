@@ -33,7 +33,7 @@ final class _CryptoPageState extends State<CryptoPage> {
 
   void _scrollListener() =>
       scrCtl.position.pixels == scrCtl.position.maxScrollExtent
-          ? inject.get<BinanceService>().refreshBinance(_query)
+          ? inject.get<BinanceService>().paginateBinance(_query)
           : null;
 
   @override
