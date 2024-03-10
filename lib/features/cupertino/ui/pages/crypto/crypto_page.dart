@@ -41,9 +41,9 @@ final class _CryptoPageState extends State<CryptoPage> {
     final BuildContext context,
   ) =>
       ViewModel<BinanceService>(
-        builder: (final ctl) async => QueryBinanceBuilder(
+        builder: (final ctl) => QueryBinanceBuilder(
           'binance_fetch',
-          ctl.fetchBinance(),
+          ctl.fetchBinance,
           queryAccess: (final query) => _query = query,
           initial: const [],
           loading: () => n.Row(

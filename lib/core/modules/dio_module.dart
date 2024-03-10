@@ -8,7 +8,7 @@ abstract class DioModule {
   @Named('route')
   String get route => '';
 
-  @singleton
+  @lazySingleton
   Dio get dio => Dio(
         BaseOptions(
           baseUrl: '$protocol://$host',

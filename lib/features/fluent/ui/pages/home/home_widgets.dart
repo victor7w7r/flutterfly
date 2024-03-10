@@ -101,10 +101,9 @@ final class HomeCardCrypto extends StatelessWidget {
             ),
             const SizedBox(height: 45),
             ViewModel<BinanceService>(
-              builder: (final ctlServ) async => QueryBitcoinBuilder(
+              builder: (final ctlServ) => QueryBitcoinBuilder(
                 'bitcoin_fetch',
-                ctlServ.getBitcoin(),
-                initial: const [],
+                ctlServ.getBitcoin,
                 loading: () => const ProgressRing(value: 35),
                 error: (final _, final error) => n.Column(
                   [const SizedBox(height: 120), error.message.n..fontSize = 20],

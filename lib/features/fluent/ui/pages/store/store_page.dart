@@ -82,7 +82,7 @@ class _StoreState extends State<StorePage> {
                         ctlData.state.isEmpty
                             ? 'Store state: Not yet.'
                             : 'Store state: Yes, you write. '
-                                '${ctlData.state.isEmpty}',
+                                '${ctlData.state}',
                       )
                         ..fontSize = 20
                         ..color = ctl.state.themeColor[2]

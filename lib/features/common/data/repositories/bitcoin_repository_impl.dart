@@ -14,8 +14,8 @@ class BitcoinRepositoryImpl implements BitcoinRepository {
   final BinanceRemoteDataSource _binanceDataSource;
 
   @override
-  TaskEither<Failure, Bitcoin> getBitcoin() => TaskEither.tryCatch(
-        _binanceDataSource.getCurrencies,
+  TaskEither<Failure, Bitcoin?> getBitcoin() => TaskEither.tryCatch(
+        _binanceDataSource.getBitcoin,
         (final e, final s) =>
             ServerFailure((e as DioException).message ?? 'Server Error'),
       );

@@ -1,3 +1,4 @@
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:fpdart/fpdart.dart' show Either;
 import 'package:injectable/injectable.dart' show injectable;
 
@@ -8,12 +9,12 @@ import 'package:flutterfly/features/common/business/repositories/repositories.da
 
 @injectable
 class GetCurrenciesUseCase
-    implements UseCase<Either<Failure, List<Binance>>, void> {
+    implements UseCase<Either<Failure, IList<Binance>>, void> {
   GetCurrenciesUseCase(this._repository);
 
   final BinanceRepository _repository;
 
   @override
-  Future<Either<Failure, List<Binance>>> call({final void params}) =>
+  Future<Either<Failure, IList<Binance>>> call({final void params}) =>
       _repository.getCurrencies().run();
 }

@@ -19,20 +19,20 @@ class _BinanceRemoteDataSource implements BinanceRemoteDataSource {
   String? baseUrl;
 
   @override
-  Future<IList<BinanceDto>> getCurrencies() async {
+  Future<List<BinanceDto>> getCurrencies() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<IList<BinanceDto>>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<BinanceDto>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/price?symbol=BTCUSDT',
+              '/24hr',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -41,9 +41,9 @@ class _BinanceRemoteDataSource implements BinanceRemoteDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = IList<BinanceDto>.fromJson(
-      _result.data!,
-      (json) => BinanceDto.fromJson(json as Map<String, dynamic>),
+    var value = await compute(
+      deserializeBinanceDtoList,
+      _result.data!.cast<Map<String, dynamic>>(),
     );
     return value;
   }
@@ -62,7 +62,7 @@ class _BinanceRemoteDataSource implements BinanceRemoteDataSource {
     )
             .compose(
               _dio.options,
-              '/24hr',
+              '/price?symbol=BTCUSDT',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -71,8 +71,9 @@ class _BinanceRemoteDataSource implements BinanceRemoteDataSource {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
-        _result.data == null ? null : BitcoinDto.fromJson(_result.data!);
+    final value = _result.data == null
+        ? null
+        : await compute(deserializeBitcoinDto, _result.data!);
     return value;
   }
 

@@ -90,7 +90,7 @@ class _StoreState extends State<StorePage> {
               builder: (final ctl) => n.Text(
                 ctl.state.isEmpty
                     ? 'Store state: Not yet.'
-                    : 'Store state: Yes, you write. ${ctl.state.isEmpty}',
+                    : 'Store state: Yes, you write. ${ctl.state}',
               )
                 ..fontSize = 15
                 ..n.center,

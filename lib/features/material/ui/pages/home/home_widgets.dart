@@ -33,7 +33,7 @@ final class TopContent extends StatelessWidget {
           builder: (final ctl) => n.Text(
             ctl.state.isEmpty
                 ? 'Store state: Not yet.'
-                : 'Store state: Yes, you write. ${ctl.state.isEmpty}',
+                : 'Store state: Yes, you write. ${ctl.state}',
           )
             ..fontSize = ctl.state.isEmpty ? ((height > 960) ? 25 : 15) : 20
             ..n.center,
@@ -134,9 +134,9 @@ final class _BottomContentState extends State<BottomContent> {
           ..n.center,
         const SizedBox(height: 25),
         ViewModel<BinanceService>(
-          builder: (final ctl) async => QueryBinanceBuilder(
+          builder: (final ctl) => QueryBinanceBuilder(
             'binance_fetch',
-            ctl.fetchBinance(),
+            ctl.fetchBinance,
             queryAccess: (final query) => _query = query,
             initial: const [],
             loading: () => n.Row(

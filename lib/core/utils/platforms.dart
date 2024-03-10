@@ -10,10 +10,10 @@ final isDesktopOnly = defaultTargetPlatform == TargetPlatform.linux ||
     defaultTargetPlatform == TargetPlatform.macOS ||
     defaultTargetPlatform == TargetPlatform.windows;
 
-final isAndroid = defaultTargetPlatform == TargetPlatform.android;
+final isAndroid = defaultTargetPlatform == TargetPlatform.android && !kIsWeb;
 
-final isMacOS = defaultTargetPlatform == TargetPlatform.macOS;
+final isMacOS = defaultTargetPlatform == TargetPlatform.macOS && !kIsWeb;
 
-final isIos = defaultTargetPlatform == TargetPlatform.iOS;
+final isIos = defaultTargetPlatform == TargetPlatform.iOS && !kIsWeb;
 
 const isWeb = kIsWeb;

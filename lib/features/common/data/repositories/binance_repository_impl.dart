@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart' show DioException;
-import 'package:fpdart/fpdart.dart' show TaskEither;
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:fpdart/fpdart.dart' show Task, TaskEither;
 import 'package:injectable/injectable.dart' show Injectable;
 
 import 'package:flutterfly/core/error/failure.dart';
@@ -14,8 +15,10 @@ class BinanceRepositoryImpl implements BinanceRepository {
   final BinanceRemoteDataSource _binanceDataSource;
 
   @override
-  TaskEither<Failure, List<Binance>> getCurrencies() => TaskEither.tryCatch(
-        _binanceDataSource.getCurrencies,
+  TaskEither<Failure, IList<Binance>> getCurrencies() => TaskEither.tryCatch(
+        Task(_binanceDataSource.getCurrencies)
+            .map((final list) => list.lock)
+            .run,
         (final e, final s) =>
             ServerFailure((e as DioException).message ?? 'Server Error'),
       );
