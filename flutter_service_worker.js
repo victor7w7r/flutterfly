@@ -54,9 +54,9 @@ const RESOURCES = {"assets/assets/aqua-light.png": "d66003b3d310ad8e409ecbd6d6e4
 "favicon.png": "dccad73fa4d81429a1d1c209a5c9179e",
 "flutter.js": "c71a09214cb6f5f8996a531350400a9a",
 "manifest.json": "7cf2ddbdbd60c7e5848402a3c3756506",
-"index.html": "1ea0294f970dd9b0c3e496435c877d55",
-"/": "1ea0294f970dd9b0c3e496435c877d55",
-"main.dart.js": "bfb611ef53c0a743e7c278ab3a60f883"};
+"index.html": "d3ef53846c9bd3829dd9b2bd4c329f26",
+"/": "d3ef53846c9bd3829dd9b2bd4c329f26",
+"main.dart.js": "e79a09fb5bdf9e5520002d6afdd27f1c"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
