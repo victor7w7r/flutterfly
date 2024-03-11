@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/di/di.dart';
+import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
@@ -60,12 +61,12 @@ class _StoreState extends State<StorePage> {
           body: n.Column([
             'Store Example'.n
               ..freezed
-              ..fontSize = 40
+              ..fontSize = context.minMd ? 25 : 40
               ..n.center,
             const SizedBox(height: 15),
             'Write anything in this form and send!'.n
               ..freezed
-              ..fontSize = 20
+              ..fontSize = context.minMd ? 15 : 20
               ..n.center,
             const SizedBox(height: 25),
             TextField(

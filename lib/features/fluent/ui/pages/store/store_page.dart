@@ -1,6 +1,7 @@
 import 'dart:async' show unawaited;
 
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:niku/namespace.dart' as n;
 
 import 'package:flutterfly/core/di/di.dart';
@@ -62,7 +63,12 @@ class _StoreState extends State<StorePage> {
                 Card(
                   backgroundColor: ctl.state.themeColor[1],
                   borderRadius: BorderRadius.circular(20),
-                  padding: const EdgeInsets.fromLTRB(50, 50, 50, 50),
+                  padding: EdgeInsets.fromLTRB(
+                    context.minMd ? 20 : 50,
+                    50,
+                    context.minMd ? 20 : 50,
+                    50,
+                  ),
                   child: n.Column([
                     const SizedBox(height: 45),
                     'Write anything in this form and send!'.n

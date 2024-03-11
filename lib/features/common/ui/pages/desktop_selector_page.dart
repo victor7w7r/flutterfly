@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterfly/core/resources/extensions.dart';
 
 import 'package:niku/namespace.dart' as n;
 
@@ -7,6 +8,33 @@ import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_controller.dart';
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_widgets.dart';
 import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
+
+class SelectionWrap extends StatelessWidget {
+  const SelectionWrap(this._ctl, {super.key});
+
+  final DesktopSelectorController _ctl;
+
+  @override
+  Widget build(final BuildContext context) => n.Wrap([
+        MenuBuilder(
+          title: 'Material',
+          image: 'material',
+          onTap: () => _ctl.exit('material'),
+        ),
+        MenuBuilder(
+          title: 'Fluent',
+          image: 'fluent',
+          onTap: () => _ctl.exit('web'),
+        ),
+        MenuBuilder(
+          title: 'Cupertino',
+          image: 'cupertino',
+          onTap: () => _ctl.exit('cupertino'),
+        ),
+      ])
+        ..spacing = 50
+        ..n.center;
+}
 
 class DesktopSelectorPage extends StatelessWidget {
   const DesktopSelectorPage({super.key});
@@ -29,29 +57,14 @@ class DesktopSelectorPage extends StatelessWidget {
               child: n.Stack([
                 const AnimatedGradient(),
                 'Choose your flavour'.n
-                  ..fontSize = 50
+                  ..fontSize = context.mWidth < 530 ? 40 : 60
                   ..fontFamily = 'AminaReska'
                   ..color = Colors.white
                   ..n.align = Alignment.topCenter,
-                n.Wrap([
-                  MenuBuilder(
-                    title: 'Material',
-                    image: 'material',
-                    onTap: () => ctl.exit('material'),
-                  ),
-                  MenuBuilder(
-                    title: 'Fluent',
-                    image: 'fluent',
-                    onTap: () => ctl.exit('web'),
-                  ),
-                  MenuBuilder(
-                    title: 'Cupertino',
-                    image: 'cupertino',
-                    onTap: () => ctl.exit('cupertino'),
-                  ),
-                ])
-                  ..spacing = 50
-                  ..n.center,
+                context.mWidth < 530
+                    ? (SingleChildScrollView(child: SelectionWrap(ctl)).niku
+                      ..pt = 100)
+                    : SelectionWrap(ctl),
                 if (isDesktop) const WindowTitleBar(isDark: true),
               ]),
             ),

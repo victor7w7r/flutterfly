@@ -38,12 +38,12 @@ final class TopContent extends StatelessWidget {
             ..fontSize = ctl.state.isEmpty ? ((height > 960) ? 25 : 15) : 20
             ..n.center,
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 10),
         'Made with love by '.n
           ..freezed
           ..fontSize = 14
           ..n.center,
-        const SizedBox(height: 20),
+        const SizedBox(height: 15),
         const DynamicChip(isHome: true),
       ]);
 }
@@ -60,7 +60,7 @@ final class DynamicChip extends StatelessWidget {
       ListenViewModel<MaterialService>(
         builder: (final ctl) => Container(
           width: isHome ? 300 : 270,
-          height: isHome ? 60 : 50,
+          height: 50,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
             border: ctl.isDark
@@ -128,11 +128,10 @@ final class _BottomContentState extends State<BottomContent> {
 
   @override
   Widget build(final BuildContext context) => n.Column([
-        const SizedBox(height: 35),
         'Cryptocurrency data'.n
-          ..fontSize = (widget.height > 960) ? 35 : 30
+          ..fontSize = (widget.height > 960) ? 35 : 20
           ..n.center,
-        const SizedBox(height: 25),
+        const SizedBox(height: 15),
         ViewModel<BinanceService>(
           builder: (final ctl) => QueryBinanceBuilder(
             'binance_fetch',
@@ -231,13 +230,13 @@ final class CurrencyCard extends StatelessWidget {
                     _ => Container()
                   },
             sym.n
-              ..fontSize = (context.mWidth > 520) ? 20 : 15
+              ..fontSize = (context.mWidth > 520) ? 20 : 12
               ..fontWeight = FontWeight.bold,
             '$per%'.n
-              ..fontSize = (context.mWidth > 520) ? 12 : 10
+              ..fontSize = (context.mWidth > 520) ? 12 : 8
               ..fontWeight = FontWeight.bold,
             pri.n
-              ..fontSize = (context.mWidth > 520) ? 12 : 10
+              ..fontSize = (context.mWidth > 520) ? 12 : 8
               ..fontWeight = FontWeight.bold,
           ])
             ..crossStart,

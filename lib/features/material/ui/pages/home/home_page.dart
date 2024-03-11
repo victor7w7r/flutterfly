@@ -22,13 +22,14 @@ final class HomePage extends StatelessWidget {
                 or == Orientation.portrait ? Axis.vertical : Axis.horizontal,
             children: [
               Expanded(
+                flex: context.minMd ? 3 : 1,
                 child: TopContent(
                   height: context.mHeight,
                   pOrientation: or,
                 ),
               ),
               Expanded(
-                flex: or == Orientation.portrait ? 2 : 1,
+                flex: or == Orientation.portrait ? 4 : 1,
                 child: BottomContent(
                   height: context.mHeight,
                   pOrientation: or,
