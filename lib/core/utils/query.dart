@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fl_query/fl_query.dart' show Query, QueryBuilder;
 
-class BaseQueryBuilder<T, U> extends StatelessWidget {
+final class BaseQueryBuilder<T, U> extends StatelessWidget {
   const BaseQueryBuilder(
     this.queryKey,
     this.queryFn, {

@@ -9,7 +9,7 @@ import 'package:flutterfly/features/common/business/repositories/binance_reposit
 import 'package:flutterfly/features/common/data/datasources/binance_remote_data_source.dart';
 
 @Injectable(as: BinanceRepository)
-class BinanceRepositoryImpl implements BinanceRepository {
+final class BinanceRepositoryImpl implements BinanceRepository {
   const BinanceRepositoryImpl(this._binanceDataSource);
 
   final BinanceRemoteDataSource _binanceDataSource;

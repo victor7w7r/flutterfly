@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:flutterfly/core/di/di.dart';
+import 'package:flutterfly/core/config/inject.dart';
 import 'package:flutterfly/core/mappers/fic_mappers.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';

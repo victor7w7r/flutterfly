@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/di/di.dart';
+import 'package:flutterfly/core/config/inject.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/utils.dart';
 import 'package:flutterfly/features/common/ui/widgets/title_bar.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/di/di.dart';
+import 'package:flutterfly/core/config/inject.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/features/common/ui/services/binance_service.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_widgets.dart';

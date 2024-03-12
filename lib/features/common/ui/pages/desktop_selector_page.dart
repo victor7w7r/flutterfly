@@ -9,7 +9,7 @@ import 'package:flutterfly/features/common/ui/pages/desktop_selector_controller.
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_widgets.dart';
 import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
 
-class SelectionWrap extends StatelessWidget {
+final class SelectionWrap extends StatelessWidget {
   const SelectionWrap(this._ctl, {super.key});
 
   final DesktopSelectorController _ctl;
@@ -36,7 +36,7 @@ class SelectionWrap extends StatelessWidget {
         ..n.center;
 }
 
-class DesktopSelectorPage extends StatelessWidget {
+final class DesktopSelectorPage extends StatelessWidget {
   const DesktopSelectorPage({super.key});
 
   @override

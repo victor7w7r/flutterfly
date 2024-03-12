@@ -8,7 +8,7 @@ import 'package:flutterfly/features/common/business/repositories/bitcoin_reposit
 import 'package:flutterfly/features/common/data/datasources/binance_remote_data_source.dart';
 
 @Injectable(as: BitcoinRepository)
-class BitcoinRepositoryImpl implements BitcoinRepository {
+final class BitcoinRepositoryImpl implements BitcoinRepository {
   const BitcoinRepositoryImpl(this._binanceDataSource);
 
   final BinanceRemoteDataSource _binanceDataSource;

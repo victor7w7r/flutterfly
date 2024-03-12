@@ -4,21 +4,21 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/di/di.dart';
+import 'package:flutterfly/core/config/inject.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/theme_toggle.dart';
 
-class StorePage extends StatefulWidget {
+final class StorePage extends StatefulWidget {
   const StorePage({super.key});
 
   @override
   State<StorePage> createState() => _StoreState();
 }
 
-class _StoreState extends State<StorePage> {
+final class _StoreState extends State<StorePage> {
   final TextEditingController _txtCtl = TextEditingController();
 
   void _request(

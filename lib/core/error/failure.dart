@@ -9,14 +9,14 @@ abstract class Failure extends Equatable {
   List<Object> get props => [message];
 }
 
-class ServerFailure extends Failure {
+final class ServerFailure extends Failure {
   const ServerFailure(super.message);
 }
 
-class ConnectionFailure extends Failure {
+final class ConnectionFailure extends Failure {
   const ConnectionFailure(super.message);
 }
 
-class DatabaseFailure extends Failure {
+final class DatabaseFailure extends Failure {
   const DatabaseFailure(super.message);
 }

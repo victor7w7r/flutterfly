@@ -7,7 +7,8 @@ import 'package:flutterfly/features/common/business/entities/entities.dart';
 import 'package:flutterfly/features/common/business/repositories/repositories.dart';
 
 @injectable
-class GetBitcoinUseCase implements UseCase<Either<Failure, Bitcoin?>, void> {
+final class GetBitcoinUseCase
+    implements UseCase<Either<Failure, Bitcoin?>, void> {
   const GetBitcoinUseCase(this._repository);
 
   final BitcoinRepository _repository;

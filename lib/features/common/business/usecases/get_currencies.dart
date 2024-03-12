@@ -10,7 +10,7 @@ import 'package:flutterfly/features/common/business/entities/entities.dart';
 import 'package:flutterfly/features/common/business/repositories/repositories.dart';
 
 @injectable
-class GetCurrenciesUseCase
+final class GetCurrenciesUseCase
     implements UseCase<Either<Failure, IList<Binance>>, void> {
   const GetCurrenciesUseCase(this._repository);
 
