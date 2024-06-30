@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, unnecessary_cast
+// ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
 part of '../../../../../features/common/data/dto/binance_dto.dart';
@@ -13,6 +13,7 @@ class BinanceDtoMapper extends ClassMapperBase<BinanceDto> {
   static BinanceDtoMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = BinanceDtoMapper._());
+      BinanceMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -150,142 +151,4 @@ mixin BinanceDtoMappable {
     return BinanceDtoMapper.ensureInitialized()
         .encodeMap<BinanceDto>(this as BinanceDto);
   }
-
-  BinanceDtoCopyWith<BinanceDto, BinanceDto, BinanceDto> get copyWith =>
-      _BinanceDtoCopyWithImpl(this as BinanceDto, $identity, $identity);
-  @override
-  String toString() {
-    return BinanceDtoMapper.ensureInitialized()
-        .stringifyValue(this as BinanceDto);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (runtimeType == other.runtimeType &&
-            BinanceDtoMapper.ensureInitialized()
-                .isValueEqual(this as BinanceDto, other));
-  }
-
-  @override
-  int get hashCode {
-    return BinanceDtoMapper.ensureInitialized().hashValue(this as BinanceDto);
-  }
-}
-
-extension BinanceDtoValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, BinanceDto, $Out> {
-  BinanceDtoCopyWith<$R, BinanceDto, $Out> get $asBinanceDto =>
-      $base.as((v, t, t2) => _BinanceDtoCopyWithImpl(v, t, t2));
-}
-
-abstract class BinanceDtoCopyWith<$R, $In extends BinanceDto, $Out>
-    implements ClassCopyWith<$R, $In, $Out> {
-  $R call(
-      {String? symbol,
-      String? priceChange,
-      String? priceChangePercent,
-      String? weightedAvgPrice,
-      String? prevClosePrice,
-      String? lastPrice,
-      String? lastQty,
-      String? bidPrice,
-      String? bidQty,
-      String? askPrice,
-      String? askQty,
-      String? openPrice,
-      String? highPrice,
-      String? lowPrice,
-      String? volume,
-      String? quoteVolume,
-      double? openTime,
-      double? closeTime,
-      double? firstId,
-      double? lastId,
-      double? count});
-  BinanceDtoCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
-}
-
-class _BinanceDtoCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, BinanceDto, $Out>
-    implements BinanceDtoCopyWith<$R, BinanceDto, $Out> {
-  _BinanceDtoCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<BinanceDto> $mapper =
-      BinanceDtoMapper.ensureInitialized();
-  @override
-  $R call(
-          {String? symbol,
-          String? priceChange,
-          String? priceChangePercent,
-          String? weightedAvgPrice,
-          String? prevClosePrice,
-          String? lastPrice,
-          String? lastQty,
-          String? bidPrice,
-          String? bidQty,
-          String? askPrice,
-          String? askQty,
-          String? openPrice,
-          String? highPrice,
-          String? lowPrice,
-          String? volume,
-          String? quoteVolume,
-          double? openTime,
-          double? closeTime,
-          double? firstId,
-          double? lastId,
-          double? count}) =>
-      $apply(FieldCopyWithData({
-        if (symbol != null) #symbol: symbol,
-        if (priceChange != null) #priceChange: priceChange,
-        if (priceChangePercent != null) #priceChangePercent: priceChangePercent,
-        if (weightedAvgPrice != null) #weightedAvgPrice: weightedAvgPrice,
-        if (prevClosePrice != null) #prevClosePrice: prevClosePrice,
-        if (lastPrice != null) #lastPrice: lastPrice,
-        if (lastQty != null) #lastQty: lastQty,
-        if (bidPrice != null) #bidPrice: bidPrice,
-        if (bidQty != null) #bidQty: bidQty,
-        if (askPrice != null) #askPrice: askPrice,
-        if (askQty != null) #askQty: askQty,
-        if (openPrice != null) #openPrice: openPrice,
-        if (highPrice != null) #highPrice: highPrice,
-        if (lowPrice != null) #lowPrice: lowPrice,
-        if (volume != null) #volume: volume,
-        if (quoteVolume != null) #quoteVolume: quoteVolume,
-        if (openTime != null) #openTime: openTime,
-        if (closeTime != null) #closeTime: closeTime,
-        if (firstId != null) #firstId: firstId,
-        if (lastId != null) #lastId: lastId,
-        if (count != null) #count: count
-      }));
-  @override
-  BinanceDto $make(CopyWithData data) => BinanceDto(
-      data.get(#symbol, or: $value.symbol),
-      data.get(#priceChange, or: $value.priceChange),
-      data.get(#priceChangePercent, or: $value.priceChangePercent),
-      data.get(#weightedAvgPrice, or: $value.weightedAvgPrice),
-      data.get(#prevClosePrice, or: $value.prevClosePrice),
-      data.get(#lastPrice, or: $value.lastPrice),
-      data.get(#lastQty, or: $value.lastQty),
-      data.get(#bidPrice, or: $value.bidPrice),
-      data.get(#bidQty, or: $value.bidQty),
-      data.get(#askPrice, or: $value.askPrice),
-      data.get(#askQty, or: $value.askQty),
-      data.get(#openPrice, or: $value.openPrice),
-      data.get(#highPrice, or: $value.highPrice),
-      data.get(#lowPrice, or: $value.lowPrice),
-      data.get(#volume, or: $value.volume),
-      data.get(#quoteVolume, or: $value.quoteVolume),
-      data.get(#openTime, or: $value.openTime),
-      data.get(#closeTime, or: $value.closeTime),
-      data.get(#firstId, or: $value.firstId),
-      data.get(#lastId, or: $value.lastId),
-      data.get(#count, or: $value.count));
-
-  @override
-  BinanceDtoCopyWith<$R2, BinanceDto, $Out2> $chain<$R2, $Out2>(
-          Then<$Out2, $R2> t) =>
-      _BinanceDtoCopyWithImpl($value, $cast, t);
 }

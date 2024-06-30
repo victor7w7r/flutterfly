@@ -24,10 +24,11 @@ final class _AnimatedGradientState extends State<AnimatedGradient> {
   ];
   int _index = 0;
 
-  void end() {
+  void _end() {
     _index++;
     _first = _colors[(_index + 1) % _colors.length];
     _last = _colors[_index % _colors.length];
+    // ignore: avoid_empty_blocks
     setState(() {});
   }
 
@@ -37,6 +38,7 @@ final class _AnimatedGradientState extends State<AnimatedGradient> {
     unawaited(
       Future.delayed(Duration.zero, () {
         _last = const Color.fromRGBO(253, 186, 116, 1);
+        // ignore: avoid_empty_blocks
         setState(() {});
       }),
     );
@@ -48,7 +50,7 @@ final class _AnimatedGradientState extends State<AnimatedGradient> {
   ) =>
       AnimatedContainer(
         duration: const Duration(seconds: 3),
-        onEnd: end,
+        onEnd: _end,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.bottomLeft,

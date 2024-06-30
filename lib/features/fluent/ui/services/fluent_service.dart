@@ -37,7 +37,7 @@ final class FluentThemeApp {
 @lazySingleton
 final class FluentService extends ChangeNotifier {
   FluentService(this._localDbModule)
-      : _state = _localDbModule.fluentDark
+      : _state = _localDbModule.isFluentDark
             ? FluentThemeApp.dark()
             : FluentThemeApp.light();
 
@@ -58,7 +58,8 @@ final class FluentService extends ChangeNotifier {
     Color interpolatorInv;
 
     Timer.periodic(const Duration(milliseconds: 30), (final t) {
-      interpolatorBack = Color.lerp(state.themeColor[0], changer[0], linear)!;
+      interpolatorBack =
+          Color.lerp(state.themeColor.first, changer.first, linear)!;
       interpolatorCard = Color.lerp(state.themeColor[1], changer[1], linear)!;
       interpolatorInv = Color.lerp(state.themeColor[2], changer[2], linear)!;
       state = state.copyWith(

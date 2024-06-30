@@ -1,12 +1,14 @@
-import 'package:equatable/equatable.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
-abstract class Failure extends Equatable {
+part '../../../../generated/core/error/failure.mapper.dart';
+
+@MappableClass(
+  generateMethods: GenerateMethods.stringify | GenerateMethods.equals,
+)
+abstract class Failure with FailureMappable {
   const Failure(this.message);
 
   final String message;
-
-  @override
-  List<Object> get props => [message];
 }
 
 final class ServerFailure extends Failure {

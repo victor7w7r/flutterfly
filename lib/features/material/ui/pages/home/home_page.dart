@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/material/ui/pages/home/home_widgets.dart';
@@ -11,18 +12,19 @@ final class HomePage extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(isMacOS ? 35 : 50),
+          preferredSize:
+              Size.fromHeight(inject.get<Platform>().isMacOS() ? 35 : 50),
           child: const NavBar('My Home'),
         ),
-        drawer: isMacOS ? null : const DrawerMenu(),
-        endDrawer: isMacOS ? const DrawerMenu() : null,
+        drawer: inject.get<Platform>().isMacOS() ? null : const DrawerMenu(),
+        endDrawer: inject.get<Platform>().isMacOS() ? const DrawerMenu() : null,
         body: OrientationBuilder(
           builder: (final _, final or) => Flex(
             direction:
                 or == Orientation.portrait ? Axis.vertical : Axis.horizontal,
             children: [
               Expanded(
-                flex: context.minMd ? 3 : 1,
+                flex: context.isMinMd ? 3 : 1,
                 child: TopContent(
                   height: context.mHeight,
                   pOrientation: or,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:niku/namespace.dart' as n;
 
+import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
@@ -18,20 +19,20 @@ final class NavBar extends StatelessWidget {
   ) =>
       AppBar(
         elevation: 0.0,
-        toolbarHeight: isMacOS ? 30 : null,
-        leading: isMacOS ? Container() : null,
-        title: isMacOS
+        toolbarHeight: inject.get<Platform>().isMacOS() ? 30 : null,
+        leading: inject.get<Platform>().isMacOS() ? Container() : null,
+        title: inject.get<Platform>().isMacOS()
             ? ListenViewModel<MaterialService>(
                 builder: (final ctl) => WindowTitleBar(isDark: ctl.isDark),
               )
             : n.Stack([
                 title.n,
-                if (isDesktop)
+                if (inject.get<Platform>().isDesktop())
                   ListenViewModel<MaterialService>(
                     builder: (final ctl) => WindowTitleBar(isDark: ctl.isDark),
                   ),
               ]),
-        actions: isMacOS
+        actions: inject.get<Platform>().isMacOS()
             ? [
                 Builder(
                   builder: (final ctx) => n.IconButton(Icons.menu)

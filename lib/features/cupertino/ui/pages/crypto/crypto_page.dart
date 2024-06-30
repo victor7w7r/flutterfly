@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
+import 'package:fl_query/fl_query.dart' show Query;
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/config/inject.dart';
+import 'package:flutterfly/core/di/inject.dart';
+import 'package:flutterfly/core/error/fetch_exception.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
+import 'package:flutterfly/core/utils/query.dart';
+import 'package:flutterfly/features/common/business/entities/binance.dart';
 import 'package:flutterfly/features/common/ui/services/binance_service.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_widgets.dart';
 
@@ -15,24 +19,26 @@ final class CryptoPage extends StatefulWidget {
 }
 
 final class _CryptoPageState extends State<CryptoPage> {
-  final scrCtl = ScrollController();
+  final _scrCtl = ScrollController();
 
-  late QueryBinance _query;
+  late Query<List<Binance>, FetchException> _query;
 
   @override
   void initState() {
     super.initState();
-    scrCtl.addListener(_scrollListener);
+    _scrCtl.addListener(_scrollListener);
   }
 
   @override
   void dispose() {
-    scrCtl.removeListener(_scrollListener);
+    _scrCtl.removeListener(_scrollListener);
+    // ignore: cascade_invocations
+    _scrCtl.dispose();
     super.dispose();
   }
 
   void _scrollListener() =>
-      scrCtl.position.pixels == scrCtl.position.maxScrollExtent
+      _scrCtl.position.pixels == _scrCtl.position.maxScrollExtent
           ? inject.get<BinanceService>().paginateBinance(_query)
           : null;
 
@@ -41,11 +47,11 @@ final class _CryptoPageState extends State<CryptoPage> {
     final BuildContext context,
   ) =>
       ViewModel<BinanceService>(
-        builder: (final ctl) => QueryBinanceBuilder(
+        builder: (final ctl) => BaseQueryBuilder<List<Binance>, FetchException>(
           'binance_fetch',
           ctl.fetchBinance,
           queryAccess: (final query) => _query = query,
-          initial: const [],
+          def: [Binance.detached()],
           loading: () => n.Row(
             const [SizedBox(height: 120), CupertinoActivityIndicator()],
           )..mainCenter,
@@ -56,7 +62,7 @@ final class _CryptoPageState extends State<CryptoPage> {
             ..mainCenter
             ..crossCenter,
           success: (final query, final data) => CustomScrollView(
-            controller: scrCtl,
+            controller: _scrCtl,
             physics: const BouncingScrollPhysics(),
             slivers: [
               const CupertinoSliverNavigationBar(

@@ -1,10 +1,10 @@
 import 'dart:async' show unawaited;
 
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/config/inject.dart';
+import 'package:flutterfly/core/di/inject.dart';
+import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/utils.dart';
 import 'package:flutterfly/features/common/ui/services/services.dart';
 import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
@@ -52,9 +52,10 @@ class _StoreState extends State<StorePage> {
   ) =>
       ListenViewModel<FluentService>(
         builder: (final ctl) => ColoredBox(
-          color: ctl.state.themeColor[0],
+          color: ctl.state.themeColor.first,
           child: n.Column([
-            if (!isWeb) WindowTitleBar(isDark: ctl.state.isDark),
+            if (!inject.get<Platform>().isWeb())
+              WindowTitleBar(isDark: ctl.state.isDark),
             const SizedBox(height: 10),
             const Header(),
             const SizedBox(height: 50),
@@ -62,12 +63,10 @@ class _StoreState extends State<StorePage> {
               n.Row([
                 Card(
                   backgroundColor: ctl.state.themeColor[1],
-                  borderRadius: BorderRadius.circular(20),
-                  padding: EdgeInsets.fromLTRB(
-                    context.minMd ? 20 : 50,
-                    50,
-                    context.minMd ? 20 : 50,
-                    50,
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.isMinMd ? 20 : 50,
+                    vertical: 50,
                   ),
                   child: n.Column([
                     const SizedBox(height: 45),

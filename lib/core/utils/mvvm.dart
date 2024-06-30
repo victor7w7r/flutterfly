@@ -11,9 +11,9 @@ final class ViewModel<T extends Object> extends WatchingWidget {
     super.key,
   });
 
-  final Widget Function(T) builder;
-  final void Function(T)? onInit;
-  final void Function(T)? onDispose;
+  final Widget Function(T object) builder;
+  final void Function(T object)? onInit;
+  final void Function(T object)? onDispose;
   final bool disposeLazy;
 
   @override
@@ -39,9 +39,9 @@ final class ListenViewModel<T extends ChangeNotifier> extends WatchingWidget {
     super.key,
   });
 
-  final Widget Function(T) builder;
-  final void Function(T)? onInit;
-  final void Function(T)? onDispose;
+  final Widget Function(T notifier) builder;
+  final void Function(T notifier)? onInit;
+  final void Function(T notifier)? onDispose;
   final bool disposeLazy;
 
   @override
@@ -57,5 +57,46 @@ final class ListenViewModel<T extends ChangeNotifier> extends WatchingWidget {
       },
     );
     return builder(ctl);
+  }
+}
+
+final class LUViewModel<T extends Object, U extends ChangeNotifier>
+    extends WatchingWidget {
+  const LUViewModel({
+    required this.builder,
+    this.onInit,
+    this.onDispose,
+    this.disposeLazyOne = false,
+    this.disposeLazyTwo = false,
+    super.key,
+  });
+
+  final Widget Function(T not, U obj) builder;
+  final void Function(T not, U obj)? onInit;
+  final void Function(T not, U obj)? onDispose;
+  final bool disposeLazyOne;
+  final bool disposeLazyTwo;
+
+  @override
+  Widget build(final BuildContext context) {
+    final ctl2 = watchIt<U>();
+
+    callOnce(
+      (final _) => onInit?.call(
+        GetIt.I.get<T>(),
+        ctl2,
+      ),
+      dispose: () {
+        onDispose?.call(
+          GetIt.I.get<T>(),
+          ctl2,
+        );
+        // ignore: discarded_futures
+        if (disposeLazyOne) GetIt.I.resetLazySingleton<T>();
+        // ignore: discarded_futures
+        if (disposeLazyTwo) GetIt.I.resetLazySingleton<U>();
+      },
+    );
+    return builder(GetIt.I.get<T>(), ctl2);
   }
 }

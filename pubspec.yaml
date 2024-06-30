@@ -6,36 +6,40 @@ publish_to: 'none'
 version: 1.5.0
 
 environment:
-  sdk: '>=3.3.1 <4.0.0'
+  sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
   bitsdojo_window: ^0.1.6
-  cupertino_icons: ^1.0.6
-  dart_mappable: ^4.2.1
-  dio: ^5.4.1
-  equatable: ^2.0.5
-  fast_immutable_collections: ^10.1.2
-  fl_query: ^1.0.0
-  fluent_ui: ^4.8.6
+  cupertino_icons: ^1.0.8
+  dart_mappable: ^4.2.2
+  dio: ^5.4.3+1
+  fast_immutable_collections: ^10.2.4
+  fl_query: ^1.1.0
+  fluent_ui: ^4.8.7
   flutter:
     sdk: flutter
-  flutter_native_splash: ^2.3.13
+  flutter_native_splash: ^2.4.0
   fpdart: ^1.1.0
-  get_it: ^7.6.7
+  get_it: ^7.7.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  injectable: ^2.3.2
+  injectable: ^2.4.2
   niku: ^2.4.3
   retrofit: ^4.1.0
-  watch_it: ^1.4.0
+  watch_it: ^1.4.2
 
 dev_dependencies:
-  build_runner: ^2.4.8
-  dart_mappable_builder: ^4.2.1
-  flutter_lints: ^3.0.1
+  build_runner: ^2.4.11
+  custom_lint: ^0.6.4
+  dart_mappable_builder: ^4.2.3
+  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
   icons_launcher: ^2.1.7
   import_sorter: ^4.6.0
-  injectable_generator: ^2.4.2
+  injectable_generator: ^2.6.1
+  mocktail: ^1.0.4
+  pyramid_lint: ^2.0.0
   retrofit_generator: ^8.1.0
   source_gen: ^1.5.0
 

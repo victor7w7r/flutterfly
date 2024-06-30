@@ -27,13 +27,17 @@ final class CurrencyCard extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
             border: ctl.isDark
-                ? Border.all(
-                    width: 2,
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                ? const Border.fromBorderSide(
+                    BorderSide(
+                      width: 2,
+                      color: Color.fromARGB(255, 255, 255, 255),
+                    ),
                   )
-                : Border.all(width: 2),
+                : const Border.fromBorderSide(
+                    BorderSide(width: 2),
+                  ),
             image: DecorationImage(
               alignment: const Alignment(1.3, 0),
               image: const AssetImage('assets/binance.png'),

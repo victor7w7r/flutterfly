@@ -8,7 +8,8 @@ import 'package:flutterfly/core/modules/localdb_module.dart';
 
 @lazySingleton
 final class MaterialService extends ChangeNotifier {
-  MaterialService(this._localDbModule) : _isDark = _localDbModule.materialDark;
+  MaterialService(this._localDbModule)
+      : _isDark = _localDbModule.isMaterialDark;
 
   bool _isDark;
   final LocalDbModule _localDbModule;

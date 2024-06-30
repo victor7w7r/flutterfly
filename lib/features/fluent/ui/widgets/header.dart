@@ -17,7 +17,7 @@ final class Header extends StatelessWidget {
         builder: (final ctl) => Nest([
           (final next) => Card(
                 backgroundColor: ctl.state.themeColor[1],
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
                 child: next,
               ),
           (final next) => FractionallySizedBox(widthFactor: 0.98, child: next),

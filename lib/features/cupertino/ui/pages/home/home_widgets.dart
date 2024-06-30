@@ -19,15 +19,19 @@ final class DynamicChip extends StatelessWidget {
           width: isHome ? 300 : 270,
           height: isHome ? 60 : 50,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
             border: ctl.isDark
-                ? Border.all(
-                    width: 2,
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                ? const Border.fromBorderSide(
+                    BorderSide(
+                      width: 2,
+                      color: Color.fromARGB(255, 255, 255, 255),
+                    ),
                   )
-                : Border.all(
-                    width: 2,
-                    color: const Color.fromARGB(255, 26, 31, 43),
+                : const Border.fromBorderSide(
+                    BorderSide(
+                      width: 2,
+                      color: Color.fromARGB(255, 26, 31, 43),
+                    ),
                   ),
           ),
           child: n.Row(

@@ -19,7 +19,7 @@ final class BinanceRepositoryImpl implements BinanceRepository {
         Task(_binanceDataSource.getCurrencies)
             .map((final list) => list.lock)
             .run,
-        (final e, final s) =>
+        (final e, final _) =>
             ServerFailure((e as DioException).message ?? 'Server Error'),
       );
 }

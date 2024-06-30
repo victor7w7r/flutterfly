@@ -4,7 +4,9 @@ import 'package:flutterfly/features/common/business/entities/binance.dart';
 
 part '../../../../generated/features/common/data/dto/binance_dto.mapper.dart';
 
-@MappableClass()
+@MappableClass(
+  generateMethods: GenerateMethods.decode | GenerateMethods.encode,
+)
 final class BinanceDto extends Binance with BinanceDtoMappable {
   const BinanceDto(
     super.symbol,

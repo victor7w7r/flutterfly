@@ -14,9 +14,6 @@ targets:
           build_extensions:
             '^lib/{{}}.dart': 'lib/generated/{{}}.g.dart'
       dart_mappable_builder:
-        generate_for:
-          include:
-            - lib/**_dto.dart
         options:
           build_extensions:
             '^lib/{{}}.dart': 'lib/generated/{{}}.mapper.dart'

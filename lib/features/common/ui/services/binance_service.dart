@@ -10,25 +10,24 @@ import 'package:flutterfly/core/utils/utils.dart';
 import 'package:flutterfly/features/common/business/entities/entities.dart';
 import 'package:flutterfly/features/common/business/usecases/usecases.dart';
 
-typedef QueryBinanceBuilder = BaseQueryBuilder<List<Binance>, FetchException>;
-typedef QueryBinance = Query<List<Binance>, FetchException>;
-
-typedef QueryBitcoinBuilder = BaseQueryBuilder<Bitcoin, FetchException>;
-typedef QueryBitcoin = Query<Bitcoin, FetchException>;
-
 @lazySingleton
 final class BinanceService {
-  BinanceService(this._getCurrenciesUseCase, this._getBitcoinUseCase);
+  BinanceService(
+    this._getCurrenciesUseCase,
+    this._getBitcoinUseCase,
+    this._platform,
+  );
 
   final GetCurrenciesUseCase _getCurrenciesUseCase;
   final GetBitcoinUseCase _getBitcoinUseCase;
+  final Platform _platform;
 
   final _allBin = <Binance>[];
   var _position = 0;
 
   Future<List<Binance>> fetchBinance() async {
     final binList = <Binance>[];
-    isWeb
+    _platform.isWeb()
         ? binList.addAll(Binance.dummyGen())
         : binList.addAll((await getCurrencies()).unlock);
     _allBin.addAll(binList);
@@ -43,13 +42,13 @@ final class BinanceService {
   Future<Bitcoin?> getBitcoin() async => (await _getBitcoinUseCase())
       .fold((final l) => throw FetchException(l.message), identity);
 
-  void refreshBinance(final QueryBinance query) => query
+  void refreshBinance(final Query<List<Binance>, FetchException> query) => query
     // ignore: discarded_futures
     ..reset()
     // ignore: discarded_futures
     ..refresh();
 
-  void paginateBinance(final QueryBinance query) {
+  void paginateBinance(final Query<List<Binance>, FetchException> query) {
     query.setData(_allBin.sublist(0, _position + 40));
     _position += 40;
   }

@@ -1,0 +1,66 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutterfly/core/modules/localdb_module.dart';
+
+class MockBox<T> extends Mock implements Box<T> {}
+
+class MockHive extends Mock implements HiveInterface {}
+
+void main() {
+  late LocalDbModule localDbModule;
+  late MockBox<bool> mockPrefsBox;
+  late MockHive mockHive;
+
+  setUpAll(() {
+    registerFallbackValue(Future<void>.value());
+  });
+
+  setUp(() {
+    mockPrefsBox = MockBox<bool>();
+    mockHive = MockHive();
+
+    // ignore: avoid_empty_blocks
+    when(() => mockHive.initFlutter()).thenAnswer((final _) async {});
+    when(() => mockHive.openBox<bool>('prefsBox'))
+        .thenAnswer((final _) async => mockPrefsBox);
+
+    localDbModule = LocalDbModule()..prefsBox = mockPrefsBox;
+  });
+
+  group('LocalDbModule', () {
+    test('should initialize correctly', () async {
+      await localDbModule.init();
+      verify(() => mockHive.initFlutter()).called(1);
+      verify(() => mockHive.openBox<bool>('prefsBox')).called(1);
+    });
+
+    test('isMaterialDark should return true and set value if key is null', () {
+      when(() => mockPrefsBox.get('materialdark')).thenReturn(null);
+      final result = localDbModule.isMaterialDark;
+      expect(result, isTrue);
+      verify(() async => mockPrefsBox.put('materialdark', true)).called(1);
+    });
+
+    test('isMaterialDark should return false if key is false', () {
+      when(() => mockPrefsBox.get('materialdark')).thenReturn(false);
+      final result = localDbModule.isMaterialDark;
+      expect(result, isFalse);
+      verifyNever(() async => mockPrefsBox.put('materialdark', true));
+    });
+
+    test('isCupertinoDark should return true and set value if key is null', () {
+      when(() => mockPrefsBox.get('cupertinodark')).thenReturn(null);
+      final result = localDbModule.isCupertinoDark;
+      expect(result, isTrue);
+      verify(() async => mockPrefsBox.put('cupertinodark', true)).called(1);
+    });
+
+    test('isFluentDark should return true and set value if key is null', () {
+      when(() => mockPrefsBox.get('fluentdark')).thenReturn(null);
+      final result = localDbModule.isFluentDark;
+      expect(result, isTrue);
+      verify(() async => mockPrefsBox.put('fluentdark', true)).called(1);
+    });
+  });
+}

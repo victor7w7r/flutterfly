@@ -4,7 +4,9 @@ import 'package:flutterfly/features/common/business/entities/bitcoin.dart';
 
 part '../../../../generated/features/common/data/dto/bitcoin_dto.mapper.dart';
 
-@MappableClass()
+@MappableClass(
+  generateMethods: GenerateMethods.decode | GenerateMethods.encode,
+)
 final class BitcoinDto extends Bitcoin with BitcoinDtoMappable {
   const BitcoinDto(
     super.symbol,

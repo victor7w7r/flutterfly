@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'package:fl_query/fl_query.dart' show Query;
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/config/inject.dart';
+import 'package:flutterfly/core/di/inject.dart';
+import 'package:flutterfly/core/error/fetch_exception.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
+import 'package:flutterfly/core/utils/query.dart';
+import 'package:flutterfly/features/common/business/entities/binance.dart';
 import 'package:flutterfly/features/common/ui/services/services.dart';
 import 'package:flutterfly/features/common/ui/widgets/nest.dart';
 import 'package:flutterfly/features/material/ui/services/material_service.dart';
@@ -62,10 +66,14 @@ final class DynamicChip extends StatelessWidget {
           width: isHome ? 300 : 270,
           height: 50,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
             border: ctl.isDark
-                ? Border.all(width: 2, color: Colors.white)
-                : Border.all(width: 2),
+                ? const Border.fromBorderSide(
+                    BorderSide(width: 2, color: Colors.white),
+                  )
+                : const Border.fromBorderSide(
+                    BorderSide(width: 2),
+                  ),
           ),
           child: n.Row(
             isHome
@@ -105,24 +113,26 @@ final class BottomContent extends StatefulWidget {
 }
 
 final class _BottomContentState extends State<BottomContent> {
-  final scrCtl = ScrollController();
+  final _scrCtl = ScrollController();
 
-  late QueryBinance _query;
+  late Query<List<Binance>, FetchException> _query;
 
   void _scrollListener() =>
-      scrCtl.position.pixels == scrCtl.position.maxScrollExtent
+      _scrCtl.position.pixels == _scrCtl.position.maxScrollExtent
           ? inject.get<BinanceService>().paginateBinance(_query)
           : null;
 
   @override
   void initState() {
     super.initState();
-    scrCtl.addListener(_scrollListener);
+    _scrCtl.addListener(_scrollListener);
   }
 
   @override
   void dispose() {
-    scrCtl.removeListener(_scrollListener);
+    _scrCtl.removeListener(_scrollListener);
+    // ignore: cascade_invocations
+    _scrCtl.dispose();
     super.dispose();
   }
 
@@ -133,11 +143,12 @@ final class _BottomContentState extends State<BottomContent> {
           ..n.center,
         const SizedBox(height: 15),
         ViewModel<BinanceService>(
-          builder: (final ctl) => QueryBinanceBuilder(
+          builder: (final ctl) =>
+              BaseQueryBuilder<List<Binance>, FetchException>(
             'binance_fetch',
             ctl.fetchBinance,
             queryAccess: (final query) => _query = query,
-            initial: const [],
+            def: [Binance.detached()],
             loading: () => n.Row(
               const [
                 SizedBox(height: 120),
@@ -162,7 +173,7 @@ final class _BottomContentState extends State<BottomContent> {
                 ..physics = const AlwaysScrollableScrollPhysics()
                 ..mainAxisSpacing = 10.0
                 ..scrollDirection = Axis.vertical
-                ..controller = scrCtl
+                ..controller = _scrCtl
                 ..children = data
                     .map(
                       (final bin) => CurrencyCard(
@@ -199,13 +210,17 @@ final class CurrencyCard extends StatelessWidget {
   ) =>
       ListenViewModel<MaterialService>(
         builder: (final ctl) => Container(
-          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          margin: const EdgeInsets.all(10),
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
             border: ctl.isDark
-                ? Border.all(width: 2, color: Colors.white)
-                : Border.all(width: 2),
+                ? const Border.fromBorderSide(
+                    BorderSide(width: 2, color: Colors.white),
+                  )
+                : const Border.fromBorderSide(
+                    BorderSide(width: 2),
+                  ),
             image: DecorationImage(
               alignment: const Alignment(1.3, 0),
               image: const AssetImage('assets/binance.png'),

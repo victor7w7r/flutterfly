@@ -24,6 +24,7 @@ abstract class BinanceRemoteDataSource {
   Future<BitcoinDto?> getBitcoin();
 }
 
+// coverage:ignore-start
 BitcoinDto deserializeBitcoinDto(final Map<String, dynamic> json) =>
     BitcoinDto.fromJson(json);
 
@@ -42,3 +43,4 @@ List<Map<String, dynamic>> serializeBinanceDtoList(
   final List<BinanceDto> objects,
 ) =>
     objects.map((final e) => e.toJson()).toList();
+// coverage:ignore-end

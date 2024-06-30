@@ -9,7 +9,7 @@ import 'package:flutterfly/core/modules/localdb_module.dart';
 @lazySingleton
 final class CupertinoService extends ChangeNotifier {
   CupertinoService(this._localDbModule)
-      : _isDark = _localDbModule.cupertinoDark;
+      : _isDark = _localDbModule.isCupertinoDark;
 
   bool _isDark;
   final LocalDbModule _localDbModule;

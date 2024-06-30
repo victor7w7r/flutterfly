@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-typedef NestChain = Widget Function(Widget);
+typedef NestChain = Widget Function(Widget widget);
 
 final class Nest extends StatelessWidget {
   Nest(final List<NestChain> children, {super.key})

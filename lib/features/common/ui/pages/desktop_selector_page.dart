@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutterfly/core/resources/extensions.dart';
 
 import 'package:niku/namespace.dart' as n;
 
+import 'package:flutterfly/core/di/inject.dart';
+import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_controller.dart';
@@ -52,7 +53,7 @@ final class DesktopSelectorPage extends StatelessWidget {
             disposeLazy: true,
             onInit: (final ctl) => ctl.init(),
             builder: (final ctl) => AnimatedOpacity(
-              opacity: ctl.initAnim ? 1.0 : 0.0,
+              opacity: ctl.isInitAnim ? 1.0 : 0.0,
               duration: const Duration(milliseconds: 1000),
               child: n.Stack([
                 const AnimatedGradient(),
@@ -65,7 +66,10 @@ final class DesktopSelectorPage extends StatelessWidget {
                     ? (SingleChildScrollView(child: SelectionWrap(ctl)).niku
                       ..pt = 100)
                     : SelectionWrap(ctl),
-                if (isDesktop) const WindowTitleBar(isDark: true),
+                // coverage:ignore-start
+                if (inject.get<Platform>().isDesktop())
+                  const WindowTitleBar(isDark: true),
+                // coverage:ignore-end
               ]),
             ),
           ),

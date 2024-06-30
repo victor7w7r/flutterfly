@@ -11,6 +11,7 @@ custom_lint.log
 migrate_working_dir/
 *.iml
 *.ipr
+coverage
 *.iws
 .idea/
 **/doc/api/

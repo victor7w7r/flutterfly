@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 extension MediaQueryExt on BuildContext {
-  double get mWidth => MediaQuery.of(this).size.width;
-  double get mHeight => MediaQuery.of(this).size.height;
-  bool get maxMd => MediaQuery.of(this).size.width > 720;
-  bool get minMd => MediaQuery.of(this).size.width < 720;
-  bool get maxLg => MediaQuery.of(this).size.width > 960;
-  bool get maxResp => MediaQuery.of(this).size.width > 890;
-  bool get bRatio => MediaQuery.of(this).devicePixelRatio >= 3.0;
-  bool get mRatio => MediaQuery.of(this).devicePixelRatio >= 2.0;
+  double get mWidth => MediaQuery.sizeOf(this).width;
+  double get mHeight => MediaQuery.sizeOf(this).height;
+  bool get isMaxMd => MediaQuery.sizeOf(this).width > 720;
+  bool get isMinMd => MediaQuery.sizeOf(this).width < 720;
+  bool get isMaxLg => MediaQuery.sizeOf(this).width > 960;
+  bool get isMaxResp => MediaQuery.sizeOf(this).width > 890;
+  bool get isBRatio => MediaQuery.devicePixelRatioOf(this) >= 3.0;
+  bool get isMRatio => MediaQuery.devicePixelRatioOf(this) >= 2.0;
 }

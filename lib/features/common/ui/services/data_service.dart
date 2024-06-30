@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart' show ChangeNotifier;
 import 'package:injectable/injectable.dart' show lazySingleton;
 
 @lazySingleton
-final class DataService extends ChangeNotifier {
+class DataService extends ChangeNotifier {
   DataService() : _state = '';
 
   String _state;

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/config/inject.dart';
+import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
@@ -58,12 +58,12 @@ final class _StoreState extends State<StorePage> {
             ..niku.right = 0,
           n.Column([
             'Store Example'.n
-              ..fontSize = context.minMd ? 25 : 40
+              ..fontSize = context.isMinMd ? 25 : 40
               ..freezed
               ..n.center,
             const SizedBox(height: 15),
             'Write anything in this form and send!'.n
-              ..fontSize = context.minMd ? 15 : 20
+              ..fontSize = context.isMinMd ? 15 : 20
               ..freezed
               ..n.center,
             const SizedBox(height: 25),

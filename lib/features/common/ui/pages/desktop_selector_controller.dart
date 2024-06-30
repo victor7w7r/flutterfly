@@ -5,26 +5,26 @@ import 'package:injectable/injectable.dart' show lazySingleton;
 import 'package:flutterfly/features/common/ui/services/desktop_service.dart';
 
 @lazySingleton
-final class DesktopSelectorController extends ChangeNotifier {
-  DesktopSelectorController(this._desktopService) : _initAnim = false;
+class DesktopSelectorController extends ChangeNotifier {
+  DesktopSelectorController(this._desktopService) : _isinitAnim = false;
 
   final DesktopService _desktopService;
-  bool _initAnim;
+  bool _isinitAnim;
 
-  void init() => Future.delayed(Duration.zero, () => initAnim = true);
+  void init() => Future.delayed(Duration.zero, () => isinitAnim = true);
 
   void exit(final String selector) {
-    initAnim = false;
+    isinitAnim = false;
     Future.delayed(
       const Duration(seconds: 1),
       () => _desktopService.mutate = selector,
     );
   }
 
-  bool get initAnim => _initAnim;
+  bool get isInitAnim => _isinitAnim;
 
-  set initAnim(final bool value) {
-    _initAnim = value;
+  set isinitAnim(final bool value) {
+    _isinitAnim = value;
     notifyListeners();
   }
 }

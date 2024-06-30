@@ -25,15 +25,18 @@ final class BlurButton extends StatelessWidget {
           backgroundColor:
               ButtonState.all<Color>(const Color.fromRGBO(255, 255, 255, 0.4)),
           shape: ButtonState.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-              side: const BorderSide(color: Color.fromRGBO(204, 204, 204, 0)),
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(18.0)),
+              side: BorderSide(color: Color.fromRGBO(204, 204, 204, 0)),
             ),
           ),
         ),
         child: caption.n
           ..fontFamily = 'FuturaPTMedium'
           ..fontSize = fontSize
-          ..n.padding = const EdgeInsets.fromLTRB(10, 3, 10, 3), // n.Button
+          ..n.padding = const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 3,
+          ),
       );
 }

@@ -23,7 +23,7 @@ final class FluentModule extends StatelessWidget {
               '/': (final _) => const HomePage(),
               '/store': (final _) => const StorePage(),
             },
-            color: ctl.state.themeColor[0],
+            color: ctl.state.themeColor.first,
           ),
         ),
       );

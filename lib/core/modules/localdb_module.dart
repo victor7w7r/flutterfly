@@ -15,7 +15,7 @@ final class LocalDbModule {
     prefsBox = await Hive.openBox<bool>('prefsBox');
   }
 
-  bool _darkWorker(final String key) {
+  bool _isDarkWorker(final String key) {
     final isDark = prefsBox.get(key);
     if (isDark == null) {
       unawaited(prefsBox.put(key, true));
@@ -25,7 +25,7 @@ final class LocalDbModule {
     }
   }
 
-  bool get materialDark => _darkWorker('materialdark');
-  bool get cupertinoDark => _darkWorker('cupertinodark');
-  bool get fluentDark => _darkWorker('fluentdark');
+  bool get isMaterialDark => _isDarkWorker('materialdark');
+  bool get isCupertinoDark => _isDarkWorker('cupertinodark');
+  bool get isFluentDark => _isDarkWorker('fluentdark');
 }

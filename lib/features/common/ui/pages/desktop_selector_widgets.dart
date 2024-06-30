@@ -24,8 +24,10 @@ final class MenuBuilder extends StatelessWidget {
           ..color = Colors.white,
         Nest([
           (final next) => GestureDetector(onTap: onTap, child: next),
-          (final next) =>
-              ClipRRect(borderRadius: BorderRadius.circular(20.0), child: next),
+          (final next) => ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                child: next,
+              ),
           (final next) =>
               SizedBox.fromSize(size: const Size.fromRadius(120), child: next),
           (final _) => Image.asset('assets/$image.jpg', fit: BoxFit.cover),

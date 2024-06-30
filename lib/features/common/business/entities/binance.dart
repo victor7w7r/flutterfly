@@ -1,6 +1,12 @@
-import 'package:equatable/equatable.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
-base class Binance extends Equatable {
+part '../../../../generated/features/common/business/entities/binance.mapper.dart';
+
+@MappableClass(
+  generateMethods:
+      GenerateMethods.stringify | GenerateMethods.equals | GenerateMethods.copy,
+)
+base class Binance with BinanceMappable {
   const Binance(
     this.symbol,
     this.priceChange,
@@ -25,6 +31,30 @@ base class Binance extends Equatable {
     this.count,
   );
 
+  factory Binance.detached() => const Binance(
+        'Detached',
+        '',
+        '0.00',
+        '',
+        '',
+        '',
+        '',
+        '100',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        0,
+        0,
+        0,
+        0,
+        0,
+      );
+
   final String symbol;
   final String priceChange;
   final String priceChangePercent;
@@ -46,31 +76,6 @@ base class Binance extends Equatable {
   final double firstId;
   final double lastId;
   final double count;
-
-  @override
-  List<Object> get props => [
-        symbol,
-        priceChange,
-        priceChangePercent,
-        weightedAvgPrice,
-        prevClosePrice,
-        lastPrice,
-        lastQty,
-        bidPrice,
-        bidQty,
-        askPrice,
-        askQty,
-        openPrice,
-        highPrice,
-        lowPrice,
-        volume,
-        quoteVolume,
-        openTime,
-        closeTime,
-        firstId,
-        lastId,
-        count,
-      ];
 
   static List<Binance> dummyGen() => List.filled(120, null)
       .map(

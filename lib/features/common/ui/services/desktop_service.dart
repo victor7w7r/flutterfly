@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart' show ChangeNotifier;
 import 'package:injectable/injectable.dart' show lazySingleton;
 
 @lazySingleton
-final class DesktopService extends ChangeNotifier {
+class DesktopService extends ChangeNotifier {
   DesktopService() : _state = 'none';
 
   String _state;

@@ -1,8 +1,10 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:niku/namespace.dart' as n;
 
+import 'package:flutterfly/core/error/fetch_exception.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
-import 'package:flutterfly/core/utils/mvvm.dart';
+import 'package:flutterfly/core/utils/utils.dart';
+import 'package:flutterfly/features/common/business/entities/bitcoin.dart';
 import 'package:flutterfly/features/common/ui/services/services.dart';
 import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 
@@ -28,7 +30,7 @@ final class ColorButton extends StatelessWidget {
           ),
         ),
         onPressed: onClick,
-        child: const Padding(padding: EdgeInsets.fromLTRB(25, 25, 25, 25)),
+        child: const Padding(padding: EdgeInsets.all(25)),
       );
 }
 
@@ -42,8 +44,8 @@ final class HomeCardBrand extends StatelessWidget {
       ListenViewModel<FluentService>(
         builder: (final ctl) => Card(
           backgroundColor: ctl.state.themeColor[1],
-          borderRadius: BorderRadius.circular(20),
-          padding: const EdgeInsets.fromLTRB(10, 25, 10, 25),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),
           child: n.Column([
             'Made with love by'.n
               ..fontFamily = 'AminaReska'
@@ -80,12 +82,10 @@ final class HomeCardCrypto extends StatelessWidget {
       ListenViewModel<FluentService>(
         builder: (final ctl) => Card(
           backgroundColor: ctl.state.themeColor[1],
-          borderRadius: BorderRadius.circular(20),
-          padding: EdgeInsets.fromLTRB(
-            100,
-            context.mWidth > 960 ? 75 : 5,
-            100,
-            context.mWidth > 960 ? 75 : 5,
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          padding: EdgeInsets.symmetric(
+            horizontal: 100,
+            vertical: context.mWidth > 960 ? 75 : 5,
           ),
           child: n.Column([
             const SizedBox(height: 45),
@@ -101,14 +101,16 @@ final class HomeCardCrypto extends StatelessWidget {
             ),
             const SizedBox(height: 45),
             ViewModel<BinanceService>(
-              builder: (final ctlServ) => QueryBitcoinBuilder(
+              builder: (final ctlServ) =>
+                  BaseQueryBuilder<Bitcoin, FetchException>(
                 'bitcoin_fetch',
+                def: Bitcoin.detached(),
                 ctlServ.getBitcoin,
                 loading: () => const ProgressRing(value: 35),
                 error: (final _, final error) => n.Column(
                   [const SizedBox(height: 120), error.message.n..fontSize = 20],
                 ),
-                success: (final query, final data) => n.Column([
+                success: (final _, final data) => n.Column([
                   'Symbol: ${data.symbol}'.n
                     ..color = ctl.state.themeColor[2]
                     ..fontSize = 20,

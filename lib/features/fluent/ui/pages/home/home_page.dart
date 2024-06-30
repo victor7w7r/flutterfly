@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/config/inject.dart';
+import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/utils.dart';
 import 'package:flutterfly/features/common/ui/widgets/title_bar.dart';
@@ -79,9 +79,10 @@ class HomePage extends StatelessWidget {
   ) =>
       ListenViewModel<FluentService>(
         builder: (final ctl) => ColoredBox(
-          color: ctl.state.themeColor[0],
+          color: ctl.state.themeColor.first,
           child: n.Column([
-            if (!isWeb) WindowTitleBar(isDark: ctl.state.isDark),
+            if (!inject.get<Platform>().isWeb())
+              WindowTitleBar(isDark: ctl.state.isDark),
             const SizedBox(height: 10),
             const Header(),
             context.mWidth > 960
