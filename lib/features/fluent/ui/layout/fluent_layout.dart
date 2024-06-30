@@ -6,8 +6,8 @@ import 'package:flutterfly/features/fluent/ui/pages/home/home_page.dart';
 import 'package:flutterfly/features/fluent/ui/pages/store/store_page.dart';
 import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 
-final class FluentModule extends StatelessWidget {
-  const FluentModule({super.key});
+final class FluentLayout extends StatelessWidget {
+  const FluentLayout({super.key});
 
   @override
   Widget build(

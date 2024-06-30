@@ -9,8 +9,8 @@ import 'package:flutterfly/features/cupertino/ui/pages/store/store_page.dart';
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/title.dart';
 
-final class CupertinoModule extends StatelessWidget {
-  const CupertinoModule({super.key});
+final class CupertinoLayout extends StatelessWidget {
+  const CupertinoLayout({super.key});
 
   @override
   Widget build(

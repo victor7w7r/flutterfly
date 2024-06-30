@@ -7,8 +7,8 @@ import 'package:flutterfly/features/material/ui/pages/home/home_page.dart';
 import 'package:flutterfly/features/material/ui/pages/store/store_page.dart';
 import 'package:flutterfly/features/material/ui/services/material_service.dart';
 
-final class MaterialModule extends StatelessWidget {
-  const MaterialModule({super.key});
+final class MaterialLayout extends StatelessWidget {
+  const MaterialLayout({super.key});
 
   @override
   Widget build(
