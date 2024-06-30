@@ -22,7 +22,6 @@ $ flutter pub get
 - cupertino_icons: Icons for Flutter's Cupertino widgets.
 - dart_mappable: Improved json serialization and data classes with full support for generics, inheritance, customization and more:
 - dio: A powerful Http client for Dart.
-- equatable: Simplify Equality Comparisons.
 - fast_immutable_collections: Fast immutable collections for Dart.
 - fl_query: Asynchronous data caching, refetching & invalidation library for Flutter.
 - fluent_ui: Unofficial implementation of Fluent UI for Flutter.
