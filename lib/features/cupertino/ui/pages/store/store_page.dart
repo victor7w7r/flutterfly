@@ -73,7 +73,7 @@ final class _StoreState extends State<StorePage> {
                 cursorHeight: 25,
                 controller: _txtCtl,
                 decoration: BoxDecoration(
-                  color: ctl.isDark
+                  color: ctl.isDark()
                       ? const Color.fromARGB(255, 43, 53, 69)
                       : const Color.fromARGB(255, 248, 250, 253),
                 ),

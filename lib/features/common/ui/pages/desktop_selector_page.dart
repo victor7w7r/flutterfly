@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:niku/namespace.dart' as n;
@@ -38,7 +39,9 @@ final class SelectionWrap extends StatelessWidget {
 }
 
 final class DesktopSelectorPage extends StatelessWidget {
-  const DesktopSelectorPage({super.key});
+  const DesktopSelectorPage({super.key, @visibleForTesting this.mockChild});
+
+  final Widget? mockChild;
 
   @override
   Widget build(
@@ -66,10 +69,8 @@ final class DesktopSelectorPage extends StatelessWidget {
                     ? (SingleChildScrollView(child: SelectionWrap(ctl)).niku
                       ..pt = 100)
                     : SelectionWrap(ctl),
-                // coverage:ignore-start
                 if (inject.get<Platform>().isDesktop())
-                  const WindowTitleBar(isDark: true),
-                // coverage:ignore-end
+                  WindowTitleBar(isDark: true, mockChild: mockChild),
               ]),
             ),
           ),

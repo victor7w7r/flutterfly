@@ -7,14 +7,14 @@ import 'package:injectable/injectable.dart' show lazySingleton;
 import 'package:flutterfly/core/modules/localdb_module.dart';
 
 @lazySingleton
-final class CupertinoService extends ChangeNotifier {
+class CupertinoService extends ChangeNotifier {
   CupertinoService(this._localDbModule)
       : _isDark = _localDbModule.isCupertinoDark();
 
   bool _isDark;
   final LocalDbModule _localDbModule;
 
-  bool get isDark => _isDark;
+  bool isDark() => _isDark;
 
   void toggle() {
     _isDark = !_isDark;

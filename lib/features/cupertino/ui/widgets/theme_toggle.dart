@@ -20,7 +20,7 @@ final class ThemeToggle extends StatelessWidget {
           scale: 0.7,
           child: ListenViewModel<CupertinoService>(
             builder: (final ctl) => CupertinoSwitch(
-              value: ctl.isDark,
+              value: ctl.isDark(),
               onChanged: (final _) async => ctl.toggle(),
               thumbColor: CupertinoColors.white,
               activeColor: CupertinoColors.activeBlue,

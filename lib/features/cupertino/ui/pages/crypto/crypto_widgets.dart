@@ -28,7 +28,7 @@ final class CurrencyCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(24)),
-            border: ctl.isDark
+            border: ctl.isDark()
                 ? const Border.fromBorderSide(
                     BorderSide(
                       width: 2,

@@ -52,17 +52,20 @@ void main() {
         GetIt.I.registerLazySingleton<DesktopSelectorController>(
           MockDesktopSelectorController.new,
         );
-        GetIt.I.registerSingleton<Platform>(Platform());
+        GetIt.I.registerSingleton<Platform>(MockPlatform());
       });
       testWidgets('initializes correctly and responds to isInitAnim',
           (final tester) async {
         await tester.runAsync(() async {
           final controller = GetIt.I.get<DesktopSelectorController>();
+          final platform = GetIt.I.get<Platform>();
 
+          when(platform.isDesktop).thenReturn(true);
           when(() => controller.isInitAnim).thenReturn(false);
 
-          await tester
-              .pumpWidget(const MaterialApp(home: DesktopSelectorPage()));
+          await tester.pumpWidget(
+            const MaterialApp(home: DesktopSelectorPage(mockChild: SizedBox())),
+          );
 
           when(() => controller.isInitAnim).thenReturn(true);
 

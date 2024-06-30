@@ -20,7 +20,7 @@ final class DynamicChip extends StatelessWidget {
           height: isHome ? 60 : 50,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(24)),
-            border: ctl.isDark
+            border: ctl.isDark()
                 ? const Border.fromBorderSide(
                     BorderSide(
                       width: 2,
@@ -39,7 +39,9 @@ final class DynamicChip extends StatelessWidget {
                 ? [
                     const SizedBox(width: 38),
                     n.Image.asset(
-                      ctl.isDark ? 'assets/brandwhite.png' : 'assets/brand.png',
+                      ctl.isDark()
+                          ? 'assets/brandwhite.png'
+                          : 'assets/brand.png',
                     )
                       ..width = 220.0
                       ..height = 70.0,

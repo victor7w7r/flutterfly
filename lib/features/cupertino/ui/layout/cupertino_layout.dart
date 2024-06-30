@@ -22,7 +22,7 @@ final class CupertinoLayout extends StatelessWidget {
             title: 'flutterfly',
             debugShowCheckedModeBanner: false,
             theme: CupertinoThemeData(
-              brightness: ctl.isDark ? Brightness.dark : Brightness.light,
+              brightness: ctl.isDark() ? Brightness.dark : Brightness.light,
             ),
             home: CupertinoPageScaffold(
               navigationBar: CupertinoNavigationBar(
