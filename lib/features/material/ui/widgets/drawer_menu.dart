@@ -21,7 +21,7 @@ final class DrawerMenu extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                    ctl.isDark
+                    ctl.isDark()
                         ? 'assets/aqua-light.png'
                         : 'assets/aqua-black.png',
                   ),
@@ -48,7 +48,7 @@ final class DrawerMenu extends StatelessWidget {
           const Spacer(flex: 15),
           ListenViewModel<MaterialService>(
             builder: (final ctl) => n.Image.asset(
-              ctl.isDark ? 'assets/brandwhite.png' : 'assets/brand.png',
+              ctl.isDark() ? 'assets/brandwhite.png' : 'assets/brand.png',
             )
               ..width = 250.0
               ..height = 75.0,

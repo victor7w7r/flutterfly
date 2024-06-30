@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'package:flutterfly/core/utils/utils.dart';
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_page.dart';
@@ -8,7 +8,9 @@ import 'package:flutterfly/features/fluent/ui/layout/fluent_layout.dart';
 import 'package:flutterfly/features/material/ui/layout/material_layout.dart';
 
 final class App extends StatelessWidget {
-  const App({super.key});
+  const App({super.key, @visibleForTesting this.mockChild});
+
+  final Widget? mockChild;
 
   @override
   Widget build(
@@ -17,7 +19,7 @@ final class App extends StatelessWidget {
       LUViewModel<Platform, DesktopService>(
         builder: (final pt, final ctl) {
           if (pt.isIos()) {
-            return const CupertinoLayout();
+            return mockChild ?? const CupertinoLayout();
           } else if (pt.isAndroid()) {
             return const MaterialLayout();
           } else if (pt.isDesktop() && ctl.state != 'none') {

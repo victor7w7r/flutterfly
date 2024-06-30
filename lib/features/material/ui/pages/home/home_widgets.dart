@@ -67,7 +67,7 @@ final class DynamicChip extends StatelessWidget {
           height: 50,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(24)),
-            border: ctl.isDark
+            border: ctl.isDark()
                 ? const Border.fromBorderSide(
                     BorderSide(width: 2, color: Colors.white),
                   )
@@ -80,7 +80,7 @@ final class DynamicChip extends StatelessWidget {
                 ? [
                     const SizedBox(width: 38),
                     n.Image.asset(
-                      'assets/${ctl.isDark ? 'brandwhite' : 'brand'}.png',
+                      'assets/${ctl.isDark() ? 'brandwhite' : 'brand'}.png',
                     )
                       ..width = 220.0
                       ..height = 70.0,
@@ -214,7 +214,7 @@ final class CurrencyCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(24)),
-            border: ctl.isDark
+            border: ctl.isDark()
                 ? const Border.fromBorderSide(
                     BorderSide(width: 2, color: Colors.white),
                   )

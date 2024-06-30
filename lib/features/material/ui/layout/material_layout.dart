@@ -25,7 +25,7 @@ final class MaterialLayout extends StatelessWidget {
             ),
             darkTheme: ThemeData.dark()
                 .copyWith(splashFactory: InkRipple.splashFactory),
-            themeMode: ctl.isDark ? ThemeMode.dark : ThemeMode.light,
+            themeMode: ctl.isDark() ? ThemeMode.dark : ThemeMode.light,
             initialRoute: '/',
             routes: {
               '/': (final _) => const HomePage(),

@@ -37,7 +37,7 @@ final class FluentThemeApp {
 @lazySingleton
 final class FluentService extends ChangeNotifier {
   FluentService(this._localDbModule)
-      : _state = _localDbModule.isFluentDark
+      : _state = _localDbModule.isFluentDark()
             ? FluentThemeApp.dark()
             : FluentThemeApp.light();
 
@@ -73,6 +73,6 @@ final class FluentService extends ChangeNotifier {
   Future<void> toggle(final bool value) async {
     state = state.copyWith(isDark: value);
     state.isDark ? interpolator(darkColors) : interpolator(lightColors);
-    unawaited(_localDbModule.prefsBox.put('fluentdark', state.isDark));
+    unawaited(_localDbModule.prefsBox().put('fluentdark', state.isDark));
   }
 }
