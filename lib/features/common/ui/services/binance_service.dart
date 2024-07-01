@@ -11,7 +11,7 @@ import 'package:flutterfly/features/common/business/entities/entities.dart';
 import 'package:flutterfly/features/common/business/usecases/usecases.dart';
 
 @lazySingleton
-final class BinanceService {
+class BinanceService {
   BinanceService(
     this._getCurrenciesUseCase,
     this._getBitcoinUseCase,

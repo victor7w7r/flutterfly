@@ -14,15 +14,17 @@ final class BaseQueryBuilder<T, U> extends StatelessWidget {
     this.def,
     this.queryAccess,
     super.key,
+    this.mockError = false,
   });
 
   final String queryKey;
   final FutureOr<T?> Function() queryFn;
   final void Function(Query<T, U> query)? queryAccess;
   final Widget Function() loading;
-  final Widget Function(Query<T, U> query, U err) error;
+  final Widget Function(Query<T, U> query, U? err) error;
   final Widget Function(Query<T, U> query, T value) success;
   final T? def;
+  final bool mockError;
 
   @override
   Widget build(
@@ -35,7 +37,9 @@ final class BaseQueryBuilder<T, U> extends StatelessWidget {
         builder: (final _, final query) {
           queryAccess?.call(query);
           if (query.isLoading || !query.hasData) return loading();
-          if (query.hasError) return error(query, query.error as U);
+          if (query.hasError || mockError) {
+            return error(query, mockError ? null : query.error as U);
+          }
           if (def != null && (query.data as T) == def) return loading();
           return success(query, query.data as T);
         },

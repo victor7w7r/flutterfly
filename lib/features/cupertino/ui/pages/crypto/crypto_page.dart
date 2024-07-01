@@ -12,35 +12,38 @@ import 'package:flutterfly/features/common/ui/services/binance_service.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_widgets.dart';
 
 final class CryptoPage extends StatefulWidget {
-  const CryptoPage({super.key, this.child});
+  const CryptoPage({super.key, this.child, this.mockError = false});
 
   final Widget? child;
+  final bool mockError;
 
   @override
-  State<CryptoPage> createState() => _CryptoPageState();
+  State<CryptoPage> createState() => CryptoPageState();
 }
 
-final class _CryptoPageState extends State<CryptoPage> {
-  final _scrCtl = ScrollController();
+final class CryptoPageState extends State<CryptoPage> {
+  @visibleForTesting
+  // ignore: avoid_public_members_in_states
+  final scrCtl = ScrollController();
 
   late Query<List<Binance>, FetchException> _query;
 
   @override
   void initState() {
     super.initState();
-    _scrCtl.addListener(_scrollListener);
+    scrCtl.addListener(_scrollListener);
   }
 
   @override
   void dispose() {
-    _scrCtl.removeListener(_scrollListener);
+    scrCtl.removeListener(_scrollListener);
     // ignore: cascade_invocations
-    _scrCtl.dispose();
+    scrCtl.dispose();
     super.dispose();
   }
 
   void _scrollListener() =>
-      _scrCtl.position.pixels == _scrCtl.position.maxScrollExtent
+      scrCtl.position.pixels == scrCtl.position.maxScrollExtent
           ? inject.get<BinanceService>().paginateBinance(_query)
           : null;
 
@@ -54,18 +57,23 @@ final class _CryptoPageState extends State<CryptoPage> {
           'binance_fetch',
           ctl.fetchBinance,
           queryAccess: (final query) => _query = query,
+          mockError: widget.mockError,
           def: [Binance.detached()],
           loading: () => n.Row(
             const [SizedBox(height: 120), CupertinoActivityIndicator()],
           )..mainCenter,
           error: (final _, final error) => n.Row([
             const SizedBox(height: 120),
-            error.message.n..fontSize = 20,
+            error == null
+                ? ('An error occurred'.n..fontSize = 20)
+                // coverage:ignore-start
+                : (error.message.n..fontSize = 20),
+            // coverage:ignore-end
           ])
             ..mainCenter
             ..crossCenter,
           success: (final query, final data) => CustomScrollView(
-            controller: _scrCtl,
+            controller: scrCtl,
             physics: const BouncingScrollPhysics(),
             slivers: [
               const CupertinoSliverNavigationBar(

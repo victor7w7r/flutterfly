@@ -108,7 +108,12 @@ final class HomeCardCrypto extends StatelessWidget {
                 ctlServ.getBitcoin,
                 loading: () => const ProgressRing(value: 35),
                 error: (final _, final error) => n.Column(
-                  [const SizedBox(height: 120), error.message.n..fontSize = 20],
+                  [
+                    const SizedBox(height: 120),
+                    error == null
+                        ? ('An error occurred'.n..fontSize = 20)
+                        : (error.message.n..fontSize = 20),
+                  ],
                 ),
                 success: (final _, final data) => n.Column([
                   'Symbol: ${data.symbol}'.n

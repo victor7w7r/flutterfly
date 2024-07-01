@@ -157,7 +157,9 @@ final class _BottomContentState extends State<BottomContent> {
             )..mainCenter,
             error: (final _, final error) => n.Row([
               const SizedBox(height: 120),
-              (error.message).n..fontSize = 20,
+              error == null
+                  ? ('An error occurred'.n..fontSize = 20)
+                  : (error.message.n..fontSize = 20),
             ])
               ..mainCenter
               ..crossCenter,
