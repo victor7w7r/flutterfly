@@ -6,9 +6,9 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:niku/namespace.dart' as n;
 
 final class WindowTitleBar extends StatelessWidget {
-  const WindowTitleBar({required this.isDark, this.mockChild, super.key});
+  const WindowTitleBar({required this.isDark, this.child, super.key});
 
-  final Widget? mockChild;
+  final Widget? child;
   final bool isDark;
 
   @override
@@ -26,7 +26,7 @@ final class WindowTitleBar extends StatelessWidget {
           : Colors.white.withOpacity(0.08),
     );
 
-    return mockChild ??
+    return child ??
         WindowTitleBarBox(
           child: n.Row([
             Expanded(child: MoveWindow()),

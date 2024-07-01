@@ -8,9 +8,9 @@ import 'package:flutterfly/features/fluent/ui/layout/fluent_layout.dart';
 import 'package:flutterfly/features/material/ui/layout/material_layout.dart';
 
 final class App extends StatelessWidget {
-  const App({super.key, @visibleForTesting this.mockChild});
+  const App({super.key, this.child});
 
-  final Widget? mockChild;
+  final Widget? child;
 
   @override
   Widget build(
@@ -19,7 +19,7 @@ final class App extends StatelessWidget {
       LUViewModel<Platform, DesktopService>(
         builder: (final pt, final ctl) {
           if (pt.isIos()) {
-            return mockChild ?? const CupertinoLayout();
+            return child ?? const CupertinoLayout();
           } else if (pt.isAndroid()) {
             return const MaterialLayout();
           } else if (pt.isDesktop() && ctl.state != 'none') {

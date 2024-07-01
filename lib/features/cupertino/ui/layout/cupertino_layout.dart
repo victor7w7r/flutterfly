@@ -10,7 +10,9 @@ import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart
 import 'package:flutterfly/features/cupertino/ui/widgets/title.dart';
 
 final class CupertinoLayout extends StatelessWidget {
-  const CupertinoLayout({super.key});
+  const CupertinoLayout({super.key, this.child});
+
+  final Widget? child;
 
   @override
   Widget build(
@@ -26,7 +28,7 @@ final class CupertinoLayout extends StatelessWidget {
             ),
             home: CupertinoPageScaffold(
               navigationBar: CupertinoNavigationBar(
-                middle: CupTitle(ctl.isDark),
+                middle: CupTitle(ctl.isDark(), child: child),
               ),
               child: CupertinoTabScaffold(
                 tabBar: CupertinoTabBar(
@@ -45,8 +47,11 @@ final class CupertinoLayout extends StatelessWidget {
                     ),
                   ],
                 ),
-                tabBuilder: (final _, final i) =>
-                    const [HomePage(), CryptoPage(), StorePage()][i],
+                tabBuilder: (final _, final i) => [
+                  HomePage(child: child),
+                  CryptoPage(child: child),
+                  StorePage(child: child),
+                ][i],
               ),
             ),
           ),

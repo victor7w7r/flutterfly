@@ -91,7 +91,7 @@ final class HomeCardCrypto extends StatelessWidget {
             const SizedBox(height: 45),
             ListenViewModel<DataService>(
               builder: (final ctlData) => n.Text(
-                ctlData.state.isEmpty
+                ctlData.state().isEmpty
                     ? 'Store state: Not yet.'
                     : 'Store state: Yes, you write. ${ctlData.state}',
               )

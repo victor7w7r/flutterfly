@@ -88,7 +88,7 @@ class _StoreState extends State<StorePage> {
             const SizedBox(height: 10),
             ListenViewModel<DataService>(
               builder: (final ctl) => n.Text(
-                ctl.state.isEmpty
+                ctl.state().isEmpty
                     ? 'Store state: Not yet.'
                     : 'Store state: Yes, you write. ${ctl.state}',
               )

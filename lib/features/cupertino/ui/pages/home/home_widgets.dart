@@ -51,6 +51,7 @@ final class DynamicChip extends StatelessWidget {
                       ..width = 77.0
                       ..height = 35.0,
                     'Flutter Template'.n
+                      ..expanded
                       ..freezed
                       ..fontSize = 20,
                   ],

@@ -35,11 +35,11 @@ final class TopContent extends StatelessWidget {
         const SizedBox(height: 10),
         ListenViewModel<DataService>(
           builder: (final ctl) => n.Text(
-            ctl.state.isEmpty
+            ctl.state().isEmpty
                 ? 'Store state: Not yet.'
                 : 'Store state: Yes, you write. ${ctl.state}',
           )
-            ..fontSize = ctl.state.isEmpty ? ((height > 960) ? 25 : 15) : 20
+            ..fontSize = ctl.state().isEmpty ? ((height > 960) ? 25 : 15) : 20
             ..n.center,
         ),
         const SizedBox(height: 10),

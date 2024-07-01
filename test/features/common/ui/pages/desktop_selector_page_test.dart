@@ -64,7 +64,7 @@ void main() {
           when(() => controller.isInitAnim).thenReturn(false);
 
           await tester.pumpWidget(
-            const MaterialApp(home: DesktopSelectorPage(mockChild: SizedBox())),
+            const MaterialApp(home: DesktopSelectorPage(child: SizedBox())),
           );
 
           when(() => controller.isInitAnim).thenReturn(true);

@@ -24,7 +24,7 @@ void main() {
       await tester.pumpWidget(
         const CupertinoApp(
           home: CupertinoPageScaffold(
-            child: CupTitle(true, mockChild: SizedBox()),
+            child: CupTitle(true, child: SizedBox()),
           ),
         ),
       );
@@ -41,7 +41,7 @@ void main() {
       await tester.pumpWidget(
         const CupertinoApp(
           home: CupertinoPageScaffold(
-            child: CupTitle(true, mockChild: SizedBox()),
+            child: CupTitle(true, child: SizedBox()),
           ),
         ),
       );
@@ -58,7 +58,7 @@ void main() {
       await tester.pumpWidget(
         const CupertinoApp(
           home: CupertinoPageScaffold(
-            child: CupTitle(true, mockChild: SizedBox()),
+            child: CupTitle(true, child: SizedBox()),
           ),
         ),
       );

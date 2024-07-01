@@ -9,10 +9,14 @@ import 'package:flutterfly/features/cupertino/ui/pages/home/home_widgets.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/theme_toggle.dart';
 
 final class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, this.child});
+
+  final Widget? child;
 
   @override
-  Widget build(final BuildContext context) => n.Stack([
+  Widget build(final BuildContext context) =>
+      child ??
+      n.Stack([
         const ThemeToggle().niku
           ..top = 70
           ..right = 0,
@@ -25,12 +29,12 @@ final class HomePage extends StatelessWidget {
           const SizedBox(height: 10),
           ListenViewModel<DataService>(
             builder: (final ctl) => n.Text(
-              ctl.state.isEmpty
+              ctl.state().isEmpty
                   ? 'Store state: Not yet.'
                   : 'Store state: Yes, you write. ${ctl.state}',
             )
               ..fontSize =
-                  ctl.state.isEmpty ? ((context.mHeight > 960) ? 20 : 15) : 20
+                  ctl.state().isEmpty ? ((context.mHeight > 960) ? 20 : 15) : 20
               ..n.center,
           ),
           const SizedBox(height: 20),

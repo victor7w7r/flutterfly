@@ -12,7 +12,9 @@ import 'package:flutterfly/features/common/ui/services/binance_service.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_widgets.dart';
 
 final class CryptoPage extends StatefulWidget {
-  const CryptoPage({super.key});
+  const CryptoPage({super.key, this.child});
+
+  final Widget? child;
 
   @override
   State<CryptoPage> createState() => _CryptoPageState();
@@ -46,6 +48,7 @@ final class _CryptoPageState extends State<CryptoPage> {
   Widget build(
     final BuildContext context,
   ) =>
+      widget.child ??
       ViewModel<BinanceService>(
         builder: (final ctl) => BaseQueryBuilder<List<Binance>, FetchException>(
           'binance_fetch',

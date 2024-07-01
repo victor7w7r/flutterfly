@@ -23,13 +23,14 @@ final class NavBar extends StatelessWidget {
         leading: inject.get<Platform>().isMacOS() ? Container() : null,
         title: inject.get<Platform>().isMacOS()
             ? ListenViewModel<MaterialService>(
-                builder: (final ctl) => WindowTitleBar(isDark: ctl.isDark),
+                builder: (final ctl) => WindowTitleBar(isDark: ctl.isDark()),
               )
             : n.Stack([
                 title.n,
                 if (inject.get<Platform>().isDesktop())
                   ListenViewModel<MaterialService>(
-                    builder: (final ctl) => WindowTitleBar(isDark: ctl.isDark),
+                    builder: (final ctl) =>
+                        WindowTitleBar(isDark: ctl.isDark()),
                   ),
               ]),
         actions: inject.get<Platform>().isMacOS()

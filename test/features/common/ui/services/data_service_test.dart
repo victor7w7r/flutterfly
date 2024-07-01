@@ -11,7 +11,7 @@ void main() {
     });
 
     test('Should start with an empty state', () {
-      expect(dataService.state, isEmpty);
+      expect(dataService.state(), isEmpty);
     });
 
     test('Mutate should update state and notify listeners', () {
@@ -22,14 +22,14 @@ void main() {
         })
         ..mutate = 'new state';
 
-      expect(dataService.state, equals('new state'));
+      expect(dataService.state(), equals('new state'));
       expect(listenerCallCount, 1);
     });
 
     test('State getter should return the current state', () {
       dataService.mutate = 'another state';
 
-      expect(dataService.state, equals('another state'));
+      expect(dataService.state(), equals('another state'));
     });
   });
 }

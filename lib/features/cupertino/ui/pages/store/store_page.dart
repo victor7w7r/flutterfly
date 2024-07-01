@@ -12,7 +12,9 @@ import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart
 import 'package:flutterfly/features/cupertino/ui/widgets/theme_toggle.dart';
 
 final class StorePage extends StatefulWidget {
-  const StorePage({super.key});
+  const StorePage({super.key, this.child});
+
+  final Widget? child;
 
   @override
   State<StorePage> createState() => _StoreState();
@@ -50,7 +52,9 @@ final class _StoreState extends State<StorePage> {
   }
 
   @override
-  Widget build(final BuildContext context) => GestureDetector(
+  Widget build(final BuildContext context) =>
+      widget.child ??
+      GestureDetector(
         onTap: FocusManager.instance.primaryFocus?.unfocus,
         child: n.Stack([
           const ThemeToggle().niku
@@ -89,7 +93,7 @@ final class _StoreState extends State<StorePage> {
             const SizedBox(height: 20),
             ListenViewModel<DataService>(
               builder: (final ctl) => n.Text(
-                ctl.state.isEmpty
+                ctl.state().isEmpty
                     ? 'Store state: Not yet.'
                     : 'Store state: Yes, you write. ${ctl.state}',
               )
