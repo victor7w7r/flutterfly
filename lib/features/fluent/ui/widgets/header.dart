@@ -7,16 +7,19 @@ import 'package:flutterfly/features/common/ui/widgets/nest.dart';
 import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 
 final class Header extends StatelessWidget {
-  const Header({super.key});
+  const Header({super.key, this.child});
+
+  final Widget? child;
 
   @override
   Widget build(
     final BuildContext context,
   ) =>
+      child ??
       ListenViewModel<FluentService>(
         builder: (final ctl) => Nest([
           (final next) => Card(
-                backgroundColor: ctl.state.themeColor[1],
+                backgroundColor: ctl.state().themeColor[1],
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 child: next,
               ),
@@ -26,13 +29,15 @@ final class Header extends StatelessWidget {
                   n.Image.asset('assets/flutter-logo.png')
                     ..width = 50
                     ..height = 30,
-                  'Flutter Template'.n..color = ctl.state.themeColor[2],
+                  'Flutter Template'.n
+                    ..expanded
+                    ..color = ctl.state().themeColor[2],
                 ])
                   ..pl = context.mWidth > 960 ? 200 : 50,
                 ToggleSwitch(
-                  checked: ctl.state.isDark,
+                  checked: ctl.state().isDark,
                   onChanged: ctl.toggle,
-                  content: 'Dark Mode'.n..color = ctl.state.themeColor[2],
+                  content: 'Dark Mode'.n..color = ctl.state().themeColor[2],
                 ).niku
                   ..pr = context.mWidth > 960 ? 200 : 50,
               ])

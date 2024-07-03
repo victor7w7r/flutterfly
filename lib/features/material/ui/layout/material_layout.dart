@@ -8,7 +8,9 @@ import 'package:flutterfly/features/material/ui/pages/store/store_page.dart';
 import 'package:flutterfly/features/material/ui/services/material_service.dart';
 
 final class MaterialLayout extends StatelessWidget {
-  const MaterialLayout({super.key});
+  const MaterialLayout({super.key, this.child});
+
+  final Widget? child;
 
   @override
   Widget build(
@@ -28,8 +30,8 @@ final class MaterialLayout extends StatelessWidget {
             themeMode: ctl.isDark() ? ThemeMode.dark : ThemeMode.light,
             initialRoute: '/',
             routes: {
-              '/': (final _) => const HomePage(),
-              '/store': (final _) => const StorePage(),
+              '/': (final _) => HomePage(child: child),
+              '/store': (final _) => StorePage(child: child),
             },
           ),
         ),

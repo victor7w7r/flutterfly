@@ -43,29 +43,29 @@ final class HomeCardBrand extends StatelessWidget {
   ) =>
       ListenViewModel<FluentService>(
         builder: (final ctl) => Card(
-          backgroundColor: ctl.state.themeColor[1],
+          backgroundColor: ctl.state().themeColor[1],
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),
           child: n.Column([
             'Made with love by'.n
               ..fontFamily = 'AminaReska'
-              ..color = ctl.state.themeColor[2]
+              ..color = ctl.state().themeColor[2]
               ..fontSize = context.mWidth > 960 ? 20 : 15,
             n.Image.asset(
-              'assets/${ctl.state.isDark ? 'brandwhite' : 'brand'}.png',
+              'assets/${ctl.state().isDark ? 'brandwhite' : 'brand'}.png',
             )
               ..width = context.mWidth > 960 ? 500.0 : 300.0
               ..height = 100.0,
             'Happy Hacking!, Dart... Dart...'.n
-              ..color = ctl.state.themeColor[2]
+              ..color = ctl.state().themeColor[2]
               ..fontSize = context.mWidth > 960 ? 20 : 15,
             const SizedBox(height: 15),
             'This UI is powered by'.n
-              ..color = ctl.state.themeColor[2]
+              ..color = ctl.state().themeColor[2]
               ..fontSize = context.mWidth > 960 ? 20 : 15,
             const SizedBox(height: 30),
             'Fluent UI'.n
-              ..color = ctl.state.themeColor[2]
+              ..color = ctl.state().themeColor[2]
               ..fontSize = context.mWidth > 960 ? 60 : 40,
           ]),
         ),
@@ -81,7 +81,7 @@ final class HomeCardCrypto extends StatelessWidget {
   ) =>
       ListenViewModel<FluentService>(
         builder: (final ctl) => Card(
-          backgroundColor: ctl.state.themeColor[1],
+          backgroundColor: ctl.state().themeColor[1],
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           padding: EdgeInsets.symmetric(
             horizontal: 100,
@@ -96,7 +96,7 @@ final class HomeCardCrypto extends StatelessWidget {
                     : 'Store state: Yes, you write. ${ctlData.state}',
               )
                 ..fontSize = 20
-                ..color = ctl.state.themeColor[2]
+                ..color = ctl.state().themeColor[2]
                 ..n.center,
             ),
             const SizedBox(height: 45),
@@ -117,10 +117,10 @@ final class HomeCardCrypto extends StatelessWidget {
                 ),
                 success: (final _, final data) => n.Column([
                   'Symbol: ${data.symbol}'.n
-                    ..color = ctl.state.themeColor[2]
+                    ..color = ctl.state().themeColor[2]
                     ..fontSize = 20,
                   'Price: ${data.price}'.n
-                    ..color = ctl.state.themeColor[2]
+                    ..color = ctl.state().themeColor[2]
                     ..fontSize = 20,
                   const SizedBox(height: 45),
                 ]),

@@ -7,7 +7,9 @@ import 'package:flutterfly/features/fluent/ui/pages/store/store_page.dart';
 import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 
 final class FluentLayout extends StatelessWidget {
-  const FluentLayout({super.key});
+  const FluentLayout({super.key, this.child});
+
+  final Widget? child;
 
   @override
   Widget build(
@@ -20,10 +22,10 @@ final class FluentLayout extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             initialRoute: '/',
             routes: {
-              '/': (final _) => const HomePage(),
-              '/store': (final _) => const StorePage(),
+              '/': (final _) => HomePage(child: child),
+              '/store': (final _) => StorePage(child: child),
             },
-            color: ctl.state.themeColor.first,
+            color: ctl.state().themeColor.first,
           ),
         ),
       );

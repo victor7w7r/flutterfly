@@ -9,8 +9,9 @@ import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
 import 'package:flutterfly/features/material/ui/services/material_service.dart';
 
 final class NavBar extends StatelessWidget {
-  const NavBar(this.title, {super.key});
+  const NavBar(this.title, {super.key, this.child});
 
+  final Widget? child;
   final String title;
 
   @override
@@ -23,14 +24,15 @@ final class NavBar extends StatelessWidget {
         leading: inject.get<Platform>().isMacOS() ? Container() : null,
         title: inject.get<Platform>().isMacOS()
             ? ListenViewModel<MaterialService>(
-                builder: (final ctl) => WindowTitleBar(isDark: ctl.isDark()),
+                builder: (final ctl) =>
+                    WindowTitleBar(isDark: ctl.isDark(), child: child),
               )
             : n.Stack([
                 title.n,
                 if (inject.get<Platform>().isDesktop())
                   ListenViewModel<MaterialService>(
                     builder: (final ctl) =>
-                        WindowTitleBar(isDark: ctl.isDark()),
+                        WindowTitleBar(isDark: ctl.isDark(), child: child),
                   ),
               ]),
         actions: inject.get<Platform>().isMacOS()

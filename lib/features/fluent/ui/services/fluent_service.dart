@@ -35,7 +35,7 @@ final class FluentThemeApp {
 }
 
 @lazySingleton
-final class FluentService extends ChangeNotifier {
+class FluentService extends ChangeNotifier {
   FluentService(this._localDbModule)
       : _state = _localDbModule.isFluentDark()
             ? FluentThemeApp.dark()
@@ -44,9 +44,9 @@ final class FluentService extends ChangeNotifier {
   final LocalDbModule _localDbModule;
   FluentThemeApp _state;
 
-  FluentThemeApp get state => _state;
+  FluentThemeApp state() => _state;
 
-  set state(final FluentThemeApp value) {
+  set mutate(final FluentThemeApp value) {
     _state = value;
     notifyListeners();
   }
@@ -59,10 +59,10 @@ final class FluentService extends ChangeNotifier {
 
     Timer.periodic(const Duration(milliseconds: 30), (final t) {
       interpolatorBack =
-          Color.lerp(state.themeColor.first, changer.first, linear)!;
-      interpolatorCard = Color.lerp(state.themeColor[1], changer[1], linear)!;
-      interpolatorInv = Color.lerp(state.themeColor[2], changer[2], linear)!;
-      state = state.copyWith(
+          Color.lerp(state().themeColor.first, changer.first, linear)!;
+      interpolatorCard = Color.lerp(state().themeColor[1], changer[1], linear)!;
+      interpolatorInv = Color.lerp(state().themeColor[2], changer[2], linear)!;
+      mutate = state().copyWith(
         themeColor: [interpolatorBack, interpolatorCard, interpolatorInv],
       );
       linear += 0.1;
@@ -71,8 +71,8 @@ final class FluentService extends ChangeNotifier {
   }
 
   Future<void> toggle(final bool value) async {
-    state = state.copyWith(isDark: value);
-    state.isDark ? interpolator(darkColors) : interpolator(lightColors);
-    unawaited(_localDbModule.prefsBox().put('fluentdark', state.isDark));
+    mutate = state().copyWith(isDark: value);
+    state().isDark ? interpolator(darkColors) : interpolator(lightColors);
+    unawaited(_localDbModule.prefsBox().put('fluentdark', state().isDark));
   }
 }

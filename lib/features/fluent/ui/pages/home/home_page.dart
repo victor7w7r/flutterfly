@@ -10,16 +10,18 @@ import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 import 'package:flutterfly/features/fluent/ui/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, this.child});
+
+  final Widget? child;
 
   Color _background() =>
-      inject.get<FluentService>().state.isDark ? Colors.white : Colors.black;
+      inject.get<FluentService>().state().isDark ? Colors.white : Colors.black;
 
   void _colorChange(final String color) {
     switch (color) {
       case 'blue':
         inject.get<FluentService>().interpolator([
-          inject.get<FluentService>().state.isDark
+          inject.get<FluentService>().state().isDark
               ? const Color(0xFF0C4A6E)
               : const Color.fromARGB(255, 136, 202, 238),
           const Color(0xFF0369A1),
@@ -27,7 +29,7 @@ class HomePage extends StatelessWidget {
         ]);
       case 'violet':
         inject.get<FluentService>().interpolator([
-          inject.get<FluentService>().state.isDark
+          inject.get<FluentService>().state().isDark
               ? const Color(0xFF581c87)
               : const Color(0xFFD8b4FE),
           const Color(0xFF7E22CE),
@@ -35,7 +37,7 @@ class HomePage extends StatelessWidget {
         ]);
       case 'red':
         inject.get<FluentService>().interpolator([
-          inject.get<FluentService>().state.isDark
+          inject.get<FluentService>().state().isDark
               ? const Color(0xFF7F1D1D)
               : const Color(0xFFfCA5A5),
           const Color(0xFFB91C1C),
@@ -43,7 +45,7 @@ class HomePage extends StatelessWidget {
         ]);
       default:
         inject.get<FluentService>().interpolator([
-          inject.get<FluentService>().state.isDark
+          inject.get<FluentService>().state().isDark
               ? const Color(0xFF064E3B)
               : const Color(0xFF6EE7B7),
           const Color(0xFF047857),
@@ -77,12 +79,13 @@ class HomePage extends StatelessWidget {
   Widget build(
     final BuildContext context,
   ) =>
+      child ??
       ListenViewModel<FluentService>(
         builder: (final ctl) => ColoredBox(
-          color: ctl.state.themeColor.first,
+          color: ctl.state().themeColor.first,
           child: n.Column([
             if (!inject.get<Platform>().isWeb())
-              WindowTitleBar(isDark: ctl.state.isDark),
+              WindowTitleBar(isDark: ctl.state().isDark),
             const SizedBox(height: 10),
             const Header(),
             context.mWidth > 960

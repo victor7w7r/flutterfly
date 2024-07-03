@@ -7,14 +7,19 @@ import 'package:flutterfly/features/material/ui/pages/home/home_widgets.dart';
 import 'package:flutterfly/features/material/ui/widgets/widgets.dart';
 
 final class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, this.child, this.secondChild});
+
+  final Widget? child;
+  final Widget? secondChild;
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(final BuildContext context) =>
+      child ??
+      Scaffold(
         appBar: PreferredSize(
           preferredSize:
               Size.fromHeight(inject.get<Platform>().isMacOS() ? 35 : 50),
-          child: const NavBar('My Home'),
+          child: NavBar('My Home', child: secondChild),
         ),
         drawer: inject.get<Platform>().isMacOS() ? null : const DrawerMenu(),
         endDrawer: inject.get<Platform>().isMacOS() ? const DrawerMenu() : null,
@@ -28,6 +33,7 @@ final class HomePage extends StatelessWidget {
                 child: TopContent(
                   height: context.mHeight,
                   pOrientation: or,
+                  child: secondChild,
                 ),
               ),
               Expanded(
@@ -35,6 +41,7 @@ final class HomePage extends StatelessWidget {
                 child: BottomContent(
                   height: context.mHeight,
                   pOrientation: or,
+                  child: secondChild,
                 ),
               ),
             ],

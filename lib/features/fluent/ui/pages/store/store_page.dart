@@ -13,7 +13,10 @@ import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 import 'package:flutterfly/features/fluent/ui/widgets/widgets.dart';
 
 class StorePage extends StatefulWidget {
-  const StorePage({super.key});
+  const StorePage({super.key, this.child, this.secondMockChild});
+
+  final Widget? child;
+  final Widget? secondMockChild;
 
   @override
   State<StorePage> createState() => _StoreState();
@@ -50,19 +53,23 @@ class _StoreState extends State<StorePage> {
   Widget build(
     final BuildContext context,
   ) =>
+      widget.child ??
       ListenViewModel<FluentService>(
         builder: (final ctl) => ColoredBox(
-          color: ctl.state.themeColor.first,
+          color: ctl.state().themeColor.first,
           child: n.Column([
             if (!inject.get<Platform>().isWeb())
-              WindowTitleBar(isDark: ctl.state.isDark),
+              WindowTitleBar(
+                isDark: ctl.state().isDark,
+                child: widget.secondMockChild,
+              ),
             const SizedBox(height: 10),
-            const Header(),
+            Header(child: widget.secondMockChild),
             const SizedBox(height: 50),
             n.Column([
               n.Row([
                 Card(
-                  backgroundColor: ctl.state.themeColor[1],
+                  backgroundColor: ctl.state().themeColor[1],
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   padding: EdgeInsets.symmetric(
                     horizontal: context.isMinMd ? 20 : 50,
@@ -71,10 +78,11 @@ class _StoreState extends State<StorePage> {
                   child: n.Column([
                     const SizedBox(height: 45),
                     'Write anything in this form and send!'.n
-                      ..color = ctl.state.themeColor[2]
-                      ..fontSize = 20,
+                      ..color = ctl.state().themeColor[2]
+                      ..overflow = TextOverflow.ellipsis
+                      ..fontSize = 17,
                     const SizedBox(height: 30),
-                    StoreText(ctl: _txtCtl, theme: ctl.state),
+                    StoreText(ctl: _txtCtl, theme: ctl.state()),
                     const SizedBox(height: 30),
                     BlurButton(
                       caption: 'Send',
@@ -88,8 +96,8 @@ class _StoreState extends State<StorePage> {
                             : 'Store state: Yes, you write. '
                                 '${ctlData.state}',
                       )
-                        ..fontSize = 20
-                        ..color = ctl.state.themeColor[2]
+                        ..fontSize = 17
+                        ..color = ctl.state().themeColor[2]
                         ..n.center,
                     ),
                     const SizedBox(height: 45),

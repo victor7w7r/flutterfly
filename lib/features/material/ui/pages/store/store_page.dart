@@ -11,14 +11,17 @@ import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
 import 'package:flutterfly/features/material/ui/widgets/widgets.dart';
 
-class StorePage extends StatefulWidget {
-  const StorePage({super.key});
+final class StorePage extends StatefulWidget {
+  const StorePage({super.key, this.child, this.secondMockChild});
+
+  final Widget? child;
+  final Widget? secondMockChild;
 
   @override
   State<StorePage> createState() => _StoreState();
 }
 
-class _StoreState extends State<StorePage> {
+final class _StoreState extends State<StorePage> {
   final TextEditingController _txtCtl = TextEditingController();
 
   void _request(
@@ -49,12 +52,14 @@ class _StoreState extends State<StorePage> {
   }
 
   @override
-  Widget build(final BuildContext context) => GestureDetector(
+  Widget build(final BuildContext context) =>
+      widget.child ??
+      GestureDetector(
         onTap: FocusManager.instance.primaryFocus?.unfocus,
         child: Scaffold(
-          appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(50),
-            child: NavBar('My Store'),
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(50),
+            child: NavBar('My Store', child: widget.secondMockChild),
           ),
           drawer: inject.get<Platform>().isMacOS() ? null : const DrawerMenu(),
           endDrawer:

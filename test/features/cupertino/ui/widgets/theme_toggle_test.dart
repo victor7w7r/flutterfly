@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
 
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';

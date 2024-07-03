@@ -17,14 +17,18 @@ final class TopContent extends StatelessWidget {
   const TopContent({
     required this.height,
     required this.pOrientation,
+    this.child,
     super.key,
   });
 
   final double height;
   final Orientation pOrientation;
+  final Widget? child;
 
   @override
-  Widget build(final BuildContext context) => n.Column([
+  Widget build(final BuildContext context) =>
+      child ??
+      n.Column([
         SizedBox(
           height: pOrientation == Orientation.portrait ? 30 : height / 3.5,
         ),
@@ -91,6 +95,7 @@ final class DynamicChip extends StatelessWidget {
                       ..height = 35.0,
                     'Flutter Template'.n
                       ..freezed
+                      ..expanded
                       ..fontSize = 20,
                   ],
           ),
@@ -102,42 +107,49 @@ final class BottomContent extends StatefulWidget {
   const BottomContent({
     required this.height,
     required this.pOrientation,
+    this.mockError = false,
+    this.child,
     super.key,
   });
 
   final double height;
+  final bool mockError;
   final Orientation pOrientation;
+  final Widget? child;
 
   @override
-  State<BottomContent> createState() => _BottomContentState();
+  State<BottomContent> createState() => BottomContentState();
 }
 
-final class _BottomContentState extends State<BottomContent> {
-  final _scrCtl = ScrollController();
+final class BottomContentState extends State<BottomContent> {
+  // ignore: avoid_public_members_in_states
+  final scrCtl = ScrollController();
 
   late Query<List<Binance>, FetchException> _query;
 
   void _scrollListener() =>
-      _scrCtl.position.pixels == _scrCtl.position.maxScrollExtent
+      scrCtl.position.pixels == scrCtl.position.maxScrollExtent
           ? inject.get<BinanceService>().paginateBinance(_query)
           : null;
 
   @override
   void initState() {
     super.initState();
-    _scrCtl.addListener(_scrollListener);
+    scrCtl.addListener(_scrollListener);
   }
 
   @override
   void dispose() {
-    _scrCtl.removeListener(_scrollListener);
+    scrCtl.removeListener(_scrollListener);
     // ignore: cascade_invocations
-    _scrCtl.dispose();
+    scrCtl.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(final BuildContext context) => n.Column([
+  Widget build(final BuildContext context) =>
+      widget.child ??
+      n.Column([
         'Cryptocurrency data'.n
           ..fontSize = (widget.height > 960) ? 35 : 20
           ..n.center,
@@ -147,6 +159,7 @@ final class _BottomContentState extends State<BottomContent> {
               BaseQueryBuilder<List<Binance>, FetchException>(
             'binance_fetch',
             ctl.fetchBinance,
+            mockError: widget.mockError,
             queryAccess: (final query) => _query = query,
             def: [Binance.detached()],
             loading: () => n.Row(
@@ -159,7 +172,9 @@ final class _BottomContentState extends State<BottomContent> {
               const SizedBox(height: 120),
               error == null
                   ? ('An error occurred'.n..fontSize = 20)
+                  // coverage:ignore-start
                   : (error.message.n..fontSize = 20),
+              // coverage:ignore-end
             ])
               ..mainCenter
               ..crossCenter,
@@ -175,7 +190,7 @@ final class _BottomContentState extends State<BottomContent> {
                 ..physics = const AlwaysScrollableScrollPhysics()
                 ..mainAxisSpacing = 10.0
                 ..scrollDirection = Axis.vertical
-                ..controller = _scrCtl
+                ..controller = scrCtl
                 ..children = data
                     .map(
                       (final bin) => CurrencyCard(

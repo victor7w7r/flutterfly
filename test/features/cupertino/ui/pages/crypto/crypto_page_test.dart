@@ -1,18 +1,17 @@
-import 'package:fl_query/fl_query.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'package:fl_query/fl_query.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart' show GetIt;
+import 'package:mocktail/mocktail.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+
 import 'package:flutterfly/core/error/fetch_exception.dart';
 import 'package:flutterfly/features/common/business/entities/binance.dart';
 import 'package:flutterfly/features/common/ui/services/binance_service.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_page.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_widgets.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mocktail/mocktail.dart';
-
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
-import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
-
 import '../../../../../setup.dart';
 
 class MockCupertinoService extends Mock

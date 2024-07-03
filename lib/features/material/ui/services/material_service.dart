@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart' show lazySingleton;
 import 'package:flutterfly/core/modules/localdb_module.dart';
 
 @lazySingleton
-final class MaterialService extends ChangeNotifier {
+class MaterialService extends ChangeNotifier {
   MaterialService(this._localDbModule)
       : _isDark = _localDbModule.isMaterialDark();
 
