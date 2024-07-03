@@ -13,5 +13,5 @@ class DesktopService extends ChangeNotifier {
     notifyListeners();
   }
 
-  String get state => _state;
+  String state() => _state;
 }

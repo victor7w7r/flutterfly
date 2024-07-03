@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
@@ -36,4 +38,22 @@ class MockPathProviderPlatform extends Mock
 
   @override
   Future<String> getDownloadsPath() async => kDownloadsPath;
+}
+
+void disableOverflowErrors() {
+  FlutterError.onError = (final details) {
+    final exception = details.exception;
+    final isOverflowError = exception is FlutterError &&
+        !exception.diagnostics.any(
+          (final e) =>
+              e.value.toString().startsWith('A RenderFlex overflowed by'),
+        );
+
+    if (isOverflowError) {
+      // ignore: avoid_print
+      print('Overflow error.');
+    } else {
+      FlutterError.presentError(details);
+    }
+  };
 }

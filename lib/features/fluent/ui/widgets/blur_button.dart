@@ -20,11 +20,12 @@ final class BlurButton extends StatelessWidget {
       FilledButton(
         onPressed: onClick,
         style: ButtonStyle(
-          elevation: ButtonState.all<double>(0),
-          foregroundColor: ButtonState.all<Color>(Colors.black),
-          backgroundColor:
-              ButtonState.all<Color>(const Color.fromRGBO(255, 255, 255, 0.4)),
-          shape: ButtonState.all<RoundedRectangleBorder>(
+          elevation: WidgetStateProperty.all<double>(0),
+          foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+          backgroundColor: WidgetStateProperty.all<Color>(
+            const Color.fromRGBO(255, 255, 255, 0.4),
+          ),
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(18.0)),
               side: BorderSide(color: Color.fromRGBO(204, 204, 204, 0)),

@@ -29,9 +29,7 @@ final class Header extends StatelessWidget {
                   n.Image.asset('assets/flutter-logo.png')
                     ..width = 50
                     ..height = 30,
-                  'Flutter Template'.n
-                    ..expanded
-                    ..color = ctl.state().themeColor[2],
+                  'Flutter Template'.n..color = ctl.state().themeColor[2],
                 ])
                   ..pl = context.mWidth > 960 ? 200 : 50,
                 ToggleSwitch(

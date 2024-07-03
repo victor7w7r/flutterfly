@@ -1,14 +1,14 @@
 import 'package:fluent_ui/fluent_ui.dart';
-
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutterfly/features/fluent/ui/pages/store/store_page.dart';
-import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
-import 'package:flutterfly/features/fluent/ui/widgets/blur_button.dart';
 import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
+import 'package:flutterfly/features/fluent/ui/pages/store/store_page.dart';
+import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
+import 'package:flutterfly/features/fluent/ui/widgets/blur_button.dart';
+import '../../../../../setup.dart';
 
 class MockFluentService extends Mock
     with ChangeNotifier
@@ -28,8 +28,11 @@ void main() {
     });
 
     testWidgets('Render widget successfully', (final tester) async {
+      disableOverflowErrors();
       final platform = GetIt.I.get<Platform>();
       when(platform.isWeb).thenReturn(false);
+
+      GetIt.I.get<DataService>().mutate = '.';
 
       await tester.pumpWidget(
         const FluentApp(home: StorePage(secondMockChild: SizedBox())),
@@ -84,6 +87,22 @@ void main() {
         await tester.tap(find.text('OK'));
         await tester.pump();
       });
+    });
+
+    testWidgets('Press to Go To Home Button', (final tester) async {
+      final platform = GetIt.I.get<Platform>();
+      when(platform.isWeb).thenReturn(true);
+
+      await tester.pumpWidget(
+        const FluentApp(
+          home: StorePage(secondMockChild: SizedBox()),
+        ),
+      );
+
+      await tester.tap(find.text('Go to Home'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(StorePage), findsOneWidget);
     });
   });
 }

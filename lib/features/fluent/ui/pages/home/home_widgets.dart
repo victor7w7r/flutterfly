@@ -23,9 +23,9 @@ final class ColorButton extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Button(
         style: ButtonStyle(
-          elevation: ButtonState.all<double>(0),
-          backgroundColor: ButtonState.all<Color>(back),
-          shape: ButtonState.all<CircleBorder>(
+          elevation: WidgetStateProperty.all<double>(0),
+          backgroundColor: WidgetStateProperty.all<Color>(back),
+          shape: WidgetStateProperty.all<CircleBorder>(
             CircleBorder(side: BorderSide(width: 4, color: border)),
           ),
         ),
@@ -35,12 +35,15 @@ final class ColorButton extends StatelessWidget {
 }
 
 final class HomeCardBrand extends StatelessWidget {
-  const HomeCardBrand({super.key});
+  const HomeCardBrand({super.key, this.child});
+
+  final Widget? child;
 
   @override
   Widget build(
     final BuildContext context,
   ) =>
+      child ??
       ListenViewModel<FluentService>(
         builder: (final ctl) => Card(
           backgroundColor: ctl.state().themeColor[1],
@@ -73,12 +76,17 @@ final class HomeCardBrand extends StatelessWidget {
 }
 
 final class HomeCardCrypto extends StatelessWidget {
-  const HomeCardCrypto({super.key});
+  const HomeCardCrypto({super.key, this.child, this.mockError = false});
+
+  final Widget? child;
+
+  final bool mockError;
 
   @override
   Widget build(
     final BuildContext context,
   ) =>
+      child ??
       ListenViewModel<FluentService>(
         builder: (final ctl) => Card(
           backgroundColor: ctl.state().themeColor[1],
@@ -107,12 +115,15 @@ final class HomeCardCrypto extends StatelessWidget {
                 def: Bitcoin.detached(),
                 ctlServ.getBitcoin,
                 loading: () => const ProgressRing(value: 35),
+                mockError: mockError,
                 error: (final _, final error) => n.Column(
                   [
                     const SizedBox(height: 120),
                     error == null
                         ? ('An error occurred'.n..fontSize = 20)
+                        // coverage:ignore-start
                         : (error.message.n..fontSize = 20),
+                    // coverage:ignore-end
                   ],
                 ),
                 success: (final _, final data) => n.Column([

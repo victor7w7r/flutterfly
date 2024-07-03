@@ -10,9 +10,10 @@ import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 import 'package:flutterfly/features/fluent/ui/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, this.child});
+  const HomePage({super.key, this.child, this.secondMockChild});
 
   final Widget? child;
+  final Widget? secondMockChild;
 
   Color _background() =>
       inject.get<FluentService>().state().isDark ? Colors.white : Colors.black;
@@ -85,9 +86,12 @@ class HomePage extends StatelessWidget {
           color: ctl.state().themeColor.first,
           child: n.Column([
             if (!inject.get<Platform>().isWeb())
-              WindowTitleBar(isDark: ctl.state().isDark),
+              WindowTitleBar(
+                isDark: ctl.state().isDark,
+                child: secondMockChild,
+              ),
             const SizedBox(height: 10),
-            const Header(),
+            Header(child: secondMockChild),
             context.mWidth > 960
                 ? SizedBox(
                     height: context.mHeight <= 700 ? 40 : context.mHeight / 15,
@@ -95,13 +99,17 @@ class HomePage extends StatelessWidget {
                 : const SizedBox(height: 20),
             n.Column([
               context.mWidth > 960
-                  ? (n.Row(const [HomeCardBrand(), HomeCardCrypto()])
-                    ..mainAxisAlignment = MainAxisAlignment.spaceEvenly)
+                  ? (n.Row(
+                      [
+                        HomeCardBrand(child: secondMockChild),
+                        HomeCardCrypto(child: secondMockChild),
+                      ],
+                    )..mainAxisAlignment = MainAxisAlignment.spaceEvenly)
                   : (n.Column(
-                      const [
-                        HomeCardBrand(),
-                        SizedBox(height: 30),
-                        HomeCardCrypto(),
+                      [
+                        HomeCardBrand(child: secondMockChild),
+                        const SizedBox(height: 30),
+                        HomeCardCrypto(child: secondMockChild),
                       ],
                     )..mainAxisAlignment = MainAxisAlignment.spaceEvenly),
               const SizedBox(height: 40),
