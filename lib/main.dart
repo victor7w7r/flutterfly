@@ -10,7 +10,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart'
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configInjection();
-  if (Platform().isDesktop()) {
+  if (Platform().isDesktop) {
     doWhenWindowReady(
       () => appWindow
         ..minSize = const Size(360, 360)

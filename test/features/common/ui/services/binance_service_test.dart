@@ -1,7 +1,8 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:fl_query/fl_query.dart' show Query;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
+import 'package:fpdart/fpdart.dart' show Either;
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
 
 import 'package:flutterfly/core/error/failure.dart';
@@ -11,13 +12,15 @@ import 'package:flutterfly/features/common/business/entities/entities.dart';
 import 'package:flutterfly/features/common/business/usecases/usecases.dart';
 import 'package:flutterfly/features/common/ui/services/binance_service.dart';
 
-class MockGetCurrenciesUseCase extends Mock implements GetCurrenciesUseCase {}
+final class MockGetCurrenciesUseCase extends Mock
+    implements GetCurrenciesUseCase {}
 
-class MockGetBitcoinUseCase extends Mock implements GetBitcoinUseCase {}
+final class MockGetBitcoinUseCase extends Mock implements GetBitcoinUseCase {}
 
-class MockQuery extends Mock implements Query<List<Binance>, FetchException> {}
+final class MockQuery extends Mock
+    implements Query<List<Binance>, FetchException> {}
 
-class MockPlatform extends Mock implements Platform {}
+final class MockPlatform extends Mock implements Platform {}
 
 void main() {
   group('BinanceService', () {
@@ -27,7 +30,8 @@ void main() {
     late MockPlatform mockPlatform;
     late MockQuery mockQuery;
 
-    setUp(() {
+    setUp(() async {
+      await GetIt.I.reset();
       mockGetCurrenciesUseCase = MockGetCurrenciesUseCase();
       mockGetBitcoinUseCase = MockGetBitcoinUseCase();
       mockQuery = MockQuery();
@@ -37,7 +41,7 @@ void main() {
         mockGetBitcoinUseCase,
         mockPlatform,
       );
-      when(mockPlatform.isWeb).thenReturn(false);
+      when(() => mockPlatform.isWeb).thenReturn(false);
     });
 
     test('Call fetchBinance', () async {
@@ -46,13 +50,15 @@ void main() {
       );
 
       await binanceService.fetchBinance();
+
       verify(mockGetCurrenciesUseCase.call).called(1);
     });
 
     test('Call fetchBinance with web interface', () async {
-      when(mockPlatform.isWeb).thenReturn(true);
+      when(() => mockPlatform.isWeb).thenReturn(true);
 
       await binanceService.fetchBinance();
+
       verifyNever(mockGetCurrenciesUseCase.call);
     });
 
@@ -62,8 +68,8 @@ void main() {
       );
 
       final binance = await binanceService.getBitcoin();
-      verify(mockGetBitcoinUseCase.call).called(1);
 
+      verify(mockGetBitcoinUseCase.call).called(1);
       expect(binance, isA<Bitcoin>());
     });
 
@@ -84,8 +90,8 @@ void main() {
       );
 
       final binance = await binanceService.getCurrencies();
-      verify(mockGetCurrenciesUseCase.call).called(1);
 
+      verify(mockGetCurrenciesUseCase.call).called(1);
       expect(binance, isA<IList<Binance>>());
     });
 
@@ -106,8 +112,8 @@ void main() {
       );
 
       await binanceService.fetchBinance();
-
       binanceService.paginateBinance(mockQuery);
+
       verify(() => mockQuery.setData(any())).called(1);
     });
 

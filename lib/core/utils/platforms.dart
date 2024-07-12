@@ -3,41 +3,42 @@
 import 'package:flutter/foundation.dart'
     show TargetPlatform, defaultTargetPlatform, kIsWeb;
 
-import 'package:injectable/injectable.dart';
+import 'package:watch_it/watch_it.dart';
 
-@injectable
 class Platform {
-  bool isWeb() => kIsWeb;
+  bool get isAndroid => defaultTargetPlatform == TargetPlatform.android;
 
-  bool isPlatform() =>
-      defaultTargetPlatform == TargetPlatform.linux ||
-      defaultTargetPlatform == TargetPlatform.macOS ||
-      defaultTargetPlatform == TargetPlatform.windows ||
-      kIsWeb;
+  bool get isAndroidOnly =>
+      defaultTargetPlatform == TargetPlatform.android && !kIsWeb;
 
-  bool isPlatformNotMac() =>
-      defaultTargetPlatform == TargetPlatform.linux ||
-      defaultTargetPlatform == TargetPlatform.windows ||
-      kIsWeb;
-
-  bool isDesktop() =>
+  bool get isDesktop =>
       defaultTargetPlatform == TargetPlatform.linux ||
       defaultTargetPlatform == TargetPlatform.macOS ||
       defaultTargetPlatform == TargetPlatform.windows;
 
-  bool isWindows() => defaultTargetPlatform == TargetPlatform.windows;
+  bool get isIos => defaultTargetPlatform == TargetPlatform.iOS;
 
-  bool isLinux() => defaultTargetPlatform == TargetPlatform.linux;
+  bool get isLinux => defaultTargetPlatform == TargetPlatform.linux;
 
-  bool isIos() => defaultTargetPlatform == TargetPlatform.iOS;
+  bool get isMacOS => defaultTargetPlatform == TargetPlatform.macOS;
 
-  bool isMacOS() => defaultTargetPlatform == TargetPlatform.macOS;
-
-  bool isAndroid() => defaultTargetPlatform == TargetPlatform.android;
-
-  bool isAndroidOnly() =>
-      defaultTargetPlatform == TargetPlatform.android && !kIsWeb;
-
-  bool isMacOSOnly() =>
+  bool get isMacOSOnly =>
       defaultTargetPlatform == TargetPlatform.macOS && !kIsWeb;
+
+  bool get isPlatform =>
+      defaultTargetPlatform == TargetPlatform.linux ||
+      defaultTargetPlatform == TargetPlatform.macOS ||
+      defaultTargetPlatform == TargetPlatform.windows ||
+      kIsWeb;
+
+  bool get isPlatformNotMac =>
+      defaultTargetPlatform == TargetPlatform.linux ||
+      defaultTargetPlatform == TargetPlatform.windows ||
+      kIsWeb;
+
+  bool get isWeb => kIsWeb;
+
+  bool get isWindows => defaultTargetPlatform == TargetPlatform.windows;
 }
+
+void setUpPlatform() => GetIt.I.registerFactory<Platform>(Platform.new);

@@ -7,15 +7,12 @@ part '../../../../generated/features/common/business/entities/bitcoin.mapper.dar
       GenerateMethods.stringify | GenerateMethods.equals | GenerateMethods.copy,
 )
 base class Bitcoin with BitcoinMappable {
-  const Bitcoin(
-    this.symbol,
-    this.price,
-  );
-
-  factory Bitcoin.dummy() => const Bitcoin('DUMMY', '0.00');
+  const Bitcoin(this.symbol, this.price);
 
   factory Bitcoin.detached() => const Bitcoin('DETACHED', '0.00');
 
-  final String symbol;
+  factory Bitcoin.dummy() => const Bitcoin('DUMMY', '0.00');
+
   final String price;
+  final String symbol;
 }

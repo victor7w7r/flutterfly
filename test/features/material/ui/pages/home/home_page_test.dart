@@ -20,11 +20,11 @@ void main() {
       GetIt.I.registerSingleton<Platform>(MockPlatform());
       GetIt.I.registerSingleton<MaterialService>(MockMaterialService());
 
-      when(() => GetIt.I.get<MaterialService>().isDark()).thenReturn(false);
+      when(() => GetIt.I<MaterialService>().).thenReturn(false);
     });
 
     testWidgets('Render page successfully', (final tester) async {
-      final platform = GetIt.I.get<Platform>();
+      final platform = GetIt.I<Platform>();
       when(platform.isMacOS).thenReturn(true);
 
       await tester.pumpWidget(

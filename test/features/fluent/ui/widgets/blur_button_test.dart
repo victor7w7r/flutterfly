@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_empty_blocks
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 

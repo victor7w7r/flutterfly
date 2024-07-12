@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:watch_it/watch_it.dart' show GetIt;
+import 'package:get_it/get_it.dart' show GetIt;
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/core/utils/mvvm.dart';
 
-class MockObject {
+final class MockObject {
   bool isMarked = false;
 }
 
-class MockNotifier extends ChangeNotifier {
+final class MockNotifier extends ChangeNotifier {
   bool isMarked = false;
 }
 
@@ -17,159 +18,156 @@ void main() {
   group('baseMvvm', () {
     setUp(() async => GetIt.I.reset());
 
-    testWidgets('ViewModel calls onInit and onDispose', (final tester) async {
-      GetIt.I.registerSingleton<MockObject>(MockObject());
+    patrolWidgetTest('ViewModel calls onInit and onDispose', (final $) async {
+      GetIt.I.registerSingleton(MockObject());
+
       var isInitCalled = false;
       var isDisposeCalled = false;
 
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         MaterialApp(
           home: ViewModel<MockObject>(
-            onInit: (final _) {
-              isInitCalled = true;
-            },
-            onDispose: (final _) {
-              isDisposeCalled = true;
-            },
             builder: (final _) => const Text('Mock Object'),
+            onInit: (final _) => isInitCalled = true,
+            onDispose: (final _) => isDisposeCalled = true,
           ),
         ),
       );
 
       expect(isInitCalled, isTrue);
-      expect(find.text('Mock Object'), findsOneWidget);
+      expect($('Mock Object'), findsOneWidget);
 
-      await tester.pumpWidget(Container());
+      await $.pumpWidget(Container());
 
       expect(isDisposeCalled, isTrue);
     });
 
-    testWidgets('ViewModel resets lazy singleton when disposeLazy is true',
-        (final tester) async {
-      GetIt.I.registerLazySingleton<MockObject>(MockObject.new);
-      await tester.pumpWidget(
+    patrolWidgetTest('ViewModel resets lazy singleton when disposeLazy is true',
+        (final $) async {
+      GetIt.I.registerLazySingleton(MockObject.new);
+      await $.pumpWidget(
         MaterialApp(
           home: ViewModel<MockObject>(
-            disposeLazy: true,
             builder: (final _) => const Text('Lazy Singleton'),
+            disposeLazy: true,
           ),
         ),
       );
 
-      expect(find.text('Lazy Singleton'), findsOneWidget);
+      expect($('Lazy Singleton'), findsOneWidget);
 
-      GetIt.I.get<MockObject>().isMarked = true;
-      expect(GetIt.I.get<MockObject>().isMarked, true);
+      GetIt.I<MockObject>().isMarked = true;
+      expect(GetIt.I<MockObject>().isMarked, true);
 
-      await tester.pumpWidget(Container());
+      await $.pumpWidget(Container());
 
-      expect(GetIt.I.get<MockObject>().isMarked, isFalse);
+      expect(GetIt.I<MockObject>().isMarked, isFalse);
     });
 
-    testWidgets('ListenViewModel calls onInit and onDispose',
-        (final tester) async {
-      GetIt.I.registerSingleton<MockNotifier>(MockNotifier());
+    patrolWidgetTest('ListenViewModel calls onInit and onDispose',
+        (final $) async {
+      GetIt.I.registerSingleton(MockNotifier());
+
       var isInitCalled = false;
       var isDisposeCalled = false;
 
-      await tester.pumpWidget(
+      await $.pumpWidget(
         MaterialApp(
           home: ListenViewModel<MockNotifier>(
-            onInit: (final _) {
-              isInitCalled = true;
-            },
-            onDispose: (final _) {
-              isDisposeCalled = true;
-            },
             builder: (final _) => const Text('Mock Notifier'),
+            onInit: (final _) => isInitCalled = true,
+            onDispose: (final _) => isDisposeCalled = true,
           ),
         ),
       );
 
       expect(isInitCalled, isTrue);
-      expect(find.text('Mock Notifier'), findsOneWidget);
+      expect($('Mock Notifier'), findsOneWidget);
 
-      await tester.pumpWidget(Container());
+      await $.pumpWidget(Container());
 
       expect(isDisposeCalled, isTrue);
     });
 
-    testWidgets(
+    patrolWidgetTest(
         'ListenViewModel resets lazy singleton when disposeLazy is true',
-        (final tester) async {
-      GetIt.I.registerLazySingleton<MockNotifier>(MockNotifier.new);
-      await tester.pumpWidget(
+        (final $) async {
+      GetIt.I.registerLazySingleton(MockNotifier.new);
+      await $.pumpWidget(
         MaterialApp(
           home: ListenViewModel<MockNotifier>(
-            disposeLazy: true,
             builder: (final _) => const Text('Lazy Singleton'),
+            disposeLazy: true,
           ),
         ),
       );
 
-      expect(find.text('Lazy Singleton'), findsOneWidget);
+      expect($('Lazy Singleton'), findsOneWidget);
 
-      GetIt.I.get<MockNotifier>().isMarked = true;
-      expect(GetIt.I.get<MockNotifier>().isMarked, true);
+      GetIt.I<MockNotifier>().isMarked = true;
+      expect(GetIt.I<MockNotifier>().isMarked, true);
 
-      await tester.pumpWidget(Container());
+      await $.pumpWidget(Container());
 
-      expect(GetIt.I.get<MockNotifier>().isMarked, isFalse);
+      expect(GetIt.I<MockNotifier>().isMarked, isFalse);
     });
 
-    testWidgets('LUViewModel calls onInit and onDispose', (final tester) async {
-      GetIt.I.registerSingleton<MockNotifier>(MockNotifier());
-      GetIt.I.registerSingleton<MockObject>(MockObject());
+    patrolWidgetTest('LUViewModel calls onInit and onDispose', (final $) async {
+      GetIt.I.registerSingleton(MockNotifier());
+      GetIt.I.registerSingleton(MockObject());
+
       var isInitCalled = false;
       var isDisposeCalled = false;
 
-      await tester.pumpWidget(
+      await $.pumpWidget(
         MaterialApp(
           home: LUViewModel<MockObject, MockNotifier>(
+            builder: (final _, final __) => const Text('Mock Notifier'),
             onInit: (final _, final __) {
               isInitCalled = true;
             },
             onDispose: (final _, final __) {
               isDisposeCalled = true;
             },
-            builder: (final _, final __) => const Text('Mock Notifier'),
           ),
         ),
       );
 
       expect(isInitCalled, isTrue);
-      expect(find.text('Mock Notifier'), findsOneWidget);
+      expect($('Mock Notifier'), findsOneWidget);
 
-      await tester.pumpWidget(Container());
+      await $.pumpWidget(const SizedBox());
 
       expect(isDisposeCalled, isTrue);
     });
 
-    testWidgets('LUViewModel resets lazy singleton when disposeLazy is true',
-        (final tester) async {
-      GetIt.I.registerLazySingleton<MockNotifier>(MockNotifier.new);
-      GetIt.I.registerLazySingleton<MockObject>(MockObject.new);
-      await tester.pumpWidget(
+    patrolWidgetTest(
+        'LUViewModel resets lazy singleton when disposeLazy is true',
+        (final $) async {
+      GetIt.I.registerLazySingleton(MockNotifier.new);
+      GetIt.I.registerLazySingleton(MockObject.new);
+
+      await $.pumpWidgetAndSettle(
         MaterialApp(
           home: LUViewModel<MockObject, MockNotifier>(
+            builder: (final _, final __) => const Text('Lazy Singleton'),
             disposeLazyOne: true,
             disposeLazyTwo: true,
-            builder: (final _, final __) => const Text('Lazy Singleton'),
           ),
         ),
       );
 
-      expect(find.text('Lazy Singleton'), findsOneWidget);
+      expect($('Lazy Singleton'), findsOneWidget);
 
-      GetIt.I.get<MockNotifier>().isMarked = true;
-      GetIt.I.get<MockObject>().isMarked = true;
-      expect(GetIt.I.get<MockNotifier>().isMarked, true);
-      expect(GetIt.I.get<MockObject>().isMarked, true);
+      GetIt.I<MockNotifier>().isMarked = true;
+      GetIt.I<MockObject>().isMarked = true;
+      expect(GetIt.I<MockNotifier>().isMarked, true);
+      expect(GetIt.I<MockObject>().isMarked, true);
 
-      await tester.pumpWidget(Container());
+      await $.pumpWidget(const SizedBox());
 
-      expect(GetIt.I.get<MockNotifier>().isMarked, isFalse);
-      expect(GetIt.I.get<MockObject>().isMarked, isFalse);
+      expect(GetIt.I<MockNotifier>().isMarked, isFalse);
+      expect(GetIt.I<MockObject>().isMarked, isFalse);
     });
   });
 }

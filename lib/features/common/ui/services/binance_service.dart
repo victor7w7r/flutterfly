@@ -16,40 +16,41 @@ class BinanceService {
     this._getCurrenciesUseCase,
     this._getBitcoinUseCase,
     this._platform,
-  );
+  )   : _allBin = <Binance>[],
+        _position = 0;
 
-  final GetCurrenciesUseCase _getCurrenciesUseCase;
+  final List<Binance> _allBin;
   final GetBitcoinUseCase _getBitcoinUseCase;
+  final GetCurrenciesUseCase _getCurrenciesUseCase;
   final Platform _platform;
-
-  final _allBin = <Binance>[];
-  var _position = 0;
+  int _position;
 
   Future<List<Binance>> fetchBinance() async {
     final binList = <Binance>[];
-    _platform.isWeb()
+    _platform.isWeb
         ? binList.addAll(Binance.dummyGen())
         : binList.addAll((await getCurrencies()).unlock);
     _allBin.addAll(binList);
     _position = 40;
+
     return binList.sublist(0, 40);
   }
+
+  Future<Bitcoin?> getBitcoin() async => (await _getBitcoinUseCase())
+      .fold((final l) => throw FetchException(l.message), identity);
 
   Future<IList<Binance>> getCurrencies() async =>
       (await _getCurrenciesUseCase())
           .fold((final l) => throw FetchException(l.message), identity);
 
-  Future<Bitcoin?> getBitcoin() async => (await _getBitcoinUseCase())
-      .fold((final l) => throw FetchException(l.message), identity);
+  void paginateBinance(final Query<List<Binance>, FetchException> query) {
+    query.setData(_allBin.sublist(0, _position + 40));
+    _position += 40;
+  }
 
   void refreshBinance(final Query<List<Binance>, FetchException> query) => query
     // ignore: discarded_futures
     ..reset()
     // ignore: discarded_futures
     ..refresh();
-
-  void paginateBinance(final Query<List<Binance>, FetchException> query) {
-    query.setData(_allBin.sublist(0, _position + 40));
-    _position += 40;
-  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutterfly/core/di/inject.dart';
+import 'package:get_it/get_it.dart' show GetIt;
+
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/material/ui/pages/home/home_widgets.dart';
@@ -17,12 +18,12 @@ final class HomePage extends StatelessWidget {
       child ??
       Scaffold(
         appBar: PreferredSize(
-          preferredSize:
-              Size.fromHeight(inject.get<Platform>().isMacOS() ? 35 : 50),
-          child: NavBar('My Home', child: secondChild),
+          preferredSize: Size.fromHeight(GetIt.I<Platform>().isMacOS ? 35 : 50),
+          child: NavBar(
+            'My Home',
+            child: secondChild,
+          ),
         ),
-        drawer: inject.get<Platform>().isMacOS() ? null : const DrawerMenu(),
-        endDrawer: inject.get<Platform>().isMacOS() ? const DrawerMenu() : null,
         body: OrientationBuilder(
           builder: (final _, final or) => Flex(
             direction:
@@ -47,5 +48,7 @@ final class HomePage extends StatelessWidget {
             ],
           ),
         ),
+        drawer: GetIt.I<Platform>().isMacOS ? null : const DrawerMenu(),
+        endDrawer: GetIt.I<Platform>().isMacOS ? const DrawerMenu() : null,
       );
 }

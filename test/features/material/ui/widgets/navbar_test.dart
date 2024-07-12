@@ -25,10 +25,10 @@ void main() {
 
     testWidgets('Render AppBar successfully when macOS is the main platform',
         (final tester) async {
-      final service = GetIt.I.get<MaterialService>();
+      final service = GetIt.I<MaterialService>();
       when(service.isDark).thenReturn(false);
 
-      final platform = GetIt.I.get<Platform>();
+      final platform = GetIt.I<Platform>();
       when(platform.isMacOS).thenReturn(true);
       when(platform.isDesktop).thenReturn(true);
 
@@ -51,10 +51,10 @@ void main() {
 
     testWidgets('Render AppBar successfully when windows is the main platform',
         (final tester) async {
-      final service = GetIt.I.get<MaterialService>();
+      final service = GetIt.I<MaterialService>();
       when(service.isDark).thenReturn(false);
 
-      final platform = GetIt.I.get<Platform>();
+      final platform = GetIt.I<Platform>();
       when(platform.isMacOS).thenReturn(false);
       when(platform.isDesktop).thenReturn(true);
 

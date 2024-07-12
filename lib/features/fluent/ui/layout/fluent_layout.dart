@@ -18,14 +18,14 @@ final class FluentLayout extends StatelessWidget {
       ListenViewModel<FluentService>(
         builder: (final ctl) => QueryClientProvider(
           child: FluentApp(
-            title: 'flutterfly',
-            debugShowCheckedModeBanner: false,
             initialRoute: '/',
             routes: {
               '/': (final _) => HomePage(child: child),
               '/store': (final _) => StorePage(child: child),
             },
-            color: ctl.state().themeColor.first,
+            title: 'flutterfly',
+            color: ctl.state.themeColor.first,
+            debugShowCheckedModeBanner: false,
           ),
         ),
       );

@@ -20,24 +20,21 @@ final class BlurButton extends StatelessWidget {
       FilledButton(
         onPressed: onClick,
         style: ButtonStyle(
-          elevation: WidgetStateProperty.all<double>(0),
-          foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
           backgroundColor: WidgetStateProperty.all<Color>(
             const Color.fromRGBO(255, 255, 255, 0.4),
           ),
+          foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+          elevation: WidgetStateProperty.all<double>(0),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(18.0)),
               side: BorderSide(color: Color.fromRGBO(204, 204, 204, 0)),
+              borderRadius: BorderRadius.all(Radius.circular(18.0)),
             ),
           ),
         ),
         child: caption.n
           ..fontFamily = 'FuturaPTMedium'
           ..fontSize = fontSize
-          ..n.padding = const EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: 3,
-          ),
+          ..n.padding = const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
       );
 }

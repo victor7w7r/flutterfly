@@ -11,7 +11,12 @@ class DesktopSelectorController extends ChangeNotifier {
   final DesktopService _desktopService;
   bool _isinitAnim;
 
-  void init() => Future.delayed(Duration.zero, () => isinitAnim = true);
+  bool get isInitAnim => _isinitAnim;
+
+  set isinitAnim(final bool value) {
+    _isinitAnim = value;
+    notifyListeners();
+  }
 
   void exit(final String selector) {
     isinitAnim = false;
@@ -21,10 +26,5 @@ class DesktopSelectorController extends ChangeNotifier {
     );
   }
 
-  bool get isInitAnim => _isinitAnim;
-
-  set isinitAnim(final bool value) {
-    _isinitAnim = value;
-    notifyListeners();
-  }
+  void init() => Future.delayed(Duration.zero, () => isinitAnim = true);
 }

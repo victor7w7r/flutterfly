@@ -12,21 +12,22 @@ final class ViewModel<T extends Object> extends WatchingWidget {
   });
 
   final Widget Function(T object) builder;
-  final void Function(T object)? onInit;
-  final void Function(T object)? onDispose;
   final bool disposeLazy;
+  final void Function(T object)? onDispose;
+  final void Function(T object)? onInit;
 
   @override
   Widget build(final BuildContext context) {
     callOnce(
-      (final _) => onInit?.call(GetIt.I.get<T>()),
+      (final _) => onInit?.call(GetIt.I<T>()),
       dispose: () {
-        onDispose?.call(GetIt.I.get<T>());
+        onDispose?.call(GetIt.I<T>());
         // ignore: discarded_futures
         if (disposeLazy) GetIt.I.resetLazySingleton<T>();
       },
     );
-    return builder(GetIt.I.get<T>());
+
+    return builder(GetIt.I<T>());
   }
 }
 
@@ -40,9 +41,9 @@ final class ListenViewModel<T extends ChangeNotifier> extends WatchingWidget {
   });
 
   final Widget Function(T notifier) builder;
-  final void Function(T notifier)? onInit;
-  final void Function(T notifier)? onDispose;
   final bool disposeLazy;
+  final void Function(T notifier)? onDispose;
+  final void Function(T notifier)? onInit;
 
   @override
   Widget build(final BuildContext context) {
@@ -56,6 +57,7 @@ final class ListenViewModel<T extends ChangeNotifier> extends WatchingWidget {
         if (disposeLazy) GetIt.I.resetLazySingleton<T>();
       },
     );
+
     return builder(ctl);
   }
 }
@@ -72,10 +74,10 @@ final class LUViewModel<T extends Object, U extends ChangeNotifier>
   });
 
   final Widget Function(T not, U obj) builder;
-  final void Function(T not, U obj)? onInit;
-  final void Function(T not, U obj)? onDispose;
   final bool disposeLazyOne;
   final bool disposeLazyTwo;
+  final void Function(T not, U obj)? onDispose;
+  final void Function(T not, U obj)? onInit;
 
   @override
   Widget build(final BuildContext context) {
@@ -83,12 +85,12 @@ final class LUViewModel<T extends Object, U extends ChangeNotifier>
 
     callOnce(
       (final _) => onInit?.call(
-        GetIt.I.get<T>(),
+        GetIt.I<T>(),
         ctl2,
       ),
       dispose: () {
         onDispose?.call(
-          GetIt.I.get<T>(),
+          GetIt.I<T>(),
           ctl2,
         );
         // ignore: discarded_futures
@@ -97,6 +99,7 @@ final class LUViewModel<T extends Object, U extends ChangeNotifier>
         if (disposeLazyTwo) GetIt.I.resetLazySingleton<U>();
       },
     );
-    return builder(GetIt.I.get<T>(), ctl2);
+
+    return builder(GetIt.I<T>(), ctl2);
   }
 }

@@ -20,15 +20,15 @@ final class StoreText extends StatelessWidget {
         width: 250.0,
         height: 40.0,
         child: TextBox(
-          cursorHeight: 25,
           controller: ctl,
+          decoration: BoxDecoration(color: theme.themeColor[1]),
+          highlightColor: const Color(0xFF6B7280),
           placeholder: 'here',
           placeholderStyle: const TextStyle(color: Color(0xFF6B7280)),
-          textAlignVertical: TextAlignVertical.center,
           style: TextStyle(color: theme.themeColor[2]),
+          textAlignVertical: TextAlignVertical.center,
+          cursorHeight: 25,
           cursorColor: theme.themeColor[2],
-          highlightColor: const Color(0xFF6B7280),
-          decoration: BoxDecoration(color: theme.themeColor[1]),
         ),
       );
 }

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mocktail/mocktail.dart' show Mock, verify;
 
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_controller.dart';
 import 'package:flutterfly/features/common/ui/services/desktop_service.dart';

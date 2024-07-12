@@ -1,9 +1,9 @@
 import 'dart:async' show unawaited;
 
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/utils.dart';
 import 'package:flutterfly/features/common/ui/services/services.dart';
@@ -26,7 +26,7 @@ class _StoreState extends State<StorePage> {
   final TextEditingController _txtCtl = TextEditingController();
 
   void _request(final BuildContext context) => _txtCtl.text.isNotEmpty
-      ? inject.get<DataService>().mutate = _txtCtl.text
+      ? GetIt.I<DataService>().mutate = _txtCtl.text
       : unawaited(
           showDialog(
             context: context,
@@ -35,8 +35,8 @@ class _StoreState extends State<StorePage> {
               content: const Text('Is empty your Text'),
               actions: [
                 Button(
-                  child: const Text('OK'),
                   onPressed: () => Navigator.pop(ctx),
+                  child: const Text('OK'),
                 ),
               ],
             ),
@@ -56,11 +56,11 @@ class _StoreState extends State<StorePage> {
       widget.child ??
       ListenViewModel<FluentService>(
         builder: (final ctl) => ColoredBox(
-          color: ctl.state().themeColor.first,
+          color: ctl.state.themeColor.first,
           child: n.Column([
-            if (!inject.get<Platform>().isWeb())
+            if (!GetIt.I<Platform>().isWeb)
               WindowTitleBar(
-                isDark: ctl.state().isDark,
+                isDark: ctl.state.isDark,
                 child: widget.secondMockChild,
               ),
             const SizedBox(height: 10),
@@ -69,20 +69,20 @@ class _StoreState extends State<StorePage> {
             n.Column([
               n.Row([
                 Card(
-                  backgroundColor: ctl.state().themeColor[1],
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                   padding: EdgeInsets.symmetric(
-                    horizontal: context.isMinMd ? 20 : 50,
                     vertical: 50,
+                    horizontal: context.isMinMd ? 20 : 50,
                   ),
+                  backgroundColor: ctl.state.themeColor[1],
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                   child: n.Column([
                     const SizedBox(height: 45),
                     'Write anything in this form and send!'.n
-                      ..color = ctl.state().themeColor[2]
+                      ..color = ctl.state.themeColor[2]
                       ..overflow = TextOverflow.ellipsis
                       ..fontSize = 17,
                     const SizedBox(height: 30),
-                    StoreText(ctl: _txtCtl, theme: ctl.state()),
+                    StoreText(ctl: _txtCtl, theme: ctl.state),
                     const SizedBox(height: 30),
                     BlurButton(
                       caption: 'Send',
@@ -91,13 +91,13 @@ class _StoreState extends State<StorePage> {
                     const SizedBox(height: 45),
                     ListenViewModel<DataService>(
                       builder: (final ctlData) => n.Text(
-                        ctlData.state().isEmpty
+                        ctlData.state.isEmpty
                             ? 'Store state: Not yet.'
                             : 'Store state: Yes, you write. '
                                 '${ctlData.state}',
                       )
                         ..fontSize = 17
-                        ..color = ctl.state().themeColor[2]
+                        ..color = ctl.state.themeColor[2]
                         ..n.center,
                     ),
                     const SizedBox(height: 45),

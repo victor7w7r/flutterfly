@@ -16,32 +16,30 @@ final class DynamicChip extends StatelessWidget {
   ) =>
       ListenViewModel<CupertinoService>(
         builder: (final ctl) => Container(
-          width: isHome ? 300 : 270,
-          height: isHome ? 60 : 50,
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(24)),
-            border: ctl.isDark()
+            border: ctl.isDark
                 ? const Border.fromBorderSide(
                     BorderSide(
-                      width: 2,
                       color: Color.fromARGB(255, 255, 255, 255),
+                      width: 2,
                     ),
                   )
                 : const Border.fromBorderSide(
                     BorderSide(
-                      width: 2,
                       color: Color.fromARGB(255, 26, 31, 43),
+                      width: 2,
                     ),
                   ),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
           ),
+          width: isHome ? 300 : 270,
+          height: isHome ? 60 : 50,
           child: n.Row(
             isHome
                 ? [
                     const SizedBox(width: 38),
                     n.Image.asset(
-                      ctl.isDark()
-                          ? 'assets/brandwhite.png'
-                          : 'assets/brand.png',
+                      ctl.isDark ? 'assets/brandwhite.png' : 'assets/brand.png',
                     )
                       ..width = 220.0
                       ..height = 70.0,

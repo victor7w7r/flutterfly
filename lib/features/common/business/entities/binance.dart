@@ -55,27 +55,27 @@ base class Binance with BinanceMappable {
         0,
       );
 
-  final String symbol;
-  final String priceChange;
-  final String priceChangePercent;
-  final String weightedAvgPrice;
-  final String prevClosePrice;
-  final String lastPrice;
-  final String lastQty;
-  final String bidPrice;
-  final String bidQty;
   final String askPrice;
   final String askQty;
-  final String openPrice;
-  final String highPrice;
-  final String lowPrice;
-  final String volume;
-  final String quoteVolume;
-  final double openTime;
+  final String bidPrice;
+  final String bidQty;
   final double closeTime;
-  final double firstId;
-  final double lastId;
   final double count;
+  final double firstId;
+  final String highPrice;
+  final double lastId;
+  final String lastPrice;
+  final String lastQty;
+  final String lowPrice;
+  final String openPrice;
+  final double openTime;
+  final String prevClosePrice;
+  final String priceChange;
+  final String priceChangePercent;
+  final String quoteVolume;
+  final String symbol;
+  final String volume;
+  final String weightedAvgPrice;
 
   static List<Binance> dummyGen() => List.filled(120, null)
       .map(

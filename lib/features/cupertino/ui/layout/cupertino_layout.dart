@@ -21,14 +21,9 @@ final class CupertinoLayout extends StatelessWidget {
       ListenViewModel<CupertinoService>(
         builder: (final ctl) => QueryClientProvider(
           child: CupertinoApp(
-            title: 'flutterfly',
-            debugShowCheckedModeBanner: false,
-            theme: CupertinoThemeData(
-              brightness: ctl.isDark() ? Brightness.dark : Brightness.light,
-            ),
             home: CupertinoPageScaffold(
               navigationBar: CupertinoNavigationBar(
-                middle: CupTitle(ctl.isDark(), child: child),
+                middle: CupTitle(ctl.isDark, child: child),
               ),
               child: CupertinoTabScaffold(
                 tabBar: CupertinoTabBar(
@@ -54,6 +49,11 @@ final class CupertinoLayout extends StatelessWidget {
                 ][i],
               ),
             ),
+            theme: CupertinoThemeData(
+              brightness: ctl.isDark ? Brightness.dark : Brightness.light,
+            ),
+            title: 'flutterfly',
+            debugShowCheckedModeBanner: false,
           ),
         ),
       );

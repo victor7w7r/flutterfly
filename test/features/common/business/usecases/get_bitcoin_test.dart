@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
+import 'package:fpdart/fpdart.dart' show TaskEither;
 import 'package:mocktail/mocktail.dart';
 
 import 'package:flutterfly/core/error/failure.dart';
@@ -7,7 +7,7 @@ import 'package:flutterfly/features/common/business/entities/bitcoin.dart';
 import 'package:flutterfly/features/common/business/repositories/bitcoin_repository.dart';
 import 'package:flutterfly/features/common/business/usecases/get_bitcoin.dart';
 
-class MockBitcoinRepository extends Mock implements BitcoinRepository {}
+final class MockBitcoinRepository extends Mock implements BitcoinRepository {}
 
 void main() {
   group('GetBitcoinUseCase', () {
@@ -29,7 +29,6 @@ void main() {
       final result = await getBitcoinUseCase.call();
 
       expect(result.getRight().toNullable(), equals(bitcoin));
-
       verify(() => mockBitcoinRepository.getBitcoin()).called(1);
       verifyNoMoreInteractions(mockBitcoinRepository);
     });
@@ -44,7 +43,6 @@ void main() {
       final result = await getBitcoinUseCase.call();
 
       expect(result.getLeft().toNullable(), equals(failure));
-
       verify(() => mockBitcoinRepository.getBitcoin()).called(1);
       verifyNoMoreInteractions(mockBitcoinRepository);
     });

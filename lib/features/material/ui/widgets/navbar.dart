@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/widgets/widgets.dart';
@@ -19,23 +19,21 @@ final class NavBar extends StatelessWidget {
     final BuildContext context,
   ) =>
       AppBar(
-        elevation: 0.0,
-        toolbarHeight: inject.get<Platform>().isMacOS() ? 30 : null,
-        leading: inject.get<Platform>().isMacOS() ? Container() : null,
-        title: inject.get<Platform>().isMacOS()
+        leading: GetIt.I<Platform>().isMacOS ? Container() : null,
+        title: GetIt.I<Platform>().isMacOS
             ? ListenViewModel<MaterialService>(
                 builder: (final ctl) =>
-                    WindowTitleBar(isDark: ctl.isDark(), child: child),
+                    WindowTitleBar(isDark: ctl.isDark, child: child),
               )
             : n.Stack([
                 title.n,
-                if (inject.get<Platform>().isDesktop())
+                if (GetIt.I<Platform>().isDesktop)
                   ListenViewModel<MaterialService>(
                     builder: (final ctl) =>
-                        WindowTitleBar(isDark: ctl.isDark(), child: child),
+                        WindowTitleBar(isDark: ctl.isDark, child: child),
                   ),
               ]),
-        actions: inject.get<Platform>().isMacOS()
+        actions: GetIt.I<Platform>().isMacOS
             ? [
                 Builder(
                   builder: (final ctx) => n.IconButton(Icons.menu)
@@ -45,5 +43,7 @@ final class NavBar extends StatelessWidget {
                 ),
               ]
             : null,
+        elevation: 0.0,
+        toolbarHeight: GetIt.I<Platform>().isMacOS ? 30 : null,
       );
 }

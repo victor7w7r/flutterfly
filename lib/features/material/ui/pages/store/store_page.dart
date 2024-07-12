@@ -2,9 +2,9 @@ import 'dart:async' show unawaited;
 
 import 'package:flutter/material.dart';
 
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
@@ -28,7 +28,7 @@ final class _StoreState extends State<StorePage> {
     final BuildContext context,
   ) =>
       _txtCtl.text.isNotEmpty
-          ? inject.get<DataService>().mutate = _txtCtl.text
+          ? GetIt.I<DataService>().mutate = _txtCtl.text
           : unawaited(
               showDialog(
                 context: context,
@@ -59,11 +59,11 @@ final class _StoreState extends State<StorePage> {
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(50),
-            child: NavBar('My Store', child: widget.secondMockChild),
+            child: NavBar(
+              'My Store',
+              child: widget.secondMockChild,
+            ),
           ),
-          drawer: inject.get<Platform>().isMacOS() ? null : const DrawerMenu(),
-          endDrawer:
-              inject.get<Platform>().isMacOS() ? const DrawerMenu() : null,
           body: n.Column([
             'Store Example'.n
               ..freezed
@@ -76,12 +76,12 @@ final class _StoreState extends State<StorePage> {
               ..n.center,
             const SizedBox(height: 25),
             TextField(
-              cursorHeight: 25,
               controller: _txtCtl,
               decoration: const InputDecoration(
                 hintText: 'here',
                 border: OutlineInputBorder(),
               ),
+              cursorHeight: 25,
             ).niku
               ..w = 250.0
               ..h = 55.0,
@@ -93,7 +93,7 @@ final class _StoreState extends State<StorePage> {
             const SizedBox(height: 10),
             ListenViewModel<DataService>(
               builder: (final ctl) => n.Text(
-                ctl.state().isEmpty
+                ctl.state.isEmpty
                     ? 'Store state: Not yet.'
                     : 'Store state: Yes, you write. ${ctl.state}',
               )
@@ -103,6 +103,8 @@ final class _StoreState extends State<StorePage> {
           ])
             ..mainCenter
             ..crossCenter,
+          drawer: GetIt.I<Platform>().isMacOS ? null : const DrawerMenu(),
+          endDrawer: GetIt.I<Platform>().isMacOS ? const DrawerMenu() : null,
         ),
       );
 }

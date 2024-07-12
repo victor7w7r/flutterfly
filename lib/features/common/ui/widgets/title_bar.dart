@@ -14,9 +14,6 @@ final class WindowTitleBar extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     final buttonColors = WindowButtonColors(
-      iconNormal: !isDark ? Colors.black : Colors.white,
-      iconMouseDown: !isDark ? Colors.black : Colors.white,
-      iconMouseOver: !isDark ? Colors.black : Colors.white,
       normal: Colors.transparent,
       mouseOver: !isDark
           ? Colors.black.withOpacity(0.04)
@@ -24,6 +21,9 @@ final class WindowTitleBar extends StatelessWidget {
       mouseDown: !isDark
           ? Colors.black.withOpacity(0.08)
           : Colors.white.withOpacity(0.08),
+      iconNormal: !isDark ? Colors.black : Colors.white,
+      iconMouseOver: !isDark ? Colors.black : Colors.white,
+      iconMouseDown: !isDark ? Colors.black : Colors.white,
     );
 
     return child ??
@@ -34,8 +34,8 @@ final class WindowTitleBar extends StatelessWidget {
               MinimizeWindowButton(colors: buttonColors),
               MaximizeWindowButton(colors: buttonColors),
               CloseWindowButton(
-                onPressed: appWindow.close,
                 colors: buttonColors,
+                onPressed: appWindow.close,
               ),
             ]),
           ]),

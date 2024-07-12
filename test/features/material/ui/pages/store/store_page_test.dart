@@ -22,12 +22,12 @@ void main() {
       GetIt.I.registerLazySingleton<MaterialService>(MockMaterialService.new);
       GetIt.I.registerLazySingleton<DataService>(DataService.new);
       GetIt.I.registerLazySingleton<Platform>(MockPlatform.new);
-      final service = GetIt.I.get<MaterialService>();
+      final service = GetIt.I<MaterialService>();
       when(service.isDark).thenReturn(false);
     });
 
     testWidgets('Render widget successfully', (final tester) async {
-      final platform = GetIt.I.get<Platform>();
+      final platform = GetIt.I<Platform>();
       when(platform.isMacOS).thenReturn(true);
 
       await tester.pumpWidget(
@@ -47,7 +47,7 @@ void main() {
 
     testWidgets('Perform text change and submit to verify the new state',
         (final tester) async {
-      final platform = GetIt.I.get<Platform>();
+      final platform = GetIt.I<Platform>();
       when(platform.isMacOS).thenReturn(true);
 
       await tester.pumpWidget(
@@ -59,14 +59,14 @@ void main() {
       await tester.enterText(txtFieldFinder, 'Hello World');
       await tester.tap(find.byType(ElevatedButton));
 
-      final service = GetIt.I.get<DataService>();
+      final service = GetIt.I<DataService>();
       expect(service.state(), 'Hello World');
 
       await tester.pump();
     });
 
     testWidgets('Show dialog when text field is empty', (final tester) async {
-      final platform = GetIt.I.get<Platform>();
+      final platform = GetIt.I<Platform>();
       when(platform.isMacOS).thenReturn(true);
 
       await tester.pumpWidget(

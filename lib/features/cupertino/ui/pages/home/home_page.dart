@@ -29,12 +29,12 @@ final class HomePage extends StatelessWidget {
           const SizedBox(height: 10),
           ListenViewModel<DataService>(
             builder: (final ctl) => n.Text(
-              ctl.state().isEmpty
+              ctl.state.isEmpty
                   ? 'Store state: Not yet.'
                   : 'Store state: Yes, you write. ${ctl.state}',
             )
               ..fontSize =
-                  ctl.state().isEmpty ? ((context.mHeight > 960) ? 20 : 15) : 20
+                  ctl.state.isEmpty ? ((context.mHeight > 960) ? 20 : 15) : 20
               ..n.center,
           ),
           const SizedBox(height: 20),

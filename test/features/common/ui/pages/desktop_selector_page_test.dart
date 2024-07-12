@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 import 'package:watch_it/watch_it.dart' show GetIt;
 
 import 'package:flutterfly/core/utils/platforms.dart';
@@ -9,39 +10,40 @@ import 'package:flutterfly/features/common/ui/pages/desktop_selector_controller.
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_page.dart';
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_widgets.dart';
 
-class MockDesktopSelectorController extends Mock
+final class MockDesktopSelectorController extends Mock
     with ChangeNotifier
     implements DesktopSelectorController {}
 
-class MockPlatform extends Mock implements Platform {}
+final class MockPlatform extends Mock implements Platform {}
 
 void main() {
   group('DesktopSelectorPage', () {
     group('SelectionWrap', () {
-      testWidgets(
+      patrolWidgetTest(
           'renders three MenuBuilder widgets and handles taps correctly',
-          (final tester) async {
+          (final $) async {
         final controller = MockDesktopSelectorController();
-        await tester.pumpWidget(MaterialApp(home: SelectionWrap(controller)));
+        await $.pumpWidgetAndSettle(
+          MaterialApp(home: SelectionWrap(controller)),
+        );
 
-        final menuBuilderFinder = find.byType(MenuBuilder);
-        expect(menuBuilderFinder, findsNWidgets(3));
+        expect($(MenuBuilder), findsNWidgets(3));
 
         final materialFinder = find.widgetWithText(MenuBuilder, 'Material');
         expect(materialFinder, findsOneWidget);
-        await tester.tap(materialFinder);
+        await $.tester.tap(materialFinder);
 
         verify(() => controller.exit('material')).called(1);
 
         final fluentFinder = find.widgetWithText(MenuBuilder, 'Fluent');
         expect(fluentFinder, findsOneWidget);
-        await tester.tap(fluentFinder);
+        await $.tap(fluentFinder);
 
         verify(() => controller.exit('web')).called(1);
 
         final cupertinoFinder = find.widgetWithText(MenuBuilder, 'Cupertino');
         expect(cupertinoFinder, findsOneWidget);
-        await tester.tap(cupertinoFinder);
+        await $.tap(cupertinoFinder);
 
         verify(() => controller.exit('cupertino')).called(1);
       });
@@ -54,16 +56,16 @@ void main() {
         );
         GetIt.I.registerSingleton<Platform>(MockPlatform());
       });
-      testWidgets('initializes correctly and responds to isInitAnim',
-          (final tester) async {
-        await tester.runAsync(() async {
-          final controller = GetIt.I.get<DesktopSelectorController>();
-          final platform = GetIt.I.get<Platform>();
+      patrolWidgetTest('initializes correctly and responds to isInitAnim',
+          (final $) async {
+        final controller = GetIt.I<DesktopSelectorController>();
+        final platform = GetIt.I<Platform>();
 
-          when(platform.isDesktop).thenReturn(true);
-          when(() => controller.isInitAnim).thenReturn(false);
+        when(() => platform.isDesktop).thenReturn(true);
+        when(() => controller.isInitAnim).thenReturn(false);
 
-          await tester.pumpWidget(
+        await $.tester.runAsync(() async {
+          await $.pumpWidgetAndSettle(
             const MaterialApp(home: DesktopSelectorPage(child: SizedBox())),
           );
 
@@ -71,11 +73,11 @@ void main() {
 
           verify(controller.init).called(1);
 
-          tester.view.physicalSize = const Size(400, 800);
+          $.tester.view.physicalSize = const Size(400, 800);
 
-          await tester.pump();
+          await $.pump();
 
-          expect(find.byType(SingleChildScrollView), findsOneWidget);
+          expect($(SingleChildScrollView), findsOneWidget);
         });
       });
     });

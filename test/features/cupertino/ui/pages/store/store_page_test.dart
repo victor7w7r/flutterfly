@@ -3,13 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/store/store_page.dart';
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/theme_toggle.dart';
 
-class MockCupertinoService extends Mock
+final class MockCupertinoService extends Mock
     with ChangeNotifier
     implements CupertinoService {}
 
@@ -20,64 +21,63 @@ void main() {
       GetIt.I.registerLazySingleton<CupertinoService>(MockCupertinoService.new);
       GetIt.I.registerLazySingleton<DataService>(DataService.new);
 
-      final service = GetIt.I.get<CupertinoService>();
-      when(service.isDark).thenReturn(false);
+      when(() => GetIt.I<CupertinoService>().isDark).thenReturn(false);
     });
 
-    testWidgets('Render widget successfully', (final tester) async {
-      await tester.pumpWidget(
+    patrolWidgetTest('Render widget successfully', (final $) async {
+      await $.pumpWidgetAndSettle(
         const CupertinoApp(
           home: CupertinoPageScaffold(child: StorePage()),
         ),
       );
 
-      expect(find.text('Store Example'), findsOneWidget);
+      expect($('Store Example'), findsOneWidget);
       expect(
-        find.text('Write anything in this form and send!'),
+        $('Write anything in this form and send!'),
         findsOneWidget,
       );
 
-      expect(find.byType(ThemeToggle), findsOneWidget);
-      expect(find.byType(Column), findsOneWidget);
-      expect(find.byType(CupertinoTextField), findsOneWidget);
-      expect(find.byType(CupertinoButton), findsOneWidget);
+      expect($(ThemeToggle), findsOneWidget);
+      expect($(Column), findsOneWidget);
+      expect($(CupertinoTextField), findsOneWidget);
+      expect($(CupertinoButton), findsOneWidget);
     });
 
-    testWidgets('Perform text change and submit to verify the new state',
-        (final tester) async {
-      await tester.pumpWidget(
+    patrolWidgetTest('Perform text change and submit to verify the new state',
+        (final $) async {
+      await $.pumpWidgetAndSettle(
         const CupertinoApp(
           home: CupertinoPageScaffold(child: StorePage()),
         ),
       );
 
-      final txtFieldFinder = find.byType(CupertinoTextField);
+      final txtFieldFinder = $(CupertinoTextField);
 
-      await tester.enterText(txtFieldFinder, 'Hello World');
-      await tester.tap(find.byType(CupertinoButton));
+      await $.tester.enterText(txtFieldFinder, 'Hello World');
+      await $(CupertinoButton).tap();
 
-      final service = GetIt.I.get<DataService>();
-      expect(service.state(), 'Hello World');
+      final service = GetIt.I<DataService>();
+      expect(service.state, 'Hello World');
 
-      await tester.pump();
+      await $.tester.pump();
     });
 
-    testWidgets('Show dialog when text field is empty', (final tester) async {
-      await tester.pumpWidget(
+    patrolWidgetTest('Show dialog when text field is empty', (final $) async {
+      await $.pumpWidgetAndSettle(
         const CupertinoApp(
           home: CupertinoPageScaffold(child: StorePage()),
         ),
       );
 
-      await tester.tap(find.byType(CupertinoButton));
+      await $(CupertinoButton).tap();
 
-      await tester.pumpAndSettle();
+      await $.pumpAndSettle();
 
-      expect(find.text('Error'), findsOneWidget);
-      expect(find.text('Is empty your TextField'), findsOneWidget);
+      expect($('Error'), findsOneWidget);
+      expect($('Is empty your TextField'), findsOneWidget);
 
-      await tester.tap(find.text('OK'));
-      await tester.pump();
+      await $('OK').tap();
+      await $.pump();
     });
   });
 }

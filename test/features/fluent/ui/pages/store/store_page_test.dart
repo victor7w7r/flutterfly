@@ -23,16 +23,16 @@ void main() {
       GetIt.I.registerLazySingleton<FluentService>(MockFluentService.new);
       GetIt.I.registerLazySingleton<DataService>(DataService.new);
       GetIt.I.registerLazySingleton<Platform>(MockPlatform.new);
-      final service = GetIt.I.get<FluentService>();
+      final service = GetIt.I<FluentService>();
       when(service.state).thenReturn(FluentThemeApp.dark());
     });
 
     testWidgets('Render widget successfully', (final tester) async {
       disableOverflowErrors();
-      final platform = GetIt.I.get<Platform>();
+      final platform = GetIt.I<Platform>();
       when(platform.isWeb).thenReturn(false);
 
-      GetIt.I.get<DataService>().mutate = '.';
+      GetIt.I<DataService>().mutate = '.';
 
       await tester.pumpWidget(
         const FluentApp(home: StorePage(secondMockChild: SizedBox())),
@@ -51,7 +51,7 @@ void main() {
     testWidgets('Perform text change and submit to verify the new state',
         (final tester) async {
       await tester.runAsync(() async {
-        final platform = GetIt.I.get<Platform>();
+        final platform = GetIt.I<Platform>();
         when(platform.isWeb).thenReturn(true);
 
         await tester.pumpWidget(
@@ -63,14 +63,14 @@ void main() {
         await tester.enterText(txtFieldFinder, 'test');
         await tester.tap(find.text('Send'));
 
-        final service = GetIt.I.get<DataService>();
+        final service = GetIt.I<DataService>();
         expect(service.state(), 'test');
       });
     });
 
     testWidgets('Show dialog when text field is empty', (final tester) async {
       await tester.runAsync(() async {
-        final platform = GetIt.I.get<Platform>();
+        final platform = GetIt.I<Platform>();
         when(platform.isWeb).thenReturn(true);
 
         await tester.pumpWidget(
@@ -90,7 +90,7 @@ void main() {
     });
 
     testWidgets('Press to Go To Home Button', (final tester) async {
-      final platform = GetIt.I.get<Platform>();
+      final platform = GetIt.I<Platform>();
       when(platform.isWeb).thenReturn(true);
 
       await tester.pumpWidget(

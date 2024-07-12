@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_empty_blocks
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mocktail/mocktail.dart';
@@ -29,14 +27,14 @@ void main() {
     });
 
     test('Should initialize with the correct isDark value', () {
-      expect(materialService.isDark(), false);
+      expect(materialService., false);
     });
 
     test('Toggle should invert isDark value', () async {
-      expect(materialService.isDark(), false);
+      expect(materialService., false);
 
       materialService.toggle();
-      expect(materialService.isDark(), true);
+      expect(materialService., true);
 
       reset(mockBox);
 

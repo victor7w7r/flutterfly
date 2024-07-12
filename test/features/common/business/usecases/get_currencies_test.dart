@@ -1,6 +1,6 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fpdart/fpdart.dart';
+import 'package:fpdart/fpdart.dart' show TaskEither;
 import 'package:mocktail/mocktail.dart';
 
 import 'package:flutterfly/core/error/failure.dart';
@@ -8,7 +8,7 @@ import 'package:flutterfly/features/common/business/entities/binance.dart';
 import 'package:flutterfly/features/common/business/repositories/binance_repository.dart';
 import 'package:flutterfly/features/common/business/usecases/get_currencies.dart';
 
-class MockBinanceRepository extends Mock implements BinanceRepository {}
+final class MockBinanceRepository extends Mock implements BinanceRepository {}
 
 void main() {
   group('GetCurrenciesUseCase', () {
@@ -30,7 +30,6 @@ void main() {
       final result = await getCurrenciesUseCase.call();
 
       expect(result.getRight().toNullable()?.first, equals(curr.first));
-
       verify(() => mockBinanceRepository.getCurrencies()).called(1);
       verifyNoMoreInteractions(mockBinanceRepository);
     });
@@ -45,7 +44,6 @@ void main() {
       final result = await getCurrenciesUseCase.call();
 
       expect(result.getLeft().toNullable(), equals(failure));
-
       verify(() => mockBinanceRepository.getCurrencies()).called(1);
       verifyNoMoreInteractions(mockBinanceRepository);
     });

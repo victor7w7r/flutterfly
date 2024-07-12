@@ -26,7 +26,7 @@ void main() {
 
     testWidgets('Render widget successfully', (final tester) async {
       await tester.runAsync(() async {
-        final service = GetIt.I.get<MaterialService>();
+        final service = GetIt.I<MaterialService>();
 
         when(service.isDark).thenReturn(false);
 
@@ -46,7 +46,7 @@ void main() {
     });
 
     testWidgets('Navigate to Store Page', (final tester) async {
-      final service = GetIt.I.get<MaterialService>();
+      final service = GetIt.I<MaterialService>();
 
       when(service.isDark).thenReturn(false);
 

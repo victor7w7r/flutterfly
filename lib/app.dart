@@ -18,14 +18,14 @@ final class App extends StatelessWidget {
   ) =>
       LUViewModel<Platform, DesktopService>(
         builder: (final pt, final ctl) {
-          if (pt.isIos()) {
+          if (pt.isIos) {
             return CupertinoLayout(child: child);
-          } else if (pt.isAndroid()) {
+          } else if (pt.isAndroid) {
             return MaterialLayout(child: child);
-          } else if (pt.isDesktop() && ctl.state() != 'none') {
-            if (ctl.state() == 'material') {
+          } else if (pt.isDesktop && ctl.state != 'none') {
+            if (ctl.state == 'material') {
               return MaterialLayout(child: child);
-            } else if (ctl.state() == 'cupertino') {
+            } else if (ctl.state == 'cupertino') {
               return CupertinoLayout(child: child);
             } else {
               return FluentLayout(child: child);

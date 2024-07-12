@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_empty_blocks
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mocktail/mocktail.dart';

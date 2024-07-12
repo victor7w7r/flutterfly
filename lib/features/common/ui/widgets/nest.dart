@@ -6,6 +6,7 @@ final class Nest extends StatelessWidget {
   Nest(final List<NestChain> children, {super.key})
       : children = children.toList();
 
+  // ignore: no-object-declaration
   final Object children;
 
   @override
@@ -14,6 +15,7 @@ final class Nest extends StatelessWidget {
     for (final child in (children as List<NestChain>).reversed) {
       next = child(next);
     }
+
     return next;
   }
 }

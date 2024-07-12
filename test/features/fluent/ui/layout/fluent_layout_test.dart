@@ -21,13 +21,13 @@ void main() {
       await GetIt.I.reset();
       GetIt.I.registerSingleton<FluentService>(MockFluentService());
 
-      final srv = GetIt.I.get<FluentService>();
+      final srv = GetIt.I<FluentService>();
       when(srv.state).thenReturn(FluentThemeApp.dark());
     });
 
     testWidgets('Render widget successfully', (final tester) async {
       await tester.runAsync(() async {
-        final service = GetIt.I.get<FluentService>();
+        final service = GetIt.I<FluentService>();
 
         await tester.pumpWidget(const FluentLayout(child: SizedBox()));
 

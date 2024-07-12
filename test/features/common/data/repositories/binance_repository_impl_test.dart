@@ -7,7 +7,8 @@ import 'package:flutterfly/features/common/data/datasources/binance_remote_data_
 import 'package:flutterfly/features/common/data/dto/binance_dto.dart';
 import 'package:flutterfly/features/common/data/repositories/binance_repository_impl.dart';
 
-class MockBinanceDataSource extends Mock implements BinanceRemoteDataSource {}
+final class MockBinanceDataSource extends Mock
+    implements BinanceRemoteDataSource {}
 
 void main() {
   group('BinanceRepositoryImpl', () {

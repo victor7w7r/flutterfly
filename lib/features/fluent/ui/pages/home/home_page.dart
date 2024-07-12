@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/utils.dart';
 import 'package:flutterfly/features/common/ui/widgets/title_bar.dart';
@@ -15,47 +15,6 @@ class HomePage extends StatelessWidget {
   final Widget? child;
   final Widget? secondMockChild;
 
-  Color _background() =>
-      inject.get<FluentService>().state().isDark ? Colors.white : Colors.black;
-
-  void _colorChange(final String color) {
-    switch (color) {
-      case 'blue':
-        inject.get<FluentService>().interpolator([
-          inject.get<FluentService>().state().isDark
-              ? const Color(0xFF0C4A6E)
-              : const Color.fromARGB(255, 136, 202, 238),
-          const Color(0xFF0369A1),
-          _background(),
-        ]);
-      case 'violet':
-        inject.get<FluentService>().interpolator([
-          inject.get<FluentService>().state().isDark
-              ? const Color(0xFF581c87)
-              : const Color(0xFFD8b4FE),
-          const Color(0xFF7E22CE),
-          _background(),
-        ]);
-      case 'red':
-        inject.get<FluentService>().interpolator([
-          inject.get<FluentService>().state().isDark
-              ? const Color(0xFF7F1D1D)
-              : const Color(0xFFfCA5A5),
-          const Color(0xFFB91C1C),
-          _background(),
-        ]);
-      default:
-        inject.get<FluentService>().interpolator([
-          inject.get<FluentService>().state().isDark
-              ? const Color(0xFF064E3B)
-              : const Color(0xFF6EE7B7),
-          const Color(0xFF047857),
-          _background(),
-        ]);
-        break;
-    }
-  }
-
   Color _backSelector(
     final String color,
   ) =>
@@ -65,6 +24,9 @@ class HomePage extends StatelessWidget {
         'red' => const Color(0xFFF3425B),
         _ => const Color(0xFF059669)
       };
+
+  Color _background() =>
+      GetIt.I<FluentService>().state.isDark ? Colors.white : Colors.black;
 
   Color _borderSelector(
     final String color,
@@ -76,6 +38,44 @@ class HomePage extends StatelessWidget {
         _ => const Color(0xAA6EE7B7)
       };
 
+  void _colorChange(final String color) {
+    switch (color) {
+      case 'blue':
+        GetIt.I<FluentService>().interpolator([
+          GetIt.I<FluentService>().state.isDark
+              ? const Color(0xFF0C4A6E)
+              : const Color.fromARGB(255, 136, 202, 238),
+          const Color(0xFF0369A1),
+          _background(),
+        ]);
+      case 'violet':
+        GetIt.I<FluentService>().interpolator([
+          GetIt.I<FluentService>().state.isDark
+              ? const Color(0xFF581c87)
+              : const Color(0xFFD8b4FE),
+          const Color(0xFF7E22CE),
+          _background(),
+        ]);
+      case 'red':
+        GetIt.I<FluentService>().interpolator([
+          GetIt.I<FluentService>().state.isDark
+              ? const Color(0xFF7F1D1D)
+              : const Color(0xFFfCA5A5),
+          const Color(0xFFB91C1C),
+          _background(),
+        ]);
+      default:
+        GetIt.I<FluentService>().interpolator([
+          GetIt.I<FluentService>().state.isDark
+              ? const Color(0xFF064E3B)
+              : const Color(0xFF6EE7B7),
+          const Color(0xFF047857),
+          _background(),
+        ]);
+        break;
+    }
+  }
+
   @override
   Widget build(
     final BuildContext context,
@@ -83,11 +83,11 @@ class HomePage extends StatelessWidget {
       child ??
       ListenViewModel<FluentService>(
         builder: (final ctl) => ColoredBox(
-          color: ctl.state().themeColor.first,
+          color: ctl.state.themeColor.first,
           child: n.Column([
-            if (!inject.get<Platform>().isWeb())
+            if (!GetIt.I<Platform>().isWeb)
               WindowTitleBar(
-                isDark: ctl.state().isDark,
+                isDark: ctl.state.isDark,
                 child: secondMockChild,
               ),
             const SizedBox(height: 10),

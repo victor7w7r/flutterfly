@@ -12,7 +12,8 @@ analyzer:
     strict-inference: true
     strict-raw-types: true
   plugins:
-    - custom_lint
+    #- custom_lint
+    - dart_code_linter
 linter:
   rules:
     - always_declare_return_types
@@ -116,7 +117,6 @@ custom_lint:
   rules:
     - always_specify_parameter_names
     - avoid_dynamic
-    - avoid_empty_blocks
     - avoid_inverted_boolean_expressions
     - avoid_mutable_global_variables
     - avoid_positional_fields_in_records
@@ -126,7 +126,7 @@ custom_lint:
     - boolean_prefixes
     - no_duplicate_imports
     - no_self_comparisons
-    #- prefer_async_await
+    - prefer_async_await
     - prefer_const_constructor_declarations
     - prefer_immediate_return
     - prefer_iterable_any
@@ -150,3 +150,53 @@ custom_lint:
     - proper_super_dispose
     - proper_super_init_state
     - use_spacer
+
+dart_code_linter:
+  rules:
+    - arguments-ordering:
+        child-last: true
+    - avoid-cascade-after-if-null
+    - avoid-collection-methods-with-unrelated-types
+    - avoid-double-slash-imports
+    - avoid-duplicate-exports
+    - avoid-non-null-assertion
+    - avoid-unnecessary-conditionals
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - member-ordering:
+        alphabetize: true
+        order:
+          - named-constructors
+          - factory-constructors
+          - private-final-fields
+          - private-fields
+          - private-late-final-fields
+          - private-late-fields
+          - private-nullable-fields
+          - public-final-fields
+          - public-fields
+          - public-late-final-fields
+          - public-late-fields
+          - public-nullable-fields
+          - private-getters-setters
+          - public-getters-setters
+          - overridden-methods
+          - private-methods
+          - public-methods
+          - public-static-methods
+    - newline-before-return
+    - no-boolean-literal-compare
+    - no-equal-then-else
+    - no-object-declaration
+    - prefer-conditional-expressions
+    - prefer-immediate-return
+    - prefer-iterable-of
+    # Flutter
+    - avoid-border-all
+    - avoid-expanded-as-spacer
+    - avoid-returning-widgets
+    - avoid-shrink-wrap-in-lists
+    - avoid-unnecessary-setstate
+    - prefer-correct-edge-insets-constructor
+    - prefer-using-list-view
+    - use-setstate-synchronously

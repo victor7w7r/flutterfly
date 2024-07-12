@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_empty_blocks
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -16,7 +14,7 @@ void main() {
       await GetIt.I.reset();
       GetIt.I.registerSingleton<FluentService>(MockFluentService());
 
-      final srv = GetIt.I.get<FluentService>();
+      final srv = GetIt.I<FluentService>();
       when(srv.state).thenReturn(FluentThemeApp.dark());
     });
 
@@ -27,7 +25,7 @@ void main() {
 
     testWidgets('Card widget should have correct background color',
         (final tester) async {
-      final srv = GetIt.I.get<FluentService>();
+      final srv = GetIt.I<FluentService>();
 
       await tester.pumpWidget(const FluentApp(home: Header()));
       final card = tester.widget<Card>(find.byType(Card));
@@ -44,7 +42,7 @@ void main() {
 
     testWidgets('ToggleSwitch should toggle dark mode', (final tester) async {
       await tester.runAsync(() async {
-        final srv = GetIt.I.get<FluentService>();
+        final srv = GetIt.I<FluentService>();
 
         when(() => srv.toggle(false)).thenAnswer((final _) async {});
 

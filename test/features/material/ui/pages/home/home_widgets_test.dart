@@ -35,8 +35,8 @@ void main() {
       });
       testWidgets('Render widget successfully with portrait and state',
           (final tester) async {
-        final service = GetIt.I.get<MaterialService>();
-        final ctl = GetIt.I.get<DataService>();
+        final service = GetIt.I<MaterialService>();
+        final ctl = GetIt.I<DataService>();
         when(service.isDark).thenReturn(false);
         ctl.mutate = 'Hello, Flutter!';
 
@@ -58,7 +58,7 @@ void main() {
 
       testWidgets('Render widget successfully with landscape and empty state',
           (final tester) async {
-        final service = GetIt.I.get<MaterialService>();
+        final service = GetIt.I<MaterialService>();
         when(service.isDark).thenReturn(false);
 
         await tester.pumpWidget(
@@ -81,7 +81,7 @@ void main() {
       testWidgets(
           'Render widget successfully set '
           'home in false and dark mode in true', (final tester) async {
-        final service = GetIt.I.get<MaterialService>();
+        final service = GetIt.I<MaterialService>();
         when(service.isDark).thenReturn(true);
 
         tester.view.physicalSize = const Size(1600, 900);
@@ -108,7 +108,7 @@ void main() {
       testWidgets(
           'Render widget successfully set '
           'home in true and dark mode in false', (final tester) async {
-        final service = GetIt.I.get<MaterialService>();
+        final service = GetIt.I<MaterialService>();
         when(service.isDark).thenReturn(false);
 
         await tester.pumpWidget(
@@ -126,7 +126,7 @@ void main() {
       testWidgets(
           'Render widget successfully set '
           'home in false and dark mode in true', (final tester) async {
-        final service = GetIt.I.get<MaterialService>();
+        final service = GetIt.I<MaterialService>();
         when(service.isDark).thenReturn(true);
 
         tester.view.physicalSize = const Size(1600, 900);
@@ -169,7 +169,7 @@ void main() {
         await GetIt.I.reset();
         GetIt.I.registerSingleton<MaterialService>(MockMaterialService());
         GetIt.I.registerSingleton<BinanceService>(MockBinanceService());
-        final service = GetIt.I.get<MaterialService>();
+        final service = GetIt.I<MaterialService>();
         when(service.isDark).thenReturn(false);
       });
 
@@ -217,7 +217,6 @@ void main() {
 
         when(srv.fetchBinance)
             .thenAnswer((final _) async => Binance.dummyGen());
-        // ignore: avoid_empty_blocks
         when(() => srv.paginateBinance(any())).thenAnswer((final _) {});
 
         await tester.runAsync(() async {
@@ -241,7 +240,6 @@ void main() {
 
         when(srv.fetchBinance)
             .thenAnswer((final _) async => Binance.dummyGen());
-        // ignore: avoid_empty_blocks
         when(() => srv.refreshBinance(any())).thenAnswer((final _) {});
 
         await tester.runAsync(() async {
@@ -276,13 +274,13 @@ void main() {
         await GetIt.I.reset();
 
         GetIt.I.registerLazySingleton<MaterialService>(MockMaterialService.new);
-        final service = GetIt.I.get<MaterialService>();
+        final service = GetIt.I<MaterialService>();
         when(service.isDark).thenReturn(false);
       });
       testWidgets(
           'Render widget successfully with landscape/dark, portait/light',
           (final tester) async {
-        when(GetIt.I.get<MaterialService>().isDark).thenReturn(true);
+        when(GetIt.I<MaterialService>().isDark).thenReturn(true);
         await tester.pumpWidget(widget(Orientation.landscape));
 
         expect(find.byType(Container), findsWidgets);
@@ -291,7 +289,7 @@ void main() {
         expect(find.text('1.0%'), findsOneWidget);
         expect(find.text('1.0'), findsOneWidget);
 
-        when(GetIt.I.get<MaterialService>().isDark).thenReturn(false);
+        when(GetIt.I<MaterialService>().isDark).thenReturn(false);
 
         await tester.pumpWidget(widget(Orientation.portrait));
 

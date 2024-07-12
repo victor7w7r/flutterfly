@@ -19,20 +19,20 @@ final class MaterialLayout extends StatelessWidget {
       ListenViewModel<MaterialService>(
         builder: (final ctl) => QueryClientProvider(
           child: MaterialApp(
-            title: 'flutterfly',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              useMaterial3: true,
-              splashFactory: InkRipple.splashFactory,
-            ),
-            darkTheme: ThemeData.dark()
-                .copyWith(splashFactory: InkRipple.splashFactory),
-            themeMode: ctl.isDark() ? ThemeMode.dark : ThemeMode.light,
-            initialRoute: '/',
             routes: {
               '/': (final _) => HomePage(child: child),
               '/store': (final _) => StorePage(child: child),
             },
+            initialRoute: '/',
+            title: 'flutterfly',
+            theme: ThemeData(
+              splashFactory: InkRipple.splashFactory,
+              useMaterial3: true,
+            ),
+            darkTheme: ThemeData.dark()
+                .copyWith(splashFactory: InkRipple.splashFactory),
+            themeMode: ctl.isDark ? ThemeMode.dark : ThemeMode.light,
+            debugShowCheckedModeBanner: false,
           ),
         ),
       );

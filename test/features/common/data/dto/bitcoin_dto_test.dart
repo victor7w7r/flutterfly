@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'dart:convert' show jsonDecode, jsonEncode;
 
 import 'package:flutter_test/flutter_test.dart';
 

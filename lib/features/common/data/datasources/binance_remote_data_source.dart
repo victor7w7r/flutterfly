@@ -17,11 +17,11 @@ abstract class BinanceRemoteDataSource {
     @Named('route') final String baseUrl,
   }) = _BinanceRemoteDataSource;
 
-  @GET('/24hr')
-  Future<List<BinanceDto>> getCurrencies();
-
   @GET('/price?symbol=BTCUSDT')
   Future<BitcoinDto?> getBitcoin();
+
+  @GET('/24hr')
+  Future<List<BinanceDto>> getCurrencies();
 }
 
 // coverage:ignore-start

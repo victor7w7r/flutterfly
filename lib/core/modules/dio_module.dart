@@ -5,9 +5,6 @@ import 'package:flutterfly/core/constants/constants.dart';
 
 @module
 abstract class DioModule {
-  @Named('route')
-  String get route => '';
-
   @lazySingleton
   Dio get dio => Dio(
         BaseOptions(
@@ -15,4 +12,7 @@ abstract class DioModule {
           headers: {'Content-Type': 'application/json'},
         ),
       );
+
+  @Named('route')
+  String get route => '';
 }

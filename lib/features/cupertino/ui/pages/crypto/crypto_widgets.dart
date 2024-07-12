@@ -24,27 +24,25 @@ final class CurrencyCard extends StatelessWidget {
   ) =>
       ListenViewModel<CupertinoService>(
         builder: (final ctl) => Container(
-          margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(24)),
-            border: ctl.isDark()
+            image: DecorationImage(
+              image: const AssetImage('assets/binance.png'),
+              fit: BoxFit.none,
+              alignment: const Alignment(1.3, 0),
+              scale: context.mWidth > 520 ? 12 : 20,
+            ),
+            border: ctl.isDark
                 ? const Border.fromBorderSide(
                     BorderSide(
-                      width: 2,
                       color: Color.fromARGB(255, 255, 255, 255),
+                      width: 2,
                     ),
                   )
-                : const Border.fromBorderSide(
-                    BorderSide(width: 2),
-                  ),
-            image: DecorationImage(
-              alignment: const Alignment(1.3, 0),
-              image: const AssetImage('assets/binance.png'),
-              scale: context.mWidth > 520 ? 12 : 20,
-              fit: BoxFit.none,
-            ),
+                : const Border.fromBorderSide(BorderSide(width: 2)),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
           ),
+          margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
           child: n.Column([
             switch (context.mWidth) {
               > 720 => const SizedBox(height: 45),

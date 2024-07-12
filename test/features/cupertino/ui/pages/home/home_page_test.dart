@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/home/home_page.dart';
@@ -10,7 +11,7 @@ import 'package:flutterfly/features/cupertino/ui/pages/home/home_widgets.dart';
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/theme_toggle.dart';
 
-class MockCupertinoService extends Mock
+final class MockCupertinoService extends Mock
     with ChangeNotifier
     implements CupertinoService {}
 
@@ -21,39 +22,38 @@ void main() {
       GetIt.I.registerLazySingleton<CupertinoService>(MockCupertinoService.new);
       GetIt.I.registerLazySingleton<DataService>(DataService.new);
 
-      final service = GetIt.I.get<CupertinoService>();
-      when(service.isDark).thenReturn(false);
+      when(() => GetIt.I<CupertinoService>().isDark).thenReturn(false);
     });
 
-    testWidgets('Render widget successfully', (final tester) async {
-      GetIt.I.get<DataService>().mutate = 'Hello, Flutter!';
+    patrolWidgetTest('Render widget successfully', (final $) async {
+      GetIt.I<DataService>().mutate = 'Hello, Flutter!';
 
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         const CupertinoApp(
           home: CupertinoPageScaffold(child: HomePage()),
         ),
       );
 
-      expect(find.text('Happy Hacking!, Dart... Dart...'), findsOneWidget);
-      expect(find.text('Made with love by '), findsOneWidget);
+      expect($('Happy Hacking!, Dart... Dart...'), findsOneWidget);
+      expect($('Made with love by '), findsOneWidget);
 
-      expect(find.byType(ThemeToggle), findsOneWidget);
-      expect(find.byType(DynamicChip), findsWidgets);
+      expect($(ThemeToggle), findsOneWidget);
+      expect($(DynamicChip), findsWidgets);
     });
 
-    testWidgets('Render widget successfully with empty state',
-        (final tester) async {
-      await tester.pumpWidget(
+    patrolWidgetTest('Render widget successfully with empty state',
+        (final $) async {
+      await $.pumpWidgetAndSettle(
         const CupertinoApp(
           home: CupertinoPageScaffold(child: HomePage()),
         ),
       );
 
-      expect(find.text('Happy Hacking!, Dart... Dart...'), findsOneWidget);
-      expect(find.text('Made with love by '), findsOneWidget);
-      expect(find.text('Store state: Not yet.'), findsOneWidget);
-      expect(find.byType(ThemeToggle), findsOneWidget);
-      expect(find.byType(DynamicChip), findsWidgets);
+      expect($('Happy Hacking!, Dart... Dart...'), findsOneWidget);
+      expect($('Made with love by '), findsOneWidget);
+      expect($('Store state: Not yet.'), findsOneWidget);
+      expect($(ThemeToggle), findsOneWidget);
+      expect($(DynamicChip), findsWidgets);
     });
   });
 }

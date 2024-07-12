@@ -11,14 +11,14 @@ class CupertinoService extends ChangeNotifier {
   CupertinoService(this._localDbModule)
       : _isDark = _localDbModule.isCupertinoDark();
 
-  bool _isDark;
   final LocalDbModule _localDbModule;
+  bool _isDark;
 
-  bool isDark() => _isDark;
+  bool get isDark => _isDark;
 
   void toggle() {
     _isDark = !_isDark;
-    unawaited(_localDbModule.prefsBox().put('cupertinodark', _isDark));
+    unawaited(_localDbModule.prefsBox.put('cupertinodark', _isDark));
     notifyListeners();
   }
 }

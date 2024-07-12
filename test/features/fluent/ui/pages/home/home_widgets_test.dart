@@ -33,8 +33,7 @@ void main() {
     setUp(() async {
       await GetIt.I.reset();
       GetIt.I.registerSingleton<FluentService>(MockFluentService());
-      when(GetIt.I.get<FluentService>().state)
-          .thenReturn(FluentThemeApp.dark());
+      when(GetIt.I<FluentService>().state).thenReturn(FluentThemeApp.dark());
     });
 
     group('ColorButton', () {
@@ -117,7 +116,7 @@ void main() {
         final srv = GetIt.I<BinanceService>();
         when(srv.getBitcoin).thenAnswer((final _) async => Bitcoin.dummy());
 
-        GetIt.I.get<DataService>().mutate = 'test';
+        GetIt.I<DataService>().mutate = 'test';
 
         await tester.runAsync(() async {
           await tester.pumpWidget(

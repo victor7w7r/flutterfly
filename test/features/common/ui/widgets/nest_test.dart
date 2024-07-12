@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/features/common/ui/widgets/nest.dart';
 
 void main() {
   group('Nest', () {
-    testWidgets('Renders a Container for an empty NestChain list',
-        (final tester) async {
-      await tester.pumpWidget(MaterialApp(home: Nest(const [])));
-      expect(find.byType(Container), findsOneWidget);
+    patrolWidgetTest('Renders a Container for an empty NestChain list',
+        (final $) async {
+      await $.pumpWidgetAndSettle(MaterialApp(home: Nest(const [])));
+
+      expect($(Container), findsOneWidget);
     });
 
-    testWidgets('Applies a single NestChain function', (final tester) async {
-      await tester.pumpWidget(
+    patrolWidgetTest('Applies a single NestChain function', (final $) async {
+      await $.pumpWidgetAndSettle(
         MaterialApp(
           home: Nest([
             (final child) => Padding(
@@ -23,12 +25,13 @@ void main() {
           ]),
         ),
       );
-      expect(find.byType(Padding), findsOneWidget);
+
+      expect($(Padding), findsOneWidget);
     });
 
-    testWidgets('Applies multiple NestChain functions in reverse order',
-        (final tester) async {
-      await tester.pumpWidget(
+    patrolWidgetTest('Applies multiple NestChain functions in reverse order',
+        (final $) async {
+      await $.pumpWidgetAndSettle(
         MaterialApp(
           home: Nest([
             (final child) => Padding(
@@ -41,17 +44,13 @@ void main() {
         ),
       );
 
-      expect(find.byType(Container), findsWidgets);
+      expect($(Container), findsWidgets);
     });
 
-    testWidgets('Correctly uses the key property', (final tester) async {
+    patrolWidgetTest('Correctly uses the key property', (final $) async {
       final key = UniqueKey();
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Nest(const [], key: key),
-        ),
-      );
-      expect(find.byKey(key), findsOneWidget);
+      await $.pumpWidgetAndSettle(MaterialApp(home: Nest(const [], key: key)));
+      expect($(key), findsOneWidget);
     });
   });
 }

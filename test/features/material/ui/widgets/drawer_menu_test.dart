@@ -20,7 +20,7 @@ void main() {
 
     testWidgets('Drawer builds correctly with dark and light mode',
         (final tester) async {
-      final service = GetIt.I.get<MaterialService>();
+      final service = GetIt.I<MaterialService>();
       when(service.isDark).thenReturn(false);
 
       await tester.pumpWidget(
@@ -47,7 +47,7 @@ void main() {
     });
 
     testWidgets('Drawer tap on Home item and navigate', (final tester) async {
-      final service = GetIt.I.get<MaterialService>();
+      final service = GetIt.I<MaterialService>();
       when(service.isDark).thenReturn(false);
 
       await tester.pumpWidget(
@@ -74,7 +74,7 @@ void main() {
     });
 
     testWidgets('Drawer tap on Store item and navigate', (final tester) async {
-      final service = GetIt.I.get<MaterialService>();
+      final service = GetIt.I<MaterialService>();
       when(service.isDark).thenReturn(false);
 
       await tester.pumpWidget(
@@ -101,7 +101,7 @@ void main() {
     });
 
     testWidgets('Tapping the switch calls toggle', (final tester) async {
-      final service = GetIt.I.get<MaterialService>();
+      final service = GetIt.I<MaterialService>();
       when(service.isDark).thenReturn(false);
 
       await tester.pumpWidget(

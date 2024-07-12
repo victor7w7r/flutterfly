@@ -7,7 +7,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_widgets.dart';
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 
-class MockCupertinoService extends Mock
+final class MockCupertinoService extends Mock
     with ChangeNotifier
     implements CupertinoService {}
 
@@ -15,11 +15,7 @@ void main() {
   group('CurrencyCard', () {
     const widget = CupertinoApp(
       home: CupertinoPageScaffold(
-        child: CurrencyCard(
-          per: '1.0',
-          pri: '1.0',
-          sym: 'BTC',
-        ),
+        child: CurrencyCard(sym: 'BTC', per: '1.0', pri: '1.0'),
       ),
     );
 
@@ -27,8 +23,7 @@ void main() {
       await GetIt.I.reset();
 
       GetIt.I.registerLazySingleton<CupertinoService>(MockCupertinoService.new);
-      final service = GetIt.I.get<CupertinoService>();
-      when(service.isDark).thenReturn(false);
+      when(() => GetIt.I<CupertinoService>().isDark).thenReturn(false);
     });
     testWidgets('Render widget successfully ', (final tester) async {
       await tester.pumpWidget(widget);
@@ -39,7 +34,7 @@ void main() {
       expect(find.text('1.0%'), findsOneWidget);
       expect(find.text('1.0'), findsOneWidget);
 
-      when(GetIt.I.get<CupertinoService>().isDark).thenReturn(true);
+      when(GetIt.I<CupertinoService>().isDark).thenReturn(true);
 
       await tester.pumpWidget(widget);
     });

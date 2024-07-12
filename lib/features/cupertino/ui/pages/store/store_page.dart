@@ -2,9 +2,9 @@ import 'dart:async' show unawaited;
 
 import 'package:flutter/cupertino.dart';
 
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
@@ -27,7 +27,7 @@ final class _StoreState extends State<StorePage> {
     final BuildContext context,
   ) =>
       _txtCtl.text.isNotEmpty
-          ? inject.get<DataService>().mutate = _txtCtl.text
+          ? GetIt.I<DataService>().mutate = _txtCtl.text
           : unawaited(
               showCupertinoModalPopup<void>(
                 context: context,
@@ -36,8 +36,8 @@ final class _StoreState extends State<StorePage> {
                   content: const Text('Is empty your TextField'),
                   actions: [
                     CupertinoDialogAction(
-                      isDefaultAction: true,
                       onPressed: () => Navigator.pop(ctx),
+                      isDefaultAction: true,
                       child: const Text('OK'),
                     ),
                   ],
@@ -73,14 +73,14 @@ final class _StoreState extends State<StorePage> {
             const SizedBox(height: 25),
             ListenViewModel<CupertinoService>(
               builder: (final ctl) => CupertinoTextField(
-                placeholder: 'here',
-                cursorHeight: 25,
                 controller: _txtCtl,
                 decoration: BoxDecoration(
-                  color: ctl.isDark()
+                  color: ctl.isDark
                       ? const Color.fromARGB(255, 43, 53, 69)
                       : const Color.fromARGB(255, 248, 250, 253),
                 ),
+                placeholder: 'here',
+                cursorHeight: 25,
               ).niku
                 ..w = 250.0
                 ..h = 55.0,
@@ -93,7 +93,7 @@ final class _StoreState extends State<StorePage> {
             const SizedBox(height: 20),
             ListenViewModel<DataService>(
               builder: (final ctl) => n.Text(
-                ctl.state().isEmpty
+                ctl.state.isEmpty
                     ? 'Store state: Not yet.'
                     : 'Store state: Yes, you write. ${ctl.state}',
               )

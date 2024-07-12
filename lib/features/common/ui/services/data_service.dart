@@ -13,5 +13,5 @@ class DataService extends ChangeNotifier {
     notifyListeners();
   }
 
-  String state() => _state;
+  String get state => _state;
 }

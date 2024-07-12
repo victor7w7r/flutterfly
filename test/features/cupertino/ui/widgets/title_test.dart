@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart' show GetIt;
-import 'package:mocktail/mocktail.dart';
+import 'package:mocktail/mocktail.dart' show Mock, when;
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/title.dart';
@@ -16,12 +17,12 @@ void main() {
       GetIt.I.registerSingleton<Platform>(MockPlatform());
     });
 
-    testWidgets('Render when platform is macOS', (final tester) async {
-      final platform = GetIt.I.get<Platform>();
-      when(platform.isMacOS).thenReturn(true);
-      when(platform.isDesktop).thenReturn(false);
+    patrolWidgetTest('Render when platform is macOS', (final $) async {
+      final platform = GetIt.I<Platform>();
+      when(() => platform.isMacOS).thenReturn(true);
+      when(() => platform.isDesktop).thenReturn(false);
 
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         const CupertinoApp(
           home: CupertinoPageScaffold(
             child: CupTitle(true, child: SizedBox()),
@@ -29,16 +30,16 @@ void main() {
         ),
       );
 
-      expect(find.byType(SizedBox), findsOneWidget);
+      expect($(SizedBox), findsOneWidget);
     });
 
-    testWidgets('Render when platform is not macOS and is desktop',
-        (final tester) async {
-      final platform = GetIt.I.get<Platform>();
-      when(platform.isMacOS).thenReturn(false);
-      when(platform.isDesktop).thenReturn(true);
+    patrolWidgetTest('Render when platform is not macOS and is desktop',
+        (final $) async {
+      final platform = GetIt.I<Platform>();
+      when(() => platform.isMacOS).thenReturn(false);
+      when(() => platform.isDesktop).thenReturn(true);
 
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         const CupertinoApp(
           home: CupertinoPageScaffold(
             child: CupTitle(true, child: SizedBox()),
@@ -46,16 +47,16 @@ void main() {
         ),
       );
 
-      expect(find.byType(SizedBox), findsOneWidget);
+      expect($(SizedBox), findsOneWidget);
     });
 
-    testWidgets('Render when platform is not macOS and not desktop',
-        (final tester) async {
-      final platform = GetIt.I.get<Platform>();
-      when(platform.isMacOS).thenReturn(false);
-      when(platform.isDesktop).thenReturn(false);
+    patrolWidgetTest('Render when platform is not macOS and not desktop',
+        (final $) async {
+      final platform = GetIt.I<Platform>();
+      when(() => platform.isMacOS).thenReturn(false);
+      when(() => platform.isDesktop).thenReturn(false);
 
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         const CupertinoApp(
           home: CupertinoPageScaffold(
             child: CupTitle(true, child: SizedBox()),
@@ -63,7 +64,7 @@ void main() {
         ),
       );
 
-      expect(find.text('CupertinoApp'), findsOneWidget);
+      expect($('CupertinoApp'), findsOneWidget);
     });
   });
 }

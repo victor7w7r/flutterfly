@@ -24,10 +24,10 @@ void main() {
 
       registerFallbackValue(<Colors>[]);
 
-      final srv = GetIt.I.get<FluentService>();
+      final srv = GetIt.I<FluentService>();
       when(srv.state).thenReturn(FluentThemeApp.dark());
       when(() => srv.interpolator(any())).thenReturn(null);
-      when(GetIt.I.get<Platform>().isWeb).thenReturn(false);
+      when(GetIt.I<Platform>().isWeb).thenReturn(false);
     });
 
     testWidgets('Renders page successfully', (final tester) async {
@@ -88,7 +88,7 @@ void main() {
       await tester.tap(colorButtonFinder.at(3));
       await tester.pumpAndSettle();
 
-      verify(() => GetIt.I.get<FluentService>().interpolator(any())).called(4);
+      verify(() => GetIt.I<FluentService>().interpolator(any())).called(4);
 
       final blurButtonFinder = find.byType(BlurButton);
       expect(blurButtonFinder, findsOneWidget);

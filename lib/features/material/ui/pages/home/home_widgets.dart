@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:fl_query/fl_query.dart' show Query;
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/error/fetch_exception.dart';
 import 'package:flutterfly/core/resources/extensions.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
@@ -21,9 +21,9 @@ final class TopContent extends StatelessWidget {
     super.key,
   });
 
+  final Widget? child;
   final double height;
   final Orientation pOrientation;
-  final Widget? child;
 
   @override
   Widget build(final BuildContext context) =>
@@ -39,11 +39,11 @@ final class TopContent extends StatelessWidget {
         const SizedBox(height: 10),
         ListenViewModel<DataService>(
           builder: (final ctl) => n.Text(
-            ctl.state().isEmpty
+            ctl.state.isEmpty
                 ? 'Store state: Not yet.'
                 : 'Store state: Yes, you write. ${ctl.state}',
           )
-            ..fontSize = ctl.state().isEmpty ? ((height > 960) ? 25 : 15) : 20
+            ..fontSize = ctl.state.isEmpty ? ((height > 960) ? 25 : 15) : 20
             ..n.center,
         ),
         const SizedBox(height: 10),
@@ -67,25 +67,22 @@ final class DynamicChip extends StatelessWidget {
   ) =>
       ListenViewModel<MaterialService>(
         builder: (final ctl) => Container(
+          decoration: BoxDecoration(
+            border: ctl.isDark
+                ? const Border.fromBorderSide(
+                    BorderSide(color: Colors.white, width: 2),
+                  )
+                : const Border.fromBorderSide(BorderSide(width: 2)),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
+          ),
           width: isHome ? 300 : 270,
           height: 50,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(24)),
-            border: ctl.isDark()
-                ? const Border.fromBorderSide(
-                    BorderSide(width: 2, color: Colors.white),
-                  )
-                : const Border.fromBorderSide(
-                    BorderSide(width: 2),
-                  ),
-          ),
           child: n.Row(
             isHome
                 ? [
                     const SizedBox(width: 38),
                     n.Image.asset(
-                      'assets/${ctl.isDark() ? 'brandwhite' : 'brand'}.png',
-                    )
+                        'assets/${ctl.isDark ? 'brandwhite' : 'brand'}.png')
                       ..width = 220.0
                       ..height = 70.0,
                   ]
@@ -112,10 +109,10 @@ final class BottomContent extends StatefulWidget {
     super.key,
   });
 
+  final Widget? child;
   final double height;
   final bool mockError;
   final Orientation pOrientation;
-  final Widget? child;
 
   @override
   State<BottomContent> createState() => BottomContentState();
@@ -127,16 +124,16 @@ final class BottomContentState extends State<BottomContent> {
 
   late Query<List<Binance>, FetchException> _query;
 
-  void _scrollListener() =>
-      scrCtl.position.pixels == scrCtl.position.maxScrollExtent
-          ? inject.get<BinanceService>().paginateBinance(_query)
-          : null;
-
   @override
   void initState() {
     super.initState();
     scrCtl.addListener(_scrollListener);
   }
+
+  void _scrollListener() =>
+      scrCtl.position.pixels == scrCtl.position.maxScrollExtent
+          ? GetIt.I<BinanceService>().paginateBinance(_query)
+          : null;
 
   @override
   void dispose() {
@@ -159,9 +156,6 @@ final class BottomContentState extends State<BottomContent> {
               BaseQueryBuilder<List<Binance>, FetchException>(
             'binance_fetch',
             ctl.fetchBinance,
-            mockError: widget.mockError,
-            queryAccess: (final query) => _query = query,
-            def: [Binance.detached()],
             loading: () => n.Row(
               const [
                 SizedBox(height: 120),
@@ -172,9 +166,7 @@ final class BottomContentState extends State<BottomContent> {
               const SizedBox(height: 120),
               error == null
                   ? ('An error occurred'.n..fontSize = 20)
-                  // coverage:ignore-start
                   : (error.message.n..fontSize = 20),
-              // coverage:ignore-end
             ])
               ..mainCenter
               ..crossCenter,
@@ -194,14 +186,17 @@ final class BottomContentState extends State<BottomContent> {
                 ..children = data
                     .map(
                       (final bin) => CurrencyCard(
-                        sym: bin.symbol,
+                        orientation: widget.pOrientation,
                         per: bin.priceChangePercent,
                         pri: bin.bidPrice,
-                        orientation: widget.pOrientation,
+                        sym: bin.symbol,
                       ),
                     )
                     .toList(),
             ]),
+            def: [Binance.detached()],
+            queryAccess: (final query) => _query = query,
+            mockError: widget.mockError,
           ),
         ),
       ]);
@@ -227,24 +222,24 @@ final class CurrencyCard extends StatelessWidget {
   ) =>
       ListenViewModel<MaterialService>(
         builder: (final ctl) => Container(
-          margin: const EdgeInsets.all(10),
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(24)),
-            border: ctl.isDark()
-                ? const Border.fromBorderSide(
-                    BorderSide(width: 2, color: Colors.white),
-                  )
-                : const Border.fromBorderSide(
-                    BorderSide(width: 2),
-                  ),
             image: DecorationImage(
-              alignment: const Alignment(1.3, 0),
               image: const AssetImage('assets/binance.png'),
-              scale: context.mWidth > 520 ? 12 : 20,
               fit: BoxFit.none,
+              alignment: const Alignment(1.3, 0),
+              scale: context.mWidth > 520 ? 12 : 20,
+            ),
+            border: ctl.isDark
+                ? const Border.fromBorderSide(
+                    BorderSide(color: Colors.white, width: 2),
+                  )
+                : const Border.fromBorderSide(BorderSide(width: 2)),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(24),
             ),
           ),
+          margin: const EdgeInsets.all(10),
           child: n.Column([
             orientation == Orientation.portrait
                 ? switch (context.mWidth) {

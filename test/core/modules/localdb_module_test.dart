@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:hive_flutter/hive_flutter.dart' show Box, HiveInterface;
+import 'package:mocktail/mocktail.dart' show Mock, when;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import 'package:flutterfly/core/modules/localdb_module.dart';
@@ -23,7 +23,7 @@ void main() {
 
     test('Check init method', () async {
       await localDbModule.init();
-      expect(localDbModule.prefsBox(), isA<Box<bool>>());
+      expect(localDbModule.prefsBox, isA<Box<bool>>());
     });
 
     test('Check isMaterialDark method', () async {
@@ -31,6 +31,7 @@ void main() {
 
       localDbModule.assignPrefsBox(box);
       when(() => box.get('materialdark')).thenReturn(true);
+
       expect(localDbModule.isMaterialDark(), true);
     });
 
@@ -39,6 +40,7 @@ void main() {
 
       localDbModule.assignPrefsBox(box);
       when(() => box.get('cupertinodark')).thenReturn(true);
+
       expect(localDbModule.isCupertinoDark(), true);
     });
 
@@ -47,15 +49,18 @@ void main() {
 
       localDbModule.assignPrefsBox(box);
       when(() => box.get('fluentdark')).thenReturn(true);
+
       expect(localDbModule.isFluentDark(), true);
     });
 
     test('Check isMaterialDark method when the key is null', () async {
       final box = MockBox<bool>();
+
       when(() => box.put('materialdark', true))
           .thenAnswer((final _) async => Future<void>.value());
       localDbModule.assignPrefsBox(box);
       when(() => box.get('materialdark')).thenReturn(null);
+
       expect(localDbModule.isMaterialDark(), true);
     });
   });

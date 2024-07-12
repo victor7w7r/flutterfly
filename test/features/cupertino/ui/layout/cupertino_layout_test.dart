@@ -8,9 +8,9 @@ import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/cupertino/ui/layout/cupertino_layout.dart';
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 
-class MockPlatform extends Mock implements Platform {}
+final class MockPlatform extends Mock implements Platform {}
 
-class MockCupertinoService extends Mock implements CupertinoService {}
+final class MockCupertinoService extends Mock implements CupertinoService {}
 
 void main() {
   group('Title', () {
@@ -21,11 +21,10 @@ void main() {
     });
 
     testWidgets('Render widget successfully', (final tester) async {
+      final service = GetIt.I<CupertinoService>();
+
+      when(() => service.isDark).thenReturn(false);
       await tester.runAsync(() async {
-        final service = GetIt.I.get<CupertinoService>();
-
-        when(service.isDark).thenReturn(false);
-
         await tester.pumpWidget(const CupertinoLayout(child: SizedBox()));
 
         expect(find.byType(CupertinoApp), findsOneWidget);
@@ -35,11 +34,11 @@ void main() {
 
         reset(service);
 
-        when(service.isDark).thenReturn(false);
+        when(() => service.isDark).thenReturn(false);
 
         await tester.pumpWidget(const CupertinoLayout(child: SizedBox()));
 
-        verify(service.isDark).called(2);
+        verify(() => service.isDark).called(2);
       });
     });
   });

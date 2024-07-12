@@ -14,13 +14,14 @@ import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_widgets.dar
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 import '../../../../../setup.dart';
 
-class MockCupertinoService extends Mock
+final class MockCupertinoService extends Mock
     with ChangeNotifier
     implements CupertinoService {}
 
-class MockBinanceService extends Mock implements BinanceService {}
+final class MockBinanceService extends Mock implements BinanceService {}
 
-class MockQuery extends Mock implements Query<List<Binance>, FetchException> {}
+final class MockQuery extends Mock
+    implements Query<List<Binance>, FetchException> {}
 
 void main() {
   group('CryptoPage', () {
@@ -43,7 +44,7 @@ void main() {
       await GetIt.I.reset();
       GetIt.I.registerSingleton<CupertinoService>(MockCupertinoService());
       GetIt.I.registerSingleton<BinanceService>(MockBinanceService());
-      final service = GetIt.I.get<CupertinoService>();
+      final service = GetIt.I<CupertinoService>();
       when(service.isDark).thenReturn(false);
     });
     testWidgets('Render widget successfully when data is ready',
@@ -92,7 +93,6 @@ void main() {
       final srv = GetIt.I<BinanceService>();
 
       when(srv.fetchBinance).thenAnswer((final _) async => Binance.dummyGen());
-      // ignore: avoid_empty_blocks
       when(() => srv.paginateBinance(any())).thenAnswer((final _) {});
 
       await tester.runAsync(() async {
@@ -114,7 +114,6 @@ void main() {
       final srv = GetIt.I<BinanceService>();
 
       when(srv.fetchBinance).thenAnswer((final _) async => Binance.dummyGen());
-      // ignore: avoid_empty_blocks
       when(() => srv.refreshBinance(any())).thenAnswer((final _) {});
 
       await tester.runAsync(() async {

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:fl_query/fl_query.dart' show Query;
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:niku/namespace.dart' as n;
 
-import 'package:flutterfly/core/di/inject.dart';
 import 'package:flutterfly/core/error/fetch_exception.dart';
 import 'package:flutterfly/core/utils/mvvm.dart';
 import 'package:flutterfly/core/utils/query.dart';
@@ -34,6 +34,11 @@ final class CryptoPageState extends State<CryptoPage> {
     scrCtl.addListener(_scrollListener);
   }
 
+  void _scrollListener() =>
+      scrCtl.position.pixels == scrCtl.position.maxScrollExtent
+          ? GetIt.I<BinanceService>().paginateBinance(_query)
+          : null;
+
   @override
   void dispose() {
     scrCtl.removeListener(_scrollListener);
@@ -41,11 +46,6 @@ final class CryptoPageState extends State<CryptoPage> {
     scrCtl.dispose();
     super.dispose();
   }
-
-  void _scrollListener() =>
-      scrCtl.position.pixels == scrCtl.position.maxScrollExtent
-          ? inject.get<BinanceService>().paginateBinance(_query)
-          : null;
 
   @override
   Widget build(
@@ -56,20 +56,17 @@ final class CryptoPageState extends State<CryptoPage> {
         builder: (final ctl) => BaseQueryBuilder<List<Binance>, FetchException>(
           'binance_fetch',
           ctl.fetchBinance,
-          queryAccess: (final query) => _query = query,
-          mockError: widget.mockError,
-          def: [Binance.detached()],
           loading: () => n.Row(
             const [SizedBox(height: 120), CupertinoActivityIndicator()],
           )..mainCenter,
-          error: (final _, final error) => n.Row([
-            const SizedBox(height: 120),
-            error == null
-                ? ('An error occurred'.n..fontSize = 20)
-                // coverage:ignore-start
-                : (error.message.n..fontSize = 20),
-            // coverage:ignore-end
-          ])
+          error: (final _, final error) => n.Row(
+            [
+              const SizedBox(height: 120),
+              error == null
+                  ? ('An error occurred'.n..fontSize = 20)
+                  : (error.message.n..fontSize = 20),
+            ],
+          )
             ..mainCenter
             ..crossCenter,
           success: (final query, final data) => CustomScrollView(
@@ -87,9 +84,9 @@ final class CryptoPageState extends State<CryptoPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 sliver: SliverGrid.count(
                   crossAxisCount: 2,
-                  childAspectRatio: 2,
                   mainAxisSpacing: 20.0,
                   crossAxisSpacing: 10.0,
+                  childAspectRatio: 2,
                   children: data
                       .map(
                         (final bin) => CurrencyCard(
@@ -103,6 +100,9 @@ final class CryptoPageState extends State<CryptoPage> {
               ),
             ],
           ),
+          def: [Binance.detached()],
+          queryAccess: (final query) => _query = query,
+          mockError: widget.mockError,
         ),
       );
 }
