@@ -16,12 +16,11 @@ void main() {
   group('ThemeToggle', () {
     setUp(() async {
       await GetIt.I.reset();
-      GetIt.I.registerLazySingleton<CupertinoService>(MockCupertinoService.new);
+      GetIt.I.registerSingleton<CupertinoService>(MockCupertinoService());
     });
 
     patrolWidgetTest('ThemeToggle builds correctly', (final $) async {
-      final service = GetIt.I<CupertinoService>();
-      when(() => service.isDark).thenReturn(false);
+      when(() => GetIt.I<CupertinoService>().isDark).thenReturn(false);
 
       await $.pumpWidgetAndSettle(
         const CupertinoApp(

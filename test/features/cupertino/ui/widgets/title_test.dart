@@ -8,7 +8,7 @@ import 'package:patrol/patrol.dart' show patrolWidgetTest;
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/cupertino/ui/widgets/title.dart';
 
-class MockPlatform extends Mock implements Platform {}
+final class MockPlatform extends Mock implements Platform {}
 
 void main() {
   group('Title', () {

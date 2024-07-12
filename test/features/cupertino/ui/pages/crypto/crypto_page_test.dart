@@ -4,6 +4,7 @@ import 'package:fl_query/fl_query.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import 'package:flutterfly/core/error/fetch_exception.dart';
@@ -42,37 +43,39 @@ void main() {
 
     setUp(() async {
       await GetIt.I.reset();
+
       GetIt.I.registerSingleton<CupertinoService>(MockCupertinoService());
       GetIt.I.registerSingleton<BinanceService>(MockBinanceService());
       final service = GetIt.I<CupertinoService>();
-      when(service.isDark).thenReturn(false);
+
+      when(() => service.isDark).thenReturn(false);
     });
-    testWidgets('Render widget successfully when data is ready',
-        (final tester) async {
+    patrolWidgetTest('Render widget successfully when data is ready',
+        (final $) async {
       final srv = GetIt.I<BinanceService>();
 
       when(srv.fetchBinance).thenAnswer((final _) async => Binance.dummyGen());
 
-      await tester.runAsync(() async {
-        await tester.pumpWidget(page);
+      await $.tester.runAsync(() async {
+        await $.pumpWidget(page);
 
         expect(find.byType(CupertinoActivityIndicator), findsOneWidget);
 
         await Future<void>.delayed(const Duration(milliseconds: 150));
-        await tester.pump();
+        await $.pump();
 
         expect(find.byType(CustomScrollView), findsOneWidget);
         expect(find.byType(CurrencyCard), findsWidgets);
       });
     });
 
-    testWidgets('Renders an error in widget query', (final tester) async {
+    patrolWidgetTest('Renders an error in widget query', (final $) async {
       final srv = GetIt.I<BinanceService>();
 
       when(srv.fetchBinance).thenAnswer((final _) async => Binance.dummyGen());
 
-      await tester.runAsync(() async {
-        await tester.pumpWidget(
+      await $.tester.runAsync(() async {
+        await $.tester.pumpWidget(
           QueryClientProvider(
             child: const CupertinoApp(
               home: CupertinoPageScaffold(child: CryptoPage(mockError: true)),
@@ -81,15 +84,15 @@ void main() {
         );
 
         await Future<void>.delayed(const Duration(milliseconds: 150));
-        await tester.pump();
+        await $.pump();
 
         expect(find.text('An error occurred'), findsOneWidget);
       });
     });
 
-    testWidgets(
+    patrolWidgetTest(
         'ScrollListener invokes paginateBinance when scrolled to bottom',
-        (final tester) async {
+        (final $) async {
       final srv = GetIt.I<BinanceService>();
 
       when(srv.fetchBinance).thenAnswer((final _) async => Binance.dummyGen());
@@ -109,8 +112,8 @@ void main() {
       });
     });
 
-    testWidgets('OnRefresh is called when pulling to refresh',
-        (final tester) async {
+    patrolWidgetTest('OnRefresh is called when pulling to refresh',
+        (final $) async {
       final srv = GetIt.I<BinanceService>();
 
       when(srv.fetchBinance).thenAnswer((final _) async => Binance.dummyGen());
@@ -120,7 +123,7 @@ void main() {
         await tester.pumpWidget(page);
 
         await Future<void>.delayed(const Duration(milliseconds: 150));
-        await tester.pump();
+        await $.pump();
 
         final customScrollView = find.byType(CustomScrollView);
         await tester.drag(customScrollView, const Offset(0.0, 300.0));

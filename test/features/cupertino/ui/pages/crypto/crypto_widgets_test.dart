@@ -22,7 +22,7 @@ void main() {
     setUp(() async {
       await GetIt.I.reset();
 
-      GetIt.I.registerLazySingleton<CupertinoService>(MockCupertinoService.new);
+      GetIt.I.registerSingleton<CupertinoService>(MockCupertinoService());
       when(() => GetIt.I<CupertinoService>().isDark).thenReturn(false);
     });
     testWidgets('Render widget successfully ', (final tester) async {
@@ -34,7 +34,7 @@ void main() {
       expect(find.text('1.0%'), findsOneWidget);
       expect(find.text('1.0'), findsOneWidget);
 
-      when(GetIt.I<CupertinoService>().isDark).thenReturn(true);
+      when(() => GetIt.I<CupertinoService>().isDark).thenReturn(true);
 
       await tester.pumpWidget(widget);
     });

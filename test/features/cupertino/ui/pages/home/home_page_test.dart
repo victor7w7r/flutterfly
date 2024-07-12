@@ -19,8 +19,8 @@ void main() {
   group('HomePage', () {
     setUp(() async {
       await GetIt.I.reset();
-      GetIt.I.registerLazySingleton<CupertinoService>(MockCupertinoService.new);
-      GetIt.I.registerLazySingleton<DataService>(DataService.new);
+      GetIt.I.registerSingleton<CupertinoService>(MockCupertinoService());
+      GetIt.I.registerSingleton(DataService());
 
       when(() => GetIt.I<CupertinoService>().isDark).thenReturn(false);
     });

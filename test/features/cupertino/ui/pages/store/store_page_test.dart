@@ -18,8 +18,8 @@ void main() {
   group('StorePage', () {
     setUp(() async {
       await GetIt.I.reset();
-      GetIt.I.registerLazySingleton<CupertinoService>(MockCupertinoService.new);
-      GetIt.I.registerLazySingleton<DataService>(DataService.new);
+      GetIt.I.registerSingleton<CupertinoService>(MockCupertinoService());
+      GetIt.I.registerSingleton<DataService>(DataService());
 
       when(() => GetIt.I<CupertinoService>().isDark).thenReturn(false);
     });
@@ -56,8 +56,7 @@ void main() {
       await $.tester.enterText(txtFieldFinder, 'Hello World');
       await $(CupertinoButton).tap();
 
-      final service = GetIt.I<DataService>();
-      expect(service.state, 'Hello World');
+      expect(GetIt.I<DataService>().state, 'Hello World');
 
       await $.tester.pump();
     });

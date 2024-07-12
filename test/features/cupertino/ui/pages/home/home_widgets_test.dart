@@ -9,7 +9,7 @@ import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/cupertino/ui/pages/home/home_widgets.dart';
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
 
-class MockCupertinoService extends Mock implements CupertinoService {}
+final class MockCupertinoService extends Mock implements CupertinoService {}
 
 void main() {
   group('HomePage Widgets', () {
@@ -17,7 +17,7 @@ void main() {
       await GetIt.I.reset();
 
       GetIt.I.registerSingleton<CupertinoService>(MockCupertinoService());
-      GetIt.I.registerSingleton<Platform>(Platform());
+      GetIt.I.registerSingleton(Platform());
     });
 
     group('DynamicChip', () {
