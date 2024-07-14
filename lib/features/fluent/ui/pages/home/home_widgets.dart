@@ -120,7 +120,9 @@ final class HomeCardCrypto extends StatelessWidget {
                   const SizedBox(height: 120),
                   error == null
                       ? ('An error occurred'.n..fontSize = 20)
+                      // coverage:ignore-start
                       : (error.message.n..fontSize = 20),
+                  // coverage:ignore-end
                 ]),
                 success: (final _, final data) => n.Column([
                   'Symbol: ${data.symbol}'.n

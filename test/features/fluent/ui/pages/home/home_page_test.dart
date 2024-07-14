@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/fluent/ui/pages/home/home_page.dart';
@@ -9,11 +10,11 @@ import 'package:flutterfly/features/fluent/ui/pages/home/home_widgets.dart';
 import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 import 'package:flutterfly/features/fluent/ui/widgets/widgets.dart';
 
-class MockFluentService extends Mock
+final class MockFluentService extends Mock
     with ChangeNotifier
     implements FluentService {}
 
-class MockPlatform extends Mock implements Platform {}
+final class MockPlatform extends Mock implements Platform {}
 
 void main() {
   group('HomeWidgets', () {
@@ -25,13 +26,13 @@ void main() {
       registerFallbackValue(<Colors>[]);
 
       final srv = GetIt.I<FluentService>();
-      when(srv.state).thenReturn(FluentThemeApp.dark());
+      when(() => srv.state).thenReturn(FluentThemeApp.dark());
       when(() => srv.interpolator(any())).thenReturn(null);
-      when(GetIt.I<Platform>().isWeb).thenReturn(false);
+      when(() => GetIt.I<Platform>().isWeb).thenReturn(false);
     });
 
-    testWidgets('Renders page successfully', (final tester) async {
-      await tester.pumpWidget(
+    patrolWidgetTest('renders page successfully', (final $) async {
+      await $.pumpWidgetAndSettle(
         const FluentApp(
           home: HomePage(
             child: HomePage(secondMockChild: SizedBox()),
@@ -39,30 +40,30 @@ void main() {
         ),
       );
 
-      expect(find.byType(Header), findsOneWidget);
-      expect(find.byType(Column), findsNWidgets(3));
-      expect(find.byType(HomeCardCrypto), findsOneWidget);
-      expect(find.byType(HomeCardBrand), findsOneWidget);
-      expect(find.byType(BlurButton), findsOneWidget);
-      expect(find.byType(ColorButton), findsNWidgets(4));
+      expect($(Header), findsOneWidget);
+      expect($(Column), findsNWidgets(3));
+      expect($(HomeCardCrypto), findsOneWidget);
+      expect($(HomeCardBrand), findsOneWidget);
+      expect($(BlurButton), findsOneWidget);
+      expect($(ColorButton), findsNWidgets(4));
     });
 
-    testWidgets('Renders page successfully with other width and height',
-        (final tester) async {
-      tester.view.physicalSize = const Size(2950, 1800);
+    patrolWidgetTest('renders page successfully with other width and height',
+        (final $) async {
+      $.tester.view.physicalSize = const Size(2950, 1800);
 
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         const FluentApp(home: HomePage(secondMockChild: SizedBox())),
       );
 
-      expect(find.byType(Header), findsOneWidget);
-      expect(find.byType(Column), findsNWidgets(2));
+      expect($(Header), findsOneWidget);
+      expect($(Column), findsNWidgets(2));
 
-      tester.view.physicalSize = const Size(2400, 1800);
+      $.tester.view.physicalSize = const Size(2400, 1800);
     });
 
-    testWidgets('Click buttons and navigation', (final tester) async {
-      await tester.pumpWidget(
+    patrolWidgetTest('click buttons and navigation', (final $) async {
+      await $.pumpWidgetAndSettle(
         FluentApp(
           home: const HomePage(
             child: HomePage(secondMockChild: SizedBox()),
@@ -73,30 +74,30 @@ void main() {
         ),
       );
 
-      final colorButtonFinder = find.byType(ColorButton);
+      final colorButtonFinder = $(ColorButton);
       expect(colorButtonFinder, findsNWidgets(4));
 
-      await tester.tap(colorButtonFinder.at(0));
-      await tester.pumpAndSettle();
+      await $(colorButtonFinder.at(0)).tap();
+      await $.pumpAndSettle();
 
-      await tester.tap(colorButtonFinder.at(1));
-      await tester.pumpAndSettle();
+      await $(colorButtonFinder.at(1)).tap();
+      await $.pumpAndSettle();
 
-      await tester.tap(colorButtonFinder.at(2));
-      await tester.pumpAndSettle();
+      await $(colorButtonFinder.at(2)).tap();
+      await $.pumpAndSettle();
 
-      await tester.tap(colorButtonFinder.at(3));
-      await tester.pumpAndSettle();
+      await $(colorButtonFinder.at(3)).tap();
+      await $.pumpAndSettle();
 
       verify(() => GetIt.I<FluentService>().interpolator(any())).called(4);
 
-      final blurButtonFinder = find.byType(BlurButton);
+      final blurButtonFinder = $(BlurButton);
       expect(blurButtonFinder, findsOneWidget);
 
-      await tester.tap(blurButtonFinder);
-      await tester.pumpAndSettle();
+      await $(blurButtonFinder).tap();
+      await $.pumpAndSettle();
 
-      expect(find.byType(Placeholder), findsOneWidget);
+      expect($(Placeholder), findsOneWidget);
     });
   });
 }

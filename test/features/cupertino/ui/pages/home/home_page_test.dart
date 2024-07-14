@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
@@ -25,7 +25,7 @@ void main() {
       when(() => GetIt.I<CupertinoService>().isDark).thenReturn(false);
     });
 
-    patrolWidgetTest('Render widget successfully', (final $) async {
+    patrolWidgetTest('render widget successfully', (final $) async {
       GetIt.I<DataService>().mutate = 'Hello, Flutter!';
 
       await $.pumpWidgetAndSettle(
@@ -41,7 +41,7 @@ void main() {
       expect($(DynamicChip), findsWidgets);
     });
 
-    patrolWidgetTest('Render widget successfully with empty state',
+    patrolWidgetTest('render widget successfully with empty state',
         (final $) async {
       await $.pumpWidgetAndSettle(
         const CupertinoApp(

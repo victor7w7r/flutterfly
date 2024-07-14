@@ -12,8 +12,8 @@ analyzer:
     strict-inference: true
     strict-raw-types: true
   plugins:
-    #- custom_lint
-    - dart_code_linter
+    - custom_lint
+    #- dart_code_linter
 linter:
   rules:
     - always_declare_return_types

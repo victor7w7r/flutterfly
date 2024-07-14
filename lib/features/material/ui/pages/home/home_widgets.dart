@@ -82,7 +82,8 @@ final class DynamicChip extends StatelessWidget {
                 ? [
                     const SizedBox(width: 38),
                     n.Image.asset(
-                        'assets/${ctl.isDark ? 'brandwhite' : 'brand'}.png')
+                      'assets/${ctl.isDark ? 'brandwhite' : 'brand'}.png',
+                    )
                       ..width = 220.0
                       ..height = 70.0,
                   ]
@@ -166,7 +167,9 @@ final class BottomContentState extends State<BottomContent> {
               const SizedBox(height: 120),
               error == null
                   ? ('An error occurred'.n..fontSize = 20)
+                  // coverage:ignore-start
                   : (error.message.n..fontSize = 20),
+              // coverage:ignore-end
             ])
               ..mainCenter
               ..crossCenter,

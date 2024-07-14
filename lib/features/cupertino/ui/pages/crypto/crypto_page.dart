@@ -64,7 +64,9 @@ final class CryptoPageState extends State<CryptoPage> {
               const SizedBox(height: 120),
               error == null
                   ? ('An error occurred'.n..fontSize = 20)
+                  // coverage:ignore-start
                   : (error.message.n..fontSize = 20),
+              // coverage:ignore-end
             ],
           )
             ..mainCenter

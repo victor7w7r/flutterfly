@@ -18,13 +18,14 @@ void main() {
   group('StorePage', () {
     setUp(() async {
       await GetIt.I.reset();
+
       GetIt.I.registerSingleton<CupertinoService>(MockCupertinoService());
       GetIt.I.registerSingleton<DataService>(DataService());
 
       when(() => GetIt.I<CupertinoService>().isDark).thenReturn(false);
     });
 
-    patrolWidgetTest('Render widget successfully', (final $) async {
+    patrolWidgetTest('render widget successfully', (final $) async {
       await $.pumpWidgetAndSettle(
         const CupertinoApp(
           home: CupertinoPageScaffold(child: StorePage()),
@@ -43,7 +44,7 @@ void main() {
       expect($(CupertinoButton), findsOneWidget);
     });
 
-    patrolWidgetTest('Perform text change and submit to verify the new state',
+    patrolWidgetTest('perform text change and submit to verify the new state',
         (final $) async {
       await $.pumpWidgetAndSettle(
         const CupertinoApp(
@@ -61,7 +62,7 @@ void main() {
       await $.tester.pump();
     });
 
-    patrolWidgetTest('Show dialog when text field is empty', (final $) async {
+    patrolWidgetTest('show dialog when text field is empty', (final $) async {
       await $.pumpWidgetAndSettle(
         const CupertinoApp(
           home: CupertinoPageScaffold(child: StorePage()),

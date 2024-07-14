@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/services/data_service.dart';
@@ -10,99 +11,93 @@ import 'package:flutterfly/features/fluent/ui/services/fluent_service.dart';
 import 'package:flutterfly/features/fluent/ui/widgets/blur_button.dart';
 import '../../../../../setup.dart';
 
-class MockFluentService extends Mock
+final class MockFluentService extends Mock
     with ChangeNotifier
     implements FluentService {}
 
-class MockPlatform extends Mock implements Platform {}
+final class MockPlatform extends Mock implements Platform {}
 
 void main() {
   group('StorePage', () {
     setUp(() async {
       await GetIt.I.reset();
-      GetIt.I.registerLazySingleton<FluentService>(MockFluentService.new);
-      GetIt.I.registerLazySingleton<DataService>(DataService.new);
-      GetIt.I.registerLazySingleton<Platform>(MockPlatform.new);
-      final service = GetIt.I<FluentService>();
-      when(service.state).thenReturn(FluentThemeApp.dark());
+      GetIt.I.registerSingleton<FluentService>(MockFluentService());
+      GetIt.I.registerSingleton(DataService());
+      GetIt.I.registerSingleton<Platform>(MockPlatform());
+
+      when(() => GetIt.I<FluentService>().state)
+          .thenReturn(FluentThemeApp.dark());
     });
 
-    testWidgets('Render widget successfully', (final tester) async {
+    patrolWidgetTest('render widget successfully', (final $) async {
       disableOverflowErrors();
-      final platform = GetIt.I<Platform>();
-      when(platform.isWeb).thenReturn(false);
+      when(() => GetIt.I<Platform>().isWeb).thenReturn(false);
 
       GetIt.I<DataService>().mutate = '.';
 
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         const FluentApp(home: StorePage(secondMockChild: SizedBox())),
       );
 
       expect(
-        find.text('Write anything in this form and send!'),
+        $('Write anything in this form and send!'),
         findsOneWidget,
       );
 
-      expect(find.byType(Column), findsNWidgets(3));
-      expect(find.byType(BlurButton), findsNWidgets(2));
-      expect(find.byType(SizedBox), findsWidgets);
+      expect($(Column), findsNWidgets(3));
+      expect($(BlurButton), findsNWidgets(2));
+      expect($(SizedBox), findsWidgets);
     });
 
-    testWidgets('Perform text change and submit to verify the new state',
-        (final tester) async {
-      await tester.runAsync(() async {
-        final platform = GetIt.I<Platform>();
-        when(platform.isWeb).thenReturn(true);
+    patrolWidgetTest('perform text change and submit to verify the new state',
+        (final $) async {
+      when(() => GetIt.I<Platform>().isWeb).thenReturn(true);
 
-        await tester.pumpWidget(
+      await $.tester.runAsync(() async {
+        await $.pumpWidgetAndSettle(
           const FluentApp(home: StorePage(secondMockChild: SizedBox())),
         );
 
-        final txtFieldFinder = find.byType(TextBox);
+        final txtFieldFinder = $(TextBox);
 
-        await tester.enterText(txtFieldFinder, 'test');
-        await tester.tap(find.text('Send'));
+        await $.enterText(txtFieldFinder, 'test');
+        await $('Send').tap();
 
-        final service = GetIt.I<DataService>();
-        expect(service.state(), 'test');
+        expect(GetIt.I<DataService>().state, 'test');
       });
     });
 
-    testWidgets('Show dialog when text field is empty', (final tester) async {
-      await tester.runAsync(() async {
-        final platform = GetIt.I<Platform>();
-        when(platform.isWeb).thenReturn(true);
+    patrolWidgetTest('Show dialog when text field is empty', (final $) async {
+      when(() => GetIt.I<Platform>().isWeb).thenReturn(true);
 
-        await tester.pumpWidget(
+      await $.tester.runAsync(() async {
+        await $.pumpWidgetAndSettle(
           const FluentApp(home: StorePage(secondMockChild: SizedBox())),
         );
 
-        await tester.tap(find.text('Send'));
+        await $('Send').tap();
+        await $.pumpAndSettle();
 
-        await tester.pumpAndSettle();
+        expect($('Error'), findsOneWidget);
+        expect($('Is empty your Text'), findsOneWidget);
 
-        expect(find.text('Error'), findsOneWidget);
-        expect(find.text('Is empty your Text'), findsOneWidget);
-
-        await tester.tap(find.text('OK'));
-        await tester.pump();
+        await $('OK').tap();
       });
     });
 
-    testWidgets('Press to Go To Home Button', (final tester) async {
-      final platform = GetIt.I<Platform>();
-      when(platform.isWeb).thenReturn(true);
+    patrolWidgetTest('Press to Go To Home Button', (final $) async {
+      when(() => GetIt.I<Platform>().isWeb).thenReturn(true);
 
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         const FluentApp(
           home: StorePage(secondMockChild: SizedBox()),
         ),
       );
 
-      await tester.tap(find.text('Go to Home'));
-      await tester.pumpAndSettle();
+      await $('Go to Home').tap();
+      await $.pumpAndSettle();
 
-      expect(find.byType(StorePage), findsOneWidget);
+      expect($(StorePage), findsOneWidget);
     });
   });
 }

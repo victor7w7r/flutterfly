@@ -19,7 +19,7 @@ void main() {
       getBitcoinUseCase = GetBitcoinUseCase(mockBitcoinRepository);
     });
 
-    test('Call should return a bitcoin', () async {
+    test('call should return a bitcoin', () async {
       final bitcoin = Bitcoin.dummy();
 
       when(() => mockBitcoinRepository.getBitcoin()).thenAnswer(
@@ -33,7 +33,7 @@ void main() {
       verifyNoMoreInteractions(mockBitcoinRepository);
     });
 
-    test('Call should return a failure', () async {
+    test('call should return a failure', () async {
       const failure = ServerFailure('Server Failure');
 
       when(() => mockBitcoinRepository.getBitcoin()).thenAnswer(

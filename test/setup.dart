@@ -13,31 +13,30 @@ const String kApplicationDocumentsPath = 'applicationDocumentsPath';
 const String kExternalCachePath = 'externalCachePath';
 const String kExternalStoragePath = 'externalStoragePath';
 
-class MockPathProviderPlatform extends Mock
+final class MockPathProviderPlatform extends Mock
     with MockPlatformInterfaceMixin
     implements PathProviderPlatform {
   @override
-  Future<String> getTemporaryPath() async => kTemporaryPath;
-
+  Future<String> getApplicationDocumentsPath() async =>
+      kApplicationDocumentsPath;
   @override
   Future<String> getApplicationSupportPath() async => kApplicationSupportPath;
 
   @override
-  Future<String> getLibraryPath() async => kLibraryPath;
-
-  @override
-  Future<String> getApplicationDocumentsPath() async =>
-      kApplicationDocumentsPath;
-
-  @override
-  Future<String> getExternalStoragePath() async => kExternalStoragePath;
+  Future<String> getDownloadsPath() async => kDownloadsPath;
 
   @override
   Future<List<String>> getExternalCachePaths() async =>
       <String>[kExternalCachePath];
 
   @override
-  Future<String> getDownloadsPath() async => kDownloadsPath;
+  Future<String> getExternalStoragePath() async => kExternalStoragePath;
+
+  @override
+  Future<String> getLibraryPath() async => kLibraryPath;
+
+  @override
+  Future<String> getTemporaryPath() async => kTemporaryPath;
 }
 
 void disableOverflowErrors() {

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/features/cupertino/ui/pages/crypto/crypto_widgets.dart';
 import 'package:flutterfly/features/cupertino/ui/services/cupertino_service.dart';
@@ -25,33 +26,31 @@ void main() {
       GetIt.I.registerSingleton<CupertinoService>(MockCupertinoService());
       when(() => GetIt.I<CupertinoService>().isDark).thenReturn(false);
     });
-    testWidgets('Render widget successfully ', (final tester) async {
-      await tester.pumpWidget(widget);
+    patrolWidgetTest('render widget successfully ', (final $) async {
+      await $.pumpWidgetAndSettle(widget);
 
-      expect(find.byType(Container), findsOneWidget);
-      expect(find.byType(Column), findsWidgets);
-      expect(find.text('BTC'), findsOneWidget);
-      expect(find.text('1.0%'), findsOneWidget);
-      expect(find.text('1.0'), findsOneWidget);
+      expect($(Container), findsOneWidget);
+      expect($(Column), findsWidgets);
+      expect($('BTC'), findsOneWidget);
+      expect($('1.0%'), findsOneWidget);
+      expect($('1.0'), findsOneWidget);
 
       when(() => GetIt.I<CupertinoService>().isDark).thenReturn(true);
 
-      await tester.pumpWidget(widget);
+      await $.pumpWidget(widget);
     });
 
-    testWidgets('Render SizedBox in various context size',
-        (final tester) async {
-      tester.view.physicalSize = const Size(620, 800);
+    patrolWidgetTest('render SizedBox in various context size',
+        (final $) async {
+      $.tester.view.physicalSize = const Size(620, 800);
 
-      await tester.pumpWidget(widget);
+      await $.pumpWidgetAndSettle(widget);
 
-      expect(find.byType(SizedBox), findsOneWidget);
+      expect($(SizedBox), findsOneWidget);
+      $.tester.view.physicalSize = const Size(480, 800);
+      await $.pumpWidget(widget);
 
-      tester.view.physicalSize = const Size(480, 800);
-
-      await tester.pumpWidget(widget);
-
-      expect(find.byType(SizedBox), findsOneWidget);
+      expect($(SizedBox), findsOneWidget);
     });
   });
 }

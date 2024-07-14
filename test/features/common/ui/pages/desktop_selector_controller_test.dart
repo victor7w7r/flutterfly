@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart' show Mock, verify;
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_controller.dart';
 import 'package:flutterfly/features/common/ui/services/desktop_service.dart';
 
-class MockDesktopService extends Mock implements DesktopService {}
+final class MockDesktopService extends Mock implements DesktopService {}
 
 void main() {
   group('DesktopSelectorController', () {

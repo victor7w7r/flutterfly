@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
 import 'package:patrol/patrol.dart' show patrolWidgetTest;
-import 'package:watch_it/watch_it.dart' show GetIt;
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/common/ui/pages/desktop_selector_controller.dart';

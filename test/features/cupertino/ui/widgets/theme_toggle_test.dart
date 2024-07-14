@@ -47,7 +47,7 @@ void main() {
       expect(switchWidget.value, isTrue);
     });
 
-    patrolWidgetTest('Tapping the switch calls toggle', (final $) async {
+    patrolWidgetTest('tapping the switch calls toggle', (final $) async {
       final service = GetIt.I<CupertinoService>();
       when(() => service.isDark).thenReturn(false);
 

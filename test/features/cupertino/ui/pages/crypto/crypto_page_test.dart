@@ -4,8 +4,8 @@ import 'package:fl_query/fl_query.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
-import 'package:patrol/patrol.dart' show patrolWidgetTest;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/core/error/fetch_exception.dart';
 import 'package:flutterfly/features/common/business/entities/binance.dart';
@@ -50,7 +50,7 @@ void main() {
 
       when(() => service.isDark).thenReturn(false);
     });
-    patrolWidgetTest('Render widget successfully when data is ready',
+    patrolWidgetTest('render widget successfully when data is ready',
         (final $) async {
       final srv = GetIt.I<BinanceService>();
 
@@ -59,20 +59,19 @@ void main() {
       await $.tester.runAsync(() async {
         await $.pumpWidget(page);
 
-        expect(find.byType(CupertinoActivityIndicator), findsOneWidget);
+        expect($(CupertinoActivityIndicator), findsOneWidget);
 
         await Future<void>.delayed(const Duration(milliseconds: 150));
         await $.pump();
 
-        expect(find.byType(CustomScrollView), findsOneWidget);
-        expect(find.byType(CurrencyCard), findsWidgets);
+        expect($(CustomScrollView), findsOneWidget);
+        expect($(CurrencyCard), findsWidgets);
       });
     });
 
-    patrolWidgetTest('Renders an error in widget query', (final $) async {
-      final srv = GetIt.I<BinanceService>();
-
-      when(srv.fetchBinance).thenAnswer((final _) async => Binance.dummyGen());
+    patrolWidgetTest('renders an error in widget query', (final $) async {
+      when(GetIt.I<BinanceService>().fetchBinance)
+          .thenAnswer((final _) async => Binance.dummyGen());
 
       await $.tester.runAsync(() async {
         await $.tester.pumpWidget(
@@ -86,7 +85,7 @@ void main() {
         await Future<void>.delayed(const Duration(milliseconds: 150));
         await $.pump();
 
-        expect(find.text('An error occurred'), findsOneWidget);
+        expect($('An error occurred'), findsOneWidget);
       });
     });
 
@@ -98,13 +97,13 @@ void main() {
       when(srv.fetchBinance).thenAnswer((final _) async => Binance.dummyGen());
       when(() => srv.paginateBinance(any())).thenAnswer((final _) {});
 
-      await tester.runAsync(() async {
-        await tester.pumpWidget(page);
+      await $.tester.runAsync(() async {
+        await $.pumpWidgetAndSettle(page);
 
         await Future<void>.delayed(const Duration(milliseconds: 150));
-        await tester.pump();
+        await $.pump();
 
-        final state = tester.state<CryptoPageState>(find.byType(CryptoPage));
+        final state = $.tester.state<CryptoPageState>($(CryptoPage));
         final scrCtl = state.scrCtl;
         scrCtl.jumpTo(scrCtl.position.maxScrollExtent);
 
@@ -119,16 +118,16 @@ void main() {
       when(srv.fetchBinance).thenAnswer((final _) async => Binance.dummyGen());
       when(() => srv.refreshBinance(any())).thenAnswer((final _) {});
 
-      await tester.runAsync(() async {
-        await tester.pumpWidget(page);
+      await $.tester.runAsync(() async {
+        await $.pumpWidgetAndSettle(page);
 
         await Future<void>.delayed(const Duration(milliseconds: 150));
         await $.pump();
 
-        final customScrollView = find.byType(CustomScrollView);
-        await tester.drag(customScrollView, const Offset(0.0, 300.0));
+        final customScrollView = $(CustomScrollView);
+        await $.tester.drag(customScrollView, const Offset(0.0, 300.0));
 
-        await tester.pumpAndSettle();
+        await $.pumpAndSettle();
 
         verify(() => srv.refreshBinance(any())).called(1);
       });

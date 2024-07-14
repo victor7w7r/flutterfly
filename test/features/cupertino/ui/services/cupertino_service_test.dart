@@ -34,7 +34,7 @@ void main() {
       () => expect(cupertinoService.isDark, false),
     );
 
-    test('Toggle should invert isDark value', () async {
+    test('toggle should invert isDark value', () async {
       expect(cupertinoService.isDark, false);
 
       cupertinoService.toggle();
@@ -45,12 +45,10 @@ void main() {
       verify(() => mockLocalDbModule.prefsBox).called(1);
     });
 
-    test('Should notify listeners when toggle is called', () {
+    test('should notify listeners when toggle is called', () {
       var isNotified = false;
       cupertinoService
-        ..addListener(() {
-          isNotified = true;
-        })
+        ..addListener(() => isNotified = true)
         ..toggle();
 
       expect(isNotified, true);

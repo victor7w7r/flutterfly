@@ -52,7 +52,7 @@ void main() {
       when(() => GetIt.I<DesktopSelectorController>().isInitAnim)
           .thenReturn(false);
     });
-    patrolWidgetTest('Should display CupertinoLayout for iOS platform',
+    patrolWidgetTest('should display CupertinoLayout for iOS platform',
         (final $) async {
       final platform = GetIt.I<Platform>();
 
@@ -65,7 +65,7 @@ void main() {
         expect($(CupertinoLayout), findsOneWidget);
       });
     });
-    patrolWidgetTest('Should display MaterialLayout for Android platform',
+    patrolWidgetTest('should display MaterialLayout for Android platform',
         (final $) async {
       final platform = GetIt.I<Platform>();
 
@@ -73,6 +73,7 @@ void main() {
       when(() => platform.isAndroid).thenReturn(true);
       when(() => platform.isDesktop).thenReturn(false);
       when(() => platform.isMacOS).thenReturn(false);
+
       await $.tester.runAsync(() async {
         await $.pumpWidgetAndSettle(const App(child: SizedBox()));
         expect($(MaterialLayout), findsOneWidget);
@@ -80,7 +81,7 @@ void main() {
     });
 
     patrolWidgetTest(
-        'Should display MaterialLayout with for '
+        'should display MaterialLayout with for '
         'desktop platform and material state', (final $) async {
       final platform = GetIt.I<Platform>();
       final desktopService = GetIt.I<DesktopService>();
@@ -96,7 +97,7 @@ void main() {
     });
 
     patrolWidgetTest(
-        'Should display CupertinoLayout with for '
+        'should display CupertinoLayout with for '
         'desktop platform and cupertino state', (final $) async {
       final platform = GetIt.I<Platform>();
       final desktopService = GetIt.I<DesktopService>();
@@ -106,6 +107,7 @@ void main() {
       when(() => platform.isDesktop).thenReturn(true);
       when(() => platform.isMacOS).thenReturn(false);
       when(() => desktopService.state).thenReturn('cupertino');
+
       await $.tester.runAsync(() async {
         await $.pumpWidgetAndSettle(const App(child: SizedBox()));
         expect($(CupertinoLayout), findsOneWidget);
@@ -113,7 +115,7 @@ void main() {
     });
 
     patrolWidgetTest(
-        'Should display FluentLayout with for '
+        'should display FluentLayout with for '
         'desktop platform and fluent state', (final $) async {
       final platform = GetIt.I<Platform>();
       final desktopService = GetIt.I<DesktopService>();
@@ -130,7 +132,7 @@ void main() {
     });
 
     patrolWidgetTest(
-        'Should display DesktopSelectorPage for '
+        'should display DesktopSelectorPage for '
         'Desktop platform with state none', (final $) async {
       final platform = GetIt.I<Platform>();
       final desktopService = GetIt.I<DesktopService>();

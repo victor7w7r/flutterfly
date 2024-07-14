@@ -13,7 +13,7 @@ void main() {
       () => expect(dataService.state, isEmpty),
     );
 
-    test('Mutate should update state and notify listeners', () {
+    test('mutate should update state and notify listeners', () {
       var listenerCallCount = 0;
       dataService
         ..addListener(() {
@@ -25,7 +25,7 @@ void main() {
       expect(listenerCallCount, 1);
     });
 
-    test('State getter should return the current state', () {
+    test('state getter should return the current state', () {
       dataService.mutate = 'another state';
 
       expect(dataService.state, equals('another state'));

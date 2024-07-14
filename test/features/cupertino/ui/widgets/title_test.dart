@@ -17,7 +17,7 @@ void main() {
       GetIt.I.registerSingleton<Platform>(MockPlatform());
     });
 
-    patrolWidgetTest('Render when platform is macOS', (final $) async {
+    patrolWidgetTest('render when platform is macOS', (final $) async {
       final platform = GetIt.I<Platform>();
       when(() => platform.isMacOS).thenReturn(true);
       when(() => platform.isDesktop).thenReturn(false);
@@ -33,7 +33,7 @@ void main() {
       expect($(SizedBox), findsOneWidget);
     });
 
-    patrolWidgetTest('Render when platform is not macOS and is desktop',
+    patrolWidgetTest('render when platform is not macOS and is desktop',
         (final $) async {
       final platform = GetIt.I<Platform>();
       when(() => platform.isMacOS).thenReturn(false);
@@ -50,7 +50,7 @@ void main() {
       expect($(SizedBox), findsOneWidget);
     });
 
-    patrolWidgetTest('Render when platform is not macOS and not desktop',
+    patrolWidgetTest('render when platform is not macOS and not desktop',
         (final $) async {
       final platform = GetIt.I<Platform>();
       when(() => platform.isMacOS).thenReturn(false);

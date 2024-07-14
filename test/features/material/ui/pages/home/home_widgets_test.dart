@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:fl_query/fl_query.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
+import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/core/error/fetch_exception.dart';
 import 'package:flutterfly/core/utils/platforms.dart';
@@ -15,15 +16,16 @@ import 'package:flutterfly/features/material/ui/pages/home/home_widgets.dart';
 import 'package:flutterfly/features/material/ui/services/material_service.dart';
 import '../../../../../setup.dart';
 
-class MockMaterialService extends Mock
+final class MockMaterialService extends Mock
     with ChangeNotifier
     implements MaterialService {}
 
-class MockPlatform extends Mock implements Platform {}
+final class MockPlatform extends Mock implements Platform {}
 
-class MockBinanceService extends Mock implements BinanceService {}
+final class MockBinanceService extends Mock implements BinanceService {}
 
-class MockQuery extends Mock implements Query<List<Binance>, FetchException> {}
+final class MockQuery extends Mock
+    implements Query<List<Binance>, FetchException> {}
 
 void main() {
   group('HomeWidgets', () {
@@ -33,14 +35,12 @@ void main() {
         GetIt.I.registerSingleton<MaterialService>(MockMaterialService());
         GetIt.I.registerSingleton<DataService>(DataService());
       });
-      testWidgets('Render widget successfully with portrait and state',
-          (final tester) async {
-        final service = GetIt.I<MaterialService>();
-        final ctl = GetIt.I<DataService>();
-        when(service.isDark).thenReturn(false);
-        ctl.mutate = 'Hello, Flutter!';
+      patrolWidgetTest('render widget successfully with portrait and state',
+          (final $) async {
+        when(() => GetIt.I<MaterialService>().isDark).thenReturn(false);
+        GetIt.I<DataService>().mutate = 'Hello, Flutter!';
 
-        await tester.pumpWidget(
+        await $.pumpWidgetAndSettle(
           const MaterialApp(
             home: Scaffold(
               body: TopContent(
@@ -51,17 +51,17 @@ void main() {
           ),
         );
 
-        expect(find.text('Happy Hacking!, Dart... Dart...'), findsOneWidget);
-        expect(find.byType(Row), findsNWidgets(2));
-        expect(find.text('Made with love by '), findsOneWidget);
+        expect($('Happy Hacking!, Dart... Dart...'), findsOneWidget);
+        expect($(Row), findsNWidgets(2));
+        expect($('Made with love by '), findsOneWidget);
       });
 
-      testWidgets('Render widget successfully with landscape and empty state',
-          (final tester) async {
-        final service = GetIt.I<MaterialService>();
-        when(service.isDark).thenReturn(false);
+      patrolWidgetTest(
+          'Render widget successfully with landscape and empty state',
+          (final $) async {
+        when(() => GetIt.I<MaterialService>().isDark).thenReturn(false);
 
-        await tester.pumpWidget(
+        await $.pumpWidgetAndSettle(
           const MaterialApp(
             home: Scaffold(
               body: TopContent(
@@ -72,46 +72,43 @@ void main() {
           ),
         );
 
-        expect(find.text('Happy Hacking!, Dart... Dart...'), findsOneWidget);
-        expect(find.text('Store state: Not yet.'), findsOneWidget);
-        expect(find.byType(Row), findsNWidgets(2));
-        expect(find.text('Made with love by '), findsOneWidget);
+        expect($('Happy Hacking!, Dart... Dart...'), findsOneWidget);
+        expect($('Store state: Not yet.'), findsOneWidget);
+        expect($(Row), findsNWidgets(2));
+        expect($('Made with love by '), findsOneWidget);
       });
 
-      testWidgets(
+      patrolWidgetTest(
           'Render widget successfully set '
-          'home in false and dark mode in true', (final tester) async {
-        final service = GetIt.I<MaterialService>();
-        when(service.isDark).thenReturn(true);
+          'home in false and dark mode in true', (final $) async {
+        when(() => GetIt.I<MaterialService>().isDark).thenReturn(true);
 
-        tester.view.physicalSize = const Size(1600, 900);
+        $.tester.view.physicalSize = const Size(1600, 900);
 
-        await tester.pumpWidget(
+        await $.pumpWidgetAndSettle(
           const MaterialApp(
-            home: Scaffold(
-              body: DynamicChip(isHome: true),
-            ),
+            home: Scaffold(body: DynamicChip(isHome: true)),
           ),
         );
 
-        expect(find.byType(Container), findsOneWidget);
-        expect(find.byType(Row), findsOneWidget);
+        expect($(Container), findsOneWidget);
+        expect($(Row), findsOneWidget);
       });
     });
 
     group('DynamicChip', () {
       setUp(() async {
         await GetIt.I.reset();
+
         GetIt.I.registerSingleton<MaterialService>(MockMaterialService());
-        GetIt.I.registerSingleton<Platform>(Platform());
+        GetIt.I.registerSingleton(Platform());
       });
-      testWidgets(
+      patrolWidgetTest(
           'Render widget successfully set '
-          'home in true and dark mode in false', (final tester) async {
-        final service = GetIt.I<MaterialService>();
-        when(service.isDark).thenReturn(false);
+          'home in true and dark mode in false', (final $) async {
+        when(() => GetIt.I<MaterialService>().isDark).thenReturn(false);
 
-        await tester.pumpWidget(
+        await $.pumpWidgetAndSettle(
           const MaterialApp(
             home: Scaffold(
               body: DynamicChip(isHome: true),
@@ -119,19 +116,18 @@ void main() {
           ),
         );
 
-        expect(find.byType(Container), findsOneWidget);
-        expect(find.byType(Row), findsOneWidget);
+        expect($(Container), findsOneWidget);
+        expect($(Row), findsOneWidget);
       });
 
-      testWidgets(
+      patrolWidgetTest(
           'Render widget successfully set '
-          'home in false and dark mode in true', (final tester) async {
-        final service = GetIt.I<MaterialService>();
-        when(service.isDark).thenReturn(true);
+          'home in false and dark mode in true', (final $) async {
+        when(() => GetIt.I<MaterialService>().isDark).thenReturn(true);
 
-        tester.view.physicalSize = const Size(1600, 900);
+        $.tester.view.physicalSize = const Size(1600, 900);
 
-        await tester.pumpWidget(
+        await $.pumpWidgetAndSettle(
           const MaterialApp(
             home: Scaffold(
               body: DynamicChip(isHome: true),
@@ -139,25 +135,12 @@ void main() {
           ),
         );
 
-        expect(find.byType(Container), findsOneWidget);
-        expect(find.byType(Row), findsOneWidget);
+        expect($(Container), findsOneWidget);
+        expect($(Row), findsOneWidget);
       });
     });
 
     group('BottomContent', () {
-      Widget widget(final Orientation or, {final bool mockError = false}) =>
-          QueryClientProvider(
-            child: MaterialApp(
-              home: Scaffold(
-                body: BottomContent(
-                  pOrientation: or,
-                  height: 1000,
-                  mockError: mockError,
-                ),
-              ),
-            ),
-          );
-
       setUpAll(() async {
         TestWidgetsFlutterBinding.ensureInitialized();
         PathProviderPlatform.instance = MockPathProviderPlatform();
@@ -167,66 +150,75 @@ void main() {
 
       setUp(() async {
         await GetIt.I.reset();
+
         GetIt.I.registerSingleton<MaterialService>(MockMaterialService());
         GetIt.I.registerSingleton<BinanceService>(MockBinanceService());
-        final service = GetIt.I<MaterialService>();
-        when(service.isDark).thenReturn(false);
+        when(() => GetIt.I<MaterialService>().isDark).thenReturn(false);
       });
 
-      testWidgets('Render widget successfully when data is ready',
-          (final tester) async {
-        final srv = GetIt.I<BinanceService>();
+      Widget widget(final Orientation or, {final bool mockError = false}) =>
+          QueryClientProvider(
+            child: MaterialApp(
+              home: Scaffold(
+                body: BottomContent(
+                  height: 1000,
+                  pOrientation: or,
+                  mockError: mockError,
+                ),
+              ),
+            ),
+          );
 
-        when(srv.fetchBinance)
+      patrolWidgetTest('render widget successfully when data is ready',
+          (final $) async {
+        when(GetIt.I<BinanceService>().fetchBinance)
             .thenAnswer((final _) async => Binance.dummyGen());
 
-        await tester.runAsync(() async {
-          await tester.pumpWidget(widget(Orientation.portrait));
+        await $.tester.runAsync(() async {
+          await $.pumpWidget(widget(Orientation.portrait));
 
-          expect(find.byType(CircularProgressIndicator), findsOneWidget);
+          expect($(CircularProgressIndicator), findsOneWidget);
 
           await Future<void>.delayed(const Duration(milliseconds: 150));
-          await tester.pump();
+          await $.pump();
 
-          expect(find.byType(GridView), findsOneWidget);
-          expect(find.byType(CurrencyCard), findsWidgets);
+          expect($(GridView), findsOneWidget);
+          expect($(CurrencyCard), findsWidgets);
         });
       });
 
-      testWidgets('Renders an error in widget query', (final tester) async {
-        final srv = GetIt.I<BinanceService>();
-
-        when(srv.fetchBinance)
+      patrolWidgetTest('renders an error in widget query', (final $) async {
+        when(GetIt.I<BinanceService>().fetchBinance)
             .thenAnswer((final _) async => Binance.dummyGen());
 
-        await tester.runAsync(() async {
-          await tester
-              .pumpWidget(widget(Orientation.portrait, mockError: true));
+        await $.tester.runAsync(() async {
+          await $.pumpWidget(
+            widget(Orientation.portrait, mockError: true),
+          );
 
           await Future<void>.delayed(const Duration(milliseconds: 150));
-          await tester.pump();
+          await $.pump();
 
-          expect(find.text('An error occurred'), findsOneWidget);
+          expect($('An error occurred'), findsOneWidget);
         });
       });
 
-      testWidgets(
+      patrolWidgetTest(
           'ScrollListener invokes paginateBinance when scrolled to bottom',
-          (final tester) async {
+          (final $) async {
         final srv = GetIt.I<BinanceService>();
 
         when(srv.fetchBinance)
             .thenAnswer((final _) async => Binance.dummyGen());
         when(() => srv.paginateBinance(any())).thenAnswer((final _) {});
 
-        await tester.runAsync(() async {
-          await tester.pumpWidget(widget(Orientation.portrait));
+        await $.tester.runAsync(() async {
+          await $.pumpWidget(widget(Orientation.portrait));
 
           await Future<void>.delayed(const Duration(milliseconds: 150));
-          await tester.pump();
+          await $.pump();
 
-          final state =
-              tester.state<BottomContentState>(find.byType(BottomContent));
+          final state = $.tester.state<BottomContentState>($(BottomContent));
           final scrCtl = state.scrCtl;
           scrCtl.jumpTo(scrCtl.position.maxScrollExtent);
 
@@ -234,24 +226,23 @@ void main() {
         });
       });
 
-      testWidgets('OnRefresh is called when pulling to refresh',
-          (final tester) async {
+      patrolWidgetTest('OnRefresh is called when pulling to refresh',
+          (final $) async {
         final srv = GetIt.I<BinanceService>();
 
         when(srv.fetchBinance)
             .thenAnswer((final _) async => Binance.dummyGen());
         when(() => srv.refreshBinance(any())).thenAnswer((final _) {});
 
-        await tester.runAsync(() async {
-          await tester.pumpWidget(widget(Orientation.portrait));
+        await $.tester.runAsync(() async {
+          await $.pumpWidget(widget(Orientation.portrait));
 
           await Future<void>.delayed(const Duration(milliseconds: 150));
-          await tester.pump();
+          await $.pump();
 
-          final gridView = find.byType(GridView);
-          await tester.drag(gridView, const Offset(0.0, 300.0));
+          await $.tester.drag($(GridView), const Offset(0.0, 300.0));
 
-          await tester.pumpAndSettle();
+          await $.pumpAndSettle();
 
           verify(() => srv.refreshBinance(any())).called(1);
         });
@@ -273,49 +264,48 @@ void main() {
       setUp(() async {
         await GetIt.I.reset();
 
-        GetIt.I.registerLazySingleton<MaterialService>(MockMaterialService.new);
-        final service = GetIt.I<MaterialService>();
-        when(service.isDark).thenReturn(false);
+        GetIt.I.registerSingleton<MaterialService>(MockMaterialService());
+        when(() => GetIt.I<MaterialService>().isDark).thenReturn(false);
       });
-      testWidgets(
+      patrolWidgetTest(
           'Render widget successfully with landscape/dark, portait/light',
-          (final tester) async {
-        when(GetIt.I<MaterialService>().isDark).thenReturn(true);
-        await tester.pumpWidget(widget(Orientation.landscape));
+          (final $) async {
+        when(() => GetIt.I<MaterialService>().isDark).thenReturn(true);
+        await $.pumpWidgetAndSettle(widget(Orientation.landscape));
 
-        expect(find.byType(Container), findsWidgets);
-        expect(find.byType(Column), findsWidgets);
-        expect(find.text('BTC'), findsOneWidget);
-        expect(find.text('1.0%'), findsOneWidget);
-        expect(find.text('1.0'), findsOneWidget);
+        expect($(Container), findsWidgets);
+        expect($(Column), findsWidgets);
+        expect($('BTC'), findsOneWidget);
+        expect($('1.0%'), findsOneWidget);
+        expect($('1.0'), findsOneWidget);
 
-        when(GetIt.I<MaterialService>().isDark).thenReturn(false);
+        when(() => GetIt.I<MaterialService>().isDark).thenReturn(false);
 
-        await tester.pumpWidget(widget(Orientation.portrait));
+        await $.pumpWidgetAndSettle(widget(Orientation.portrait));
 
-        expect(find.byType(Container), findsWidgets);
-        expect(find.byType(Column), findsWidgets);
-        expect(find.text('BTC'), findsOneWidget);
-        expect(find.text('1.0%'), findsOneWidget);
-        expect(find.text('1.0'), findsOneWidget);
+        expect($(Container), findsWidgets);
+        expect($(Column), findsWidgets);
+        expect($('BTC'), findsOneWidget);
+        expect($('1.0%'), findsOneWidget);
+        expect($('1.0'), findsOneWidget);
       });
 
-      testWidgets('Render SizedBox in various context size',
-          (final tester) async {
-        tester.view.physicalSize = const Size(620, 800);
+      patrolWidgetTest('render SizedBox in various context size',
+          (final $) async {
+        $.tester.view.physicalSize = const Size(620, 800);
 
-        await tester.pumpWidget(widget(Orientation.portrait));
-        expect(find.byType(Column), findsOneWidget);
+        await $.pumpWidgetAndSettle(widget(Orientation.portrait));
+        expect($(Column), findsOneWidget);
 
-        tester.view.physicalSize = const Size(480, 800);
-        await tester.pumpWidget(widget(Orientation.portrait));
+        $.tester.view.physicalSize = const Size(480, 800);
+        await $.pumpWidgetAndSettle(widget(Orientation.portrait));
 
-        expect(find.byType(Column), findsOneWidget);
+        expect($(Column), findsOneWidget);
 
-        tester.view.physicalSize = const Size(220, 800);
+        $.tester.view.physicalSize = const Size(220, 800);
 
-        await tester.pumpWidget(widget(Orientation.portrait));
-        expect(find.byType(Column), findsOneWidget);
+        await $.pumpWidgetAndSettle(widget(Orientation.portrait));
+        expect($(Column), findsOneWidget);
       });
     });
   });

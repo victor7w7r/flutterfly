@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart' show GetIt;
 import 'package:mocktail/mocktail.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/core/utils/platforms.dart';
 import 'package:flutterfly/features/cupertino/ui/layout/cupertino_layout.dart';
@@ -20,23 +21,23 @@ void main() {
       GetIt.I.registerSingleton<Platform>(Platform());
     });
 
-    testWidgets('Render widget successfully', (final tester) async {
+    patrolWidgetTest('render widget successfully', (final $) async {
       final service = GetIt.I<CupertinoService>();
 
       when(() => service.isDark).thenReturn(false);
-      await tester.runAsync(() async {
-        await tester.pumpWidget(const CupertinoLayout(child: SizedBox()));
+      await $.tester.runAsync(() async {
+        await $.pumpWidgetAndSettle(const CupertinoLayout(child: SizedBox()));
 
-        expect(find.byType(CupertinoApp), findsOneWidget);
-        expect(find.byType(CupertinoPageScaffold), findsOneWidget);
-        expect(find.byType(CupertinoTabScaffold), findsOneWidget);
-        expect(find.byType(SizedBox), findsAtLeastNWidgets(3));
+        expect($(CupertinoApp), findsOneWidget);
+        expect($(CupertinoPageScaffold), findsOneWidget);
+        expect($(CupertinoTabScaffold), findsOneWidget);
+        expect($(SizedBox), findsAtLeastNWidgets(3));
 
         reset(service);
 
         when(() => service.isDark).thenReturn(false);
 
-        await tester.pumpWidget(const CupertinoLayout(child: SizedBox()));
+        await $.pumpWidget(const CupertinoLayout(child: SizedBox()));
 
         verify(() => service.isDark).called(2);
       });

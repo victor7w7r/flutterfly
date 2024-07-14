@@ -20,7 +20,7 @@ void main() {
       getCurrenciesUseCase = GetCurrenciesUseCase(mockBinanceRepository);
     });
 
-    test('Call should return currencies', () async {
+    test('call should return currencies', () async {
       final curr = Binance.dummyGen().lock;
 
       when(() => mockBinanceRepository.getCurrencies()).thenAnswer(
@@ -34,7 +34,7 @@ void main() {
       verifyNoMoreInteractions(mockBinanceRepository);
     });
 
-    test('Call should return a failure', () async {
+    test('call should return a failure', () async {
       const failure = ServerFailure('Server Failure');
 
       when(() => mockBinanceRepository.getCurrencies()).thenAnswer(

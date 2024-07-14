@@ -1,13 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:patrol/patrol.dart' show patrolWidgetTest;
 
 import 'package:flutterfly/features/fluent/ui/widgets/blur_button.dart';
 
 void main() {
   group('BlurButton', () {
-    testWidgets('Should create with required parameters and default fontSize',
-        (final tester) async {
-      await tester.pumpWidget(
+    patrolWidgetTest(
+        'should create with required parameters and default fontSize',
+        (final $) async {
+      await $.pumpWidgetAndSettle(
         FluentApp(
           home: BlurButton(
             caption: 'Test Button',
@@ -16,7 +18,7 @@ void main() {
         ),
       );
 
-      expect(find.text('Test Button'), findsOneWidget);
+      expect($('Test Button'), findsOneWidget);
       expect(
         find.byWidgetPredicate(
           (final widget) => widget is Text && widget.style?.fontSize == 14,
@@ -25,9 +27,9 @@ void main() {
       );
     });
 
-    testWidgets('Should apply custom fontSize', (final tester) async {
+    patrolWidgetTest('should apply custom fontSize', (final $) async {
       const customFontSize = 18.0;
-      await tester.pumpWidget(
+      await $.pumpWidgetAndSettle(
         FluentApp(
           home: BlurButton(
             caption: 'Custom Font Size',
@@ -46,30 +48,28 @@ void main() {
       );
     });
 
-    testWidgets('Should trigger onClick callback when tapped',
-        (final tester) async {
-      await tester.runAsync(() async {
+    patrolWidgetTest(
+      'should trigger onClick callback when tapped',
+      (final $) async => $.tester.runAsync(() async {
         var isClicked = false;
-        await tester.pumpWidget(
+        await $.pumpWidgetAndSettle(
           FluentApp(
             home: BlurButton(
               caption: 'Clickable',
-              onClick: () {
-                isClicked = true;
-              },
+              onClick: () => isClicked = true,
             ),
           ),
         );
 
-        await tester.tap(find.text('Clickable'));
-        await tester.pump();
+        await $('Clickable').tap();
+        await $.pump();
 
         expect(isClicked, isTrue);
-      });
-    });
+      }),
+    );
 
-    testWidgets('Should have correct styles applied', (final tester) async {
-      await tester.pumpWidget(
+    patrolWidgetTest('should have correct styles applied', (final $) async {
+      await $.pumpWidgetAndSettle(
         FluentApp(
           home: BlurButton(
             caption: 'Styled Button',
@@ -78,8 +78,7 @@ void main() {
         ),
       );
 
-      final filledButton =
-          tester.widget<FilledButton>(find.byType(FilledButton));
+      final filledButton = $.tester.widget<FilledButton>($(FilledButton));
       expect(
         filledButton.style?.backgroundColor?.resolve({}),
         const Color.fromRGBO(255, 255, 255, 0.4),

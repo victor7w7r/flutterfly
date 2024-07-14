@@ -52,7 +52,7 @@ void main() {
       expect($(Image), findsOneWidget);
     });
 
-    patrolWidgetTest('Tap on image triggers onTap callback', (final $) async {
+    patrolWidgetTest('tap on image triggers onTap callback', (final $) async {
       var isTapped = false;
       await $.pumpWidgetAndSettle(
         MaterialApp(

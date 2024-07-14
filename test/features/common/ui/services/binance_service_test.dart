@@ -44,7 +44,7 @@ void main() {
       when(() => mockPlatform.isWeb).thenReturn(false);
     });
 
-    test('Call fetchBinance', () async {
+    test('call fetchBinance', () async {
       when(mockGetCurrenciesUseCase.call).thenAnswer(
         (final _) async => Either.right(Binance.dummyGen().lock),
       );
@@ -54,7 +54,7 @@ void main() {
       verify(mockGetCurrenciesUseCase.call).called(1);
     });
 
-    test('Call fetchBinance with web interface', () async {
+    test('call fetchBinance with web interface', () async {
       when(() => mockPlatform.isWeb).thenReturn(true);
 
       await binanceService.fetchBinance();
@@ -62,7 +62,7 @@ void main() {
       verifyNever(mockGetCurrenciesUseCase.call);
     });
 
-    test('Call getBitcoin successfully', () async {
+    test('call getBitcoin successfully', () async {
       when(mockGetBitcoinUseCase.call).thenAnswer(
         (final _) async => Either.right(Bitcoin.dummy()),
       );
@@ -73,7 +73,7 @@ void main() {
       expect(binance, isA<Bitcoin>());
     });
 
-    test('Call getBitcoin with error', () async {
+    test('call getBitcoin with error', () async {
       when(mockGetBitcoinUseCase.call).thenAnswer(
         (final _) async => Either.left(const ServerFailure('error')),
       );
@@ -84,7 +84,7 @@ void main() {
       );
     });
 
-    test('Call getCurrencies successfully', () async {
+    test('call getCurrencies successfully', () async {
       when(mockGetCurrenciesUseCase.call).thenAnswer(
         (final _) async => Either.right(Binance.dummyGen().lock),
       );
@@ -95,7 +95,7 @@ void main() {
       expect(binance, isA<IList<Binance>>());
     });
 
-    test('Call getCurrencies with error', () async {
+    test('call getCurrencies with error', () async {
       when(mockGetCurrenciesUseCase.call).thenAnswer(
         (final _) async => Either.left(const ServerFailure('error')),
       );
@@ -106,7 +106,7 @@ void main() {
       );
     });
 
-    test('Call paginateBinance', () async {
+    test('call paginateBinance', () async {
       when(mockGetCurrenciesUseCase.call).thenAnswer(
         (final _) async => Either.right(Binance.dummyGen().lock),
       );
@@ -117,7 +117,7 @@ void main() {
       verify(() => mockQuery.setData(any())).called(1);
     });
 
-    test('Call refreshBinance', () async {
+    test('call refreshBinance', () async {
       when(mockQuery.reset).thenAnswer((final _) async => Future.value());
       when(mockQuery.refresh).thenAnswer((final _) async => Future.value());
 

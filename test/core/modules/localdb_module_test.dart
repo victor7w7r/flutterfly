@@ -6,9 +6,9 @@ import 'package:path_provider_platform_interface/path_provider_platform_interfac
 import 'package:flutterfly/core/modules/localdb_module.dart';
 import '../../setup.dart';
 
-class MockBox<T> extends Mock implements Box<T> {}
+final class MockBox<T> extends Mock implements Box<T> {}
 
-class MockHive extends Mock implements HiveInterface {}
+final class MockHive extends Mock implements HiveInterface {}
 
 void main() {
   late LocalDbModule localDbModule;
@@ -21,12 +21,12 @@ void main() {
 
     setUp(() => localDbModule = LocalDbModule());
 
-    test('Check init method', () async {
+    test('check init method', () async {
       await localDbModule.init();
       expect(localDbModule.prefsBox, isA<Box<bool>>());
     });
 
-    test('Check isMaterialDark method', () async {
+    test('check isMaterialDark method', () async {
       final box = MockBox<bool>();
 
       localDbModule.assignPrefsBox(box);
@@ -35,7 +35,7 @@ void main() {
       expect(localDbModule.isMaterialDark(), true);
     });
 
-    test('Check isCupertinoDark method', () async {
+    test('check isCupertinoDark method', () async {
       final box = MockBox<bool>();
 
       localDbModule.assignPrefsBox(box);
@@ -44,7 +44,7 @@ void main() {
       expect(localDbModule.isCupertinoDark(), true);
     });
 
-    test('Check isFluentDark method', () async {
+    test('check isFluentDark method', () async {
       final box = MockBox<bool>();
 
       localDbModule.assignPrefsBox(box);
@@ -53,7 +53,7 @@ void main() {
       expect(localDbModule.isFluentDark(), true);
     });
 
-    test('Check isMaterialDark method when the key is null', () async {
+    test('check isMaterialDark method when the key is null', () async {
       final box = MockBox<bool>();
 
       when(() => box.put('materialdark', true))

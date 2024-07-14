@@ -1,9 +1,11 @@
 // ignore_for_file: avoid-non-null-assertion
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutterfly/features/common/ui/widgets/animated_gradient.dart';
 import 'package:patrol/patrol.dart' show patrolWidgetTest;
+
+import 'package:flutterfly/features/common/ui/widgets/animated_gradient.dart';
 
 void main() {
   group('AnimatedGradient', () {
@@ -11,7 +13,7 @@ void main() {
         (final $) async {
       await $.pumpWidget(const MaterialApp(home: AnimatedGradient()));
 
-      final animatedContainerFinder = find.byType(AnimatedContainer);
+      final animatedContainerFinder = $(AnimatedContainer);
       final animatedContainer =
           $.tester.widget<AnimatedContainer>(animatedContainerFinder);
       final gradient = (animatedContainer.decoration! as BoxDecoration)
@@ -27,7 +29,7 @@ void main() {
         (final $) async {
       await $.pumpWidget(const MaterialApp(home: AnimatedGradient()));
 
-      final animatedContainerFinder = find.byType(AnimatedContainer);
+      final animatedContainerFinder = $(AnimatedContainer);
 
       for (var i = 0; i < 80; i++) {
         await $.pump(const Duration(milliseconds: 100));
